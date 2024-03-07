@@ -9,20 +9,31 @@ class LoginController extends BaseController {
     debugPrint("LoginController Constructor");
   }
 
+  PageController pageController = new PageController(initialPage: 0);
+
   @override
   Future<void> onInit() async {
     super.onInit();
-    debugPrint("LoginController _launchLogin");
+    debugPrint("LoginController onInit");
+    pageController.addListener(() {
+
+    });
   }
 
-  void _launchLoginResident() {
-    debugPrint("LoginController _launchLoginResident");
+  void launchLoginResident() {
+    debugPrint("LoginController launchLoginResident");
     Get.toNamed(Routes.LOGINRESIDENT);
+    pageController.jumpToPage(1);
   }
 
-  void _launchLoginStaff() {
-    debugPrint("LoginController _launchLoginStaff");
-    Get.toNamed(Routes.LOGINSTAFF);
+  void launchLoginStaff() {
+    debugPrint("LoginController launchLoginStaff");
+    pageController.jumpToPage(2);
+  }
+
+  void _launchDashboard() {
+    debugPrint("LoginController launchLoginStaff");
+    Get.toNamed(Routes.DASHBOARD);
   }
   
   @override

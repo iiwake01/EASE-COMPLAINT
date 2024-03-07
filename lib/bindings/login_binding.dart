@@ -8,7 +8,7 @@ class LoginBinding extends BaseBinding {
   void dependencies() {
     Get.lazyPut<LoginController> ( 
       () => LoginController (
-      
+        
       )
     );
   }

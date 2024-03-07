@@ -1,7 +1,7 @@
 import 'package:app/bindings/dashboard_binding.dart';
 import 'package:app/bindings/login_binding.dart';
 import 'package:app/bindings/sign_up_binding.dart';
-import 'package:app/views/dashboard_view.dart';
+import 'package:app/views/dashboard_page.dart';
 import 'package:app/views/login_page.dart';
 import 'package:app/views/sign_up_page.dart';
 import 'package:get/get.dart';
