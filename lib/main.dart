@@ -1,5 +1,5 @@
 import 'package:app/bindings/login_binding.dart';
-//import 'package:app/firebase/firebase_options.dart';
+import 'package:app/firebase/firebase_options.dart';
 import 'package:app/firebase/firebase_storage_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/routes/app_pages.dart';
@@ -11,9 +11,9 @@ import 'package:get/get.dart';
 
 Future<void> main() async {
   debugPaintSizeEnabled = false;
-  //await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  //Get.put(new FirestoreService());
-  //Get.put(new FirebaseStorageService());
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  Get.put(new FirestoreService());
+  Get.put(new FirebaseStorageService());
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: true,
     initialBinding: LoginBinding(),
