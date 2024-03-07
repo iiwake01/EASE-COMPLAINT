@@ -37,17 +37,32 @@ class LoginController extends BaseController {
 
   Future<void> validateCredential() async {
     debugPrint("LoginController validateCredential");
-    if(true) {
+    try {
+      isLoading(true);
+      /*
+      final UserCredential credential = await FirebaseAuth.instance.signInWithEmailAndPassword (
+        email: emailController?.text ?? "", 
+        password: passwordController?.text ?? ""
+      );
+      debugPrint("LoginController validateCredential credential ${credential.toString()}");
+      debugPrint("LoginController validateCredential user ${credential.user}");
+      */
       _launchDashboard();
-    } else {
-      debugPrint('LoginController Invalid Credential');
-      onShowAlert("Error!", "Invalid Credential!");
+    } catch (exception) {
+      debugPrint('LoginController validateCredential exception ${exception.toString()}}');
+      onShowAlert("Error!", "Invalid Credential Please Try Again");
+    } finally {
+      isLoading(false);
     }
   }
 
   void _launchDashboard() {
     debugPrint("LoginController launchLoginStaff");
     Get.offAndToNamed(Routes.DASHBOARD);
+  }
+
+  void launchSignUp() {
+    Get.toNamed(Routes.SIGNUP);
   }
   
   @override

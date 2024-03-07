@@ -21,7 +21,8 @@ class LoginPage extends BaseView<LoginController> {
       backgroundColor: Colors.white,
       body: PageViewWidget (
         pageController: controller.pageController, 
-        isLoading: controller.isLoading, 
+        isLoading: controller.isLoading,
+        canScroll: false,
         widgets: const <Widget> [
           LoginWidget(),
           LoginResidentWidget(),

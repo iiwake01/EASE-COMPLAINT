@@ -26,7 +26,7 @@ class PageViewWidget extends BaseWidget {
         return PageView (
           controller: pageController,
           physics: canScroll == true  ? const ClampingScrollPhysics() : const NeverScrollableScrollPhysics(),
-          scrollDirection: Axis.horizontal,
+          //scrollDirection: Axis.horizontal,
           children: widgets,
         );
       }

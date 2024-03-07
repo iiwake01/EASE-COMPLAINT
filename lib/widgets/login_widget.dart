@@ -10,10 +10,14 @@ class LoginWidget extends BaseWidget<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Column (
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget> [
         Text( AppLocalizations.of(context).translate('welcome_to_ease_complaint') ),
         Row ( 
-          children: <Widget>[
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget> [
             ElevatedButton (
               style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20)),
               onPressed: () {
