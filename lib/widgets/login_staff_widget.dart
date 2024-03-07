@@ -21,8 +21,8 @@ class LoginStaffWidget extends BaseWidget<LoginController> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget> [
             Text(AppLocalizations.of(context).translate('log_in_to_your_account'), style: const TextStyle(color: Colors.green, fontSize: 20),),
-            TextFieldWidget(textEditingController: controller.emailController, hintText: AppLocalizations.of(context).translate('email'),),
-            TextFieldWidget(textEditingController: controller.passwordController, hintText: AppLocalizations.of(context).translate('password'),), 
+            TextFieldWidget(textEditingController: controller.emailController, labelText: AppLocalizations.of(context).translate('email'),),
+            TextFieldWidget(textEditingController: controller.passwordController, labelText: AppLocalizations.of(context).translate('password'),), 
             ElevatedButton (
               style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.greenAccent, textStyle: const TextStyle(fontSize: 20)),
               onPressed: () { controller.validateCredential(); },

@@ -1,6 +1,5 @@
 import 'package:app/controllers/login_controller.dart';
 import 'package:app/views/base_view.dart';
-import 'package:app/widgets/app_bar_widget.dart';
 import 'package:app/widgets/header_app_bar_widget.dart';
 import 'package:app/widgets/login_resident_widget.dart';
 import 'package:app/widgets/login_staff_widget.dart';

@@ -6,23 +6,24 @@ class TextFieldWidget extends BaseWidget {
   const TextFieldWidget( {
     super.key,
     required this.textEditingController,
-    this.hintText,
+    this.labelText,
   } );
 
   final TextEditingController? textEditingController;
-  final String? hintText;
+  final String? labelText;
 
   @override
   Widget build(BuildContext context) {
-    return TextField (
+    return TextFormField (
       controller: textEditingController,
       decoration: InputDecoration (
-        hintText: hintText,
+        labelText: labelText,
+        hintText: null,
         prefixIcon: null,
         filled: true,
         fillColor: Colors.white,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide.none,
         ),
       ),

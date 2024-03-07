@@ -1,5 +1,8 @@
 import 'package:app/controllers/sign_up_controller.dart';
+import 'package:app/utils/app_localizations.dart';
 import 'package:app/views/base_view.dart';
+import 'package:app/widgets/header_app_bar_widget.dart';
+import 'package:app/widgets/sign_up_widget.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends BaseView<SignUpController> {
@@ -9,10 +12,15 @@ class SignUpPage extends BaseView<SignUpController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold (
-      backgroundColor: Colors.grey,
-      body: Container (
-        color: Colors.grey,
-        child: const Center( child: Text("SignUpPage")) ,
+      appBar: const HeaderAppBarWidget(),
+      backgroundColor: Colors.white,
+      body: Column (
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text( AppLocalizations.of(context).translate('sign_up'), style: const TextStyle(color: Colors.green, fontSize: 13), ),
+          const SignUpWidget()
+        ]
       ),
     );
   }

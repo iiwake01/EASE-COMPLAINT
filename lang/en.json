@@ -6,9 +6,13 @@
     "log_in": "Log In",
     "log_in_as_": "Log - In as...",
     "log_in_to_your_account": "Log in to your account",
+    "make_a_new_account_": "Make a new Account...",
+    "name": "Name",
     "password": "Password",
     "resident": "Resident",
     "staff": "Staff",
-    "sign_up_here": "Sign up here.",
+    "sign_up": "Sign Up",
+    "sign_up_here": "Sign up here",
+    "username": "Username",
     "welcome_to_ease_complaint": "Welcome to Ease-Complaint!"
 }
