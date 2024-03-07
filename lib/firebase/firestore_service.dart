@@ -5,8 +5,7 @@ class FirestoreService extends GetxService {
 
   final dbFirestore = FirebaseFirestore.instance;
 
-  Future<void> _create(String collectionPath, Map<String, dynamic> data) async {
+  Future<void> create(String collectionPath, Map<String, dynamic> data) async {
     await dbFirestore.collection(collectionPath).add(data);
-  }
- 
+  } 
 }
