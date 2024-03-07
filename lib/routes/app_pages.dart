@@ -1,5 +1,7 @@
+import 'package:app/bindings/dashboard_binding.dart';
 import 'package:app/bindings/login_binding.dart';
 import 'package:app/bindings/sign_up_binding.dart';
+import 'package:app/views/dashboard_view.dart';
 import 'package:app/views/login_page.dart';
 import 'package:app/views/sign_up_page.dart';
 import 'package:get/get.dart';
@@ -18,6 +20,13 @@ abstract class AppPages {
       name: Routes.SIGNUP,
       page: () => const SignUpPage(),
       binding: SignUpBinding(),
+      transition: Transition.noTransition,
+      transitionDuration: const Duration(milliseconds: 250),
+    ),
+    GetPage (
+      name: Routes.DASHBOARD,
+      page: () => const DashboardPage(),
+      binding: DashboardBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
