@@ -20,22 +20,43 @@ class LoginWidget extends BaseWidget<LoginController> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget> [
             ElevatedButton (
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.greenAccent, textStyle: const TextStyle(fontSize: 20)),
+              style: ElevatedButton.styleFrom (
+                backgroundColor: Colors.green,
+                elevation: 1, 
+                foregroundColor: Colors.white,
+                side: const BorderSide(color: Colors.greenAccent, width: 5),
+                shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
+                textStyle: const TextStyle(fontSize: 20)
+              ),
               onPressed: () { controller.launchLoginResident(); },
-              child: Column ( 
+              child: Column (
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [ 
                   const Icon(CupertinoIcons.house_fill, color: Colors.white,),
-                  Text(AppLocalizations.of(context).translate('resident'), style: const TextStyle(color: Colors.white)), 
+                  Text(AppLocalizations.of(context).translate('resident')), 
                 ],),
             ),
              ElevatedButton (
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.greenAccent, textStyle: const TextStyle(fontSize: 20)),
+              style: ElevatedButton.styleFrom (
+                backgroundColor: Colors.green,
+                elevation: 1, 
+                foregroundColor: Colors.white,
+                side: const BorderSide(color: Colors.greenAccent, width: 5),
+                shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
+                textStyle: const TextStyle(fontSize: 20)
+              ),
               onPressed: () { controller.launchLoginStaff(); },
-              child: Column(
-                children: [
-                  const Icon(Icons.home_repair_service_sharp, color: Colors.white,),
-                  Text(AppLocalizations.of(context).translate('staff'), style: const TextStyle(color: Colors.white))
-                ],
+              child: Padding (
+                padding: const EdgeInsets.all(5),
+                child: Column (
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.home_repair_service_sharp, color: Colors.white,),
+                    Text(AppLocalizations.of(context).translate('staff'))
+                  ],
+                ),
               ),
             ),
           ],
