@@ -1,6 +1,10 @@
 import 'package:app/controllers/login_controller.dart';
 import 'package:app/views/base_view.dart';
 import 'package:app/widgets/app_bar_widget.dart';
+import 'package:app/widgets/login_resident_widget.dart';
+import 'package:app/widgets/login_staff_widget.dart';
+import 'package:app/widgets/login_widget.dart';
+import 'package:app/widgets/page_view_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends BaseView<LoginController> {
@@ -12,12 +16,17 @@ class LoginPage extends BaseView<LoginController> {
     return Scaffold (
       appBar: AppBarWidget (
         height: MediaQuery.of(context).size.height * 0.20,
-        child: const Row(),
+        child: Row(),
       ),
       backgroundColor: Colors.white,
-      body: Container (
-        color: Colors.grey,
-        child: const Center( child: Text("LoginPage")) ,
+      body: PageViewWidget (
+        pageController: controller.pageController, 
+        isLoading: controller.isLoading, 
+        widgets: const <Widget> [
+          LoginWidget(),
+          LoginResidentWidget(),
+          LoginStaffWidget(),
+        ],
       ),
     );
   }
