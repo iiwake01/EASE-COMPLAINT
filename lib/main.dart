@@ -1,4 +1,5 @@
 import 'package:app/bindings/login_binding.dart';
+import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firebase_options.dart';
 import 'package:app/firebase/firebase_storage_service.dart';
 import 'package:app/firebase/firestore_service.dart';
@@ -14,6 +15,7 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Get.put(new FirestoreService());
   Get.put(new FirebaseStorageService());
+  Get.put(new FirebaseAuthService());
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: true,
     initialBinding: LoginBinding(),
