@@ -11,7 +11,7 @@ class SignUpPage extends BaseView {
   @override
   Widget build(BuildContext context) {
     return Scaffold (
-      appBar: const HeaderAppBarWidget(),
+      appBar: HeaderAppBarWidget(height: MediaQuery.of(context).size.height * 0.20, widthGap: MediaQuery.of(context).size.width * 0.10,),
       backgroundColor: Colors.white,
       body: Column (
         mainAxisAlignment: MainAxisAlignment.center,

@@ -4,9 +4,9 @@ import 'package:app/widgets/base_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class HeaderAppBarWidget extends BaseWidget implements PreferredSizeWidget {
+class ResidentHomeAppBarWidget extends BaseWidget implements PreferredSizeWidget {
   
-  const HeaderAppBarWidget( { 
+  const ResidentHomeAppBarWidget( { 
     super.key,
     this.height,
     this.widthGap,
@@ -25,8 +25,9 @@ class HeaderAppBarWidget extends BaseWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget> [
-          const Icon(CupertinoIcons.photo,),
-          SizedBox(width: widthGap,),
+          SizedBox(width: widthGap),
+          const Icon(CupertinoIcons.bell_solid, color: Colors.white,),
+          const Spacer(),
           Column (
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,8 +36,11 @@ class HeaderAppBarWidget extends BaseWidget implements PreferredSizeWidget {
               Text( AppLocalizations.of(context).translate('app_name'), style: const TextStyle(color: Colors.white, fontSize: 20), ),
             ],
           ),
+          const Spacer(),
+          const Icon(CupertinoIcons.person_circle, color: Colors.white,),
           SizedBox(width: widthGap),
-          const Icon(CupertinoIcons.photo,),
+          const Icon(Icons.logout, color: Colors.white,),
+          SizedBox(width: widthGap),
         ],
       ),
     );

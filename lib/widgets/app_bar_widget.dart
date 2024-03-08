@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 class AppBarWidget extends BaseWidget implements PreferredSizeWidget {
 
   const AppBarWidget ( {
-    super.key, 
-    required this.child,
+    super.key,
+required this.child,
     this.height = kToolbarHeight,
-  } );
+      } );
 
-  final Widget child;
+final Widget child;
   final double height;
-
+  
   @override
   Size get preferredSize => Size.fromHeight(height);
 
@@ -23,5 +23,5 @@ class AppBarWidget extends BaseWidget implements PreferredSizeWidget {
       color: Colors.green,
       child: child,
     );
-  }
+  }  
 }
