@@ -27,7 +27,7 @@ class StaffHomeAppBarWidget extends BaseWidget<HomedController> implements Prefe
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(width: widthGap),
-          IconButton(onPressed: () => controller.launchProfile(), icon: Icon(CupertinoIcons.person_circle, color: Colors.white,)),
+          IconButton(onPressed: () => controller.launchProfile(), icon: const Icon(CupertinoIcons.person_circle, color: Colors.white,)),
           const Spacer(),
           Column (
             mainAxisAlignment: MainAxisAlignment.center,
@@ -38,7 +38,7 @@ class StaffHomeAppBarWidget extends BaseWidget<HomedController> implements Prefe
             ],
           ),
           const Spacer(),
-          IconButton(onPressed: () => controller.promptLogout(), icon: Icon(Icons.logout, color: Colors.white,)),
+          IconButton(onPressed: () => controller.promptLogout(), icon: const Icon(Icons.logout, color: Colors.white,)),
           SizedBox(width: widthGap),
         ],
       ),

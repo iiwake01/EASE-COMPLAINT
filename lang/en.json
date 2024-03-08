@@ -1,6 +1,7 @@
 {
     "app_name": "Ease - Complaint",
     "age": "Age",
+    "are_you_sure_you_want_to_log_out_": "Are you sure you want to Log Out?",
     "barangay_bonbon": "Barangay Bonbon",
     "birthdate": "Birthdate",
     "confirm_password": "Confirm Password",
@@ -17,6 +18,7 @@
     "make_a_new_account_": "Make a new Account...",
     "middle_name": "Middle Name",
     "name": "Name",
+    "no": "No",
     "password": "Password",
     "please_attach_any_valid_proof_of_residency": "Please Attacth any valid Proof of Residency",
     "please_fill_up_the_form_": "Please fill up the form...",
@@ -29,5 +31,6 @@
     "staff": "Staff",
     "status": "Status",
     "username": "Username",
-    "welcome_to_ease_complaint": "Welcome to Ease-Complaint!"
+    "welcome_to_ease_complaint": "Welcome to Ease-Complaint!",
+    "yes": "Yes"
 }
