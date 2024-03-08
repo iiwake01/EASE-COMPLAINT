@@ -36,8 +36,9 @@ class LoginController extends BaseController {
     pageController.jumpToPage(2);
   }
 
-  Future<void> validateCredential() async {
+  Future<void> validateResidentCredential() async {
     debugPrint("LoginController validateCredential");
+    _launchResidentHomePage();
     /*
     isLoading(true);
     _auth.checkCredential (
@@ -47,7 +48,9 @@ class LoginController extends BaseController {
         debugPrint("LoginController validateCredential credential ${userCredential.toString()}");
         debugPrint("LoginController validateCredential user ${userCredential.user}");
       }, 
-      () => _launchDashboard(), 
+      () {
+        _launchResidentHomePage();
+      }, 
       (exception) {
         debugPrint('LoginController validateCredential exception ${exception.toString()}}');
         onShowAlert("Error!", "Invalid Credential Please Try Again");
@@ -59,9 +62,40 @@ class LoginController extends BaseController {
     */
   }
 
-  void _launchDashboard() {
-    debugPrint("LoginController launchLoginStaff");
-    Get.offAndToNamed(Routes.DASHBOARD);
+  Future<void> validateStaffCredential() async {
+    debugPrint("LoginController validateCredential");
+    _launchStaffHomePage();
+    /*
+    isLoading(true);
+    _auth.checkCredential (
+      emailController?.text ?? "",
+      passwordController?.text ?? "",
+      (userCredential) {
+        debugPrint("LoginController validateCredential credential ${userCredential.toString()}");
+        debugPrint("LoginController validateCredential user ${userCredential.user}");
+      }, 
+      () {
+        _launchStaffHomePage();
+      }, 
+      (exception) {
+        debugPrint('LoginController validateCredential exception ${exception.toString()}}');
+        onShowAlert("Error!", "Invalid Credential Please Try Again");
+      },
+      () {
+        isLoading(false);
+      },
+    );
+    */
+  }
+
+  void _launchResidentHomePage() {
+    debugPrint("LoginController _launchResidentHomePage");
+    Get.offAndToNamed(Routes.RESIDENTHOME);
+  }
+
+  void _launchStaffHomePage() {
+    debugPrint("LoginController _launchStaffHomePage");
+    Get.offAndToNamed(Routes.STAFFHOME);
   }
 
   void launchSignUp() {

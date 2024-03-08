@@ -33,7 +33,7 @@ class LoginResidentWidget extends BaseWidget<LoginController> {
             ), 
             ElevatedButton (
               style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.white, textStyle: const TextStyle(fontSize: 20)),
-              onPressed: () { controller.validateCredential(); },
+              onPressed: () { controller.validateResidentCredential(); },
               child: Text(AppLocalizations.of(context).translate('log_in')),
             ),
           ],

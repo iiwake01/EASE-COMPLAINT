@@ -12,6 +12,8 @@ class SignUpController extends BaseController {
 
   final FirebaseAuthService _auth;
   TextEditingController? emailController, passwordController;
+  //firstNameController, lastNameController, middleNameController, 
+  //ageController, birthdateController, contactNumberController, houseStreetController
 
   @override
   Future<void> onInit() async {

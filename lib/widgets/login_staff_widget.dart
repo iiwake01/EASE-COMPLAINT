@@ -25,7 +25,7 @@ class LoginStaffWidget extends BaseWidget<LoginController> {
             TextFieldWidget(textEditingController: controller.passwordController, labelText: AppLocalizations.of(context).translate('password'),), 
             ElevatedButton (
               style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.white, textStyle: const TextStyle(fontSize: 20)),
-              onPressed: () { controller.validateCredential(); },
+              onPressed: () { controller.validateStaffCredential(); },
               child: Text(AppLocalizations.of(context).translate('log_in')),
             ),
           ],
