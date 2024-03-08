@@ -1,9 +1,13 @@
 import 'package:app/bindings/dashboard_binding.dart';
 import 'package:app/bindings/home_binding.dart';
 import 'package:app/bindings/login_binding.dart';
+import 'package:app/bindings/notification_binding.dart';
+import 'package:app/bindings/profile_binding.dart';
 import 'package:app/bindings/sign_up_binding.dart';
 import 'package:app/views/dashboard_page.dart';
 import 'package:app/views/login_page.dart';
+import 'package:app/views/notification_page.dart';
+import 'package:app/views/profile_page.dart';
 import 'package:app/views/resident_home_page.dart';
 import 'package:app/views/sign_up_page.dart';
 import 'package:app/views/staff_home_page.dart';
@@ -16,7 +20,7 @@ abstract class AppPages {
       name: Routes.LOGIN,
       page: () => const LoginPage(),
       binding: LoginBinding(),
-      transition: Transition.noTransition,
+      transition: Transition.fade,
       transitionDuration: const Duration(milliseconds: 250),
     ),
     GetPage (
@@ -37,6 +41,20 @@ abstract class AppPages {
       name: Routes.STAFFHOME,
       page: () => const StaffHomePage(),
       binding: HomeBinding(),
+      transition: Transition.noTransition,
+      transitionDuration: const Duration(milliseconds: 250),
+    ),
+     GetPage (
+      name: Routes.NOTIFICATION,
+      page: () => const NotificationPage(),
+      binding: NotificationBinding(),
+      transition: Transition.noTransition,
+      transitionDuration: const Duration(milliseconds: 250),
+    ),
+    GetPage (
+      name: Routes.PROFILE,
+      page: () => const ProfilePage(),
+      binding: ProfileBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),

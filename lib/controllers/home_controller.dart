@@ -22,10 +22,12 @@ class HomedController extends BaseController {
   //#region Home App Bar Methods
   void launchNotification() {
     debugPrint("HomedController launchNotification");
+    Get.toNamed(Routes.NOTIFICATION);
   }
 
   void launchProfile() {
     debugPrint("HomedController launchProfile");
+    Get.toNamed(Routes.PROFILE);
   }
 
   void promptLogout() {
