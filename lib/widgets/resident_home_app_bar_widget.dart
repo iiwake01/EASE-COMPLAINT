@@ -1,10 +1,11 @@
+import 'package:app/controllers/home_controller.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/widgets/app_bar_widget.dart';
 import 'package:app/widgets/base_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ResidentHomeAppBarWidget extends BaseWidget implements PreferredSizeWidget {
+class ResidentHomeAppBarWidget extends BaseWidget<HomedController> implements PreferredSizeWidget {
   
   const ResidentHomeAppBarWidget( { 
     super.key,
@@ -26,7 +27,7 @@ class ResidentHomeAppBarWidget extends BaseWidget implements PreferredSizeWidget
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget> [
           SizedBox(width: widthGap),
-          const Icon(CupertinoIcons.bell_solid, color: Colors.white,),
+          IconButton(onPressed: () => controller.launchNotification(), icon: const Icon(CupertinoIcons.bell_solid, color: Colors.white,)),
           const Spacer(),
           Column (
             mainAxisAlignment: MainAxisAlignment.center,
@@ -37,9 +38,9 @@ class ResidentHomeAppBarWidget extends BaseWidget implements PreferredSizeWidget
             ],
           ),
           const Spacer(),
-          const Icon(CupertinoIcons.person_circle, color: Colors.white,),
+          IconButton(onPressed: () => controller.launchProfile(), icon: const Icon(CupertinoIcons.person_circle, color: Colors.white,)),
           SizedBox(width: widthGap),
-          const Icon(Icons.logout, color: Colors.white,),
+          IconButton(onPressed: () => controller.promptLogout(), icon: const Icon(Icons.logout, color: Colors.white,)),
           SizedBox(width: widthGap),
         ],
       ),

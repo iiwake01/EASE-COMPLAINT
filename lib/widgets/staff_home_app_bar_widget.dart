@@ -1,10 +1,11 @@
+import 'package:app/controllers/home_controller.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/widgets/app_bar_widget.dart';
 import 'package:app/widgets/base_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class StaffHomeAppBarWidget extends BaseWidget implements PreferredSizeWidget {
+class StaffHomeAppBarWidget extends BaseWidget<HomedController> implements PreferredSizeWidget {
   
   const StaffHomeAppBarWidget( { 
     super.key,
@@ -26,7 +27,7 @@ class StaffHomeAppBarWidget extends BaseWidget implements PreferredSizeWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(width: widthGap),
-          const Icon(CupertinoIcons.person_circle, color: Colors.white,),
+          IconButton(onPressed: () => controller.launchProfile(), icon: Icon(CupertinoIcons.person_circle, color: Colors.white,)),
           const Spacer(),
           Column (
             mainAxisAlignment: MainAxisAlignment.center,
@@ -37,7 +38,7 @@ class StaffHomeAppBarWidget extends BaseWidget implements PreferredSizeWidget {
             ],
           ),
           const Spacer(),
-          const Icon(Icons.logout, color: Colors.white,),
+          IconButton(onPressed: () => controller.promptLogout(), icon: Icon(Icons.logout, color: Colors.white,)),
           SizedBox(width: widthGap),
         ],
       ),
