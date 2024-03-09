@@ -1,12 +1,20 @@
-import 'package:app/controllers/home_controller.dart';
-import 'package:app/utils/app_localizations.dart';
 import 'package:app/widgets/base_widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ResidentHomeWidget extends BaseWidget<HomedController> {
+class CardHomeWidget extends BaseWidget {
   
-  const ResidentHomeWidget({super.key});
+  const CardHomeWidget( {
+    super.key,
+    required this.firstWidget,
+    required this.secondWidget,
+    required this.thirdWidget,
+    this.onPressedFirst,
+    this.onPressedSecond,
+    this.onPressedThird,
+  } );
+
+  final Widget? firstWidget, secondWidget, thirdWidget;
+  final VoidCallback? onPressedFirst, onPressedSecond, onPressedThird;
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +26,6 @@ class ResidentHomeWidget extends BaseWidget<HomedController> {
       child: Padding (
         padding: const EdgeInsets.only(top: 13, left: 20.0, right: 20.0, bottom: 13),
         child: Column (
-          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget> [
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),  
             Row (
@@ -35,15 +41,8 @@ class ResidentHomeWidget extends BaseWidget<HomedController> {
                     shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
                     textStyle: const TextStyle(fontSize: 20)
                   ),
-                  onPressed: () { controller.launchDashboard(); },
-                  child: Row (
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [ 
-                      const Icon(CupertinoIcons.graph_square, color: Colors.white,),
-                      Text(AppLocalizations.of(context).translate('view_dashboard')), 
-                    ],),
+                  onPressed: onPressedFirst,
+                  child: firstWidget,
                 ),
                 ElevatedButton (
                   style: ElevatedButton.styleFrom (
@@ -53,15 +52,8 @@ class ResidentHomeWidget extends BaseWidget<HomedController> {
                     shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
                     textStyle: const TextStyle(fontSize: 20)
                   ),
-                  onPressed: () { controller.launchFileComplaint(); },
-                  child: Row (
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [ 
-                      const Icon(CupertinoIcons.folder_open, color: Colors.white,),
-                      Text(AppLocalizations.of(context).translate('file_a_complaint')), 
-                    ],),
+                  onPressed: onPressedSecond,
+                  child: secondWidget
                 ),
               ],
             ),
@@ -74,15 +66,8 @@ class ResidentHomeWidget extends BaseWidget<HomedController> {
                 shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
                 textStyle: const TextStyle(fontSize: 20)
               ),
-              onPressed: () { controller.launchSelfComplaintsList(); },
-              child: Row (
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Icon(CupertinoIcons.gobackward, color: Colors.white,),
-                  Text(AppLocalizations.of(context).translate('view_record_of_complaints')), 
-                ],),
+              onPressed: onPressedThird,
+              child: thirdWidget,
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),            
           ],
