@@ -56,19 +56,23 @@ class HomedController extends BaseController {
   //#region Resident Methods
   void launchFileComplaint() {
     debugPrint("HomedController launchFileComplaint");
+    Get.toNamed(Routes.FILECOMPLAINT);
   }
 
-  void launchSelfComplaintsList() {
-    debugPrint("HomedController launchSelfComplaintsList");
+  void launchResidentComplaintList() {
+    debugPrint("HomedController launchResidentComplaintList");
+    Get.toNamed(Routes.RESIDENTCOMPLAINTSLIST);
   }
   //#endregion
   //#region Staff Methods
-  void launchComplaintsList() {
-    debugPrint("HomedController launchComplaintsList");
+  void launchStaffComplaintList() {
+    debugPrint("HomedController launchStaffComplaintsList");
+    Get.toNamed(Routes.STAFFCOMPLAINTSLIST);
   }
 
   void launchResidentsList() {
     debugPrint("HomedController launchResidentsList");
+    Get.toNamed(Routes.RESIDENTSLIST);
   }
   //#endregion  
   @override

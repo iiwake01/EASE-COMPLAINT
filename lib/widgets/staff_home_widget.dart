@@ -40,7 +40,7 @@ class StaffHomeWidget extends BaseWidget<HomedController> {
         ],
       ),
       onPressedFirst:  () { controller.launchDashboard(); },
-      onPressedSecond: () { controller.launchComplaintsList(); },
+      onPressedSecond: () { controller.launchStaffComplaintList(); },
       onPressedThird: () { controller.launchResidentsList(); },
     ); 
   }

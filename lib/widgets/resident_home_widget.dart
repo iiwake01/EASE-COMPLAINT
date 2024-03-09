@@ -41,7 +41,7 @@ class ResidentHomeWidget extends BaseWidget<HomedController> {
       ),
       onPressedFirst:  () { controller.launchDashboard(); },
       onPressedSecond: () { controller.launchFileComplaint(); },
-      onPressedThird: () { controller.launchSelfComplaintsList(); },
+      onPressedThird: () { controller.launchResidentComplaintList(); },
     ); 
   }
 }

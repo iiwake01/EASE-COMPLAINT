@@ -9,4 +9,8 @@ abstract class Routes {
   static const NOTIFICATION = '/notification';
   static const PROFILE = '/profile';
   static const DASHBOARD = '/dashboard';
+  static const FILECOMPLAINT = '/file_complaint';
+  static const RESIDENTCOMPLAINTSLIST = '/resident_complaints_list';
+  static const STAFFCOMPLAINTSLIST = '/staff_complaints_list';
+  static const RESIDENTSLIST = '/residents_list';
 }
