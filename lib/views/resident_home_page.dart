@@ -4,6 +4,7 @@ import 'package:app/views/base_view.dart';
 import 'package:app/widgets/resident_home_app_bar_widget.dart';
 import 'package:app/widgets/resident_home_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ResidentHomePage extends BaseView<HomedController> {
 
@@ -16,7 +17,8 @@ class ResidentHomePage extends BaseView<HomedController> {
       backgroundColor: Colors.white,
       body: Column (
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text( AppLocalizations.of(context).translate('hello_resident_'), style: const TextStyle(color: Colors.green, fontSize: 13), ),
           Text( AppLocalizations.of(context).translate('how_can_we_can_help_you_'), style: const TextStyle(color: Colors.green, fontSize: 13), ),

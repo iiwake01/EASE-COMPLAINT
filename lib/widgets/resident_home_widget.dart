@@ -1,6 +1,7 @@
 import 'package:app/controllers/home_controller.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/widgets/base_widgets.dart';
+import 'package:app/widgets/card_home_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,84 +11,37 @@ class ResidentHomeWidget extends BaseWidget<HomedController> {
 
   @override
   Widget build(BuildContext context) {
-    final double cardMargin = MediaQuery.of(context).size.width * 0.20;
-    return Card (
-      margin: EdgeInsets.symmetric(horizontal: cardMargin),
-      elevation: 1.0,
-      shadowColor: Colors.greenAccent,
-      child: Padding (
-        padding: const EdgeInsets.only(top: 13, left: 20.0, right: 20.0, bottom: 13),
-        child: Column (
-          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget> [
-            SizedBox(height: MediaQuery.of(context).size.height * 0.025,),  
-            Row (
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget> [
-                ElevatedButton (
-                  style: ElevatedButton.styleFrom (
-                    backgroundColor: Colors.green,
-                    elevation: 1, 
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
-                    textStyle: const TextStyle(fontSize: 20)
-                  ),
-                  onPressed: () { controller.launchDashboard(); },
-                  child: Row (
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [ 
-                      const Icon(CupertinoIcons.graph_square, color: Colors.white,),
-                      Text(AppLocalizations.of(context).translate('view_dashboard')), 
-                    ],),
-                ),
-                ElevatedButton (
-                  style: ElevatedButton.styleFrom (
-                    backgroundColor: Colors.green,
-                    elevation: 1, 
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
-                    textStyle: const TextStyle(fontSize: 20)
-                  ),
-                  onPressed: () { controller.launchFileComplaint(); },
-                  child: Row (
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [ 
-                      const Icon(CupertinoIcons.folder_open, color: Colors.white,),
-                      Text(AppLocalizations.of(context).translate('file_a_complaint')), 
-                    ],),
-                ),
-              ],
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            ElevatedButton (
-              style: ElevatedButton.styleFrom (
-                backgroundColor: Colors.green,
-                elevation: 1, 
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
-                textStyle: const TextStyle(fontSize: 20)
-              ),
-              onPressed: () { controller.launchSelfComplaintsList(); },
-              child: Row (
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Icon(CupertinoIcons.gobackward, color: Colors.white,),
-                  Text(AppLocalizations.of(context).translate('view_record_of_complaints')), 
-                ],),
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.025,),            
-          ],
-        ),
+    return CardHomeWidget(
+      firstWidget: Row (
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [ 
+          const Icon(CupertinoIcons.graph_square, color: Colors.white,),
+          Text(AppLocalizations.of(context).translate('view_dashboard')), 
+        ],
+      ), 
+      secondWidget: Row (
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [ 
+          const Icon(CupertinoIcons.folder_open, color: Colors.white,),
+          Text(AppLocalizations.of(context).translate('file_a_complaint')), 
+        ],
+      ), 
+      thirdWidget: Row (
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Icon(CupertinoIcons.gobackward, color: Colors.white,),
+          Text(AppLocalizations.of(context).translate('view_record_of_complaints')), 
+        ],
       ),
+      onPressedFirst:  () { controller.launchDashboard(); },
+      onPressedSecond: () { controller.launchFileComplaint(); },
+      onPressedThird: () { controller.launchSelfComplaintsList(); },
     ); 
   }
 }
