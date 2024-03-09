@@ -13,7 +13,7 @@ class StaffHomePage extends BaseView {
       backgroundColor: Colors.grey,
       body: Container (
         color: Colors.grey,
-        child: const Center( child: Text("StaffHomePage")) ,
+        child: const Center( child: Text("StaffHomePage")),        
       ),
     ); 
   }

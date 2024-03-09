@@ -42,6 +42,7 @@ class HomedController extends BaseController {
   
   void _launchLogout() {
     debugPrint("HomedController _launchLogout");
+    if (Get.isDialogOpen == true) { Get.back(); }
     DialogWidget.loadingDialog();
     if (Get.isDialogOpen == true) { Get.back(); }
     Get.offAndToNamed(Routes.LOGIN);
