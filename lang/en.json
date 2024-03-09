@@ -11,6 +11,7 @@
     "file_a_complaint": "File a Complaint",
     "first_name": "First Name",
     "hello_resident_": "Hello, Resident...",
+    "hello_staff_": "Hello, Staff...",
     "house_number_street_name": "House Number, Street Name",
     "how_can_we_can_help_you_": "How can we Help you?",
     "i_have_read_and_agreed_to_the_terms_and_conditions": "I have read and agreed to the Terms and Conditions",
@@ -25,6 +26,7 @@
     "password": "Password",
     "please_attach_any_valid_proof_of_residency": "Please Attacth any valid Proof of Residency",
     "please_fill_up_the_form_": "Please fill up the form...",
+    "records_of_complaints": "Records of Complaints",
     "resident": "Resident",
     "select_the_zone_your_reside_in_": "Select the zone you reside in:",
     "sex": "Sex",
@@ -35,6 +37,7 @@
     "status": "Status",
     "username": "Username",
     "view_dashboard": "View Dashboard",
+    "view_list_of_residents": "View List of Residents",
     "view_record_of_complaints": "View Record of Complaints",
     "welcome_to_ease_complaint": "Welcome to Ease-Complaint!",
     "yes": "Yes"

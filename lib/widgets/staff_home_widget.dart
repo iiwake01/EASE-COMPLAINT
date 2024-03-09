@@ -5,9 +5,9 @@ import 'package:app/widgets/card_home_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ResidentHomeWidget extends BaseWidget<HomedController> {
+class StaffHomeWidget extends BaseWidget<HomedController> {
   
-  const ResidentHomeWidget( { super.key } );
+  const StaffHomeWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class ResidentHomeWidget extends BaseWidget<HomedController> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [ 
           const Icon(CupertinoIcons.folder_open, color: Colors.white,),
-          Text(AppLocalizations.of(context).translate('file_a_complaint')), 
+          Text(AppLocalizations.of(context).translate('records_of_complaints')), 
         ],
       ), 
       thirdWidget: Row (
@@ -36,12 +36,12 @@ class ResidentHomeWidget extends BaseWidget<HomedController> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Icon(CupertinoIcons.gobackward, color: Colors.white,),
-          Text(AppLocalizations.of(context).translate('view_record_of_complaints')), 
+          Text(AppLocalizations.of(context).translate('view_list_of_residents')), 
         ],
       ),
       onPressedFirst:  () { controller.launchDashboard(); },
-      onPressedSecond: () { controller.launchFileComplaint(); },
-      onPressedThird: () { controller.launchSelfComplaintsList(); },
+      onPressedSecond: () { controller.launchComplaintsList(); },
+      onPressedThird: () { controller.launchResidentsList(); },
     ); 
   }
 }
