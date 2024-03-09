@@ -11,7 +11,7 @@ class ResidentHomeWidget extends BaseWidget<HomedController> {
 
   @override
   Widget build(BuildContext context) {
-    return CardHomeWidget(
+    return CardHomeWidget (
       firstWidget: Row (
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,

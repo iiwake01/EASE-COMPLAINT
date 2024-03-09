@@ -18,60 +18,60 @@ class CardHomeWidget extends BaseWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double cardMargin = MediaQuery.of(context).size.width * 0.20;
+    //final double cardMargin = MediaQuery.of(context).size.width * 0.0;
     return Card (
-      margin: EdgeInsets.symmetric(horizontal: cardMargin),
+      //margin: EdgeInsets.symmetric(horizontal: cardMargin),
       elevation: 1.0,
       shadowColor: Colors.greenAccent,
-      child: Padding (
-        padding: const EdgeInsets.only(top: 13, left: 20.0, right: 20.0, bottom: 13),
-        child: Column (
-          children: <Widget> [
-            SizedBox(height: MediaQuery.of(context).size.height * 0.025,),  
-            Row (
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget> [
-                ElevatedButton (
-                  style: ElevatedButton.styleFrom (
-                    backgroundColor: Colors.green,
-                    elevation: 1, 
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
-                    textStyle: const TextStyle(fontSize: 20)
-                  ),
-                  onPressed: onPressedFirst,
-                  child: firstWidget,
+      child: Column (
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget> [
+          SizedBox(height: MediaQuery.of(context).size.height * 0.025,),  
+          Row (
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget> [
+              ElevatedButton (
+                style: ElevatedButton.styleFrom (
+                  backgroundColor: Colors.green,
+                  elevation: 1, 
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
+                  textStyle: const TextStyle(fontSize: 20)
                 ),
-                ElevatedButton (
-                  style: ElevatedButton.styleFrom (
-                    backgroundColor: Colors.green,
-                    elevation: 1, 
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
-                    textStyle: const TextStyle(fontSize: 20)
-                  ),
-                  onPressed: onPressedSecond,
-                  child: secondWidget
-                ),
-              ],
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            ElevatedButton (
-              style: ElevatedButton.styleFrom (
-                backgroundColor: Colors.green,
-                elevation: 1, 
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
-                textStyle: const TextStyle(fontSize: 20)
+                onPressed: onPressedFirst,
+                child: firstWidget,
               ),
-              onPressed: onPressedThird,
-              child: thirdWidget,
+              ElevatedButton (
+                style: ElevatedButton.styleFrom (
+                  backgroundColor: Colors.green,
+                  elevation: 1, 
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
+                  textStyle: const TextStyle(fontSize: 20)
+                ),
+                onPressed: onPressedSecond,
+                child: secondWidget
+              ),
+            ],
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
+          ElevatedButton (
+            style: ElevatedButton.styleFrom (
+              backgroundColor: Colors.green,
+              elevation: 1, 
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
+              textStyle: const TextStyle(fontSize: 20)
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.025,),            
-          ],
-        ),
+            onPressed: onPressedThird,
+            child: thirdWidget,
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.025,),            
+        ],
       ),
     ); 
   }
