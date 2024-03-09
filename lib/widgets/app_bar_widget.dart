@@ -6,21 +6,23 @@ class AppBarWidget extends BaseWidget implements PreferredSizeWidget {
 
   const AppBarWidget ( {
     super.key,
-required this.child,
+    required this.child,
     this.height = kToolbarHeight,
-      } );
+    this.backgroundColor,
+  } );
 
 final Widget child;
-  final double height;
+final double height;
+final Color? backgroundColor;
   
   @override
   Size get preferredSize => Size.fromHeight(height);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Container (
       height: preferredSize.height,
-      color: Colors.green,
+      color: backgroundColor ?? Colors.green,
       child: child,
     );
   }  
