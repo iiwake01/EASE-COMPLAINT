@@ -12,6 +12,31 @@ class FileComplaintController extends BaseController {
     super.onInit();
     debugPrint("FileComplaintController onInit");
   }
+
+  void launchEnvironmentalProblems() {
+    debugPrint("FileComplaintController launchEnvironmentalProblems");
+    onShowAlert("Under Construction", "On Going . . .");
+  }
+
+  void launchCommunityConflicts() {
+    debugPrint("FileComplaintController launchCommunityConflicts");
+    onShowAlert("Under Construction", "On Going . . .");
+  }
+
+  void launchPublicDisturbances() {
+    debugPrint("FileComplaintController launchPublicDisturbances");
+    onShowAlert("Under Construction", "On Going . . .");
+  }
+
+  void launchCrimeRelated() {
+    debugPrint("FileComplaintController launchCrimeRelated");
+    onShowAlert("Under Construction", "On Going . . .");
+  }
+
+  void launchOtherTypeProblem() {
+    debugPrint("FileComplaintController launchOtherTypeProblem");
+    onShowAlert("Under Construction", "On Going . . .");
+  }
   
   @override
   void onClose() {

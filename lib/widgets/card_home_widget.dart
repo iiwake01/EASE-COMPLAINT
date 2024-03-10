@@ -73,6 +73,6 @@ class CardHomeWidget extends BaseWidget {
           SizedBox(height: MediaQuery.of(context).size.height * 0.025,),            
         ],
       ),
-    ); 
+    );
   }
 }
