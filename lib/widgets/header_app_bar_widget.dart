@@ -5,12 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HeaderAppBarWidget extends BaseWidget implements PreferredSizeWidget {
-  
-  const HeaderAppBarWidget( { 
+  const HeaderAppBarWidget({
     super.key,
     this.height,
     this.widthGap,
-  } );
+  });
 
   final double? height, widthGap;
 
@@ -19,24 +18,46 @@ class HeaderAppBarWidget extends BaseWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBarWidget (
+    return AppBarWidget(
       height: height ?? kToolbarHeight,
-      child: Row (
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget> [
-          const Icon(CupertinoIcons.photo,),
-          SizedBox(width: widthGap,),
-          Column (
+        children: <Widget>[
+          const Icon(
+            CupertinoIcons.photo,
+          ),
+          SizedBox(
+            width: widthGap,
+          ),
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget> [
-              Text( AppLocalizations.of(context).translate('barangay_bonbon'), style: const TextStyle(color: Colors.white, fontSize: 13), ),
-              Text( AppLocalizations.of(context).translate('app_name'), style: const TextStyle(color: Colors.white, fontSize: 20), ),
+            children: <Widget>[
+              Text(
+                AppLocalizations.of(context).translate('barangay_bonbon'),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  letterSpacing: 3,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+              const Text(
+                // AppLocalizations.of(context).translate('app_name'),
+                "EASE - COMPLAINT",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 3),
+              ),
             ],
           ),
           SizedBox(width: widthGap),
-          const Icon(CupertinoIcons.photo,),
+          const Icon(
+            CupertinoIcons.photo,
+          ),
         ],
       ),
     );
