@@ -2,6 +2,7 @@ import 'package:app/controllers/file_complaint_controller.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/views/base_view.dart';
 import 'package:app/widgets/back_app_bar.dart';
+import 'package:app/widgets/file_complaint_button.dart';
 import 'package:flutter/material.dart';
 
 class FileComplaintPage extends BaseView<FileComplaintController> {
@@ -30,27 +31,13 @@ class FileComplaintPage extends BaseView<FileComplaintController> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget> [
-                  ElevatedButton (
-                    style: ElevatedButton.styleFrom (
-                      backgroundColor: Colors.yellow,
-                      elevation: 1, 
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
-                      textStyle: const TextStyle(fontSize: 20)
-                    ),
+                  FileComplaintButton (
                     onPressed: () => controller.launchEnvironmentalProblems(),
-                    child: Text(AppLocalizations.of(context).translate('environmental_problems')),
+                    text: AppLocalizations.of(context).translate('environmental_problems'),
                   ),
-                  ElevatedButton (
-                    style: ElevatedButton.styleFrom (
-                      backgroundColor: Colors.yellow,
-                      elevation: 1, 
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
-                      textStyle: const TextStyle(fontSize: 20)
-                    ),
+                  FileComplaintButton (
                     onPressed: () => controller.launchCommunityConflicts(),
-                    child: Text(AppLocalizations.of(context).translate('community_conflicts')),
+                    text: AppLocalizations.of(context).translate('community_conflicts'),
                   ),
                 ],
               ),
@@ -60,42 +47,21 @@ class FileComplaintPage extends BaseView<FileComplaintController> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget> [
-                  ElevatedButton (
-                    style: ElevatedButton.styleFrom (
-                      backgroundColor: Colors.yellow,
-                      elevation: 1, 
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
-                      textStyle: const TextStyle(fontSize: 20)
-                    ),
+                  FileComplaintButton (
                     onPressed: () => controller.launchPublicDisturbances(),
-                    child: Text(AppLocalizations.of(context).translate('public_disturbances')),
+                    text: AppLocalizations.of(context).translate('public_disturbances'),
                   ),
-                  ElevatedButton (
-                    style: ElevatedButton.styleFrom (
-                      backgroundColor: Colors.yellow,
-                      elevation: 1, 
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
-                      textStyle: const TextStyle(fontSize: 20)
-                    ),
+                  FileComplaintButton (
                     onPressed: () => controller.launchCrimeRelated(),
-                    child: Text(AppLocalizations.of(context).translate('crime_related')),
+                    text: AppLocalizations.of(context).translate('crime_related'),
                   ),
                 ],
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-              ElevatedButton (
-                style: ElevatedButton.styleFrom (
-                  backgroundColor: Colors.yellow,
-                  elevation: 1, 
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
-                  textStyle: const TextStyle(fontSize: 20)
-                ),
+              FileComplaintButton (
                 onPressed: () => controller.launchOtherTypeProblem(),
-                child: Text(AppLocalizations.of(context).translate('other_type_of_problem')),
-              ),      
+                text: AppLocalizations.of(context).translate('other_type_of_problem'),
+              ),    
               SizedBox(height: MediaQuery.of(context).size.height * 0.025,),    
             ],
           ),

@@ -1,3 +1,4 @@
+import 'package:app/utils/constants.dart';
 import 'package:app/widgets/app_bar_widget.dart';
 import 'package:app/widgets/base_widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -44,7 +45,7 @@ class BackAppBar extends BaseWidget implements PreferredSizeWidget {
             ),
           ),
           Text (
-            title?? "",
+            title?? Constants.BLANK,
             style: const TextStyle(color: Colors.green, fontSize: 20),
           ),
         ],

@@ -1,5 +1,6 @@
 import 'package:app/controllers/staff_complaints_list_controller.dart';
 import 'package:app/utils/app_localizations.dart';
+import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
 import 'package:app/widgets/back_app_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -33,7 +34,7 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
             rows: controller.getList().map((model) => DataRow(cells: <DataCell> [
               DataCell (
                 CachedNetworkImage (
-                  imageUrl: model.photo ?? "",
+                  imageUrl: model.photo ?? Constants.BLANK,
                   fit: BoxFit.cover,
                   height: 50,
                   width: 50,
@@ -46,11 +47,11 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
                   } ),
                 ),
               ),
-              DataCell(Text(model.name ?? "", style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
-              DataCell(Text(model.zone ?? "", style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
-              DataCell(Text(model.type ?? "", style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
-              DataCell(Text(model.date ?? "", style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
-              DataCell(Text(model.status ?? "", style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
+              DataCell(Text(model.name ?? Constants.BLANK, style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
+              DataCell(Text(model.zone ?? Constants.BLANK, style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
+              DataCell(Text(model.type ?? Constants.BLANK, style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
+              DataCell(Text(model.date ?? Constants.BLANK, style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
+              DataCell(Text(model.status ?? Constants.BLANK, style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
               DataCell(
                 TextButton (
                   onPressed: () {},
