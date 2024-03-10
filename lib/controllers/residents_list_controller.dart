@@ -46,7 +46,7 @@ class ResidentsListController extends BaseController {
     return _residentList;
   }
 
-  void viewResidentInformation() {
+  void launchView() {
     
   }
   

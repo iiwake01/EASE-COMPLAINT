@@ -52,7 +52,7 @@ class ResidentsListPage extends BaseView<ResidentsListController> {
               DataCell(Text(model.age ?? Constants.BLANK, style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
               DataCell(
                 TextButton (
-                  onPressed: () {},
+                  onPressed: () => controller.launchView(),
                   child: Text(AppLocalizations.of(context).translate('view'),style: const TextStyle(color: Color.fromARGB(255, 106, 129, 107),decoration: TextDecoration.underline,decorationColor: Color.fromARGB(255, 156, 204, 156),decorationStyle: TextDecorationStyle.solid,decorationThickness: 2,fontSize: 20),),
                 )
               )

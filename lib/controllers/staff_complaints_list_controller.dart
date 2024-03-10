@@ -63,8 +63,9 @@ class StaffComplaintsListController extends BaseController {
     return _complaintList;
   }
 
-  void viewRecordsComplaints() {
-    
+  void launchView() {
+    debugPrint("StaffComplaintsListController launchView");
+    onShowAlert("Under Construction", "On Going . . .");
   }
   
   @override
