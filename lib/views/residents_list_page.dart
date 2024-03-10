@@ -27,10 +27,10 @@ class ResidentsListPage extends BaseView<ResidentsListController> {
               DataColumn(label: Text("Age", style: TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
               DataColumn(label: SizedBox()),
             ], 
-            rows: controller.getList().map((cell) => DataRow(cells: <DataCell> [
+            rows: controller.getList().map((model) => DataRow(cells: <DataCell> [
               DataCell (
                 CachedNetworkImage (
-                  imageUrl: cell.photo ?? "",
+                  imageUrl: model.photo ?? "",
                   fit: BoxFit.cover,
                   height: 50,
                   width: 50,
@@ -43,11 +43,16 @@ class ResidentsListPage extends BaseView<ResidentsListController> {
                   } ),
                 ),
               ),
-              DataCell(Text(cell.last ?? "", style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
-              DataCell(Text(cell.first ?? "", style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
-              DataCell(Text(cell.zone ?? "", style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
-              DataCell(Text(cell.age ?? "", style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
-              DataCell(Text(AppLocalizations.of(context).translate('view'),style: const TextStyle(color: Color.fromARGB(255, 106, 129, 107),decoration: TextDecoration.underline,decorationColor: Color.fromARGB(255, 156, 204, 156),decorationStyle: TextDecorationStyle.solid,decorationThickness: 2,fontSize: 20),))
+              DataCell(Text(model.last ?? "", style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
+              DataCell(Text(model.first ?? "", style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
+              DataCell(Text(model.zone ?? "", style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
+              DataCell(Text(model.age ?? "", style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
+              DataCell(
+                TextButton (
+                  onPressed: () {},
+                  child: Text(AppLocalizations.of(context).translate('view'),style: const TextStyle(color: Color.fromARGB(255, 106, 129, 107),decoration: TextDecoration.underline,decorationColor: Color.fromARGB(255, 156, 204, 156),decorationStyle: TextDecorationStyle.solid,decorationThickness: 2,fontSize: 20),),
+                )
+              )
             ])).toList()
           );
         }

@@ -45,6 +45,10 @@ class ResidentsListController extends BaseController {
   List<ResidentModel> getList() {
     return _residentList;
   }
+
+  void viewResidentInformation() {
+    
+  }
   
   @override
   void onClose() {
