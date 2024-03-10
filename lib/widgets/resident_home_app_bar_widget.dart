@@ -5,13 +5,13 @@ import 'package:app/widgets/base_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ResidentHomeAppBarWidget extends BaseWidget<HomedController> implements PreferredSizeWidget {
-  
-  const ResidentHomeAppBarWidget( { 
+class ResidentHomeAppBarWidget extends BaseWidget<HomedController>
+    implements PreferredSizeWidget {
+  const ResidentHomeAppBarWidget({
     super.key,
     this.height,
     this.widthGap,
-  } );
+  });
 
   final double? height, widthGap;
 
@@ -20,27 +20,61 @@ class ResidentHomeAppBarWidget extends BaseWidget<HomedController> implements Pr
 
   @override
   Widget build(BuildContext context) {
-    return AppBarWidget (
+    return AppBarWidget(
       height: height ?? kToolbarHeight,
-      child: Row (
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget> [
+        children: <Widget>[
           SizedBox(width: widthGap),
-          IconButton(onPressed: () => controller.launchNotification(), icon: const Icon(CupertinoIcons.bell_solid, color: Colors.white,)),
+          IconButton(
+              onPressed: () => controller.launchNotification(),
+              icon: const Icon(
+                CupertinoIcons.bell_solid,
+                color: Colors.white,
+                size: 35,
+              )),
           const Spacer(),
-          Column (
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget> [
-              Text( AppLocalizations.of(context).translate('barangay_bonbon'), style: const TextStyle(color: Colors.white, fontSize: 13), ),
-              Text( AppLocalizations.of(context).translate('app_name'), style: const TextStyle(color: Colors.white, fontSize: 20), ),
+            children: <Widget>[
+              Text(
+                AppLocalizations.of(context).translate('barangay_bonbon'),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  letterSpacing: 3,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+              Text(
+                AppLocalizations.of(context).translate('app_name'),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 3,
+                ),
+              ),
             ],
           ),
           const Spacer(),
-          IconButton(onPressed: () => controller.launchProfile(), icon: const Icon(CupertinoIcons.person_circle, color: Colors.white,)),
+          IconButton(
+              onPressed: () => controller.launchProfile(),
+              icon: const Icon(
+                CupertinoIcons.person_circle,
+                color: Colors.white,
+                size: 35,
+              )),
           SizedBox(width: widthGap),
-          IconButton(onPressed: () => controller.promptLogout(), icon: const Icon(Icons.logout, color: Colors.white,)),
+          IconButton(
+              onPressed: () => controller.promptLogout(),
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.white,
+                size: 35,
+              )),
           SizedBox(width: widthGap),
         ],
       ),
