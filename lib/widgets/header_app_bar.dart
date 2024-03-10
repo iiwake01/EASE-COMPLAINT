@@ -4,12 +4,13 @@ import 'package:app/widgets/base_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class HeaderAppBarWidget extends BaseWidget implements PreferredSizeWidget {
-  const HeaderAppBarWidget({
+class HeaderAppBar extends BaseWidget implements PreferredSizeWidget {
+  
+  const HeaderAppBar( {
     super.key,
     this.height,
     this.widthGap,
-  });
+  } );
 
   final double? height, widthGap;
 
@@ -43,10 +44,9 @@ class HeaderAppBarWidget extends BaseWidget implements PreferredSizeWidget {
                   fontWeight: FontWeight.normal,
                 ),
               ),
-              const Text(
-                // AppLocalizations.of(context).translate('app_name'),
-                "EASE - COMPLAINT",
-                style: TextStyle(
+              Text (
+                AppLocalizations.of(context).translate('app_name'),
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 50,
                     fontWeight: FontWeight.bold,

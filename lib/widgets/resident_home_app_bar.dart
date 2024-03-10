@@ -5,9 +5,9 @@ import 'package:app/widgets/base_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ResidentHomeAppBarWidget extends BaseWidget<HomedController>
-    implements PreferredSizeWidget {
-  const ResidentHomeAppBarWidget({
+class ResidentHomeAppBar extends BaseWidget<HomedController> implements PreferredSizeWidget {
+  
+  const ResidentHomeAppBar( {
     super.key,
     this.height,
     this.widthGap,

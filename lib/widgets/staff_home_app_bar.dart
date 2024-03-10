@@ -5,9 +5,9 @@ import 'package:app/widgets/base_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class StaffHomeAppBarWidget extends BaseWidget<HomedController> implements PreferredSizeWidget {
+class StaffHomeAppBar extends BaseWidget<HomedController> implements PreferredSizeWidget {
   
-  const StaffHomeAppBarWidget( { 
+  const StaffHomeAppBar( { 
     super.key,
     this.height,
     this.widthGap,

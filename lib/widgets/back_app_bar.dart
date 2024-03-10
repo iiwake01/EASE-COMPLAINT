@@ -1,18 +1,20 @@
-import 'package:app/utils/app_localizations.dart';
 import 'package:app/widgets/app_bar_widget.dart';
 import 'package:app/widgets/base_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DashboardAppBarWidget extends BaseWidget implements PreferredSizeWidget {
-  const DashboardAppBarWidget({
+class BackAppBar extends BaseWidget implements PreferredSizeWidget {
+  
+  const BackAppBar({
     super.key,
     this.height,
     this.widthGap,
+    this.title
   });
 
   final double? height, widthGap;
+  final String? title;
 
   @override
   Size get preferredSize => Size.fromHeight(height ?? kToolbarHeight);
@@ -22,11 +24,11 @@ class DashboardAppBarWidget extends BaseWidget implements PreferredSizeWidget {
     return AppBarWidget(
       backgroundColor: Colors.white,
       height: height ?? kToolbarHeight,
-      child: Stack(
+      child: Stack (
         alignment: Alignment.center,
         children: <Widget>[
-          Positioned(
-            left: 50.0,
+          Positioned (
+            left: widthGap,
             child: IconButton(
               onPressed: () => Get.back(),
               icon: const Icon(
@@ -35,14 +37,14 @@ class DashboardAppBarWidget extends BaseWidget implements PreferredSizeWidget {
               ),
               style: IconButton.styleFrom(
                   backgroundColor: Colors.green,
-                  padding: const EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric (
                       vertical: 1.0, horizontal: 25.0),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadiusDirectional.circular(20))),
             ),
           ),
-          Text(
-            AppLocalizations.of(context).translate('dashboard_of_complaints'),
+          Text (
+            title?? "",
             style: const TextStyle(color: Colors.green, fontSize: 20),
           ),
         ],

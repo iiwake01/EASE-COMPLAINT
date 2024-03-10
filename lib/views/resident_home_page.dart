@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/views/base_view.dart';
-import 'package:app/widgets/resident_home_app_bar_widget.dart';
+import 'package:app/widgets/resident_home_app_bar.dart';
 import 'package:app/widgets/resident_home_widget.dart';
 
 class ResidentHomePage extends BaseView {
@@ -10,7 +10,7 @@ class ResidentHomePage extends BaseView {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ResidentHomeAppBarWidget(
+      appBar: ResidentHomeAppBar(
         height: MediaQuery.of(context).size.height * 0.20,
         widthGap: MediaQuery.of(context).size.width * 0.05,
       ),

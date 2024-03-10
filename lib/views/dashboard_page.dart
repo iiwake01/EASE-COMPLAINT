@@ -1,7 +1,7 @@
 import 'package:app/controllers/dashboard_controller.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/views/base_view.dart';
-import 'package:app/widgets/dashboard_app_bar.dart';
+import 'package:app/widgets/back_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,7 @@ class DashboardPage extends BaseView<DashboardController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold (
-      appBar: DashboardAppBarWidget(height: MediaQuery.of(context).size.height * 0.20, widthGap: MediaQuery.of(context).size.width * 0.05,),
+      appBar: BackAppBar(height: MediaQuery.of(context).size.height * 0.20, widthGap: MediaQuery.of(context).size.width * 0.05, title: AppLocalizations.of(context).translate('dashboard_of_complaints'),),
       backgroundColor: Colors.grey,
       body: Row (
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

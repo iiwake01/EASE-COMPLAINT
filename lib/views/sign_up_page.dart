@@ -1,6 +1,6 @@
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/views/base_view.dart';
-import 'package:app/widgets/header_app_bar_widget.dart';
+import 'package:app/widgets/header_app_bar.dart';
 import 'package:app/widgets/sign_up_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +11,7 @@ class SignUpPage extends BaseView {
   @override
   Widget build(BuildContext context) {
     return Scaffold (
-      appBar: HeaderAppBarWidget(height: MediaQuery.of(context).size.height * 0.20, widthGap: MediaQuery.of(context).size.width * 0.10,),
+      appBar: HeaderAppBar(height: MediaQuery.of(context).size.height * 0.20, widthGap: MediaQuery.of(context).size.width * 0.10,),
       backgroundColor: Colors.white,
       body: Column (
         mainAxisAlignment: MainAxisAlignment.center,
