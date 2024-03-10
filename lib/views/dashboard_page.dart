@@ -1,4 +1,5 @@
 import 'package:app/controllers/dashboard_controller.dart';
+import 'package:app/utils/app_localizations.dart';
 import 'package:app/views/base_view.dart';
 import 'package:app/widgets/dashboard_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +13,60 @@ class DashboardPage extends BaseView<DashboardController> {
     return Scaffold (
       appBar: DashboardAppBarWidget(height: MediaQuery.of(context).size.height * 0.20, widthGap: MediaQuery.of(context).size.width * 0.05,),
       backgroundColor: Colors.grey,
-      body: Container (
-        color: Colors.grey,
-        child: const Center( child: Text("DashboardPage")) ,
+      body: Row (
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget> [
+          Card (
+            child: Column (
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget> [
+                Text( AppLocalizations.of(context).translate('top_complaints_in_barangay_bonbon') ),
+                const Divider(),
+                Column( children: controller.getTopComplaintsList().map((topComplaint) => Text(topComplaint)).toList(),)
+              ],
+            ),
+          ),
+          Column (
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget> [
+              Card (
+                child: Column ( 
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center, 
+                  children: <Widget> [
+                    Text(AppLocalizations.of(context).translate('solved_complaints')),
+                    SizedBox( width: MediaQuery.of(context).size.width * 0.3, child: const Divider( color: Colors.grey, thickness: 1.0),),
+                    Text( controller.getSolvedComplaints() ),
+                  ],
+                )
+              ),
+              Card (
+                child: Column ( 
+                  children: <Widget> [ 
+                    Text(AppLocalizations.of(context).translate('pending_complaints')),
+                    SizedBox( width: MediaQuery.of(context).size.width * 0.3, child: const Divider( color: Colors.grey, thickness: 1.0),),
+                    Text( controller.getPendingComplaints() ),
+                  ],
+                )
+              ),
+              Card (
+                child: Column ( 
+                  children: <Widget> [ 
+                    Text(AppLocalizations.of(context).translate('complaints_submitted_today')), 
+                    SizedBox( width: MediaQuery.of(context).size.width * 0.3, child: const Divider( color: Colors.grey, thickness: 1.0),),
+                    Text( controller.getComplaintsSubmittedToday() ),
+                  ],
+                )
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
