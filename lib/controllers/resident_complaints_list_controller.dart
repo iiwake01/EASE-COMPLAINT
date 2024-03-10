@@ -1,6 +1,7 @@
 import 'package:app/controllers/base_controller.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/complaint_model.dart';
+import 'package:app/utils/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
@@ -18,6 +19,7 @@ class ResidentComplaintsListController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     debugPrint("ResidentComplaintsListController onInit");
+    fetch();
   }
 
   Future<void> fetch() async {
@@ -56,6 +58,22 @@ class ResidentComplaintsListController extends BaseController {
 
   RxBool observeLoading() {
     return _isLoading;
+  }
+
+  int getListCount() {
+    return _complaintList.length;
+  }
+
+  String getType(int index) {
+    return _complaintList[index].type ?? Constants.BLANK;
+  }
+
+  String getDate(int index) {
+    return _complaintList[index].date ?? Constants.BLANK;
+  }
+
+  String getStatus(int index) {
+    return _complaintList[index].status ?? Constants.BLANK;
   }
 
   List<ComplaintModel> getList() {
