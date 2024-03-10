@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoginWidget extends BaseWidget<LoginController> {
-  const LoginWidget({super.key});
+  const LoginWidget({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,56 +25,66 @@ class LoginWidget extends BaseWidget<LoginController> {
               fontWeight: FontWeight.bold,
               letterSpacing: 5),
         ),
-        Row(
-          children: <Widget>[
-            SizedBox(
-              width: widthGapCorner,
-            ),
-            Flexible(
-                child: AspectRatio(
-              aspectRatio: 2 / 0.9,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 40, 128, 43),
-                    elevation: 1,
-                    foregroundColor: Colors.white,
-                    side: const BorderSide(
-                        color: Color.fromARGB(255, 48, 146, 18), width: 5),
-                    shadowColor: Colors.black,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadiusDirectional.circular(16)),
-                    textStyle: const TextStyle(fontSize: 20)),
-                onPressed: () {
-                  controller.launchLoginResident();
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      CupertinoIcons.house_fill,
-                      color: Colors.white,
-                    ),
-                    Text(AppLocalizations.of(context).translate('resident')),
-                  ],
+        Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                height: 200,
+                width: 300,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.green,
                 ),
-              ),
-            )),
-            SizedBox(
-              width: widthGap,
-            ),
-            Flexible(
-              child: AspectRatio(
-                aspectRatio: 2 / 0.9,
+                padding: EdgeInsets.all(25),
+                // color: Colors.green,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 40, 128, 43),
-                      elevation: 1,
-                      foregroundColor: Colors.white,
-                      side: const BorderSide(
-                          color: Color.fromARGB(255, 48, 146, 18), width: 5),
+                      primary: Colors.green.shade900,
+                      elevation: 0,
+                      shadowColor: Colors.transparent,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadiusDirectional.circular(10)),
+                          borderRadius: BorderRadius.circular(20)),
+                      textStyle: const TextStyle(fontSize: 20)),
+                  onPressed: () {
+                    controller.launchLoginResident();
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        CupertinoIcons.house_fill,
+                        color: Colors.white,
+                        size: 50,
+                      ),
+                      Text(
+                        AppLocalizations.of(context).translate('resident'),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: widthGap,
+              ),
+              Container(
+                height: 200,
+                width: 300,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.green,
+                ),
+                padding: EdgeInsets.all(25),
+                // color: Colors.green,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.green.shade900,
+                      elevation: 0,
+                      shadowColor: Colors.transparent,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
                       textStyle: const TextStyle(fontSize: 20)),
                   onPressed: () {
                     controller.launchLoginStaff();
@@ -86,17 +96,18 @@ class LoginWidget extends BaseWidget<LoginController> {
                       const Icon(
                         Icons.home_repair_service_sharp,
                         color: Colors.white,
+                        size: 50,
                       ),
-                      Text(AppLocalizations.of(context).translate('staff'))
+                      Text(
+                        AppLocalizations.of(context).translate('staff'),
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ],
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              width: widthGapCorner,
-            ),
-          ],
+            ],
+          ),
         ),
         Text(
           AppLocalizations.of(context).translate('log_in_as_'),
