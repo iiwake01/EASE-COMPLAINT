@@ -1,5 +1,6 @@
 import 'package:app/controllers/dashboard_controller.dart';
 import 'package:app/utils/app_localizations.dart';
+import 'package:app/utils/app_localizations.dart';
 import 'package:app/views/base_view.dart';
 import 'package:app/widgets/dashboard_app_bar.dart';
 import 'package:flutter/cupertino.dart';
