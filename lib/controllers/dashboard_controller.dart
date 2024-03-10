@@ -1,16 +1,45 @@
 import 'package:app/controllers/base_controller.dart';
+import 'package:app/firebase/firestore_service.dart';
 import 'package:flutter/foundation.dart';
 
 class DashboardController extends BaseController {
 
-  DashboardController() {
+  DashboardController(FirestoreService this._service,) {
     debugPrint("DashboardController Constructor");
   }
+
+  final FirestoreService _service;
+  List<String> _topComplaintsList = [];
 
   @override
   Future<void> onInit() async {
     super.onInit();
     debugPrint("DashboardController onInit");
+    _topComplaintsList = ["Sample First", "Sample Second", "Sample Third"]; //TODO: Get Data from Firestore Database
+  }
+
+  int getTopComplaintsCount() {
+    return _topComplaintsList.length;
+  }
+
+  String getTopComplaints(int index) {
+    return _topComplaintsList[index];
+  }
+
+  List<String> getTopComplaintsList() {
+    return _topComplaintsList;
+  }
+
+  String getSolvedComplaints() {
+    return "Sample for Solved Complaints"; //TODO: Get Data from Firestore Database
+  }
+
+  String getPendingComplaints() {
+    return "Sample for Pending Complaints"; //TODO: Get Data from Firestore Database
+  }
+
+  String getComplaintsSubmittedToday() {
+    return "Sample for Submitted Today"; //TODO: Get Data from Firestore Database
   }
   
   @override
