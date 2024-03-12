@@ -16,6 +16,9 @@ class SignUpController extends BaseController {
   firstNameController, lastNameController, middleNameController, 
   ageController, contactNumberController, houseStreetController;
   final List<String> genderList = [AppLocalizations.of(Get.context!).translate('sex'), AppLocalizations.of(Get.context!).translate('male'), AppLocalizations.of(Get.context!).translate('female')];
+  final List<String> statusList = [AppLocalizations.of(Get.context!).translate('status'), AppLocalizations.of(Get.context!).translate('single'),];
+  final List<String> zoneList = [AppLocalizations.of(Get.context!).translate('select_the_zone_your_reside_in_'), AppLocalizations.of(Get.context!).translate('zone_6'),];
+  String? selectedGender = null, selectedStatus = null, selectedZone = null;
   final Rx<TextEditingController?> birthdateController = TextEditingController().obs;
   RxBool isReadTerms = false.obs;
 
@@ -32,6 +35,18 @@ class SignUpController extends BaseController {
     ageController = TextEditingController();
     contactNumberController = TextEditingController();
     houseStreetController = TextEditingController();
+  }
+
+  Future<void> updateGender(String? gender) async {
+    selectedGender = gender;
+  }
+
+  Future<void> updateStatus(String? status) async {
+    selectedStatus = status;
+  }
+
+  Future<void> updateZone(String? zone) async {
+    selectedZone = zone;
   }
 
   Future<void> toggleTerms() async {
@@ -62,6 +77,9 @@ class SignUpController extends BaseController {
     } else if (isPhoneValid == false) {
       onShowAlert("Error", "Contact is invalid");
       debugPrint("SignUpController Contact is invalid");
+    } if (isReadTerms.isFalse) {
+      onShowAlert("Error", "Terms and Conditions need to be check");
+      debugPrint("SignUpController Terms and Conditions need to be check");
     } else {
       onShowAlert("Creating", "Now Creating Account");
       _createAccount();

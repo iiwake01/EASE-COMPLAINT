@@ -3,13 +3,12 @@ import 'package:app/utils/app_localizations.dart';
 import 'package:app/widgets/base_widgets.dart';
 import 'package:app/widgets/date_picker_widget.dart';
 import 'package:app/widgets/text_field_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignUpWidget extends BaseWidget<SignUpController> {
   
-  const SignUpWidget({super.key});
+  const SignUpWidget( { super.key } );
 
   @override
   Widget build(BuildContext context) {
@@ -44,24 +43,17 @@ class SignUpWidget extends BaseWidget<SignUpController> {
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             TextFieldWidget(textEditingController: controller.middleNameController, labelText: AppLocalizations.of(context).translate('middle_name'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            DropdownMenu (
-              initialSelection: controller.genderList.first, 
-              dropdownMenuEntries: controller.genderList.map<DropdownMenuEntry<String>>((gender) => DropdownMenuEntry<String>(value: gender, label: gender)).toList(),
-              trailingIcon: const Icon(CupertinoIcons.arrowtriangle_down_fill,),
-            ),
+            DropdownButton (value: controller.genderList.first, items: controller.genderList.map<DropdownMenuItem<String>>((gender) => DropdownMenuItem(value: gender,child: Text(gender),)).toList(), onChanged: (gender) => controller.updateGender(gender),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             TextFieldWidget(textEditingController: controller.ageController, labelText: AppLocalizations.of(context).translate('age'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            DatePickerWidget (
-              labelText: AppLocalizations.of(context).translate('birthdate'),
-              dateController: controller.birthdateController,
-            ),
+            DatePickerWidget (labelText: AppLocalizations.of(context).translate('birthdate'), dateController: controller.birthdateController,),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             TextFieldWidget(textEditingController: controller.contactNumberController, labelText: AppLocalizations.of(context).translate('contact_number'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('status'),),
+            DropdownButton (value: controller.statusList.first, items: controller.statusList.map<DropdownMenuItem<String>>((status) => DropdownMenuItem(value: status, child: Text(status),)).toList(), onChanged: (status) => controller.updateGender(status),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('select_the_zone_your_reside_in_'),),
+            DropdownButton (value: controller.zoneList.first, items: controller.zoneList.map<DropdownMenuItem<String>>((zone) => DropdownMenuItem(value: zone, child: Text(zone),)).toList(), onChanged: (zone) => controller.updateGender(zone),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             TextFieldWidget(textEditingController: controller.houseStreetController, labelText: AppLocalizations.of(context).translate('house_number_street_name'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),

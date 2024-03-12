@@ -48,6 +48,7 @@
     "sign_up": "Sign Up",
     "sign_up_form": "Sign Up Form",
     "sign_up_here": "Sign up here",
+    "single": "Single",
     "solved_complaints": "Solved Complaints",
     "staff": "Staff",
     "status": "Status",
@@ -60,5 +61,6 @@
     "what_type_of_complaint_are_you_going_to_file_": "What type of complaint are you going to file?",
     "welcome_to_ease_complaint": "Welcome to Ease-Complaint!",
     "yes": "Yes",
-    "zone": "Zone"
+    "zone": "Zone",
+    "zone_6": "Zone 6"
 }
