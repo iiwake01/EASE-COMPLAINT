@@ -7,9 +7,8 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class HomedController extends BaseController {
-  HomedController(
-    FirebaseAuthService this._auth,
-  ) {
+  
+  HomedController(FirebaseAuthService this._auth,) {
     debugPrint("HomedController Constructor");
   }
 
