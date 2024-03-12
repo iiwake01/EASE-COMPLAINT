@@ -34,9 +34,8 @@ class FirebaseAuthService extends GetxService {
     final Function(FirebaseAuthException) onFirebaseAuthException,
     final Function(Exception) onException,
    ) async {
-    final auth = FirebaseAuth.instance;
     try {
-      await auth.currentUser?.sendEmailVerification();
+      await _auth.currentUser?.sendEmailVerification();
     } on FirebaseAuthException catch (exception) {
       onFirebaseAuthException(exception);
     } catch (exception) {
