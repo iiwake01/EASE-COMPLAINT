@@ -112,8 +112,6 @@ class SignUpController extends BaseController {
 
   Future<void> _createAccount() async {
     debugPrint("SignUpController createAccount");
-    _addResident("000");
-    /*
     _auth.registerCredential (
       emailController?.text ?? "", 
       passwordController?.text ?? "", 
@@ -133,13 +131,12 @@ class SignUpController extends BaseController {
         onShowAlert("Error!", "Register failed Please Try Again");
       },
     );
-    */
   }
 
   Future<void> _addResident(String? uid) async {
     debugPrint("SignUpController _addResident");
     try {
-      //_auth.sendEmailVerification(() {}, (firebaseException){}, (exception) {});
+      _auth.sendEmailVerification(() {}, (firebaseException){}, (exception) {});
       TaskSnapshot? taskSnapshot = await _storage.uploadPlatformFiles(residencyFile);
       final ResidentModel resident;
       if (taskSnapshot != null && taskSnapshot.state == TaskState.success) {

@@ -19,7 +19,6 @@ class HomedController extends BaseController {
     super.onInit();
     debugPrint("HomedController onInit");
   }
-
   //#region Home App Bar Methods
   void launchNotification() {
     debugPrint("HomedController launchNotification");
@@ -55,15 +54,13 @@ class HomedController extends BaseController {
       Get.back();
     }
     Get.offAndToNamed(Routes.LOGIN);
-    //_auth.signOut();
+    _auth.signOut();
   }
-
   //#endregion
   void launchDashboard() {
     debugPrint("HomedController launchDashboard");
     Get.toNamed(Routes.DASHBOARD);
   }
-
   //#region Resident Methods
   void launchFileComplaint() {
     debugPrint("HomedController launchFileComplaint");
@@ -74,7 +71,6 @@ class HomedController extends BaseController {
     debugPrint("HomedController launchResidentComplaintList");
     Get.toNamed(Routes.RESIDENTCOMPLAINTSLIST);
   }
-
   //#endregion
   //#region Staff Methods
   void launchStaffComplaintList() {
@@ -86,7 +82,6 @@ class HomedController extends BaseController {
     debugPrint("HomedController launchResidentsList");
     Get.toNamed(Routes.RESIDENTSLIST);
   }
-
   //#endregion
   @override
   void onClose() {
