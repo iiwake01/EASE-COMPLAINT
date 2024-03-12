@@ -17,8 +17,9 @@ class SignUpWidget extends BaseWidget<SignUpController> {
       shadowColor: Colors.grey,
       child: Padding (
         padding: const EdgeInsets.only(top: 13, left: 20.0, right: 20.0, bottom: 13),
-        child: Column (
+        child:  Column (
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget> [
             Text(AppLocalizations.of(context).translate('make_a_new_account_'), style: const TextStyle(color: Colors.green, fontSize: 20),),

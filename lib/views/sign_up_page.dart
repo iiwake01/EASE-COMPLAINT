@@ -13,14 +13,17 @@ class SignUpPage extends BaseView {
     return Scaffold (
       appBar: HeaderAppBar(height: MediaQuery.of(context).size.height * 0.20, widthGap: MediaQuery.of(context).size.width * 0.10,),
       backgroundColor: Colors.white,
-      body: Column (
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Text( AppLocalizations.of(context).translate('sign_up'), style: const TextStyle(color: Colors.green, fontSize: 13), ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-          const SignUpWidget()
-        ]
+      body: SingleChildScrollView (
+        child: Column (
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget> [
+            Text( AppLocalizations.of(context).translate('sign_up'), style: const TextStyle(color: Colors.green, fontSize: 13), ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
+            const SignUpWidget()
+          ]
+        ),
       ),
     );
   }
