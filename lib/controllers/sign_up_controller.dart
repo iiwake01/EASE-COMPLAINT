@@ -156,7 +156,7 @@ class SignUpController extends BaseController {
           status: selectedStatus.value,
           zone: selectedZone.value,
           houseStreet: houseStreetController?.text,
-          residency: residencyFile?.name,
+          residency: await taskSnapshot.ref.getDownloadURL(),
         );        
       } else {
         resident = ResidentModel (
@@ -193,8 +193,7 @@ class SignUpController extends BaseController {
 
   Future<FilePickerResult?> _pickFiles(
       FileType type, List<String>? extensions) async {
-    return await FilePicker.platform
-        .pickFiles(type: type, allowedExtensions: extensions);
+    return await FilePicker.platform.pickFiles(type: type, allowedExtensions: extensions);
   }
 
   Future<void> _openFile(PlatformFile? file) async {

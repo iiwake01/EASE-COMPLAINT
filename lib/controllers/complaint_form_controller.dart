@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:app/controllers/base_controller.dart';
 import 'package:app/firebase/firebase_storage_service.dart';
 import 'package:app/firebase/firestore_service.dart';
@@ -7,6 +8,7 @@ import 'package:app/utils/app_localizations.dart';
 import 'package:app/widgets/dialog_widget.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,6 +23,7 @@ class ComplaintFormController extends BaseController {
   final arguments = Get.arguments;
   TextEditingController? urgencyController, locationController, narrativeController, previousActionConroller, nameController, contactController, resolutionController;
   final Rx<TextEditingController?> typeController = TextEditingController().obs, incidentDateController = TextEditingController().obs;
+  RxString liveFile = "".obs;
   PlatformFile? attatchmentFile;
 
   @override
@@ -83,20 +86,20 @@ class ComplaintFormController extends BaseController {
   Future<void> _createComplaint() async {
     debugPrint("ComplaintFormController _createComplaint");  
     try {
-      //TaskSnapshot? taskSnapshot = await _storage.uploadPlatformFiles(attatchmentFile);
+      TaskSnapshot? taskSnapshot = await _storage.uploadPlatformFiles(attatchmentFile);
       final ComplaintModel complaint;
-      if (false/*taskSnapshot != null && taskSnapshot.state == TaskState.success*/) {
+      if (taskSnapshot != null && taskSnapshot.state == TaskState.success) {
         complaint = ComplaintModel (
           uid: "000",
           name: "x y z",
-          photo: "",
+          //photo: "",
           zone: "Zone X",
           urgency: urgencyController?.text,
           type: typeController?.value?.text,
           date: incidentDateController?.value?.text,
           location: locationController?.text,
           narrative: narrativeController?.text,
-          //attacthment: "",
+          attacthment: await taskSnapshot.ref.getDownloadURL(),
           previousActionTaken: previousActionConroller?.text,
           witnessName: nameController?.text,
           witnessContact: contactController?.text,
@@ -107,7 +110,7 @@ class ComplaintFormController extends BaseController {
         complaint = ComplaintModel (
           uid: "007",
           name: "James Bond",
-          photo: "",
+          //photo: "",
           zone: "Zone 007",
           urgency: urgencyController?.text,
           type: typeController?.value?.text,
@@ -133,7 +136,53 @@ class ComplaintFormController extends BaseController {
       },);
     }
   }
+  //#region For Picking and displaying Image Files Methods
+  Future<void> onPickFiles() async {
+    const type = FileType.custom;
+    final extensions = ['jpg', 'png', 'webp'];
+    final result = await _pickFiles(type, extensions);
+    _openFile(result?.files.single);
+  }
 
+  Future<FilePickerResult?> _pickFiles(
+      FileType type, List<String>? extensions) async {
+    return await FilePicker.platform.pickFiles(type: type, allowedExtensions: extensions);
+  }
+
+  Future<void> _openFile(PlatformFile? file) async {
+    debugPrint("SignUpController openFile(PlatformFile name ${file?.name})");
+    debugPrint("SignUpController openFile(PlatformFile size ${file?.size})");
+    debugPrint("SignUpController openFile(PlatformFile extension ${file?.extension})");
+    debugPrint("SignUpController openFile(PlatformFile bytes ${file?.bytes})");
+    DialogWidget.loadingDialog();
+    attatchmentFile = file;
+    final kb = file!.size / 1024;
+    final mb = kb / 1024;
+    final fileSize = mb >= 1 ? '${mb.toStringAsFixed(2)} MB' : '${kb.toStringAsFixed(2)} KB';
+    liveFile("${file?.name?.split('.').first}.${file?.extension} $fileSize");
+    final bool _isImage = file?.extension?.toLowerCase()?.contains("jpg") == true || file?.extension?.toLowerCase()?.contains("png") == true|| file?.extension?.toLowerCase()?.contains("webp") == true;
+    if (_isImage && file?.bytes != null) {
+      //liveFileBytes(file?.bytes);
+    } else if (_isImage && file?.path != null) {
+      debugPrint("SignUpController openFile(PlatformFile path ${file?.path})");
+      final File mobileFile = File(file.path!);
+      List<int> bytes = await mobileFile.readAsBytes();
+      Uint8List uint8List = Uint8List.fromList(bytes);
+      attatchmentFile = PlatformFile (
+        path: file.path,
+        name: file.name,
+        size: file.size,
+        bytes: uint8List,
+        readStream: file.readStream,
+        identifier: file.identifier
+      );
+      //liveFileBytes(_uint8List);
+    } else {
+      throw Exception("File is Null");
+    }
+    if (Get.isDialogOpen == true) { Get.back(); }
+  }
+  //#endregion
   @override
   void onClose() {
     super.onClose();

@@ -4,6 +4,7 @@ import 'package:app/views/base_view.dart';
 import 'package:app/widgets/back_app_bar.dart';
 import 'package:app/widgets/date_picker_widget.dart';
 import 'package:app/widgets/text_field_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,7 +28,7 @@ class ComplaintFormPage extends BaseView<ComplaintFormController> {
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             TextFieldWidget(textEditingController: controller.locationController, labelText: AppLocalizations.of(context).translate('full_location_of_incident')),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            //TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('attacthments')),
+            Row( children: [ Text(AppLocalizations.of(context).translate('attacthments'),), IconButton(onPressed: () => controller.onPickFiles(), icon: const Icon(CupertinoIcons.paperclip,)), Obx(() => Text(controller.liveFile.value))], ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             TextFieldWidget(textEditingController: controller.narrativeController, labelText: AppLocalizations.of(context).translate('narrative_report')),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),

@@ -12,7 +12,7 @@ class BaseController extends GetxController {
   @protected
   void onShowAlert(String title, String message) {
     Timer (
-      const Duration(milliseconds: 2000), ( () => Get.snackbar(title, message) )
+      const Duration(milliseconds: 1000), ( () => Get.snackbar(title, message) )
     );
   }
 
