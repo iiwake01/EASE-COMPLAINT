@@ -22,11 +22,12 @@ class TextFieldWidget extends BaseWidget {
         prefixIcon: null,
         filled: true,
         fillColor: Colors.white,
-        border: OutlineInputBorder(
+        border: OutlineInputBorder (
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide.none,
         ),
       ),
+      keyboardType: TextInputType.text,
     );
   }
 }

@@ -1,8 +1,10 @@
 import 'package:app/controllers/sign_up_controller.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/widgets/base_widgets.dart';
+import 'package:app/widgets/date_picker_widget.dart';
 import 'package:app/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SignUpWidget extends BaseWidget<SignUpController> {
   
@@ -29,33 +31,38 @@ class SignUpWidget extends BaseWidget<SignUpController> {
               children: <Widget> [
                 Flexible(child: TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('email'),),),
                 SizedBox(width: MediaQuery.of(context).size.width * 0.025,),
-                Flexible(child: TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('password'),),),
+                Flexible(child: TextFieldWidget(textEditingController: controller.passwordController, labelText: AppLocalizations.of(context).translate('password'),),),
               ],
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('confirm_password'),),
+            TextFieldWidget(textEditingController: controller.confirmPasswordController, labelText: AppLocalizations.of(context).translate('confirm_password'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('first_name'),),
+            TextFieldWidget(textEditingController: controller.firstNameController, labelText: AppLocalizations.of(context).translate('first_name'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('last_name'),),
+            TextFieldWidget(textEditingController: controller.lastNameController, labelText: AppLocalizations.of(context).translate('last_name'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('middle_name'),),
+            TextFieldWidget(textEditingController: controller.middleNameController, labelText: AppLocalizations.of(context).translate('middle_name'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('sex'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('age'),),
+            TextFieldWidget(textEditingController: controller.ageController, labelText: AppLocalizations.of(context).translate('age'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('Birthdate'),),
+            DatePickerWidget (
+              labelText: AppLocalizations.of(context).translate('birthdate'),
+              dateController: controller.birthdateController,
+            ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('contact_number'),),
+            TextFieldWidget(textEditingController: controller.contactNumberController, labelText: AppLocalizations.of(context).translate('contact_number'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('status'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('select_the_zone_your_reside_in_'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('house_number_street_name'),),
+            TextFieldWidget(textEditingController: controller.houseStreetController, labelText: AppLocalizations.of(context).translate('house_number_street_name'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('please_attach_any_valid_proof_of_residency'),),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
+            Row( children: [ Obx(() => Checkbox(value: controller.observedTerms().isTrue, onChanged: (isChecked) => controller.toggleTerms(), )), Text(AppLocalizations.of(context).translate('i_have_read_and_agreed_to_the_terms_and_conditions'),)],),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             Center (
               child: ElevatedButton (
@@ -64,7 +71,7 @@ class SignUpWidget extends BaseWidget<SignUpController> {
                   shape: RoundedRectangleBorder( borderRadius: BorderRadiusDirectional.circular(10)),
                   textStyle: const TextStyle(fontSize: 20)
                 ),
-                onPressed: () {  },
+                onPressed: () => controller.validate(),
                 child: Text(AppLocalizations.of(context).translate('sign_up'), style: const TextStyle(color: Colors.white, fontSize: 20),),
               ),
             ),
