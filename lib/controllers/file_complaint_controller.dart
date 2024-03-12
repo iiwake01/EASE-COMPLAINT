@@ -1,5 +1,8 @@
 import 'package:app/controllers/base_controller.dart';
+import 'package:app/routes/app_pages.dart';
+import 'package:app/utils/app_localizations.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 
 class FileComplaintController extends BaseController {
 
@@ -15,27 +18,27 @@ class FileComplaintController extends BaseController {
 
   void launchEnvironmentalProblems() {
     debugPrint("FileComplaintController launchEnvironmentalProblems");
-    onShowAlert("Under Construction", "On Going . . .");
+    Get.toNamed(Routes.COMPLAINTFORM, arguments: AppLocalizations.of(Get.context!).translate('environmental_problem'));
   }
 
   void launchCommunityConflicts() {
     debugPrint("FileComplaintController launchCommunityConflicts");
-    onShowAlert("Under Construction", "On Going . . .");
+    Get.toNamed(Routes.COMPLAINTFORM, arguments: AppLocalizations.of(Get.context!).translate('community_conflict'));
   }
 
   void launchPublicDisturbances() {
     debugPrint("FileComplaintController launchPublicDisturbances");
-    onShowAlert("Under Construction", "On Going . . .");
+    Get.toNamed(Routes.COMPLAINTFORM, arguments: AppLocalizations.of(Get.context!).translate('public_disturbance'));
   }
 
   void launchCrimeRelated() {
     debugPrint("FileComplaintController launchCrimeRelated");
-    onShowAlert("Under Construction", "On Going . . .");
+    Get.toNamed(Routes.COMPLAINTFORM, arguments: AppLocalizations.of(Get.context!).translate('crime_related'));
   }
 
   void launchOtherTypeProblem() {
     debugPrint("FileComplaintController launchOtherTypeProblem");
-    onShowAlert("Under Construction", "On Going . . .");
+    Get.toNamed(Routes.COMPLAINTFORM);
   }
   
   @override

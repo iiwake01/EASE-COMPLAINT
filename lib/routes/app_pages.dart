@@ -1,3 +1,4 @@
+import 'package:app/bindings/complaint_form_finding.dart';
 import 'package:app/bindings/dashboard_binding.dart';
 import 'package:app/bindings/file_complaint_binding.dart';
 import 'package:app/bindings/home_binding.dart';
@@ -8,6 +9,7 @@ import 'package:app/bindings/resident_complaints_list_binding.dart';
 import 'package:app/bindings/residents_list_binding.dart';
 import 'package:app/bindings/sign_up_binding.dart';
 import 'package:app/bindings/staff_complaints_list_binding.dart';
+import 'package:app/views/complaint_form_page.dart';
 import 'package:app/views/dashboard_page.dart';
 import 'package:app/views/file_complaint_page.dart';
 import 'package:app/views/login_page.dart';
@@ -77,6 +79,13 @@ abstract class AppPages {
       name: Routes.FILECOMPLAINT,
       page: () => const FileComplaintPage(),
       binding: FileComplaintBinding(),
+      transition: Transition.noTransition,
+      transitionDuration: const Duration(milliseconds: 250),
+    ),
+    GetPage (
+      name: Routes.COMPLAINTFORM,
+      page: () => const ComplaintFormPage(),
+      binding: ComplaintFormBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),

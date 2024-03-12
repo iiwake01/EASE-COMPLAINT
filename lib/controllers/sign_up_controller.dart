@@ -141,6 +141,7 @@ class SignUpController extends BaseController {
   Future<void> _addResident() async {
     debugPrint("SignUpController _addResident");
     try {
+      //_auth.sendEmailVerification(() {}, (firebaseException){}, (exception) {});
       TaskSnapshot? taskSnapshot = await _storage.uploadPlatformFiles(residencyFile);
       final ResidentModel resident;
       if (taskSnapshot != null && taskSnapshot.state == TaskState.success) {

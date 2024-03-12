@@ -1,11 +1,12 @@
+import 'package:app/utils/app_localizations.dart';
 import 'package:app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DialogWidget {
   static loadingDialog() {
-    Get.dialog(
-      AlertDialog(
+    Get.dialog (
+      AlertDialog (
         backgroundColor: Constants.transparentColor,
         elevation: 0.00,
         content: const Center(child: CircularProgressIndicator()),
@@ -15,14 +16,9 @@ class DialogWidget {
     );
   }
 
-  static logoutDialog(
-      String title,
-      textPositive,
-      textNegative,
-      GestureTapCallback onPressedPositive,
-      GestureTapCallback onPressedNegative) {
-    Get.dialog(
-      AlertDialog(
+  static logoutDialog (String title, textPositive, textNegative, GestureTapCallback onPressedPositive, GestureTapCallback onPressedNegative) {
+    Get.dialog (
+      AlertDialog (
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -55,6 +51,15 @@ class DialogWidget {
             color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
       ),
       barrierDismissible: true,
+    );
+  }
+
+  static submittedComplaintDialog(VoidCallback? onConfirm) {
+    Get.defaultDialog (
+      barrierDismissible: false,
+      content: Text( AppLocalizations.of(Get.context!).translate('your_complaint_has_been_filed_to_baranggay_'), ),
+      onConfirm: onConfirm,
+      title: AppLocalizations.of(Get.context!).translate('confirmation_for_submission_of_complaint'),
     );
   }
 }

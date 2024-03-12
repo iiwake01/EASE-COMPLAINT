@@ -30,5 +30,14 @@ class Constants {
   static const HOUSESTREET = "house_street";
   static const EMAIL = "email";
   static const RESIDENCY = "proof_of_residency";
+  static const URGENCY = "urgency_of_problem";
+  static const DATEINCIDENT = "date_of_incident";
+  static const LOCATION = "location_of_incident";
+  static const NARRATIVE = "narrative_report";
+  static const ATTACHMENT = "attachment";
+  static const PAT = "previous_action_taken";
+  static const WITNESSNAME = "witness_name";
+  static const WITNESSCONTACT = "witness_contract";
+  static const RESOLUTIONREQUEST = "resolution_request";
   static Color transparentColor = HexColor('00ffffff').withOpacity(0.00) ?? Colors.transparent;
 }

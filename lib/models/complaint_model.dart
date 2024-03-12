@@ -5,6 +5,14 @@ class ComplaintModel {
 
   ComplaintModel ( {
     this.id,
+    this.urgency,
+    this.location,
+    this.narrative,
+    this.attacthment,
+    this.previousActionTaken,
+    this.witnessName,
+    this.witnessContact,
+    this.resolutionRequest,
     this.photo,//Get from Resident User
     this.name,//Get from Resident User (first middle last)
     this.zone,//Get from Resident User
@@ -17,6 +25,14 @@ class ComplaintModel {
   } );
   
   final String? id;
+  final String? urgency;
+  final String? location;
+  final String? narrative;
+  final String? attacthment;
+  final String? previousActionTaken;
+  final String? witnessName;
+  final String? witnessContact;
+  final String? resolutionRequest;
   final String? photo;
   final String? name;
   final String? zone;
@@ -27,10 +43,19 @@ class ComplaintModel {
   factory ComplaintModel.fromJson(Map<String, dynamic> json) {
     return ComplaintModel (
       id : json[Constants.ID],
+      urgency : json[Constants.URGENCY].toString(),
+      location : json[Constants.LOCATION].toString(),
+      narrative : json[Constants.NARRATIVE].toString(),
+      attacthment : json[Constants.ATTACHMENT].toString(),
+      previousActionTaken : json[Constants.PAT].toString(),
+      witnessName : json[Constants.WITNESSNAME].toString(),
+      witnessContact : json[Constants.WITNESSCONTACT].toString(),
+      resolutionRequest : json[Constants.RESOLUTIONREQUEST].toString(),
       photo : json[Constants.PHOTO].toString(),
       name : json[Constants.NAME].toString(),
       zone : json[Constants.ZONE].toString(),
       type : json[Constants.TYPE].toString(),
+      date : json[Constants.DATEINCIDENT].toString(),
       status : json[Constants.STATUS].toString(),
     );
   }
@@ -39,6 +64,14 @@ class ComplaintModel {
     final data = snapshot.data() as Map<String,dynamic>;
     return ComplaintModel (
       id : snapshot.id.toString(),
+      urgency : data[Constants.URGENCY],
+      location : data[Constants.LOCATION],
+      narrative : data[Constants.NARRATIVE],
+      attacthment : data[Constants.ATTACHMENT],
+      previousActionTaken : data[Constants.PAT],
+      witnessName : data[Constants.WITNESSNAME],
+      witnessContact : data[Constants.WITNESSCONTACT],
+      resolutionRequest : data[Constants.RESOLUTIONREQUEST],
       photo : data [Constants.PHOTO],
       name : data [Constants.NAME],
       zone : data [Constants.ZONE],
@@ -48,6 +81,14 @@ class ComplaintModel {
   }
 
   Map<String, dynamic> toMap() => {
+    Constants.URGENCY: urgency,
+    Constants.LOCATION: location,
+    Constants.NARRATIVE: narrative,
+    Constants.ATTACHMENT: attacthment,
+    Constants.PAT: previousActionTaken,
+    Constants.WITNESSNAME: witnessName,
+    Constants.WITNESSCONTACT: witnessContact,
+    Constants.RESOLUTIONREQUEST: resolutionRequest,
     Constants.PHOTO: photo,
     Constants.NAME: name,
     Constants.ZONE: zone,
@@ -58,6 +99,14 @@ class ComplaintModel {
   Map<String, dynamic> toJson() {
     return {
       Constants.ID : id,
+      Constants.URGENCY: urgency,
+      Constants.LOCATION: location,
+      Constants.NARRATIVE: narrative,
+      Constants.ATTACHMENT: attacthment,
+      Constants.PAT: previousActionTaken,
+      Constants.WITNESSNAME: witnessName,
+      Constants.WITNESSCONTACT: witnessContact,
+      Constants.RESOLUTIONREQUEST: resolutionRequest,
       Constants.PHOTO : photo,
       Constants.NAME : name,
       Constants.ZONE : zone,

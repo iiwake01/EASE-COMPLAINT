@@ -29,13 +29,14 @@ class FirebaseAuthService extends GetxService {
     }
   }
 
-   Future<void> sendEmailVerification(
+   Future<void> sendEmailVerification (
     final Function() onSuccess,
     final Function(FirebaseAuthException) onFirebaseAuthException,
     final Function(Exception) onException,
    ) async {
     try {
       await _auth.currentUser?.sendEmailVerification();
+      onSuccess();
     } on FirebaseAuthException catch (exception) {
       onFirebaseAuthException(exception);
     } catch (exception) {
