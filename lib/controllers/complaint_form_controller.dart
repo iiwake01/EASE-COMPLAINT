@@ -105,10 +105,10 @@ class ComplaintFormController extends BaseController {
         );
       } else {
         complaint = ComplaintModel (
-          uid: "000",
-          name: "x y z",
+          uid: "007",
+          name: "James Bond",
           photo: "",
-          zone: "Zone X",
+          zone: "Zone 007",
           urgency: urgencyController?.text,
           type: typeController?.value?.text,
           date: incidentDateController?.value?.text,

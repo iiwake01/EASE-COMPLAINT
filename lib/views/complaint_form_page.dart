@@ -38,6 +38,7 @@ class ComplaintFormPage extends BaseView<ComplaintFormController> {
             TextFieldWidget(textEditingController: controller.contactController, labelText: AppLocalizations.of(context).translate('contact_information')),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             TextFieldWidget(textEditingController: controller.resolutionController, labelText: AppLocalizations.of(context).translate('resolution_request')),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             ElevatedButton (
               style: ElevatedButton.styleFrom (
                 backgroundColor: Colors.grey, 

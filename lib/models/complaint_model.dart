@@ -80,6 +80,7 @@ class ComplaintModel {
       name : data [Constants.NAME],
       zone : data [Constants.ZONE],
       type : data [Constants.TYPE],
+      date : data [Constants.DATEINCIDENT],
       status : data [Constants.STATUS],
     );
   }
@@ -98,6 +99,7 @@ class ComplaintModel {
     Constants.NAME: name,
     Constants.ZONE: zone,
     Constants.TYPE: type,
+    Constants.DATEINCIDENT: date,
     Constants.STATUS: status,
   };
 
@@ -117,6 +119,7 @@ class ComplaintModel {
       Constants.NAME : name,
       Constants.ZONE : zone,
       Constants.TYPE : type,
+      Constants.DATEINCIDENT : date,
       Constants.STATUS : status,
     };
   }

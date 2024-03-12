@@ -1,5 +1,6 @@
 import 'package:app/models/complaint_model.dart';
 import 'package:app/models/resident_model.dart';
+import 'package:app/utils/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
@@ -22,6 +23,11 @@ class FirestoreService extends GetxService {
   Future<List<ResidentModel>> getResidents() async {
     final response = await dbFirestore.collection("residents").get();
     return response.docs.map((doc) => ResidentModel.fromSnapshot(doc)).toList();
+  }
+
+  Future<List<ComplaintModel>> getComplaint(String uid) async {
+    final response = await dbFirestore.collection("complaints").where(Constants.UID, isEqualTo: uid).get();
+    return response.docs.map((doc) => ComplaintModel.fromSnapshot(doc)).toList();
   }
 
   Future<List<ComplaintModel>> getComplaints() async {
