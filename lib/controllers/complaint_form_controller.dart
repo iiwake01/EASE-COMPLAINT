@@ -87,6 +87,10 @@ class ComplaintFormController extends BaseController {
       final ComplaintModel complaint;
       if (false/*taskSnapshot != null && taskSnapshot.state == TaskState.success*/) {
         complaint = ComplaintModel (
+          uid: "000",
+          name: "x y z",
+          photo: "",
+          zone: "Zone X",
           urgency: urgencyController?.text,
           type: typeController?.value?.text,
           date: incidentDateController?.value?.text,
@@ -101,7 +105,10 @@ class ComplaintFormController extends BaseController {
         );
       } else {
         complaint = ComplaintModel (
+          uid: "000",
           name: "x y z",
+          photo: "",
+          zone: "Zone X",
           urgency: urgencyController?.text,
           type: typeController?.value?.text,
           date: incidentDateController?.value?.text,

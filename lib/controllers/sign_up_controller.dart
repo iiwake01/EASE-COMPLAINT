@@ -112,16 +112,14 @@ class SignUpController extends BaseController {
 
   Future<void> _createAccount() async {
     debugPrint("SignUpController createAccount");
-    _addResident();
+    _addResident("000");
     /*
     _auth.registerCredential (
       emailController?.text ?? "", 
       passwordController?.text ?? "", 
       (userCredential) => debugPrint('SignUpController UserCredential $userCredential'), 
       (user) => debugPrint('SignUpController User Id ${user!.uid} registered: ${user} '), 
-      () {
-        _addResident();
-      }, 
+      (uid) { _addResident(uid); }, 
       (firebaseAuthException) {
         debugPrint('SignUpController createAccount FirebaseAuthException ${firebaseAuthException.toString()}}');
         if (firebaseAuthException.code == 'weak-password') {
@@ -138,7 +136,7 @@ class SignUpController extends BaseController {
     */
   }
 
-  Future<void> _addResident() async {
+  Future<void> _addResident(String? uid) async {
     debugPrint("SignUpController _addResident");
     try {
       //_auth.sendEmailVerification(() {}, (firebaseException){}, (exception) {});
@@ -146,6 +144,7 @@ class SignUpController extends BaseController {
       final ResidentModel resident;
       if (taskSnapshot != null && taskSnapshot.state == TaskState.success) {
         resident = ResidentModel (
+          uid: uid,
           email: emailController?.text,
           first: firstNameController?.text,
           last: lastNameController?.text,
@@ -161,6 +160,7 @@ class SignUpController extends BaseController {
         );        
       } else {
         resident = ResidentModel (
+          uid: uid,
           email: emailController?.text,
           first: firstNameController?.text,
           last: lastNameController?.text,
@@ -203,7 +203,7 @@ class SignUpController extends BaseController {
     debugPrint("SignUpController openFile(PlatformFile extension ${file?.extension})");
     debugPrint("SignUpController openFile(PlatformFile bytes ${file?.bytes})");
     DialogWidget.loadingDialog();
-    this.residencyFile = file;
+    residencyFile = file;
     final kb = file!.size / 1024;
     final mb = kb / 1024;
     final fileSize = mb >= 1 ? '${mb.toStringAsFixed(2)} MB' : '${kb.toStringAsFixed(2)} KB';
@@ -213,14 +213,14 @@ class SignUpController extends BaseController {
       //liveFileBytes(file?.bytes);
     } else if (_isImage && file?.path != null) {
       debugPrint("SignUpController openFile(PlatformFile path ${file?.path})");
-      final File _mobileFile = File(file.path!);
-      List<int> _bytes = await _mobileFile.readAsBytes();
-      Uint8List _uint8List = Uint8List.fromList(_bytes);
-      this.residencyFile = PlatformFile (
+      final File mobileFile = File(file.path!);
+      List<int> bytes = await mobileFile.readAsBytes();
+      Uint8List uint8List = Uint8List.fromList(bytes);
+      residencyFile = PlatformFile (
         path: file.path,
         name: file.name,
         size: file.size,
-        bytes: _uint8List,
+        bytes: uint8List,
         readStream: file.readStream,
         identifier: file.identifier
       );

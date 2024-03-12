@@ -5,6 +5,7 @@ class ResidentModel {
 
   ResidentModel ( {
     this.id,
+    this.uid,
     this.photo,
     this.first, 
     this.middle,
@@ -24,6 +25,7 @@ class ResidentModel {
   } );
   
   final String? id;
+  final String? uid;
   final String? photo;
   final String? first;
   final String? middle;
@@ -41,6 +43,7 @@ class ResidentModel {
   factory ResidentModel.fromJson(Map<String, dynamic> json) {
     return ResidentModel (
       id : json[Constants.ID],
+      uid : json[Constants.UID],
       photo : json[Constants.PHOTO].toString(),
       first : json[Constants.FIRST].toString(),
       middle : json[Constants.MIDDLE].toString(),
@@ -61,6 +64,7 @@ class ResidentModel {
     final data = snapshot.data() as Map<String,dynamic>;
     return ResidentModel (
       id : snapshot.id.toString(),
+      uid : data [Constants.UID],
       photo : data [Constants.PHOTO],
       first : data[Constants.FIRST],
       middle : data[Constants.MIDDLE],
@@ -78,6 +82,7 @@ class ResidentModel {
   }
 
   Map<String, dynamic> toMap() => {
+    Constants.UID: uid,
     Constants.PHOTO: photo,
     Constants.FIRST: first,
     Constants.MIDDLE: middle,
@@ -96,6 +101,7 @@ class ResidentModel {
   Map<String, dynamic> toJson() {
     return {
       Constants.ID : id,
+      Constants.UID : uid,
       Constants.PHOTO : photo,
       Constants.FIRST: first,
       Constants.MIDDLE: middle,

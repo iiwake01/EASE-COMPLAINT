@@ -21,6 +21,8 @@ class FirebaseStorageService extends GetxService {
     bool isImage = file?.extension?.toLowerCase()?.contains("jpg") == true || file?.extension?.toLowerCase()?.contains("png") == true || file?.extension?.toLowerCase()?.contains("webp") == true;    
     if(isImage = true) {
       return await imagesRef?.child(file!.name).putData(file.bytes!);
+    } else {
+      return null;
     }
   }
 
@@ -29,6 +31,6 @@ class FirebaseStorageService extends GetxService {
     if (icon == null) {
       throw Exception("Image is Null");
     }
-    await imagesRef?.child(icon!).delete();
+    await imagesRef?.child(icon).delete();
   }
 }

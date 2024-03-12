@@ -10,7 +10,7 @@ class FirebaseAuthService extends GetxService {
     final String password, 
     final Function(UserCredential) onCreate,
     final Function(User?) onCreated,
-    final Function() onSuccess,
+    final Function(String?) onSuccess,
     final Function(FirebaseAuthException) onFirebaseAuthException,
     final Function(Exception) onException,
   ) async {
@@ -21,7 +21,7 @@ class FirebaseAuthService extends GetxService {
       onCreate(userCredential);
       final User? user = userCredential.user;
       onCreated(user);
-      onSuccess();
+      onSuccess(user?.uid);
     } on FirebaseAuthException catch (exception) {
       onFirebaseAuthException(exception);
     } catch (exception) {

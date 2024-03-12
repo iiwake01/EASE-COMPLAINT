@@ -5,6 +5,7 @@ class ComplaintModel {
 
   ComplaintModel ( {
     this.id,
+    this.uid,
     this.urgency,
     this.location,
     this.narrative,
@@ -25,6 +26,7 @@ class ComplaintModel {
   } );
   
   final String? id;
+  final String? uid;
   final String? urgency;
   final String? location;
   final String? narrative;
@@ -43,6 +45,7 @@ class ComplaintModel {
   factory ComplaintModel.fromJson(Map<String, dynamic> json) {
     return ComplaintModel (
       id : json[Constants.ID],
+      uid : json[Constants.UID].toString(),
       urgency : json[Constants.URGENCY].toString(),
       location : json[Constants.LOCATION].toString(),
       narrative : json[Constants.NARRATIVE].toString(),
@@ -64,6 +67,7 @@ class ComplaintModel {
     final data = snapshot.data() as Map<String,dynamic>;
     return ComplaintModel (
       id : snapshot.id.toString(),
+      uid : data[Constants.UID],
       urgency : data[Constants.URGENCY],
       location : data[Constants.LOCATION],
       narrative : data[Constants.NARRATIVE],
@@ -81,6 +85,7 @@ class ComplaintModel {
   }
 
   Map<String, dynamic> toMap() => {
+    Constants.UID: uid,
     Constants.URGENCY: urgency,
     Constants.LOCATION: location,
     Constants.NARRATIVE: narrative,
@@ -99,6 +104,7 @@ class ComplaintModel {
   Map<String, dynamic> toJson() {
     return {
       Constants.ID : id,
+      Constants.UID: uid,
       Constants.URGENCY: urgency,
       Constants.LOCATION: location,
       Constants.NARRATIVE: narrative,

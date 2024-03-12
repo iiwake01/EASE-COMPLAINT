@@ -15,6 +15,7 @@ class Constants {
     Locale('en', 'US'),
   ];
   static const ID = "id";
+  static const UID = "user_id";
   static const PHOTO = "photo";
   static const NAME = "name";
   static const FIRST = "first";
