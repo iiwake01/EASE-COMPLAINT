@@ -3,6 +3,7 @@ import 'package:app/utils/app_localizations.dart';
 import 'package:app/widgets/base_widgets.dart';
 import 'package:app/widgets/date_picker_widget.dart';
 import 'package:app/widgets/text_field_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -57,7 +58,7 @@ class SignUpWidget extends BaseWidget<SignUpController> {
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             TextFieldWidget(textEditingController: controller.houseStreetController, labelText: AppLocalizations.of(context).translate('house_number_street_name'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('please_attach_any_valid_proof_of_residency'),),
+            Row( children: [ Text(AppLocalizations.of(context).translate('please_attach_any_valid_proof_of_residency'),), IconButton(onPressed: () => controller.onPickFiles(), icon: Icon(CupertinoIcons.paperclip,)), Obx(() => Text(controller.liveFile.value))],),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             Row( children: [ Obx(() => Checkbox(value: controller.observedTerms().isTrue, onChanged: (isChecked) => controller.toggleTerms(), )), Text(AppLocalizations.of(context).translate('i_have_read_and_agreed_to_the_terms_and_conditions'),)],),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),

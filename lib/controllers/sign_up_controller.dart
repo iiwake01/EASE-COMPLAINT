@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:app/controllers/base_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firebase_storage_service.dart';
@@ -6,7 +7,9 @@ import 'package:app/models/resident_model.dart';
 import 'package:app/routes/app_pages.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/widgets/dialog_widget.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,9 +28,9 @@ class SignUpController extends BaseController {
   final List<String> genderList = [AppLocalizations.of(Get.context!).translate('sex'), AppLocalizations.of(Get.context!).translate('male'), AppLocalizations.of(Get.context!).translate('female')];
   final List<String> statusList = [AppLocalizations.of(Get.context!).translate('status'), AppLocalizations.of(Get.context!).translate('single'),];
   final List<String> zoneList = [AppLocalizations.of(Get.context!).translate('select_the_zone_your_reside_in_'), AppLocalizations.of(Get.context!).translate('zone_6'),];
-  RxString selectedGender = "".obs, selectedStatus = "".obs, selectedZone = "".obs;
+  RxString selectedGender = "".obs, selectedStatus = "".obs, selectedZone = "".obs, liveFile = "".obs;
   final Rx<TextEditingController?> birthdateController = TextEditingController().obs;
-  //PlatformFile? residencyFile;
+  PlatformFile? residencyFile;
   RxBool isReadTerms = false.obs;
 
   @override
@@ -138,21 +141,38 @@ class SignUpController extends BaseController {
   Future<void> _addResident() async {
     debugPrint("SignUpController _addResident");
     try {
-      //TaskSnapshot? taskSnapshot = await _storage.uploadPlatformFiles(residencyFile);
-      final resident = ResidentModel (
-        email: emailController?.text,
-        first: firstNameController?.text,
-        last: lastNameController?.text,
-        middle: middleNameController?.text,
-        sex: selectedGender.value,
-        age: ageController?.text,
-        birth: birthdateController.value?.text,
-        contact: contactNumberController?.text,
-        status: selectedStatus.value,
-        zone: selectedZone.value,
-        houseStreet: houseStreetController?.text,
-        //residency: residencyFile?.name,
-      );
+      TaskSnapshot? taskSnapshot = await _storage.uploadPlatformFiles(residencyFile);
+      final ResidentModel resident;
+      if (taskSnapshot != null && taskSnapshot.state == TaskState.success) {
+        resident = ResidentModel (
+          email: emailController?.text,
+          first: firstNameController?.text,
+          last: lastNameController?.text,
+          middle: middleNameController?.text,
+          sex: selectedGender.value,
+          age: ageController?.text,
+          birth: birthdateController.value?.text,
+          contact: contactNumberController?.text,
+          status: selectedStatus.value,
+          zone: selectedZone.value,
+          houseStreet: houseStreetController?.text,
+          residency: residencyFile?.name,
+        );        
+      } else {
+        resident = ResidentModel (
+          email: emailController?.text,
+          first: firstNameController?.text,
+          last: lastNameController?.text,
+          middle: middleNameController?.text,
+          sex: selectedGender.value,
+          age: ageController?.text,
+          birth: birthdateController.value?.text,
+          contact: contactNumberController?.text,
+          status: selectedStatus.value,
+          zone: selectedZone.value,
+          houseStreet: houseStreetController?.text,
+        );
+      }
       await _service.createResident(resident.toMap());
     } catch(exception) {
       debugPrint("SignUpController Invalid $exception");
@@ -162,7 +182,54 @@ class SignUpController extends BaseController {
       _launchLogin();
     }
   }
+  //#region For Picking and displaying Image Files Methods
+  Future<void> onPickFiles() async {
+    const type = FileType.custom;
+    final extensions = ['jpg', 'png', 'webp'];
+    final result = await _pickFiles(type, extensions);
+    _openFile(result?.files.single);
+  }
 
+  Future<FilePickerResult?> _pickFiles(
+      FileType type, List<String>? extensions) async {
+    return await FilePicker.platform
+        .pickFiles(type: type, allowedExtensions: extensions);
+  }
+
+  Future<void> _openFile(PlatformFile? file) async {
+    debugPrint("SignUpController openFile(PlatformFile name ${file?.name})");
+    debugPrint("SignUpController openFile(PlatformFile size ${file?.size})");
+    debugPrint("SignUpController openFile(PlatformFile extension ${file?.extension})");
+    debugPrint("SignUpController openFile(PlatformFile bytes ${file?.bytes})");
+    DialogWidget.loadingDialog();
+    this.residencyFile = file;
+    final kb = file!.size / 1024;
+    final mb = kb / 1024;
+    final fileSize = mb >= 1 ? '${mb.toStringAsFixed(2)} MB' : '${kb.toStringAsFixed(2)} KB';
+    liveFile("${file?.name?.split('.').first}.${file?.extension} $fileSize");
+    final bool _isImage = file?.extension?.toLowerCase()?.contains("jpg") == true || file?.extension?.toLowerCase()?.contains("png") == true|| file?.extension?.toLowerCase()?.contains("webp") == true;
+    if (_isImage && file?.bytes != null) {
+      //liveFileBytes(file?.bytes);
+    } else if (_isImage && file?.path != null) {
+      debugPrint("SignUpController openFile(PlatformFile path ${file?.path})");
+      final File _mobileFile = File(file.path!);
+      List<int> _bytes = await _mobileFile.readAsBytes();
+      Uint8List _uint8List = Uint8List.fromList(_bytes);
+      this.residencyFile = PlatformFile (
+        path: file.path,
+        name: file.name,
+        size: file.size,
+        bytes: _uint8List,
+        readStream: file.readStream,
+        identifier: file.identifier
+      );
+      //liveFileBytes(_uint8List);
+    } else {
+      throw Exception("File is Null");
+    }
+    if (Get.isDialogOpen == true) { Get.back(); }
+  }
+  //#endregion
   void _launchLogin() {
     debugPrint("SignUpController _launchLogin");
     Get.offAndToNamed(Routes.LOGIN);
