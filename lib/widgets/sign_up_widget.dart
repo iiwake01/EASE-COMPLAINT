@@ -3,6 +3,7 @@ import 'package:app/utils/app_localizations.dart';
 import 'package:app/widgets/base_widgets.dart';
 import 'package:app/widgets/date_picker_widget.dart';
 import 'package:app/widgets/text_field_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,11 +32,11 @@ class SignUpWidget extends BaseWidget<SignUpController> {
               children: <Widget> [
                 Flexible(child: TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('email'),),),
                 SizedBox(width: MediaQuery.of(context).size.width * 0.025,),
-                Flexible(child: TextFieldWidget(textEditingController: controller.passwordController, labelText: AppLocalizations.of(context).translate('password'),),),
+                Flexible(child: TextFieldWidget(textEditingController: controller.passwordController, labelText: AppLocalizations.of(context).translate('password'), isTextHidden: true,),),
               ],
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            TextFieldWidget(textEditingController: controller.confirmPasswordController, labelText: AppLocalizations.of(context).translate('confirm_password'),),
+            TextFieldWidget(textEditingController: controller.confirmPasswordController, labelText: AppLocalizations.of(context).translate('confirm_password'), isTextHidden: true,),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             TextFieldWidget(textEditingController: controller.firstNameController, labelText: AppLocalizations.of(context).translate('first_name'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
@@ -43,7 +44,11 @@ class SignUpWidget extends BaseWidget<SignUpController> {
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             TextFieldWidget(textEditingController: controller.middleNameController, labelText: AppLocalizations.of(context).translate('middle_name'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            TextFieldWidget(textEditingController: null, labelText: AppLocalizations.of(context).translate('sex'),),
+            DropdownMenu (
+              initialSelection: controller.genderList.first, 
+              dropdownMenuEntries: controller.genderList.map<DropdownMenuEntry<String>>((gender) => DropdownMenuEntry<String>(value: gender, label: gender)).toList(),
+              trailingIcon: const Icon(CupertinoIcons.arrowtriangle_down_fill,),
+            ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             TextFieldWidget(textEditingController: controller.ageController, labelText: AppLocalizations.of(context).translate('age'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),

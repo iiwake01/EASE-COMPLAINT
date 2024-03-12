@@ -1,4 +1,5 @@
 import 'package:app/widgets/base_widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,17 +22,13 @@ class DatePickerWidget extends BaseWidget {
       TextField (
         controller: dateController.value,
         decoration: InputDecoration (
-          //icon: Icon( Icons.calendar_today ),
+          icon: const Icon(CupertinoIcons.calendar,),
           hintText: hintText,
           labelText: labelText,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide.none,
           ),
-          /*
-          focusedBorder: const OutlineInputBorder( borderSide: BorderSide( color: Colors.blue, width: 1 ) ),
-          enabledBorder: const OutlineInputBorder( borderSide: BorderSide( color: Colors.blue, width: 1 ) ),
-          */
         ),
         readOnly: true,
         onTap: () async {

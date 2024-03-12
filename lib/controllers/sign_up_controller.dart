@@ -1,6 +1,7 @@
 import 'package:app/controllers/base_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/routes/app_pages.dart';
+import 'package:app/utils/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +15,7 @@ class SignUpController extends BaseController {
   TextEditingController? emailController, passwordController, confirmPasswordController,
   firstNameController, lastNameController, middleNameController, 
   ageController, contactNumberController, houseStreetController;
+  final List<String> genderList = [AppLocalizations.of(Get.context!).translate('sex'), AppLocalizations.of(Get.context!).translate('male'), AppLocalizations.of(Get.context!).translate('female')];
   final Rx<TextEditingController?> birthdateController = TextEditingController().obs;
   RxBool isReadTerms = false.obs;
 
@@ -53,7 +55,7 @@ class SignUpController extends BaseController {
       debugPrint("SignUpController Name is Invalid");
     } else if (passwordController?.text != confirmPasswordController?.text) {
       onShowAlert("Error", "Password and Confrim Password is not equal");
-      debugPrint("SignUpController Password and Confrim Password is not equal");
+      debugPrint("SignUpController Password and Confrim Password is not equal ${passwordController?.text} ${confirmPasswordController?.text}");
     } else if (isAgeInvalid) {
       onShowAlert("Error", "Age is invalid");
       onShowAlert("Error", "Age is invalid");
