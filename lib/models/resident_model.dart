@@ -17,6 +17,7 @@ class ResidentModel {
     this.zone,
     this.houseStreet,
     this.email,
+    this.residency,
     //this.phone,
     //this.email,
     //this.age,
@@ -35,6 +36,7 @@ class ResidentModel {
   final String? zone;
   final String? houseStreet;
   final String? email;
+  final String? residency;
 
   factory ResidentModel.fromJson(Map<String, dynamic> json) {
     return ResidentModel (
@@ -51,6 +53,7 @@ class ResidentModel {
       zone : json[Constants.ZONE].toString(),
       houseStreet : json[Constants.HOUSESTREET].toString(),
       email : json[Constants.EMAIL].toString(),
+      residency : json[Constants.RESIDENCY].toString(),
     );
   }
 
@@ -70,6 +73,7 @@ class ResidentModel {
       zone : data[Constants.ZONE],
       houseStreet : data[Constants.HOUSESTREET],
       email : data[Constants.EMAIL],
+      residency : data[Constants.RESIDENCY],
     );
   }
 
@@ -86,6 +90,7 @@ class ResidentModel {
     Constants.ZONE: zone,
     Constants.HOUSESTREET: houseStreet,
     Constants.EMAIL: email,
+    Constants.RESIDENCY: residency,
   };
 
   Map<String, dynamic> toJson() {
@@ -103,6 +108,7 @@ class ResidentModel {
       Constants.ZONE: zone,
       Constants.HOUSESTREET: houseStreet,
       Constants.EMAIL: email,
+      Constants.RESIDENCY: residency,
     };
   }
 
@@ -202,6 +208,14 @@ class ResidentModel {
     return id == newModel.id && email != newModel.email;
   }
 
+  bool isSameResidency(ResidentModel newModel) {
+    return id == newModel.id && residency == newModel.residency;
+  }
+
+  bool isNotSameResidency(ResidentModel newModel) {
+    return id == newModel.id && residency != newModel.residency;
+  }
+
   bool isSameContent(ResidentModel newModel) {
     return isSamePhoto(newModel) &&
     isSamePhoto(newModel) &&
@@ -216,7 +230,8 @@ class ResidentModel {
     isSameStatus(newModel) &&
     isSameZone(newModel) &&
     isSameHouseStreet(newModel) &&
-    isSameEmail(newModel);
+    isSameEmail(newModel) &&
+    isSameResidency(newModel);
   }
 
   bool isNotSameContent(ResidentModel newModel) {

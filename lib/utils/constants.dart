@@ -29,5 +29,6 @@ class Constants {
   static const STATUS = "status";
   static const HOUSESTREET = "house_street";
   static const EMAIL = "email";
+  static const RESIDENCY = "proof_of_residency";
   static Color transparentColor = HexColor('00ffffff').withOpacity(0.00) ?? Colors.transparent;
 }
