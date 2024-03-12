@@ -1,3 +1,4 @@
+import 'package:app/models/resident_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
@@ -15,5 +16,10 @@ class FirestoreService extends GetxService {
 
   Future<void> createComplaint(Map<String, dynamic> data) async {
     await _create("complaints", data);
+  }
+
+  Future<List<ResidentModel>> getResidents() async {
+    final response = await dbFirestore.collection("residents").get();
+    return response.docs.map((doc) => ResidentModel.fromSnapshot(doc)).toList();
   }
 }

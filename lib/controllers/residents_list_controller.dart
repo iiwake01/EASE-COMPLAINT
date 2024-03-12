@@ -24,15 +24,11 @@ class ResidentsListController extends BaseController {
   Future<void> fetch() async {
     try {
       _isLoading(true);
-      _residentList.clear();
-      _residentList.add( ResidentModel(photo: "Photo 0", last: "Last 0", first: "First 0", zone: "Zone 0", age: "0") );
-      _residentList.add( ResidentModel(photo: "Photo 1", last: "Last 1", first: "First 1", zone: "Zone 1", age: "1") );
-      _residentList.add( ResidentModel(photo: "Photo 2", last: "Last 2", first: "First 2", zone: "Zone 2", age: "2") );
-      _residentList.add( ResidentModel(photo: "Photo 3", last: "Last 3", first: "First 3", zone: "Zone 3", age: "3") );
-      _residentList.add( ResidentModel(photo: "Photo 4", last: "Last 4", first: "First 4", zone: "Zone 4", age: "4") );
-      _residentList.add( ResidentModel(photo: "Photo 5", last: "Last 5", first: "First 5", zone: "Zone 5", age: "5") );
+      final List<ResidentModel> snapshot = await _service.getResidents();
+      _residentList.assignAll(snapshot);
     } catch (exception) {
       onShowAlert("Error", "Fetch Failed");
+      debugPrint("ResidentsListController fetch $exception");
     } finally {
       _isLoading(false);
     }
@@ -47,7 +43,7 @@ class ResidentsListController extends BaseController {
   }
 
   void launchView() {
-    
+    onShowAlert("Under Construction", "On Going . . .");
   }
   
   @override
