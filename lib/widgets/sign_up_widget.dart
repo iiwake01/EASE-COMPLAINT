@@ -48,7 +48,7 @@ class SignUpWidget extends BaseWidget<SignUpController> {
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             TextFieldWidget(textEditingController: controller.ageController, labelText: AppLocalizations.of(context).translate('age'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
-            DatePickerWidget (labelText: AppLocalizations.of(context).translate('birthdate'), dateController: controller.birthdateController,),
+            DatePickerWidget (labelText: AppLocalizations.of(context).translate('birthdate'), dateController: controller.birthdateController, firstDate: DateTime.now().subtract(const Duration(days: 73000)),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),
             TextFieldWidget(textEditingController: controller.contactNumberController, labelText: AppLocalizations.of(context).translate('contact_number'),),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025,),

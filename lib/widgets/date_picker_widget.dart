@@ -10,11 +10,13 @@ class DatePickerWidget extends BaseWidget {
     this.labelText,
     this.hintText,
     required this.dateController,
+    this.firstDate,
   } );
 
   final String? labelText;
   final String? hintText;
   final Rx<TextEditingController?> dateController;
+  final DateTime? firstDate;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class DatePickerWidget extends BaseWidget {
           DateTime? pickedDate = await showDatePicker (
             context: context,
             initialDate: DateTime.now(),
-            firstDate: DateTime.now(),//DateTime(2000)not to allow to choose before today.
+            firstDate: firstDate ?? DateTime.now().subtract(const Duration(days: 365)),//not to allow to choose before today.
             lastDate: DateTime.now().add( const Duration(days: 365) )
           );
           if (pickedDate != null) {            
