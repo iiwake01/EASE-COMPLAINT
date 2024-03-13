@@ -38,7 +38,7 @@ class LoginController extends BaseController {
 
   Future<void> validateResidentCredential() async {
     debugPrint("LoginController validateCredential");
-    _launchResidentHomePage();
+    //_launchResidentHomePage();
     isLoading(true);
     _auth.checkCredential (
       emailController?.text ?? "",
@@ -62,7 +62,7 @@ class LoginController extends BaseController {
 
   Future<void> validateStaffCredential() async {
     debugPrint("LoginController validateCredential");
-    _launchStaffHomePage();
+    //_launchStaffHomePage();
     isLoading(true);
     _auth.checkCredential (
       emailController?.text ?? "",

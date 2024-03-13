@@ -7,12 +7,12 @@ import 'package:get/get.dart';
 
 class BackAppBar extends BaseWidget implements PreferredSizeWidget {
   
-  const BackAppBar({
+  const BackAppBar( {
     super.key,
     this.height,
     this.widthGap,
     this.title
-  });
+  } );
 
   final double? height, widthGap;
   final String? title;
@@ -22,7 +22,7 @@ class BackAppBar extends BaseWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBarWidget(
+    return AppBarWidget (
       backgroundColor: Colors.white,
       height: height ?? kToolbarHeight,
       child: Stack (
@@ -30,7 +30,7 @@ class BackAppBar extends BaseWidget implements PreferredSizeWidget {
         children: <Widget>[
           Positioned (
             left: widthGap,
-            child: IconButton(
+            child: IconButton (
               onPressed: () => Get.back(),
               icon: const Icon(
                 CupertinoIcons.arrow_left,
