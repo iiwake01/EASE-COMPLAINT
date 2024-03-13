@@ -4,7 +4,9 @@ import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/complaint_model.dart';
 import 'package:app/routes/app_pages.dart';
+import 'package:app/utils/app_localizations.dart';
 import 'package:app/utils/constants.dart';
+import 'package:app/widgets/dialog_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -24,7 +26,7 @@ class ResidentComplaintsListController extends BaseController implements Protoco
   Future<void> onInit() async {
     super.onInit();
     debugPrint("ResidentComplaintsListController onInit");
-    checkSession();
+    //checkSession();
     fetch();
   }
 
@@ -32,7 +34,11 @@ class ResidentComplaintsListController extends BaseController implements Protoco
   Future<void> checkSession() async {
     if(_auth.isUserSignedIn() == false) {
       debugPrint("ResidentComplaintsListController is user signed in ${_auth.isUserSignedIn()}");
-      Get.offAndToNamed(Routes.LOGIN, arguments: "Session Expired Please Login again");
+      DialogWidget.timeoutDialog (
+        "Session Expired Please Login again", 
+        AppLocalizations.of(Get.context!).translate('yes'), 
+        () { Get.offAndToNamed(Routes.LOGIN); }
+      );
     }
   }
 

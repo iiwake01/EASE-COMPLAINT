@@ -16,6 +16,32 @@ class DialogWidget {
     );
   }
 
+  static timeoutDialog(String title, textPositive, GestureTapCallback onPressedPositive, ) {
+    Get.dialog (
+      AlertDialog (
+        actions: [
+          ElevatedButton (
+            style: ElevatedButton.styleFrom (
+              backgroundColor: Color.fromARGB(255, 6, 141, 76),
+              foregroundColor: Colors.white,
+              textStyle: const TextStyle(fontSize: 20)
+            ),
+            onPressed: onPressedPositive,
+            child: Text (
+              textPositive,
+            ),
+          ),
+        ],
+        alignment: Alignment.center,
+        backgroundColor: Colors.green,
+        content: null,
+        title: Text (title,),
+        titleTextStyle: const TextStyle (color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold), 
+      ),
+      barrierDismissible: true,
+    );
+  }
+
   static logoutDialog (String title, textPositive, textNegative, GestureTapCallback onPressedPositive, GestureTapCallback onPressedNegative) {
     Get.dialog (
       AlertDialog (

@@ -31,16 +31,16 @@ class FirebaseAuthService extends GetxService {
 
    Future<void> sendEmailVerification (
     final Function() onSuccess,
-    final Function(FirebaseAuthException) onFirebaseAuthException,
-    final Function(Exception) onException,
+    final Function(String) onFirebaseAuthException,
+    final Function(String) onException,
    ) async {
     try {
       await _auth.currentUser?.sendEmailVerification();
       onSuccess();
     } on FirebaseAuthException catch (exception) {
-      onFirebaseAuthException(exception);
+      onFirebaseAuthException("FirebaseAuthException sendEmailVerification ${exception.code} ${exception.message}");
     } catch (exception) {
-      onException(throw Exception("FirebaseAuthService sendEmailVerification exception ${exception.toString()}}"));
+      onException("FirebaseAuthService sendEmailVerification exception ${exception.toString()}");
     }
   }
 
@@ -49,7 +49,7 @@ class FirebaseAuthService extends GetxService {
     final String password,
     final Function(UserCredential) onProcess,
     final Function() onSuccess,
-    final Function(Exception) onException,
+    final Function(String) onException,
     final Function() onFinally,
   ) async {
     try {
@@ -60,7 +60,7 @@ class FirebaseAuthService extends GetxService {
       onProcess(credential);
       onSuccess();
     } catch (exception) {
-      onException(throw Exception("FirebaseAuthService checkCredential exception ${exception.toString()}}"));
+      onException("FirebaseAuthService checkCredential exception ${exception.toString()}}");
     } finally {
       onFinally();
     }

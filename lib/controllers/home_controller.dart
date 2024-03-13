@@ -19,14 +19,18 @@ class HomedController extends BaseController implements ProtocolController {
   Future<void> onInit() async {
     super.onInit();
     debugPrint("HomedController onInit");
-    checkSession();
+    //checkSession();
   }
 
   @override
   Future<void> checkSession() async {
     if(_auth.isUserSignedIn() == false) {
       debugPrint("HomedController is user signed in ${_auth.isUserSignedIn()}");
-      Get.offAndToNamed(Routes.LOGIN, arguments: "Session Expired Please Login again");
+      DialogWidget.timeoutDialog (
+        "Session Expired Please Login again", 
+        AppLocalizations.of(Get.context!).translate('yes'), 
+        () { Get.offAndToNamed(Routes.LOGIN); }
+      );
     }
   }
   //#region Home App Bar Methods
@@ -42,16 +46,12 @@ class HomedController extends BaseController implements ProtocolController {
 
   void promptLogout() {
     debugPrint("HomedController promptLogout");
-    DialogWidget.logoutDialog(
-        AppLocalizations.of(Get.context!)
-            .translate('are_you_sure_you_want_to_log_out_'),
-        AppLocalizations.of(Get.context!).translate('yes'),
-        AppLocalizations.of(Get.context!).translate('no'),
-        () => _launchLogout(), () {
-      if (Get.isDialogOpen == true) {
-        Get.back();
-      }
-    });
+    DialogWidget.logoutDialog (
+      AppLocalizations.of(Get.context!).translate('are_you_sure_you_want_to_log_out_'),
+      AppLocalizations.of(Get.context!).translate('yes'),
+      AppLocalizations.of(Get.context!).translate('no'),
+      () => _launchLogout(), () { if (Get.isDialogOpen == true) { Get.back(); } }
+    );
   }
 
   void _launchLogout() {

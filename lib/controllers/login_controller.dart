@@ -10,7 +10,6 @@ class LoginController extends BaseController {
     debugPrint("LoginController Constructor");
   }
 
-  final arguments = Get.arguments;
   final FirebaseAuthService _auth;
   PageController pageController = new PageController(initialPage: 0);
   final RxBool isLoading = false.obs;
@@ -20,9 +19,6 @@ class LoginController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     debugPrint("LoginController onInit");
-    if (arguments != null && arguments is String) {
-      onShowAlert("Error", arguments);
-    }
     pageController.addListener(() {
       debugPrint("pageController Listener");
       emailController = TextEditingController();
@@ -41,21 +37,21 @@ class LoginController extends BaseController {
   }
 
   Future<void> validateResidentCredential() async {
-    debugPrint("LoginController validateCredential");
+    debugPrint("LoginController validateResidentCredential");
     //_launchResidentHomePage();
     isLoading(true);
     _auth.checkCredential (
       emailController?.text ?? "",
       passwordController?.text ?? "",
       (userCredential) {
-        debugPrint("LoginController validateCredential credential ${userCredential.toString()}");
-        debugPrint("LoginController validateCredential user ${userCredential.user}");
+        debugPrint("LoginController validateResidentCredential credential ${userCredential.toString()}");
+        debugPrint("LoginController validateResidentCredential user ${userCredential.user}");
       }, 
       () {
         _launchResidentHomePage();
       }, 
       (exception) {
-        debugPrint('LoginController validateCredential exception ${exception.toString()}}');
+        debugPrint('LoginController validateResidentCredential exception ${exception.toString()}}');
         onShowAlert("Error!", "Invalid Credential Please Try Again");
       },
       () {
@@ -65,21 +61,21 @@ class LoginController extends BaseController {
   }
 
   Future<void> validateStaffCredential() async {
-    debugPrint("LoginController validateCredential");
+    debugPrint("LoginController validateStaffCredential");
     //_launchStaffHomePage();
     isLoading(true);
     _auth.checkCredential (
       emailController?.text ?? "",
       passwordController?.text ?? "",
       (userCredential) {
-        debugPrint("LoginController validateCredential credential ${userCredential.toString()}");
-        debugPrint("LoginController validateCredential user ${userCredential.user}");
+        debugPrint("LoginController validateStaffCredential credential ${userCredential.toString()}");
+        debugPrint("LoginController validateStaffCredential user ${userCredential.user}");
       }, 
       () {
         _launchStaffHomePage();
       }, 
       (exception) {
-        debugPrint('LoginController validateCredential exception ${exception.toString()}}');
+        debugPrint('LoginController validateStaffCredential exception ${exception.toString()}}');
         onShowAlert("Error!", "Invalid Credential Please Try Again");
       },
       () {

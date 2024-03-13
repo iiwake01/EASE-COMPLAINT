@@ -35,7 +35,7 @@ class ComplaintFormController extends BaseController implements ProtocolControll
   void onInit() {
     super.onInit();
     debugPrint("ComplaintFormController onInit arguments $arguments");
-    checkSession();
+    //checkSession();
     urgencyController = TextEditingController();
     locationController = TextEditingController();
     narrativeController = TextEditingController();
@@ -52,7 +52,11 @@ class ComplaintFormController extends BaseController implements ProtocolControll
   Future<void> checkSession() async {
     if(_auth.isUserSignedIn() == false) {
       debugPrint("ComplaintFormController is user signed in ${_auth.isUserSignedIn()}");
-      Get.offAndToNamed(Routes.LOGIN, arguments: "Session Expired Please Login again");
+      DialogWidget.timeoutDialog (
+        "Session Expired Please Login again", 
+        AppLocalizations.of(Get.context!).translate('yes'), 
+        () { Get.offAndToNamed(Routes.LOGIN); }
+      );
     }
   }
 
