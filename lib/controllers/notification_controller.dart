@@ -27,8 +27,8 @@ class NotificationController extends BaseController implements ProtocolControlle
   @override
   Future<void> checkSession() async {
     if(_auth.isUserSignedIn() == false) {
-      debugPrint("NotificationController not signed in ${_auth.isUserSignedIn()}");
-      Get.offAndToNamed(Routes.LOGIN);
+      debugPrint("NotificationController is user signed in ${_auth.isUserSignedIn()}");
+      Get.offAndToNamed(Routes.LOGIN, arguments: "Session Expired Please Login again");
     }
   }
   

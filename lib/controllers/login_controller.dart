@@ -10,6 +10,7 @@ class LoginController extends BaseController {
     debugPrint("LoginController Constructor");
   }
 
+  final arguments = Get.arguments;
   final FirebaseAuthService _auth;
   PageController pageController = new PageController(initialPage: 0);
   final RxBool isLoading = false.obs;
@@ -19,6 +20,9 @@ class LoginController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     debugPrint("LoginController onInit");
+    if (arguments != null && arguments is String) {
+      onShowAlert("Error", arguments);
+    }
     pageController.addListener(() {
       debugPrint("pageController Listener");
       emailController = TextEditingController();

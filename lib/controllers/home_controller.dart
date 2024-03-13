@@ -25,8 +25,8 @@ class HomedController extends BaseController implements ProtocolController {
   @override
   Future<void> checkSession() async {
     if(_auth.isUserSignedIn() == false) {
-      debugPrint("HomedController not signed in ${_auth.isUserSignedIn()}");
-      Get.offAndToNamed(Routes.LOGIN);
+      debugPrint("HomedController is user signed in ${_auth.isUserSignedIn()}");
+      Get.offAndToNamed(Routes.LOGIN, arguments: "Session Expired Please Login again");
     }
   }
   //#region Home App Bar Methods

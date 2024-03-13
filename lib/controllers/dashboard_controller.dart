@@ -27,8 +27,8 @@ class DashboardController extends BaseController implements ProtocolController {
   @override
   Future<void> checkSession() async {
     if(_auth.isUserSignedIn() == false) {
-      debugPrint("DashboardController not signed in ${_auth.isUserSignedIn()}");
-      Get.offAndToNamed(Routes.LOGIN);
+      debugPrint("DashboardController is user signed in ${_auth.isUserSignedIn()}");
+      Get.offAndToNamed(Routes.LOGIN, arguments: "Session Expired Please Login again");
     }
   }
 

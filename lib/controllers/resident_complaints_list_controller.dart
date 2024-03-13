@@ -31,8 +31,8 @@ class ResidentComplaintsListController extends BaseController implements Protoco
   @override
   Future<void> checkSession() async {
     if(_auth.isUserSignedIn() == false) {
-      debugPrint("StaffComplaintsListController not signed in ${_auth.isUserSignedIn()}");
-      Get.offAndToNamed(Routes.LOGIN);
+      debugPrint("ResidentComplaintsListController is user signed in ${_auth.isUserSignedIn()}");
+      Get.offAndToNamed(Routes.LOGIN, arguments: "Session Expired Please Login again");
     }
   }
 

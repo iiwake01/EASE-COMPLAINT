@@ -29,8 +29,8 @@ class StaffComplaintsListController extends BaseController implements ProtocolCo
   @override
   Future<void> checkSession() async {
     if(_auth.isUserSignedIn() == false) {
-      debugPrint("StaffComplaintsListController not signed in ${_auth.isUserSignedIn()}");
-    Get.offAndToNamed(Routes.LOGIN);
+      debugPrint("StaffComplaintsListController is user signed in ${_auth.isUserSignedIn()}");
+      Get.offAndToNamed(Routes.LOGIN, arguments: "Session Expired Please Login again");
     }
   }
 

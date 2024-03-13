@@ -29,8 +29,8 @@ class ResidentsListController extends BaseController implements ProtocolControll
   @override
   Future<void> checkSession() async {
     if(_auth.isUserSignedIn() == false) {
-      debugPrint("ResidentsListController not signed in ${_auth.isUserSignedIn()}");
-    Get.offAndToNamed(Routes.LOGIN);
+      debugPrint("ResidentsListController is user signed in ${_auth.isUserSignedIn()}");
+      Get.offAndToNamed(Routes.LOGIN, arguments: "Session Expired Please Login again");
     }
   }
 
