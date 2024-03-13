@@ -1,4 +1,5 @@
 import 'package:app/controllers/base_controller.dart';
+import 'package:app/controllers/protocol_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/routes/app_pages.dart';
 import 'package:app/utils/app_localizations.dart';
@@ -6,7 +7,7 @@ import 'package:app/widgets/dialog_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
-class HomedController extends BaseController {
+class HomedController extends BaseController implements ProtocolController {
   
   HomedController(FirebaseAuthService this._auth,) {
     debugPrint("HomedController Constructor");
@@ -18,6 +19,15 @@ class HomedController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     debugPrint("HomedController onInit");
+    checkSession();
+  }
+
+  @override
+  Future<void> checkSession() async {
+    if(_auth.isUserSignedIn() == false) {
+      debugPrint("HomedController not signed in ${_auth.isUserSignedIn()}");
+      Get.offAndToNamed(Routes.LOGIN);
+    }
   }
   //#region Home App Bar Methods
   void launchNotification() {

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:app/controllers/base_controller.dart';
+import 'package:app/controllers/protocol_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firebase_storage_service.dart';
 import 'package:app/firebase/firestore_service.dart';
@@ -15,7 +16,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ComplaintFormController extends BaseController {
+class ComplaintFormController extends BaseController implements ProtocolController {
 
   ComplaintFormController(FirebaseAuthService this._auth, FirestoreService this._service, FirebaseStorageService this._storage) {
     debugPrint("ComplaintFormController Constructor");
@@ -34,6 +35,7 @@ class ComplaintFormController extends BaseController {
   void onInit() {
     super.onInit();
     debugPrint("ComplaintFormController onInit arguments $arguments");
+    checkSession();
     urgencyController = TextEditingController();
     locationController = TextEditingController();
     narrativeController = TextEditingController();
@@ -43,6 +45,14 @@ class ComplaintFormController extends BaseController {
     resolutionController = TextEditingController();
     if (arguments != null && arguments is String) {
       typeController(TextEditingController(text: arguments));
+    }
+  }
+
+  @override
+  Future<void> checkSession() async {
+    if(_auth.isUserSignedIn() == false) {
+      debugPrint("ComplaintFormController not signed in ${_auth.isUserSignedIn()}");
+      Get.offAndToNamed(Routes.LOGIN);
     }
   }
 

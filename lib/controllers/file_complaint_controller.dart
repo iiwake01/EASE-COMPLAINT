@@ -1,19 +1,32 @@
 import 'package:app/controllers/base_controller.dart';
+import 'package:app/controllers/protocol_controller.dart';
+import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/routes/app_pages.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
-class FileComplaintController extends BaseController {
+class FileComplaintController extends BaseController implements ProtocolController {
 
-  FileComplaintController() {
+  FileComplaintController(FirebaseAuthService this._auth,) {
     debugPrint("FileComplaintController Constructor");
   }
+
+  final FirebaseAuthService _auth;
 
   @override
   Future<void> onInit() async {
     super.onInit();
     debugPrint("FileComplaintController onInit");
+    checkSession();
+  }
+
+  @override
+  Future<void> checkSession() async {
+    if(_auth.isUserSignedIn() == false) {
+      debugPrint("HomedController not signed in ${_auth.isUserSignedIn()}");
+      Get.offAndToNamed(Routes.LOGIN);
+    }
   }
 
   void launchEnvironmentalProblems() {

@@ -70,6 +70,10 @@ class FirebaseAuthService extends GetxService {
     return _auth.currentUser;
   }
 
+  bool isUserSignedIn() {
+    return getUser() != null ? true : false;
+  }
+
   Future signOut() async {
     await _auth.signOut();
   }

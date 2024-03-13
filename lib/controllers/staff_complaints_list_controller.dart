@@ -1,15 +1,19 @@
 import 'package:app/controllers/base_controller.dart';
+import 'package:app/controllers/protocol_controller.dart';
+import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/complaint_model.dart';
+import 'package:app/routes/app_pages.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
-class StaffComplaintsListController extends BaseController {
+class StaffComplaintsListController extends BaseController implements ProtocolController {
 
-  StaffComplaintsListController(FirestoreService this._service,) {
+  StaffComplaintsListController(FirebaseAuthService this._auth, FirestoreService this._service,) {
     debugPrint("StaffComplaintsListController Constructor");
   }
 
+  final FirebaseAuthService _auth;
   final FirestoreService _service;
   final RxBool _isLoading = false.obs;
   final RxList<ComplaintModel> _complaintList = new List<ComplaintModel>.empty().obs;
@@ -18,7 +22,16 @@ class StaffComplaintsListController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     debugPrint("StaffComplaintsListController onInit");
+    checkSession();
     fetch();
+  }
+
+  @override
+  Future<void> checkSession() async {
+    if(_auth.isUserSignedIn() == false) {
+      debugPrint("StaffComplaintsListController not signed in ${_auth.isUserSignedIn()}");
+    Get.offAndToNamed(Routes.LOGIN);
+    }
   }
 
   Future<void> fetch() async {

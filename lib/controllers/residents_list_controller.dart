@@ -1,15 +1,19 @@
 import 'package:app/controllers/base_controller.dart';
+import 'package:app/controllers/protocol_controller.dart';
+import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/resident_model.dart';
+import 'package:app/routes/app_pages.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
-class ResidentsListController extends BaseController {
+class ResidentsListController extends BaseController implements ProtocolController {
 
-  ResidentsListController(FirestoreService this._service,) {
+  ResidentsListController(FirebaseAuthService this._auth, FirestoreService this._service,) {
     debugPrint("ResidentsListController Constructor");
   }
 
+  final FirebaseAuthService _auth;
   final FirestoreService _service;
   final RxBool _isLoading = false.obs;
   final RxList<ResidentModel> _residentList = new List<ResidentModel>.empty().obs;
@@ -18,7 +22,16 @@ class ResidentsListController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     debugPrint("ResidentsListController onInit");
+    checkSession();
     fetch();
+  }
+
+  @override
+  Future<void> checkSession() async {
+    if(_auth.isUserSignedIn() == false) {
+      debugPrint("ResidentsListController not signed in ${_auth.isUserSignedIn()}");
+    Get.offAndToNamed(Routes.LOGIN);
+    }
   }
 
   Future<void> fetch() async {
