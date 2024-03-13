@@ -1,16 +1,19 @@
 import 'package:app/controllers/base_controller.dart';
+import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/complaint_model.dart';
 import 'package:app/utils/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class ResidentComplaintsListController extends BaseController {
 
-  ResidentComplaintsListController(FirestoreService this._service,) {
+  ResidentComplaintsListController(FirebaseAuthService this._auth, FirestoreService this._service,) {
     debugPrint("ResidentComplaintsListController Constructor");
   }
 
+  final FirebaseAuthService _auth;
   final FirestoreService _service;
   final RxBool _isLoading = false.obs;
   final RxList<ComplaintModel> _complaintList = new List<ComplaintModel>.empty().obs;
@@ -25,7 +28,8 @@ class ResidentComplaintsListController extends BaseController {
   Future<void> fetch() async {
     try {
       _isLoading(true);
-      final List<ComplaintModel> snapshot = await _service.getComplaint("007");
+      final User? user = _auth.getUser();
+      final List<ComplaintModel> snapshot = await _service.getResidentComplaints(user?.uid ?? "000");
       _complaintList.assignAll(snapshot);
     } catch (exception) {
       onShowAlert("Error", "Fetch Failed");
