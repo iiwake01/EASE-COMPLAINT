@@ -20,6 +20,10 @@ class FirestoreService extends GetxService {
     await _create("complaints", data);
   }
 
+   Future<void> createStaff(Map<String, dynamic> data) async {
+    await _create("staff", data);
+  }
+
    Future<ResidentModel?> getResident(String uid) async {
     final response = await dbFirestore.collection("residents").where(Constants.UID, isEqualTo: uid).get();
     return response.docs.map((doc) => ResidentModel.fromSnapshot(doc)).toList().firstOrNull;
