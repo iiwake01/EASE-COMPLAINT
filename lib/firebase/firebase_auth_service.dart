@@ -44,7 +44,7 @@ class FirebaseAuthService extends GetxService {
     }
   }
 
-  Future<void> checkCredential(
+  Future<void> checkCredential (
     final String email, 
     final String password,
     final Function(UserCredential) onProcess,
@@ -64,6 +64,10 @@ class FirebaseAuthService extends GetxService {
     } finally {
       onFinally();
     }
+  }
+
+  User? getUser() {
+    return _auth.currentUser;
   }
 
   Future signOut() async {

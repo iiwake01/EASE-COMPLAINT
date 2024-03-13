@@ -1,12 +1,15 @@
 import 'dart:io';
 import 'package:app/controllers/base_controller.dart';
+import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firebase_storage_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/complaint_model.dart';
+import 'package:app/models/resident_model.dart';
 import 'package:app/routes/app_pages.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/widgets/dialog_widget.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +17,11 @@ import 'package:get/get.dart';
 
 class ComplaintFormController extends BaseController {
 
-  ComplaintFormController(FirestoreService this._service, FirebaseStorageService this._storage) {
+  ComplaintFormController(FirebaseAuthService this._auth, FirestoreService this._service, FirebaseStorageService this._storage) {
     debugPrint("ComplaintFormController Constructor");
   }
 
+  final FirebaseAuthService _auth;
   final FirestoreService _service;
   final FirebaseStorageService _storage;
   final arguments = Get.arguments;
@@ -88,12 +92,14 @@ class ComplaintFormController extends BaseController {
     try {
       TaskSnapshot? taskSnapshot = await _storage.uploadPlatformFiles(attatchmentFile);
       final ComplaintModel complaint;
+      final User? user = _auth.getUser();
+      final ResidentModel? resident = await _service.getResident(user?.uid ?? "000");
       if (taskSnapshot != null && taskSnapshot.state == TaskState.success) {
         complaint = ComplaintModel (
-          uid: "000",
-          name: "x y z",
-          //photo: "",
-          zone: "Zone X",
+          uid: user?.uid ?? "000",
+          name: "${resident?.first} ${resident?.middle} ${resident?.last}",
+          photo: resident?.photo,
+          zone: resident?.zone ?? "Zone 007",
           urgency: urgencyController?.text,
           type: typeController?.value?.text,
           date: incidentDateController?.value?.text,
@@ -108,10 +114,10 @@ class ComplaintFormController extends BaseController {
         );
       } else {
         complaint = ComplaintModel (
-          uid: "007",
-          name: "James Bond",
-          //photo: "",
-          zone: "Zone 007",
+          uid: user?.uid ?? "007",
+          name: "${resident?.first} ${resident?.middle} ${resident?.last}",
+          photo: resident?.photo,
+          zone: resident?.zone ?? "Zone 007",
           urgency: urgencyController?.text,
           type: typeController?.value?.text,
           date: incidentDateController?.value?.text,
