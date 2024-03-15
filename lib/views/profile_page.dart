@@ -1,7 +1,7 @@
 import 'package:app/controllers/profile_controller.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/views/base_view.dart';
-import 'package:app/views/profile_edit_widget.dart';
+import 'package:app/widgets/profile_edit_widget.dart';
 import 'package:app/widgets/profile_read_only_widget.dart';
 import 'package:app/widgets/page_view_widget.dart';
 import 'package:app/widgets/profile_app_bar.dart';

@@ -1,5 +1,6 @@
 import 'package:app/models/complaint_model.dart';
 import 'package:app/models/resident_model.dart';
+import 'package:app/models/staff_model.dart';
 import 'package:app/utils/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
@@ -28,9 +29,30 @@ class FirestoreService extends GetxService {
     await _create("notifications", data);
   }
 
-   Future<ResidentModel?> getResident(String uid) async {
+  Future<void> updateResident(ResidentModel? model) async {
+    if (model != null) {
+      await dbFirestore.collection("residents").doc(model.id).update(model.toMap());
+    } else {
+      throw Exception("ResidentModel is Null");
+    }
+  }
+
+  Future<void> updateStaff(StaffModel? model) async {
+    if (model != null) {
+      await dbFirestore.collection("staffs").doc(model.id).update(model.toMap());
+    } else {
+      throw Exception("StaffModel is Null");
+    }
+  }
+
+  Future<ResidentModel?> getResident(String uid) async {
     final response = await dbFirestore.collection("residents").where(Constants.UID, isEqualTo: uid).get();
     return response.docs.map((doc) => ResidentModel.fromSnapshot(doc)).toList().firstOrNull;
+  }
+
+  Future<StaffModel?> getStaff(String uid) async {
+    final response = await dbFirestore.collection("staffs").where(Constants.UID, isEqualTo: uid).get();
+    return response.docs.map((doc) => StaffModel.fromSnapshot(doc)).toList().firstOrNull;
   }
 
   Future<List<ResidentModel>> getResidents() async {
