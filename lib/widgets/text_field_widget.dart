@@ -7,12 +7,13 @@ class TextFieldWidget extends BaseWidget {
     super.key,
     required this.textEditingController,
     this.labelText,
-    this.isTextHidden
+    this.isTextHidden,
+    this.isReadOnly
   } );
 
   final TextEditingController? textEditingController;
   final String? labelText;
-  final bool? isTextHidden;
+  final bool? isTextHidden, isReadOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class TextFieldWidget extends BaseWidget {
       ),
       keyboardType: TextInputType.text,
       obscureText: isTextHidden ?? false,
+      readOnly: isReadOnly ?? false,
     );
   }
 }

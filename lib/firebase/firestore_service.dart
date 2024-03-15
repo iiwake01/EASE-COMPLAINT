@@ -20,8 +20,12 @@ class FirestoreService extends GetxService {
     await _create("complaints", data);
   }
 
-   Future<void> createStaff(Map<String, dynamic> data) async {
-    await _create("staff", data);
+  Future<void> createStaff(Map<String, dynamic> data) async {
+    await _create("staffs", data);
+  }
+
+  Future<void> createNotification(Map<String, dynamic> data) async {
+    await _create("notifications", data);
   }
 
    Future<ResidentModel?> getResident(String uid) async {

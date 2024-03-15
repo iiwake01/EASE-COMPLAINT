@@ -18,12 +18,25 @@ class ProfileController extends BaseController implements ProtocolController {
   final FirebaseAuthService _auth;
   final FirestoreService _service;
   final FirebaseStorageService _storage;
+  PageController pageController = new PageController(initialPage: 0);
+  final RxBool isLoading = false.obs;
+  TextEditingController? firstNameController, lastNameController, middleNameController, 
+  ageController, contactNumberController, houseStreetController;
 
   @override
   Future<void> onInit() async {
     super.onInit();
     debugPrint("ProfileController onInit");
     //checkSession();
+    pageController.addListener(() {
+      debugPrint("pageController Listener");
+    });
+    firstNameController = TextEditingController();
+    lastNameController = TextEditingController();
+    middleNameController = TextEditingController();
+    ageController = TextEditingController();
+    contactNumberController = TextEditingController();
+    houseStreetController = TextEditingController();
   }
 
   @override
@@ -37,7 +50,18 @@ class ProfileController extends BaseController implements ProtocolController {
       );
     }
   }
-  
+
+  void launchReadOnly() {
+    debugPrint("ProfileController launchReadOnly");
+    pageController.jumpToPage(0);
+  }
+
+  void launchEditMode() {
+    debugPrint("ProfileController launchEditMode");
+    //TODO: Save Information
+    pageController.jumpToPage(1);
+  }
+
   @override
   void onClose() {
     debugPrint("ProfileController onClose");
