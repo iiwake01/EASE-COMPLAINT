@@ -48,7 +48,7 @@ class ComplaintFormPage extends BaseView<ComplaintFormController> {
               ),
               onPressed: () => controller.validate(),
               child: Text(AppLocalizations.of(context).translate('submit_complaint'), style: const TextStyle(color: Colors.white, fontSize: 20),),
-            )
+            ),
           ],
         ),
       ),
