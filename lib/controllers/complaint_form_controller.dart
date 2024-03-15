@@ -18,7 +18,7 @@ import 'package:get/get.dart';
 
 class ComplaintFormController extends BaseController implements ProtocolController {
 
-  ComplaintFormController(FirebaseAuthService this._auth, FirestoreService this._service, FirebaseStorageService this._storage) {
+  ComplaintFormController(this._auth, this._service, this._storage) {
     debugPrint("ComplaintFormController Constructor");
   }
 
@@ -115,8 +115,8 @@ class ComplaintFormController extends BaseController implements ProtocolControll
           photo: resident?.photo,
           zone: resident?.zone ?? "Zone 007",
           urgency: urgencyController?.text,
-          type: typeController?.value?.text,
-          date: incidentDateController?.value?.text,
+          type: typeController.value?.text,
+          date: incidentDateController.value?.text,
           location: locationController?.text,
           narrative: narrativeController?.text,
           attacthment: await taskSnapshot.ref.getDownloadURL(),
@@ -133,8 +133,8 @@ class ComplaintFormController extends BaseController implements ProtocolControll
           photo: resident?.photo,
           zone: resident?.zone ?? "Zone 007",
           urgency: urgencyController?.text,
-          type: typeController?.value?.text,
-          date: incidentDateController?.value?.text,
+          type: typeController.value?.text,
+          date: incidentDateController.value?.text,
           location: locationController?.text,
           narrative: narrativeController?.text,
           previousActionTaken: previousActionConroller?.text,
@@ -179,12 +179,12 @@ class ComplaintFormController extends BaseController implements ProtocolControll
     final kb = file!.size / 1024;
     final mb = kb / 1024;
     final fileSize = mb >= 1 ? '${mb.toStringAsFixed(2)} MB' : '${kb.toStringAsFixed(2)} KB';
-    liveFile("${file?.name?.split('.').first}.${file?.extension} $fileSize");
-    final bool _isImage = file?.extension?.toLowerCase()?.contains("jpg") == true || file?.extension?.toLowerCase()?.contains("png") == true|| file?.extension?.toLowerCase()?.contains("webp") == true;
-    if (_isImage && file?.bytes != null) {
+    liveFile("${file.name.split('.').first}.${file.extension} $fileSize");
+    final bool isImage = file.extension?.toLowerCase().contains("jpg") == true || file.extension?.toLowerCase().contains("png") == true|| file.extension?.toLowerCase().contains("webp") == true;
+    if (isImage && file.bytes != null) {
       //liveFileBytes(file?.bytes);
-    } else if (_isImage && file?.path != null) {
-      debugPrint("SignUpController openFile(PlatformFile path ${file?.path})");
+    } else if (isImage && file.path != null) {
+      debugPrint("SignUpController openFile(PlatformFile path ${file.path})");
       final File mobileFile = File(file.path!);
       List<int> bytes = await mobileFile.readAsBytes();
       Uint8List uint8List = Uint8List.fromList(bytes);

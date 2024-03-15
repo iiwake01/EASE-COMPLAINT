@@ -4,10 +4,6 @@ import 'package:get/get.dart';
 
 class BaseController extends GetxController {
   
-  @override
-  onInit() {
-    super.onInit();
-  }
 
   @protected
   void onShowAlert(String title, String message) {
@@ -16,13 +12,5 @@ class BaseController extends GetxController {
     );
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
 }

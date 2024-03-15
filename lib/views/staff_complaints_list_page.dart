@@ -24,11 +24,11 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
           return DataTable (
             columns: <DataColumn> [
               const DataColumn(label: SizedBox()),
-              DataColumn(label: Text(AppLocalizations.of(context).translate('complaint_s_name'), style: TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
-              DataColumn(label: Text(AppLocalizations.of(context).translate('zone'), style: TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
-              DataColumn(label: Text(AppLocalizations.of(context).translate('complaint_type'), style: TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
-              DataColumn(label: Text(AppLocalizations.of(context).translate('date_filled'), style: TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
-              DataColumn(label: Text(AppLocalizations.of(context).translate('status'), style: TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
+              DataColumn(label: Text(AppLocalizations.of(context).translate('complaint_s_name'), style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
+              DataColumn(label: Text(AppLocalizations.of(context).translate('zone'), style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
+              DataColumn(label: Text(AppLocalizations.of(context).translate('complaint_type'), style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
+              DataColumn(label: Text(AppLocalizations.of(context).translate('date_filled'), style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
+              DataColumn(label: Text(AppLocalizations.of(context).translate('status'), style: const TextStyle ( color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500,),),),
               const DataColumn(label: SizedBox()),
             ], 
             rows: controller.getList().map((model) => DataRow(cells: <DataCell> [

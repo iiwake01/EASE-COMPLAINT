@@ -13,9 +13,9 @@ import 'package:get/get.dart';
 Future<void> main() async {
   debugPaintSizeEnabled = false;
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  Get.put(new FirestoreService());
-  Get.put(new FirebaseStorageService());
-  Get.put(new FirebaseAuthService());
+  Get.put(FirestoreService());
+  Get.put(FirebaseStorageService());
+  Get.put(FirebaseAuthService());
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: true,
     initialBinding: LoginBinding(),

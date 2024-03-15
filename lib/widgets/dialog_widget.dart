@@ -22,7 +22,7 @@ class DialogWidget {
         actions: [
           ElevatedButton (
             style: ElevatedButton.styleFrom (
-              backgroundColor: Color.fromARGB(255, 6, 141, 76),
+              backgroundColor: const Color.fromARGB(255, 6, 141, 76),
               foregroundColor: Colors.white,
               textStyle: const TextStyle(fontSize: 20)
             ),
@@ -48,7 +48,7 @@ class DialogWidget {
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(255, 6, 141, 76),
+                backgroundColor: const Color.fromARGB(255, 6, 141, 76),
                 foregroundColor: Colors.white,
                 textStyle: const TextStyle(fontSize: 20)),
             onPressed: onPressedPositive,

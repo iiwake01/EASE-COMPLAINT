@@ -5,12 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoginWidget extends BaseWidget<LoginController> {
-  const LoginWidget({Key? key});
+  const LoginWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     final widthGap = MediaQuery.of(context).size.width * 0.05;
     final widthGapCorner = MediaQuery.of(context).size.width * 0.20;
+    
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,11 +35,11 @@ class LoginWidget extends BaseWidget<LoginController> {
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.green,
                 ),
-                padding: EdgeInsets.all(25),
+                padding: const EdgeInsets.all(25),
                 // color: Colors.green,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.green.shade900,
+                      backgroundColor: Colors.green.shade900,
                       elevation: 0,
                       shadowColor: Colors.transparent,
                       shape: RoundedRectangleBorder(
@@ -58,7 +59,7 @@ class LoginWidget extends BaseWidget<LoginController> {
                       ),
                       Text(
                         AppLocalizations.of(context).translate('resident'),
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                     ],
                   ),
@@ -74,11 +75,11 @@ class LoginWidget extends BaseWidget<LoginController> {
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.green,
                 ),
-                padding: EdgeInsets.all(25),
+                padding: const EdgeInsets.all(25),
                 // color: Colors.green,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.green.shade900,
+                      backgroundColor: Colors.green.shade900,
                       elevation: 0,
                       shadowColor: Colors.transparent,
                       shape: RoundedRectangleBorder(
@@ -98,7 +99,7 @@ class LoginWidget extends BaseWidget<LoginController> {
                       ),
                       Text(
                         AppLocalizations.of(context).translate('staff'),
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                     ],
                   ),

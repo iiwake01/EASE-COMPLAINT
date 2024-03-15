@@ -17,7 +17,7 @@ class ResidentHomeWidget extends BaseWidget<HomedController> {
       width: screenWidth * 0.9, // Adjusted width
       height: screenHeight * 0.3, // Adjusted height
       child: CardHomeWidget(
-        firstWidget: Container(
+        firstWidget: SizedBox(
           height: screenHeight * 0.1,
           width: screenWidth * 0.2, // Adjusted width
           child: Row(
@@ -29,15 +29,15 @@ class ResidentHomeWidget extends BaseWidget<HomedController> {
                 CupertinoIcons.graph_square,
                 color: Colors.white,
               ),
-              SizedBox(width: 8), // Adding some space between icon and text
+              const SizedBox(width: 8), // Adding some space between icon and text
               Text(
                 AppLocalizations.of(context).translate('view_dashboard'),
-                style: TextStyle(fontSize: 16), // Adjust text size
+                style: const TextStyle(fontSize: 16), // Adjust text size
               ),
             ],
           ),
         ),
-        secondWidget: Container(
+        secondWidget: SizedBox(
           height: screenHeight * 0.1,
           width: screenWidth * 0.2, // Adjusted width
           child: Row(
@@ -49,15 +49,15 @@ class ResidentHomeWidget extends BaseWidget<HomedController> {
                 CupertinoIcons.folder_open,
                 color: Colors.white,
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Text(
                 AppLocalizations.of(context).translate('file_a_complaint'),
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
             ],
           ),
         ),
-        thirdWidget: Container(
+        thirdWidget: SizedBox(
           height: screenHeight * 0.1,
           width: screenWidth * 0.2, // Adjusted width
           child: Row(
@@ -69,11 +69,11 @@ class ResidentHomeWidget extends BaseWidget<HomedController> {
                 CupertinoIcons.gobackward,
                 color: Colors.white,
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Text(
                 AppLocalizations.of(context)
                     .translate('view_record_of_complaints'),
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
             ],
           ),

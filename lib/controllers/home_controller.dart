@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 
 class HomedController extends BaseController implements ProtocolController {
   
-  HomedController(FirebaseAuthService this._auth,) {
+  HomedController(this._auth,) {
     debugPrint("HomedController Constructor");
   }
 

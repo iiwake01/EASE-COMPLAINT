@@ -28,7 +28,7 @@ class ResidentHomePage extends BaseView {
             ),
             RichText(
               text: TextSpan(
-                style: TextStyle(
+                style: const TextStyle(
                   color: Color.fromARGB(255, 29, 87, 30),
                   fontSize: 30,
                 ),
@@ -38,7 +38,7 @@ class ResidentHomePage extends BaseView {
                         .translate('hello_resident_')
                         .split("Resident")[0],
                   ),
-                  TextSpan(
+                  const TextSpan(
                     text: "Resident",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),

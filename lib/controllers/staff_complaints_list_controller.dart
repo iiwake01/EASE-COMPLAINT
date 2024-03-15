@@ -11,14 +11,14 @@ import 'package:get/get.dart';
 
 class StaffComplaintsListController extends BaseController implements ProtocolController {
 
-  StaffComplaintsListController(FirebaseAuthService this._auth, FirestoreService this._service,) {
+  StaffComplaintsListController(this._auth, this._service,) {
     debugPrint("StaffComplaintsListController Constructor");
   }
 
   final FirebaseAuthService _auth;
   final FirestoreService _service;
   final RxBool _isLoading = false.obs;
-  final RxList<ComplaintModel> _complaintList = new List<ComplaintModel>.empty().obs;
+  final RxList<ComplaintModel> _complaintList = List<ComplaintModel>.empty().obs;
 
   @override
   Future<void> onInit() async {

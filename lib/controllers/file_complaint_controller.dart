@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 
 class FileComplaintController extends BaseController implements ProtocolController {
 
-  FileComplaintController(FirebaseAuthService this._auth,) {
+  FileComplaintController(this._auth,) {
     debugPrint("FileComplaintController Constructor");
   }
 

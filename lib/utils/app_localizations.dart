@@ -6,9 +6,7 @@ import 'package:flutter/services.dart';
 
 class AppLocalizations {
   
-  AppLocalizations(this.locale) {
-    
-  }
+  AppLocalizations(this.locale);
 
   final Locale locale;
 
@@ -47,7 +45,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
 
   @override
   Future<AppLocalizations> load(Locale locale) async {
-    AppLocalizations localizations = new AppLocalizations(locale);
+    AppLocalizations localizations = AppLocalizations(locale);
     await localizations.load();
     return localizations;
   }

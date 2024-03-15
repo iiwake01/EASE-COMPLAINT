@@ -10,10 +10,10 @@ class LoginResidentWidget extends BaseWidget<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Color.fromARGB(255, 169, 202, 174),
+      color: const Color.fromARGB(255, 169, 202, 174),
       margin: const EdgeInsets.symmetric(horizontal: 200, vertical: 50),
       elevation: 1.0,
-      shadowColor: Color.fromARGB(255, 196, 233, 202),
+      shadowColor: const Color.fromARGB(255, 196, 233, 202),
       child: Padding(
         padding:
             const EdgeInsets.only(top: 13, left: 20.0, right: 20.0, bottom: 13),

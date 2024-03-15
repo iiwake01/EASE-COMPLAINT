@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 
 class ProfileController extends BaseController implements ProtocolController {
 
-  ProfileController(FirebaseAuthService this._auth, FirestoreService this._service, FirebaseStorageService this._storage) {
+  ProfileController(this._auth, this._service, this._storage) {
     debugPrint("ProfileController Constructor");
   }
 

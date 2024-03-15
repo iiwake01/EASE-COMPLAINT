@@ -16,7 +16,7 @@ import 'package:get/get.dart';
 
 class SignUpController extends BaseController {
 
-  SignUpController(FirebaseAuthService this._auth, FirestoreService this._service, FirebaseStorageService this._storage) {
+  SignUpController(this._auth, this._service, this._storage) {
     debugPrint("SignUpController Constructor");
   }
 
@@ -117,7 +117,7 @@ class SignUpController extends BaseController {
       emailController?.text ?? "", 
       passwordController?.text ?? "", 
       (userCredential) => debugPrint('SignUpController UserCredential $userCredential'), 
-      (user) => debugPrint('SignUpController User Id ${user!.uid} registered: ${user} '), 
+      (user) => debugPrint('SignUpController User Id ${user!.uid} registered: $user '), 
       (uid) { _addResident(uid); }, 
       (firebaseAuthException) {
         debugPrint('SignUpController createAccount FirebaseAuthException ${firebaseAuthException.toString()}}');
@@ -252,12 +252,12 @@ class SignUpController extends BaseController {
     final kb = file!.size / 1024;
     final mb = kb / 1024;
     final fileSize = mb >= 1 ? '${mb.toStringAsFixed(2)} MB' : '${kb.toStringAsFixed(2)} KB';
-    liveFile("${file?.name?.split('.').first}.${file?.extension} $fileSize");
-    final bool _isImage = file?.extension?.toLowerCase()?.contains("jpg") == true || file?.extension?.toLowerCase()?.contains("png") == true|| file?.extension?.toLowerCase()?.contains("webp") == true;
-    if (_isImage && file?.bytes != null) {
+    liveFile("${file.name.split('.').first}.${file.extension} $fileSize");
+    final bool isImage = file.extension?.toLowerCase().contains("jpg") == true || file.extension?.toLowerCase().contains("png") == true|| file.extension?.toLowerCase().contains("webp") == true;
+    if (isImage && file.bytes != null) {
       //liveFileBytes(file?.bytes);
-    } else if (_isImage && file?.path != null) {
-      debugPrint("SignUpController openFile(PlatformFile path ${file?.path})");
+    } else if (isImage && file.path != null) {
+      debugPrint("SignUpController openFile(PlatformFile path ${file.path})");
       final File mobileFile = File(file.path!);
       List<int> bytes = await mobileFile.readAsBytes();
       Uint8List uint8List = Uint8List.fromList(bytes);

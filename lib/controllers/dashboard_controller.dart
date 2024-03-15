@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 
 class DashboardController extends BaseController implements ProtocolController {
 
-  DashboardController(FirebaseAuthService this._auth, FirestoreService this._service,) {
+  DashboardController(this._auth, this._service,) {
     debugPrint("DashboardController Constructor");
   }
 

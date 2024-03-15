@@ -6,12 +6,12 @@ import 'package:get/get.dart';
 
 class LoginController extends BaseController {
 
-  LoginController(FirebaseAuthService this._auth,) {
+  LoginController(this._auth,) {
     debugPrint("LoginController Constructor");
   }
 
   final FirebaseAuthService _auth;
-  PageController pageController = new PageController(initialPage: 0);
+  PageController pageController = PageController(initialPage: 0);
   final RxBool isLoading = false.obs;
   TextEditingController? emailController, passwordController;
 

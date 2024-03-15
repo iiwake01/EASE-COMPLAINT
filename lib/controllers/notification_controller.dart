@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 
 class NotificationController extends BaseController implements ProtocolController {
 
-  NotificationController(FirebaseAuthService this._auth, FirestoreService this._service, FirebaseStorageService this._storage) {
+  NotificationController(this._auth, this._service, this._storage) {
     debugPrint("NotificationController Constructor");
   }
 
