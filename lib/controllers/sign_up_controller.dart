@@ -76,11 +76,11 @@ class SignUpController extends BaseController {
     final age = num.tryParse(ageController?.text ?? "");
     final isAgeInvalid = age == null || age.isBlank == true || age.isNegative == true || age == 0;
     final isPhoneValid = contactNumberController?.text.isPhoneNumber;
-    final isfirstNameValid = firstNameController?.text.isBlank == false && firstNameController?.text.isAlphabetOnly == true;
-    final islastNameValid = lastNameController?.text.isBlank == false && lastNameController?.text.isAlphabetOnly == true;
-    final isMiddleNameValid = middleNameController?.text.isBlank == false && middleNameController?.text.isAlphabetOnly == true;
+    final isfirstNameValid = firstNameController?.text.split(' ').where((first) => first.isBlank == true || first.isAlphabetOnly != true).isEmpty;
+    final islastNameValid = lastNameController?.text.split(' ').where((last) => last.isBlank == true || last.isAlphabetOnly != true).isEmpty;
+    final isMiddleNameValid = middleNameController?.text.split(' ').where((middle) => middle.isBlank == true || middle.isAlphabetOnly != true).isEmpty;
     debugPrint("SignUpController validate age $age isAgeInvalid $isAgeInvalid isPhoneValid $isPhoneValid isfirstNameValid $isfirstNameValid islastNameValid $islastNameValid isMiddleNameValid $isMiddleNameValid");
-    if (!isfirstNameValid || !islastNameValid || !isMiddleNameValid) {
+    if (isfirstNameValid == false || islastNameValid == false || isMiddleNameValid == false) {
       onShowAlert("Error", "Name is Invalid");
       debugPrint("SignUpController Name is Invalid");
     } else if (passwordController?.text != confirmPasswordController?.text) {
