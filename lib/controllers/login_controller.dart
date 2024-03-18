@@ -1,16 +1,18 @@
 import 'package:app/controllers/base_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
+import 'package:app/firebase/firestore_service.dart';
 import 'package:app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginController extends BaseController {
 
-  LoginController(this._auth,) {
+  LoginController(this._auth, this._service,) {
     debugPrint("LoginController Constructor");
   }
 
   final FirebaseAuthService _auth;
+  final FirestoreService _service;
   PageController pageController = PageController(initialPage: 0);
   final RxBool isLoading = false.obs;
   TextEditingController? emailController, passwordController;
@@ -47,8 +49,14 @@ class LoginController extends BaseController {
         debugPrint("LoginController validateResidentCredential credential ${userCredential.toString()}");
         debugPrint("LoginController validateResidentCredential user ${userCredential.user}");
       }, 
-      () {
-        _launchResidentHomePage();
+      () async {
+        if (await _service.getResident(_auth.getUser()?.uid) !=  null) {
+          _launchResidentHomePage();
+        } else {
+          _auth.signOut();
+          debugPrint('LoginController validateResidentCredential user uid is not a Resident');
+          onShowAlert("Error!", "Invalid Residential User, Please Login as a Resident User");
+        }
       }, 
       (exception) {
         debugPrint('LoginController validateResidentCredential exception ${exception.toString()}}');
@@ -71,8 +79,14 @@ class LoginController extends BaseController {
         debugPrint("LoginController validateStaffCredential credential ${userCredential.toString()}");
         debugPrint("LoginController validateStaffCredential user ${userCredential.user}");
       }, 
-      () {
-        _launchStaffHomePage();
+      () async {
+        if (await _service.getStaff(_auth.getUser()?.uid ?? "") !=  null) {
+          _launchStaffHomePage();
+        } else {
+          _auth.signOut();
+          debugPrint('LoginController validateStaffCredential user uid is not a Resident}');
+          onShowAlert("Error!", "Invalid Staff User, Please Login as a Staff User");
+        }
       }, 
       (exception) {
         debugPrint('LoginController validateStaffCredential exception ${exception.toString()}}');
