@@ -1,5 +1,4 @@
 import 'package:app/controllers/base_controller.dart';
-import 'package:app/controllers/protocol_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/routes/app_pages.dart';
 import 'package:app/utils/app_localizations.dart';
@@ -7,7 +6,7 @@ import 'package:app/widgets/dialog_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
-class HomedController extends BaseController implements ProtocolController {
+class HomedController extends BaseController {
   
   HomedController(this._auth,) {
     debugPrint("HomedController Constructor");
@@ -21,27 +20,15 @@ class HomedController extends BaseController implements ProtocolController {
     debugPrint("HomedController onInit");
     //checkSession();
   }
-
-  @override
-  Future<void> checkSession() async {
-    if(_auth.isUserSignedIn() == false) {
-      debugPrint("HomedController is user signed in ${_auth.isUserSignedIn()}");
-      DialogWidget.timeoutDialog (
-        "Session Expired Please Login again", 
-        AppLocalizations.of(Get.context!).translate('yes'), 
-        () { Get.offAndToNamed(Routes.LOGIN); }
-      );
-    }
-  }
   //#region Home App Bar Methods
   void launchNotification() {
     debugPrint("HomedController launchNotification");
-    Get.toNamed(Routes.NOTIFICATION);
+    if(checkSession(_auth)) Get.toNamed(Routes.NOTIFICATION);
   }
 
   void launchProfile() {
     debugPrint("HomedController launchProfile");
-    Get.toNamed(Routes.PROFILE);
+    if(checkSession(_auth)) Get.toNamed(Routes.PROFILE);
   }
 
   void promptLogout() {
@@ -85,12 +72,12 @@ class HomedController extends BaseController implements ProtocolController {
   //#region Staff Methods
   void launchStaffComplaintList() {
     debugPrint("HomedController launchStaffComplaintsList");
-    Get.toNamed(Routes.STAFFCOMPLAINTSLIST);
+    if(checkSession(_auth)) Get.toNamed(Routes.STAFFCOMPLAINTSLIST);
   }
 
   void launchResidentsList() {
     debugPrint("HomedController launchResidentsList");
-    Get.toNamed(Routes.RESIDENTSLIST);
+    if(checkSession(_auth)) Get.toNamed(Routes.RESIDENTSLIST);
   }
   //#endregion
   @override

@@ -1,15 +1,11 @@
 import 'package:app/controllers/base_controller.dart';
-import 'package:app/controllers/protocol_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/resident_model.dart';
-import 'package:app/routes/app_pages.dart';
-import 'package:app/utils/app_localizations.dart';
-import 'package:app/widgets/dialog_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
-class ResidentsListController extends BaseController implements ProtocolController {
+class ResidentsListController extends BaseController {
 
   ResidentsListController(this._auth, this._service,) {
     debugPrint("ResidentsListController Constructor");
@@ -28,23 +24,15 @@ class ResidentsListController extends BaseController implements ProtocolControll
     fetch();
   }
 
-  @override
-  Future<void> checkSession() async {
-    if(_auth.isUserSignedIn() == false) {
-      debugPrint("ResidentsListController is user signed in ${_auth.isUserSignedIn()}");
-      DialogWidget.timeoutDialog (
-        "Session Expired Please Login again", 
-        AppLocalizations.of(Get.context!).translate('yes'), 
-        () { Get.offAndToNamed(Routes.LOGIN); }
-      );
-    }
-  }
-
   Future<void> fetch() async {
     try {
       _isLoading(true);
-      final List<ResidentModel> snapshot = await _service.getResidents();
-      _residentList.assignAll(snapshot);
+      if(checkSession(_auth)) {
+        final List<ResidentModel> snapshot = await _service.getResidents();
+        _residentList.assignAll(snapshot);
+      } else {
+        _residentList.clear();
+      }
     } catch (exception) {
       onShowAlert("Error", "Fetch Failed");
       debugPrint("ResidentsListController fetch $exception");
@@ -62,7 +50,7 @@ class ResidentsListController extends BaseController implements ProtocolControll
   }
 
   void launchView() {
-    onShowAlert("Under Construction", "On Going . . .");
+    if(checkSession(_auth)) onShowAlert("Under Construction", "On Going . . .");
   }
   
   @override
