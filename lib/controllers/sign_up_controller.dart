@@ -15,7 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignUpController extends BaseController {
-
   SignUpController(this._auth, this._service, this._storage) {
     debugPrint("SignUpController Constructor");
   }
@@ -23,14 +22,41 @@ class SignUpController extends BaseController {
   final FirebaseAuthService _auth;
   final FirestoreService _service;
   final FirebaseStorageService _storage;
-  TextEditingController? emailController, passwordController, confirmPasswordController,
-  firstNameController, lastNameController, middleNameController, 
-  ageController, contactNumberController, houseStreetController;
-  final List<String> genderList = [AppLocalizations.of(Get.context!).translate('sex'), AppLocalizations.of(Get.context!).translate('male'), AppLocalizations.of(Get.context!).translate('female')];
-  final List<String> statusList = [AppLocalizations.of(Get.context!).translate('status'), AppLocalizations.of(Get.context!).translate('single'),];
-  final List<String> zoneList = [AppLocalizations.of(Get.context!).translate('select_the_zone_your_reside_in_'), AppLocalizations.of(Get.context!).translate('zone_6'),];
-  RxString selectedGender = "".obs, selectedStatus = "".obs, selectedZone = "".obs, liveFile = "".obs;
-  final Rx<TextEditingController?> birthdateController = TextEditingController().obs;
+  TextEditingController? emailController,
+      passwordController,
+      confirmPasswordController,
+      firstNameController,
+      lastNameController,
+      middleNameController,
+      ageController,
+      contactNumberController,
+      houseStreetController;
+  final List<String> genderList = [
+    AppLocalizations.of(Get.context!).translate('sex'),
+    AppLocalizations.of(Get.context!).translate('male'),
+    AppLocalizations.of(Get.context!).translate('female')
+  ];
+  final List<String> statusList = [
+    AppLocalizations.of(Get.context!).translate('status'),
+    AppLocalizations.of(Get.context!).translate('single'),
+    AppLocalizations.of(Get.context!).translate('married')
+  ];
+  final List<String> zoneList = [
+    AppLocalizations.of(Get.context!)
+        .translate('select_the_zone_your_reside_in_'),
+    AppLocalizations.of(Get.context!).translate('zone_1'),
+    AppLocalizations.of(Get.context!).translate('zone_2'),
+    AppLocalizations.of(Get.context!).translate('zone_3'),
+    AppLocalizations.of(Get.context!).translate('zone_4'),
+    AppLocalizations.of(Get.context!).translate('zone_5'),
+    AppLocalizations.of(Get.context!).translate('zone_6'),
+  ];
+  RxString selectedGender = "".obs,
+      selectedStatus = "".obs,
+      selectedZone = "".obs,
+      liveFile = "".obs;
+  final Rx<TextEditingController?> birthdateController =
+      TextEditingController().obs;
   PlatformFile? residencyFile;
   RxBool isReadTerms = false.obs;
 
@@ -74,18 +100,35 @@ class SignUpController extends BaseController {
 
   Future<void> validate() async {
     final age = num.tryParse(ageController?.text ?? "");
-    final isAgeInvalid = age == null || age.isBlank == true || age.isNegative == true || age == 0;
+    final isAgeInvalid = age == null ||
+        age.isBlank == true ||
+        age.isNegative == true ||
+        age == 0;
     final isPhoneValid = contactNumberController?.text.isPhoneNumber;
-    final isfirstNameValid = firstNameController?.text.split(' ').where((first) => first.isBlank == true || first.isAlphabetOnly != true).isEmpty;
-    final islastNameValid = lastNameController?.text.split(' ').where((last) => last.isBlank == true || last.isAlphabetOnly != true).isEmpty;
-    final isMiddleNameValid = middleNameController?.text.split(' ').where((middle) => middle.isBlank == true || middle.isAlphabetOnly != true).isEmpty;
-    debugPrint("SignUpController validate age $age isAgeInvalid $isAgeInvalid isPhoneValid $isPhoneValid isfirstNameValid $isfirstNameValid islastNameValid $islastNameValid isMiddleNameValid $isMiddleNameValid");
-    if (isfirstNameValid == false || islastNameValid == false || isMiddleNameValid == false) {
+    final isfirstNameValid = firstNameController?.text
+        .split(' ')
+        .where((first) => first.isBlank == true || first.isAlphabetOnly != true)
+        .isEmpty;
+    final islastNameValid = lastNameController?.text
+        .split(' ')
+        .where((last) => last.isBlank == true || last.isAlphabetOnly != true)
+        .isEmpty;
+    final isMiddleNameValid = middleNameController?.text
+        .split(' ')
+        .where(
+            (middle) => middle.isBlank == true || middle.isAlphabetOnly != true)
+        .isEmpty;
+    debugPrint(
+        "SignUpController validate age $age isAgeInvalid $isAgeInvalid isPhoneValid $isPhoneValid isfirstNameValid $isfirstNameValid islastNameValid $islastNameValid isMiddleNameValid $isMiddleNameValid");
+    if (isfirstNameValid == false ||
+        islastNameValid == false ||
+        isMiddleNameValid == false) {
       onShowAlert("Error", "Name is Invalid");
       debugPrint("SignUpController Name is Invalid");
     } else if (passwordController?.text != confirmPasswordController?.text) {
       onShowAlert("Error", "Password and Confrim Password is not equal");
-      debugPrint("SignUpController Password and Confrim Password is not equal ${passwordController?.text} ${confirmPasswordController?.text}");
+      debugPrint(
+          "SignUpController Password and Confrim Password is not equal ${passwordController?.text} ${confirmPasswordController?.text}");
     } else if (isAgeInvalid) {
       onShowAlert("Error", "Age is invalid");
       onShowAlert("Error", "Age is invalid");
@@ -113,22 +156,28 @@ class SignUpController extends BaseController {
 
   Future<void> _createAccount() async {
     debugPrint("SignUpController createAccount");
-    _auth.registerCredential (
-      emailController?.text ?? "", 
-      passwordController?.text ?? "", 
-      (userCredential) => debugPrint('SignUpController UserCredential $userCredential'), 
-      (user) => debugPrint('SignUpController User Id ${user!.uid} registered: $user '), 
-      (uid) { _addResident(uid); }, 
+    _auth.registerCredential(
+      emailController?.text ?? "",
+      passwordController?.text ?? "",
+      (userCredential) =>
+          debugPrint('SignUpController UserCredential $userCredential'),
+      (user) => debugPrint(
+          'SignUpController User Id ${user!.uid} registered: $user '),
+      (uid) {
+        _addResident(uid);
+      },
       (firebaseAuthException) {
-        debugPrint('SignUpController createAccount FirebaseAuthException ${firebaseAuthException.toString()}}');
+        debugPrint(
+            'SignUpController createAccount FirebaseAuthException ${firebaseAuthException.toString()}}');
         if (firebaseAuthException.code == 'weak-password') {
           onShowAlert("Error!", 'The password provided is too weak.');
         } else if (firebaseAuthException.code == 'email-already-in-use') {
           onShowAlert("Error!", 'The account already exists for that email.');
         }
-      }, 
+      },
       (exception) {
-        debugPrint('SignUpController registerCredential exception ${exception.toString()}}');
+        debugPrint(
+            'SignUpController registerCredential exception ${exception.toString()}}');
         onShowAlert("Error!", "Register failed Please Try Again");
       },
     );
@@ -137,11 +186,13 @@ class SignUpController extends BaseController {
   Future<void> _addResident(String? uid) async {
     debugPrint("SignUpController _addResident");
     try {
-      _auth.sendEmailVerification(() {}, (firebaseException){}, (exception) {});
-      TaskSnapshot? taskSnapshot = await _storage.uploadPlatformFiles(residencyFile);
+      _auth.sendEmailVerification(
+          () {}, (firebaseException) {}, (exception) {});
+      TaskSnapshot? taskSnapshot =
+          await _storage.uploadPlatformFiles(residencyFile);
       final ResidentModel resident;
       if (taskSnapshot != null && taskSnapshot.state == TaskState.success) {
-        resident = ResidentModel (
+        resident = ResidentModel(
           uid: uid,
           email: emailController?.text,
           first: firstNameController?.text,
@@ -155,9 +206,9 @@ class SignUpController extends BaseController {
           zone: selectedZone.value,
           houseStreet: houseStreetController?.text,
           residency: await taskSnapshot.ref.getDownloadURL(),
-        );        
+        );
       } else {
-        resident = ResidentModel (
+        resident = ResidentModel(
           uid: uid,
           email: emailController?.text,
           first: firstNameController?.text,
@@ -173,11 +224,13 @@ class SignUpController extends BaseController {
         );
       }
       await _service.createResident(resident.toMap());
-    } catch(exception) {
+    } catch (exception) {
       debugPrint("SignUpController Invalid $exception");
       onShowAlert("Error", "Please Try again $exception");
     } finally {
-      if (Get.isDialogOpen == true) { Get.back(); }
+      if (Get.isDialogOpen == true) {
+        Get.back();
+      }
       _launchLogin();
     }
   }
@@ -185,11 +238,13 @@ class SignUpController extends BaseController {
   Future<void> _addStaff(String? uid) async {
     debugPrint("SignUpController _addStaff");
     try {
-      _auth.sendEmailVerification(() {}, (firebaseException){}, (exception) {});
-      TaskSnapshot? taskSnapshot = await _storage.uploadPlatformFiles(residencyFile);
+      _auth.sendEmailVerification(
+          () {}, (firebaseException) {}, (exception) {});
+      TaskSnapshot? taskSnapshot =
+          await _storage.uploadPlatformFiles(residencyFile);
       final StaffModel staff;
       if (taskSnapshot != null && taskSnapshot.state == TaskState.success) {
-        staff = StaffModel (
+        staff = StaffModel(
           uid: uid,
           email: emailController?.text,
           first: firstNameController?.text,
@@ -203,9 +258,9 @@ class SignUpController extends BaseController {
           zone: selectedZone.value,
           houseStreet: houseStreetController?.text,
           residency: await taskSnapshot.ref.getDownloadURL(),
-        );        
+        );
       } else {
-        staff = StaffModel (
+        staff = StaffModel(
           uid: uid,
           email: emailController?.text,
           first: firstNameController?.text,
@@ -221,14 +276,17 @@ class SignUpController extends BaseController {
         );
       }
       await _service.createStaff(staff.toMap());
-    } catch(exception) {
+    } catch (exception) {
       debugPrint("SignUpController Invalid $exception");
       onShowAlert("Error", "Please Try again $exception");
     } finally {
-      if (Get.isDialogOpen == true) { Get.back(); }
+      if (Get.isDialogOpen == true) {
+        Get.back();
+      }
       _launchLogin();
     }
   }
+
   //#region For Picking and displaying Image Files Methods
   Future<void> onPickFiles() async {
     const type = FileType.custom;
@@ -239,21 +297,27 @@ class SignUpController extends BaseController {
 
   Future<FilePickerResult?> _pickFiles(
       FileType type, List<String>? extensions) async {
-    return await FilePicker.platform.pickFiles(type: type, allowedExtensions: extensions);
+    return await FilePicker.platform
+        .pickFiles(type: type, allowedExtensions: extensions);
   }
 
   Future<void> _openFile(PlatformFile? file) async {
     debugPrint("SignUpController openFile(PlatformFile name ${file?.name})");
     debugPrint("SignUpController openFile(PlatformFile size ${file?.size})");
-    debugPrint("SignUpController openFile(PlatformFile extension ${file?.extension})");
+    debugPrint(
+        "SignUpController openFile(PlatformFile extension ${file?.extension})");
     debugPrint("SignUpController openFile(PlatformFile bytes ${file?.bytes})");
     DialogWidget.loadingDialog();
     residencyFile = file;
     final kb = file!.size / 1024;
     final mb = kb / 1024;
-    final fileSize = mb >= 1 ? '${mb.toStringAsFixed(2)} MB' : '${kb.toStringAsFixed(2)} KB';
+    final fileSize =
+        mb >= 1 ? '${mb.toStringAsFixed(2)} MB' : '${kb.toStringAsFixed(2)} KB';
     liveFile("${file.name.split('.').first}.${file.extension} $fileSize");
-    final bool isImage = file.extension?.toLowerCase().contains("jpg") == true || file.extension?.toLowerCase().contains("png") == true|| file.extension?.toLowerCase().contains("webp") == true;
+    final bool isImage =
+        file.extension?.toLowerCase().contains("jpg") == true ||
+            file.extension?.toLowerCase().contains("png") == true ||
+            file.extension?.toLowerCase().contains("webp") == true;
     if (isImage && file.bytes != null) {
       //liveFileBytes(file?.bytes);
     } else if (isImage && file.path != null) {
@@ -261,26 +325,28 @@ class SignUpController extends BaseController {
       final File mobileFile = File(file.path!);
       List<int> bytes = await mobileFile.readAsBytes();
       Uint8List uint8List = Uint8List.fromList(bytes);
-      residencyFile = PlatformFile (
-        path: file.path,
-        name: file.name,
-        size: file.size,
-        bytes: uint8List,
-        readStream: file.readStream,
-        identifier: file.identifier
-      );
+      residencyFile = PlatformFile(
+          path: file.path,
+          name: file.name,
+          size: file.size,
+          bytes: uint8List,
+          readStream: file.readStream,
+          identifier: file.identifier);
       //liveFileBytes(_uint8List);
     } else {
       throw Exception("File is Null");
     }
-    if (Get.isDialogOpen == true) { Get.back(); }
+    if (Get.isDialogOpen == true) {
+      Get.back();
+    }
   }
+
   //#endregion
   void _launchLogin() {
     debugPrint("SignUpController _launchLogin");
     Get.offAndToNamed(Routes.LOGIN);
   }
-  
+
   @override
   void onClose() {
     debugPrint("SignUpController onClose");

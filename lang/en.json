@@ -42,6 +42,7 @@
     "log_in_to_your_account": "Log in to your account",
     "male": "Male",
     "make_a_new_account_": "Make a new Account...",
+    "married": "Married",
     "middle_name": "Middle Name",
     "name": "Name",
     "narrative_report": "Narrative Report",
@@ -86,5 +87,10 @@
     "your_notifications": "Your Notifications",
     "zone": "Zone",
     "zone_you_reside_in": "Zone you reside in",
+    "zone_1": "Zone 1",
+    "zone_2": "Zone 2",
+    "zone_3": "Zone 3",
+    "zone_4": "Zone 4",
+    "zone_5": "Zone 5",
     "zone_6": "Zone 6"
 }

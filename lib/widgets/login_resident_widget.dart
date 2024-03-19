@@ -38,6 +38,7 @@ class LoginResidentWidget extends BaseWidget<LoginController> {
               TextFieldWidget(
                 textEditingController: controller.passwordController,
                 labelText: AppLocalizations.of(context).translate('password'),
+                isTextHidden: true,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
