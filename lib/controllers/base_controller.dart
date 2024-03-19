@@ -18,7 +18,7 @@ class BaseController extends GetxController {
 
   bool checkSession(final FirebaseAuthService auth) {
     if(auth.isUserSignedIn() == false) {
-      debugPrint("ComplaintFormController is user signed in ${auth.isUserSignedIn()}");
+      debugPrint("BaseController is user signed in ${auth.isUserSignedIn()}");
       DialogWidget.timeoutDialog (
         "Session Expired Please Login again", 
         AppLocalizations.of(Get.context!).translate('yes'), 
