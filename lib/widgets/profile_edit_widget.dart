@@ -1,5 +1,6 @@
 import 'package:app/controllers/profile_controller.dart';
 import 'package:app/utils/app_localizations.dart';
+import 'package:app/utils/constants.dart';
 import 'package:app/widgets/base_widgets.dart';
 import 'package:app/widgets/date_picker_widget.dart';
 import 'package:app/widgets/text_field_widget.dart';
@@ -12,7 +13,13 @@ class ProfileEditWidget extends BaseWidget<ProfileController> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
         padding: EdgeInsets.symmetric(horizontal: 150, vertical: 20),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.black),
+          borderRadius: BorderRadius.circular(36),
+          color: Colors.green.shade50,
+        ),
         child: Column(
           children: <Widget>[
             TextFieldWidget(
@@ -105,11 +112,11 @@ class ProfileEditWidget extends BaseWidget<ProfileController> {
               isReadOnly: true,
             ),
             SizedBox(
-              height: 10,
+              height: 30,
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey,
+                  backgroundColor: Constants.standardColor,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadiusDirectional.circular(10)),
                   textStyle: const TextStyle(fontSize: 20)),
