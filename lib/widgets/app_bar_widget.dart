@@ -20,7 +20,7 @@ class AppBarWidget extends BaseWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Container(
       height: preferredSize.height,
-      color: backgroundColor ?? const Color.fromRGBO(66, 88, 57, 0.514),
+      color: backgroundColor ?? Color.fromARGB(131, 64, 90, 54),
       child: child,
     );
   }

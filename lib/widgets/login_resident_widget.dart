@@ -1,5 +1,6 @@
 import 'package:app/controllers/login_controller.dart';
 import 'package:app/utils/app_localizations.dart';
+import 'package:app/utils/constants.dart';
 import 'package:app/widgets/base_widgets.dart';
 import 'package:app/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,8 @@ class LoginResidentWidget extends BaseWidget<LoginController> {
                     AppLocalizations.of(context)
                         .translate('dont_have_an_account_'),
                     style: const TextStyle(
-                        color: Color.fromARGB(255, 29, 87, 30), fontSize: 20),
+                        color: Color.fromARGB(255, 130, 143, 131),
+                        fontSize: 20),
                   ),
                   TextButton(
                       onPressed: () {
@@ -59,7 +61,7 @@ class LoginResidentWidget extends BaseWidget<LoginController> {
                         style: const TextStyle(
                             color: Color.fromARGB(255, 106, 129, 107),
                             decoration: TextDecoration.underline,
-                            decorationColor: Color.fromARGB(255, 156, 204, 156),
+                            decorationColor: Color.fromARGB(255, 136, 170, 137),
                             decorationStyle: TextDecorationStyle.solid,
                             decorationThickness: 2,
                             fontSize: 20),

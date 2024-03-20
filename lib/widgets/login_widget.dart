@@ -1,5 +1,6 @@
 import 'package:app/controllers/login_controller.dart';
 import 'package:app/utils/app_localizations.dart';
+import 'package:app/utils/constants.dart';
 import 'package:app/widgets/base_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class LoginWidget extends BaseWidget<LoginController> {
   Widget build(BuildContext context) {
     final widthGap = MediaQuery.of(context).size.width * 0.05;
     final widthGapCorner = MediaQuery.of(context).size.width * 0.20;
-    
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,13 +34,13 @@ class LoginWidget extends BaseWidget<LoginController> {
                 width: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.green,
+                  color: Color.fromARGB(131, 61, 94, 49),
                 ),
                 padding: const EdgeInsets.all(25),
                 // color: Colors.green,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green.shade900,
+                      backgroundColor: const Color.fromARGB(255, 74, 107, 76),
                       elevation: 0,
                       shadowColor: Colors.transparent,
                       shape: RoundedRectangleBorder(
@@ -73,13 +74,13 @@ class LoginWidget extends BaseWidget<LoginController> {
                 width: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.green,
+                  color: Color.fromARGB(131, 61, 94, 49),
                 ),
                 padding: const EdgeInsets.all(25),
                 // color: Colors.green,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green.shade900,
+                      backgroundColor: Constants.standardColor,
                       elevation: 0,
                       shadowColor: Colors.transparent,
                       shape: RoundedRectangleBorder(

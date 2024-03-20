@@ -5,12 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HeaderAppBar extends BaseWidget implements PreferredSizeWidget {
-  
-  const HeaderAppBar( {
+  const HeaderAppBar({
     super.key,
     this.height,
     this.widthGap,
-  } );
+  });
 
   final double? height, widthGap;
 
@@ -25,8 +24,10 @@ class HeaderAppBar extends BaseWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          const Icon(
-            CupertinoIcons.photo,
+          const Image(
+            image: AssetImage('assets/bonbon.png'),
+            width: 150,
+            height: 150,
           ),
           SizedBox(
             width: widthGap,
@@ -44,7 +45,7 @@ class HeaderAppBar extends BaseWidget implements PreferredSizeWidget {
                   fontWeight: FontWeight.normal,
                 ),
               ),
-              Text (
+              Text(
                 AppLocalizations.of(context).translate('app_name'),
                 style: const TextStyle(
                     color: Colors.white,
@@ -55,9 +56,11 @@ class HeaderAppBar extends BaseWidget implements PreferredSizeWidget {
             ],
           ),
           SizedBox(width: widthGap),
-          const Icon(
-            CupertinoIcons.photo,
-          ),
+          Image(
+            image: AssetImage('assets/ease.png'),
+            width: 150,
+            height: 150,
+          )
         ],
       ),
     );
