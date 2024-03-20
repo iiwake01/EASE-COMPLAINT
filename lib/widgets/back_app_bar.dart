@@ -6,13 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BackAppBar extends BaseWidget implements PreferredSizeWidget {
-  
-  const BackAppBar( {
-    super.key,
-    this.height,
-    this.widthGap,
-    this.title
-  } );
+  const BackAppBar({super.key, this.height, this.widthGap, this.title});
 
   final double? height, widthGap;
   final String? title;
@@ -22,31 +16,35 @@ class BackAppBar extends BaseWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBarWidget (
-      backgroundColor: Colors.white,
+    return AppBarWidget(
+      backgroundColor: Constants.primaryColor,
       height: height ?? kToolbarHeight,
-      child: Stack (
+      child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
-          Positioned (
+          Positioned(
             left: widthGap,
-            child: IconButton (
+            child: IconButton(
               onPressed: () => Get.back(),
-              icon: const Icon(
+              icon: Icon(
                 CupertinoIcons.arrow_left,
-                color: Colors.white,
+                color: Constants.standardColor,
               ),
               style: IconButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  padding: const EdgeInsets.symmetric (
+                  backgroundColor: Colors.green.shade50,
+                  padding: const EdgeInsets.symmetric(
                       vertical: 1.0, horizontal: 25.0),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadiusDirectional.circular(20))),
             ),
           ),
-          Text (
-            title?? Constants.BLANK,
-            style: const TextStyle(color: Colors.green, fontSize: 20),
+          Text(
+            title ?? Constants.BLANK,
+            style: const TextStyle(
+                color: Colors.green,
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 2),
           ),
         ],
       ),
