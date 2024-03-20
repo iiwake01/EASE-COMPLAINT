@@ -1,18 +1,14 @@
 import 'package:app/controllers/base_controller.dart';
-import 'package:app/controllers/protocol_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firebase_storage_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/resident_model.dart';
 import 'package:app/models/staff_model.dart';
-import 'package:app/routes/app_pages.dart';
-import 'package:app/utils/app_localizations.dart';
-import 'package:app/widgets/dialog_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfileController extends BaseController implements ProtocolController {
+class ProfileController extends BaseController {
 
   ProfileController(this._auth, this._service, this._storage) {
     debugPrint("ProfileController Constructor");
@@ -42,25 +38,13 @@ class ProfileController extends BaseController implements ProtocolController {
     fetch();
   }
 
-  @override
-  Future<void> checkSession() async {
-    if(_auth.isUserSignedIn() == false) {
-      debugPrint("ProfileController is user signed in ${_auth.isUserSignedIn()}");
-      DialogWidget.timeoutDialog (
-        "Session Expired Please Login again", 
-        AppLocalizations.of(Get.context!).translate('yes'), 
-        () { Get.offAndToNamed(Routes.LOGIN); }
-      );
-    }
-  }
-
   Future<void> fetch() async {
     try {
       debugPrint("ProfileController fetch");
       isLoading(true);
       final User? user = _auth.getUser();
       final ResidentModel? resident = await _service.getResident(user?.uid ?? "007");
-      final StaffModel? staff = await _service.getStaff(user?.uid ?? "007");
+      final StaffModel? staff = await _service.getStaff(user?.uid);
       debugPrint("ProfileController user uid ${user?.uid}");
       debugPrint("ProfileController resident ${resident?.toString()}");
       debugPrint("ProfileController staff ${staff?.toString()}");
@@ -88,7 +72,7 @@ class ProfileController extends BaseController implements ProtocolController {
       isLoading(true);
       final User? user = _auth.getUser();
       final ResidentModel? resident = await _service.getResident(user?.uid ?? "007");
-      final StaffModel? staff = await _service.getStaff(user?.uid ?? "007");
+      final StaffModel? staff = await _service.getStaff(user?.uid);
       if (resident != null) {
         final ResidentModel updatedModel = ResidentModel (
           id: resident.id,
@@ -138,15 +122,19 @@ class ProfileController extends BaseController implements ProtocolController {
 
   void launchReadOnly() {
     debugPrint("ProfileController launchReadOnly");
-    _updateProfile();
-    pageController.jumpToPage(0);
+    if(checkSession(_auth)) {
+      _updateProfile();
+      pageController.jumpToPage(0);
+    }
   }
 
   void launchEditMode() {
     debugPrint("ProfileController launchEditMode");
-    isLoading(true);
-    pageController.jumpToPage(1);
-    isLoading(false);
+    if(checkSession(_auth)) {
+      isLoading(true);
+      pageController.jumpToPage(1);
+      isLoading(false);
+    }
   }
 
   @override

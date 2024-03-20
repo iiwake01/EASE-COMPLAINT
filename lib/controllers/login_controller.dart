@@ -56,14 +56,16 @@ class LoginController extends BaseController {
           _auth.signOut();
           debugPrint('LoginController validateResidentCredential user uid is not a Resident');
           onShowAlert("Error!", "Invalid Residential User, Please Login as a Resident User");
+          isLoading(false);
         }
       }, 
       (exception) {
         debugPrint('LoginController validateResidentCredential exception ${exception.toString()}}');
         onShowAlert("Error!", "Invalid Credential Please Try Again");
+        isLoading(false);
       },
       () {
-        isLoading(false);
+
       },
     );
   }
@@ -80,20 +82,22 @@ class LoginController extends BaseController {
         debugPrint("LoginController validateStaffCredential user ${userCredential.user}");
       }, 
       () async {
-        if (await _service.getStaff(_auth.getUser()?.uid ?? "") !=  null) {
+        if (await _service.getStaff(_auth.getUser()?.uid) !=  null) {
           _launchStaffHomePage();
         } else {
           _auth.signOut();
           debugPrint('LoginController validateStaffCredential user uid is not a Resident}');
           onShowAlert("Error!", "Invalid Staff User, Please Login as a Staff User");
+          isLoading(false);
         }
       }, 
       (exception) {
         debugPrint('LoginController validateStaffCredential exception ${exception.toString()}}');
         onShowAlert("Error!", "Invalid Credential Please Try Again");
+        isLoading(false);
       },
       () {
-        isLoading(false);
+
       },
     );
   }

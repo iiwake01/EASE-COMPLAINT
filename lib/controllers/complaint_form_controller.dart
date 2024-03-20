@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:app/controllers/base_controller.dart';
-import 'package:app/controllers/protocol_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firebase_storage_service.dart';
 import 'package:app/firebase/firestore_service.dart';
@@ -16,7 +15,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ComplaintFormController extends BaseController implements ProtocolController {
+class ComplaintFormController extends BaseController {
 
   ComplaintFormController(this._auth, this._service, this._storage) {
     debugPrint("ComplaintFormController Constructor");
@@ -48,18 +47,6 @@ class ComplaintFormController extends BaseController implements ProtocolControll
     }
   }
 
-  @override
-  Future<void> checkSession() async {
-    if(_auth.isUserSignedIn() == false) {
-      debugPrint("ComplaintFormController is user signed in ${_auth.isUserSignedIn()}");
-      DialogWidget.timeoutDialog (
-        "Session Expired Please Login again", 
-        AppLocalizations.of(Get.context!).translate('yes'), 
-        () { Get.offAndToNamed(Routes.LOGIN); }
-      );
-    }
-  }
-
   Future<void> validate() async {
     final isUrgencyValid = urgencyController?.text.isBlank == false;
     final isTypeValid = typeController.value?.text.isBlank == false;
@@ -70,7 +57,9 @@ class ComplaintFormController extends BaseController implements ProtocolControll
     final isContactValid = contactController?.text.isBlank == false;
     final isResolutionValid = resolutionController?.text.isBlank == false;
     debugPrint("ComplaintFormController isUrgencyValid");
-    if (!isUrgencyValid) {
+    if (!checkSession(_auth)) {
+
+    } else if (!isUrgencyValid) {
       onShowAlert("Error", "Urgency is Invalid");
       debugPrint("ComplaintFormController Name is Invalid");
     } else if (!isTypeValid) {
