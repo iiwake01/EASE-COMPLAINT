@@ -1,3 +1,4 @@
+import 'package:app/utils/constants.dart';
 import 'package:app/widgets/base_widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class AppBarWidget extends BaseWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Container(
       height: preferredSize.height,
-      color: backgroundColor ?? Color.fromARGB(131, 64, 90, 54),
+      color: backgroundColor ?? Constants.appBarColor,
       child: child,
     );
   }

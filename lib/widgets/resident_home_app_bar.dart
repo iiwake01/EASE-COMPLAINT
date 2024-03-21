@@ -31,6 +31,7 @@ class ResidentHomeAppBar extends BaseWidget<HomedController>
             controller: controller,
             iconName: "Notifications",
             setIcon: CupertinoIcons.bell_solid,
+            setController: () => controller.launchNotification(),
           ),
           const Spacer(),
           Column(
@@ -62,12 +63,14 @@ class ResidentHomeAppBar extends BaseWidget<HomedController>
             controller: controller,
             iconName: "Profiles",
             setIcon: CupertinoIcons.profile_circled,
+            setController: () => controller.launchProfile(),
           ),
           SizedBox(width: widthGap),
           TitledIconButtons(
             controller: controller,
             iconName: "Log-out",
             setIcon: Icons.logout_rounded,
+            setController: () => controller.promptLogout(),
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width * .035,
@@ -84,10 +87,12 @@ class TitledIconButtons extends StatelessWidget {
     required this.controller,
     this.iconName,
     this.setIcon,
+    this.setController,
   });
 
   final iconName;
   final setIcon;
+  final setController;
 
   final HomedController controller;
 
@@ -97,7 +102,7 @@ class TitledIconButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton(
-          onPressed: () => controller.launchNotification(),
+          onPressed: setController,
           icon: Icon(
             setIcon,
             color: Colors.white,

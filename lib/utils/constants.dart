@@ -44,4 +44,5 @@ class Constants {
       HexColor('00ffffff').withOpacity(0.00) ?? Colors.transparent;
   static Color standardColor = const Color.fromARGB(255, 74, 107, 76);
   static Color primaryColor = const Color.fromARGB(255, 169, 202, 174);
+  static Color appBarColor = const Color.fromARGB(131, 64, 90, 54);
 }

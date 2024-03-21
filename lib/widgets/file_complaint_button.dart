@@ -14,18 +14,22 @@ class FileComplaintButton extends BaseWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.yellow,
-          elevation: 1,
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadiusDirectional.circular(10),
-          ),
-          textStyle: const TextStyle(fontSize: 20)),
-      onPressed: onPressed,
-      child: Text(
-        text ?? Constants.BLANK,
+    return Container(
+      width: MediaQuery.of(context).size.width * .2,
+      height: MediaQuery.of(context).size.height * .1,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            backgroundColor: Constants.standardColor,
+            elevation: 1,
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusDirectional.circular(36),
+            ),
+            textStyle: const TextStyle(fontSize: 20)),
+        onPressed: onPressed,
+        child: Text(
+          text ?? Constants.BLANK,
+        ),
       ),
     );
   }

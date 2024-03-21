@@ -36,7 +36,8 @@ class ResidentComplaintsListPage
               style: ListTileStyle.list,
               dense: true,
               child: ListView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 itemCount: controller.getListCount(),
                 itemBuilder: (context, index) => Card(
                   clipBehavior: Clip.antiAlias,

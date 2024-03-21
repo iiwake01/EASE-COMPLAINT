@@ -1,5 +1,6 @@
 import 'package:app/controllers/file_complaint_controller.dart';
 import 'package:app/utils/app_localizations.dart';
+import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
 import 'package:app/widgets/back_app_bar.dart';
 import 'package:app/widgets/file_complaint_button.dart';
@@ -20,7 +21,7 @@ class FileComplaintPage extends BaseView<FileComplaintController> {
       backgroundColor: Colors.white,
       body: Center(
         child: Card(
-          color: const Color.fromARGB(255, 169, 202, 174),
+          color: Constants.primaryColor,
           margin: const EdgeInsets.symmetric(horizontal: 200, vertical: 50),
           elevation: 1.0,
           shadowColor: const Color.fromARGB(255, 196, 233, 202),
@@ -70,7 +71,7 @@ class FileComplaintPage extends BaseView<FileComplaintController> {
                 ],
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.025,
+                height: MediaQuery.of(context).size.height * 0.035,
               ),
               FileComplaintButton(
                 onPressed: () => controller.launchOtherTypeProblem(),
