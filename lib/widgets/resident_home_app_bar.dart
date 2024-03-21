@@ -5,9 +5,9 @@ import 'package:app/widgets/base_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ResidentHomeAppBar extends BaseWidget<HomedController> implements PreferredSizeWidget {
-  
-  const ResidentHomeAppBar( {
+class ResidentHomeAppBar extends BaseWidget<HomedController>
+    implements PreferredSizeWidget {
+  const ResidentHomeAppBar({
     super.key,
     this.height,
     this.widthGap,
@@ -27,13 +27,11 @@ class ResidentHomeAppBar extends BaseWidget<HomedController> implements Preferre
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           SizedBox(width: widthGap),
-          IconButton(
-              onPressed: () => controller.launchNotification(),
-              icon: const Icon(
-                CupertinoIcons.bell_solid,
-                color: Colors.white,
-                size: 35,
-              )),
+          TitledIconButtons(
+            controller: controller,
+            iconName: "Notifications",
+            setIcon: CupertinoIcons.bell_solid,
+          ),
           const Spacer(),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -60,24 +58,60 @@ class ResidentHomeAppBar extends BaseWidget<HomedController> implements Preferre
             ],
           ),
           const Spacer(),
-          IconButton(
-              onPressed: () => controller.launchProfile(),
-              icon: const Icon(
-                CupertinoIcons.person_circle,
-                color: Colors.white,
-                size: 35,
-              )),
+          TitledIconButtons(
+            controller: controller,
+            iconName: "Profiles",
+            setIcon: CupertinoIcons.profile_circled,
+          ),
           SizedBox(width: widthGap),
-          IconButton(
-              onPressed: () => controller.promptLogout(),
-              icon: const Icon(
-                Icons.logout,
-                color: Colors.white,
-                size: 35,
-              )),
-          SizedBox(width: widthGap),
+          TitledIconButtons(
+            controller: controller,
+            iconName: "Log-out",
+            setIcon: Icons.logout_rounded,
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * .035,
+          ),
         ],
       ),
+    );
+  }
+}
+
+class TitledIconButtons extends StatelessWidget {
+  const TitledIconButtons({
+    super.key,
+    required this.controller,
+    this.iconName,
+    this.setIcon,
+  });
+
+  final iconName;
+  final setIcon;
+
+  final HomedController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IconButton(
+          onPressed: () => controller.launchNotification(),
+          icon: Icon(
+            setIcon,
+            color: Colors.white,
+            size: 35,
+          ),
+        ),
+        Text(
+          iconName,
+          style: const TextStyle(
+            fontWeight: FontWeight.w200,
+            color: Colors.white,
+          ),
+        ),
+      ],
     );
   }
 }

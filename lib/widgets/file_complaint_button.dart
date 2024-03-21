@@ -20,10 +20,13 @@ class FileComplaintButton extends BaseWidget {
           elevation: 1,
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusDirectional.circular(10)),
+            borderRadius: BorderRadiusDirectional.circular(10),
+          ),
           textStyle: const TextStyle(fontSize: 20)),
       onPressed: onPressed,
-      child: Text(text ?? Constants.BLANK),
+      child: Text(
+        text ?? Constants.BLANK,
+      ),
     );
   }
 }

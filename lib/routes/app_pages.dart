@@ -26,84 +26,84 @@ part 'routes.dart';
 
 abstract class AppPages {
   static final pages = [
-    GetPage (
+    GetPage(
       name: Routes.LOGIN,
       page: () => const LoginPage(),
       binding: LoginBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
-    GetPage (
+    GetPage(
       name: Routes.SIGNUP,
       page: () => const SignUpPage(),
       binding: SignUpBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
-    GetPage (
+    GetPage(
       name: Routes.RESIDENTHOME,
       page: () => const ResidentHomePage(),
       binding: HomeBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
-    GetPage (
+    GetPage(
       name: Routes.STAFFHOME,
       page: () => const StaffHomePage(),
       binding: HomeBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
-     GetPage (
+    GetPage(
       name: Routes.NOTIFICATION,
       page: () => const NotificationPage(),
       binding: NotificationBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
-    GetPage (
+    GetPage(
       name: Routes.PROFILE,
       page: () => const ProfilePage(),
       binding: ProfileBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
-    GetPage (
+    GetPage(
       name: Routes.DASHBOARD,
       page: () => const DashboardPage(),
       binding: DashboardBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
-    GetPage (
+    GetPage(
       name: Routes.FILECOMPLAINT,
       page: () => const FileComplaintPage(),
       binding: FileComplaintBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
-    GetPage (
+    GetPage(
       name: Routes.COMPLAINTFORM,
-      page: () => const ComplaintFormPage(),
+      page: () => ComplaintFormPage(),
       binding: ComplaintFormBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
-    GetPage (
+    GetPage(
       name: Routes.RESIDENTCOMPLAINTSLIST,
       page: () => const ResidentComplaintsListPage(),
       binding: ResidentComplaintsListBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
-    GetPage (
+    GetPage(
       name: Routes.STAFFCOMPLAINTSLIST,
       page: () => const StaffComplaintsListPage(),
       binding: StaffComplaintsListBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
-    GetPage (
+    GetPage(
       name: Routes.RESIDENTSLIST,
       page: () => const ResidentsListPage(),
       binding: ResidentsListBinding(),

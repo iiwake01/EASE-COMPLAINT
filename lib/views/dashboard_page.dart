@@ -1,99 +1,294 @@
+import 'dart:html';
+
 import 'package:app/controllers/dashboard_controller.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/views/base_view.dart';
 import 'package:app/widgets/back_app_bar.dart';
+import 'package:app/widgets/white_back_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DashboardPage extends BaseView<DashboardController> {
-
-  const DashboardPage( { Key? key } ) : super(key: key);
+  const DashboardPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold (
-      appBar: BackAppBar(height: MediaQuery.of(context).size.height * 0.20, widthGap: MediaQuery.of(context).size.width * 0.05, title: AppLocalizations.of(context).translate('dashboard_of_complaints'),),
-      backgroundColor: Colors.grey,
-      body: Row (
+    return Scaffold(
+      appBar: WhiteBackAppbar(
+        height: MediaQuery.of(context).size.height * 0.20,
+        widthGap: MediaQuery.of(context).size.width * 0.05,
+        title:
+            AppLocalizations.of(context).translate('dashboard_of_complaints'),
+      ),
+      backgroundColor: Colors.white,
+      body: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget> [
-          Card (
-            child: Stack (
-              alignment: Alignment.center,
-              children: <Widget> [
-                const Positioned(top: 10.0, right: 10.0, child: Icon(CupertinoIcons.pencil,),),
-                Column (
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget> [
-                    const Divider(),
-                    Text( AppLocalizations.of(context).translate('top_complaints_in_barangay_bonbon') ),
-                    const Divider(),
-                    Column( children: controller.getTopComplaintsList().map((topComplaint) => Text(topComplaint)).toList(),)
-                  ],
-                ),
-              ],
+        children: <Widget>[
+          Card(
+            color: Colors.deepPurple.shade200,
+            child: Container(
+              width: 800,
+              height: 650,
+              padding:
+                  EdgeInsets.only(top: 20, left: 50, right: 50, bottom: 100),
+              child: const Stack(
+                // alignment: Alignment.center,
+                children: <Widget>[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Divider(),
+                      Center(
+                        child: Text(
+                          "Top Complaints in\nBarangay Bonbon",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                            letterSpacing: 3,
+                          ),
+                        ),
+                      ),
+                      Divider(),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: 30,
+                              left: 40,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TopComplaintsText(
+                                  iteration: '1.',
+                                  data: "data 1",
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                TopComplaintsText(
+                                  iteration: '2.',
+                                  data: 'data 2',
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                TopComplaintsText(
+                                  iteration: '3.',
+                                  data: 'data 3',
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                        // children: controller
+                        //     .getTopComplaintsList()
+                        //     .map((topComplaint) => Text(topComplaint))
+                        //     .toList(),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
-          Column (
+          Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget> [
-              Card (
-                child: Stack (
-                  children: <Widget> [
-                    const Positioned(top: 10.0, right: 10.0, child: Icon(CupertinoIcons.pencil,),),
-                    Column ( 
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center, 
-                      children: <Widget> [
-                        const Divider(),
-                        Text(AppLocalizations.of(context).translate('solved_complaints')),
-                        SizedBox( width: MediaQuery.of(context).size.width * 0.3, child: const Divider( color: Colors.grey, thickness: 1.0),),
-                        Text( controller.getSolvedComplaints() ),
-                      ],
-                    ),
-                  ],
-                )
-              ),
-              Card (
-                child: Stack (
-                  children: <Widget> [
-                    const Positioned(top: 10.0, right: 10.0, child: Icon(CupertinoIcons.pencil,),),
-                    Column ( 
-                      children: <Widget> [ 
-                        const Divider(),
-                        Text(AppLocalizations.of(context).translate('pending_complaints')),
-                        SizedBox( width: MediaQuery.of(context).size.width * 0.3, child: const Divider( color: Colors.grey, thickness: 1.0),),
-                        Text( controller.getPendingComplaints() ),
-                      ],
-                    ),
-                  ],
-                )
-              ),
-              Card (
-                child: Stack (
-                  children: <Widget> [
-                    const Positioned(top: 10.0, right: 10.0, child: Icon(CupertinoIcons.pencil,),),
-                    Column ( 
-                      children: <Widget> [
-                        const Divider(),
-                        Text(AppLocalizations.of(context).translate('complaints_submitted_today')), 
-                        SizedBox( width: MediaQuery.of(context).size.width * 0.3, child: const Divider( color: Colors.grey, thickness: 1.0),),
-                        Text( controller.getComplaintsSubmittedToday() ),
-                      ],
-                    ),
-                  ],
-                )
-              ),
+            children: <Widget>[
+              Card(
+                  color: Colors.green.shade100,
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(top: 20),
+                        width: 600,
+                        height: 150,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              AppLocalizations.of(context)
+                                  .translate('solved_complaints'),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: const Divider(
+                                  color: Colors.white, thickness: 1.0),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 10),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
+                              ),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(36),
+                                  color: Colors.white),
+                              child: Text(
+                                controller.getSolvedComplaints(),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  )),
+              Card(
+                  color: Colors.orange.shade100,
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(top: 20),
+                        width: 600,
+                        height: 150,
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              AppLocalizations.of(context)
+                                  .translate('pending_complaints'),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: const Divider(
+                                  color: Colors.white, thickness: 1.0),
+                            ),
+                            Container(
+                                margin: EdgeInsets.only(top: 10),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 5,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(36),
+                                  color: Colors.white,
+                                ),
+                                child: Text(
+                                  controller.getPendingComplaints(),
+                                )),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )),
+              Card(
+                  color: Colors.blue.shade100,
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(top: 20),
+                        width: 600,
+                        height: 150,
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              AppLocalizations.of(context)
+                                  .translate('complaints_submitted_today'),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: const Divider(
+                                  color: Colors.white, thickness: 1.0),
+                            ),
+                            Container(
+                                margin: EdgeInsets.only(top: 10),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 5,
+                                ),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(36),
+                                    color: Colors.white),
+                                child: Text(
+                                  controller.getComplaintsSubmittedToday(),
+                                )),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )),
             ],
           ),
         ],
       ),
+    );
+  }
+}
+
+class TopComplaintsText extends StatelessWidget {
+  const TopComplaintsText({
+    super.key,
+    required this.iteration,
+    required this.data,
+  });
+
+  final String iteration;
+  final String data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(
+          iteration,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(
+          width: 40,
+        ),
+        Container(
+          width: 100,
+          height: 50,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(36),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Container(
+              padding: EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(36),
+                color: Colors.white,
+              ),
+              child: Text(
+                data,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w100,
+                  fontSize: 25,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

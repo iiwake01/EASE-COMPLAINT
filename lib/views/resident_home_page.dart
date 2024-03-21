@@ -1,3 +1,4 @@
+import 'package:app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/views/base_view.dart';
@@ -26,36 +27,19 @@ class ResidentHomePage extends BaseView {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.025,
             ),
-            RichText(
-              text: TextSpan(
-                style: const TextStyle(
-                  color: Color.fromARGB(255, 29, 87, 30),
-                  fontSize: 30,
-                ),
-                children: [
-                  TextSpan(
-                    text: AppLocalizations.of(context)
-                        .translate('hello_resident_')
-                        .split("Resident")[0],
-                  ),
-                  const TextSpan(
-                    text: "Resident",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  TextSpan(
-                    text: AppLocalizations.of(context)
-                        .translate('hello_resident_')
-                        .split("Resident")[1],
-                  ),
-                ],
-              ),
-            ),
             Text(
-              AppLocalizations.of(context)
-                  .translate('how_can_we_can_help_you_'),
-              style: const TextStyle(
-                  color: Color.fromARGB(255, 29, 87, 30), fontSize: 30),
+              AppLocalizations.of(context).translate('hello_resident'),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 40,
+                  color: Constants.standardColor,
+                  letterSpacing: 3),
             ),
+            // Text(
+            //   AppLocalizations.of(context).translate('how_can_we_help_you'),
+            //   style: const TextStyle(
+            //       color: Color.fromARGB(255, 29, 87, 30), fontSize: 30),
+            // ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.013,
             ),

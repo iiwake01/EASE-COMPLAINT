@@ -2,14 +2,12 @@ import 'package:app/widgets/base_widgets.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends BaseWidget {
-  
-  const TextFieldWidget( {
-    super.key,
-    required this.textEditingController,
-    this.labelText,
-    this.isTextHidden,
-    this.isReadOnly
-  } );
+  const TextFieldWidget(
+      {super.key,
+      required this.textEditingController,
+      this.labelText,
+      this.isTextHidden,
+      this.isReadOnly});
 
   final TextEditingController? textEditingController;
   final String? labelText;
@@ -17,17 +15,18 @@ class TextFieldWidget extends BaseWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField (
+    return TextFormField(
       controller: textEditingController,
-      decoration: InputDecoration (
+      decoration: InputDecoration(
         labelText: labelText,
         hintText: null,
         prefixIcon: null,
         filled: true,
         fillColor: Colors.white,
-        border: OutlineInputBorder (
+        border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
-          borderSide: BorderSide.none,
+          borderSide:
+              BorderSide(color: const Color.fromARGB(96, 114, 113, 113)),
         ),
       ),
       keyboardType: TextInputType.text,
