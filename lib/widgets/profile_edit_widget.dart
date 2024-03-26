@@ -13,8 +13,8 @@ class ProfileEditWidget extends BaseWidget<ProfileController> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-        padding: EdgeInsets.symmetric(horizontal: 150, vertical: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 150, vertical: 20),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.black),
           borderRadius: BorderRadius.circular(36),
@@ -27,7 +27,7 @@ class ProfileEditWidget extends BaseWidget<ProfileController> {
               textEditingController: controller.firstNameController,
               isReadOnly: false,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             TextFieldWidget(
@@ -35,7 +35,7 @@ class ProfileEditWidget extends BaseWidget<ProfileController> {
               textEditingController: controller.lastNameController,
               isReadOnly: false,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             TextFieldWidget(
@@ -43,7 +43,7 @@ class ProfileEditWidget extends BaseWidget<ProfileController> {
               textEditingController: controller.middleNameController,
               isReadOnly: false,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             TextFieldWidget(
@@ -51,7 +51,7 @@ class ProfileEditWidget extends BaseWidget<ProfileController> {
               textEditingController: controller.genderController,
               isReadOnly: true,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             TextFieldWidget(
@@ -59,7 +59,7 @@ class ProfileEditWidget extends BaseWidget<ProfileController> {
               textEditingController: controller.ageController,
               isReadOnly: false,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             DatePickerWidget(
@@ -67,7 +67,7 @@ class ProfileEditWidget extends BaseWidget<ProfileController> {
               dateController: controller.birthdateController,
               firstDate: DateTime.now().subtract(const Duration(days: 73000)),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             TextFieldWidget(
@@ -76,7 +76,7 @@ class ProfileEditWidget extends BaseWidget<ProfileController> {
               textEditingController: controller.contactNumberController,
               isReadOnly: false,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             TextFieldWidget(
@@ -84,7 +84,7 @@ class ProfileEditWidget extends BaseWidget<ProfileController> {
               textEditingController: controller.statusController,
               isReadOnly: true,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             TextFieldWidget(
@@ -93,7 +93,7 @@ class ProfileEditWidget extends BaseWidget<ProfileController> {
               textEditingController: controller.zoneController,
               isReadOnly: true,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             TextFieldWidget(
@@ -102,7 +102,7 @@ class ProfileEditWidget extends BaseWidget<ProfileController> {
               textEditingController: controller.houseStreetController,
               isReadOnly: false,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             TextFieldWidget(
@@ -111,7 +111,7 @@ class ProfileEditWidget extends BaseWidget<ProfileController> {
               textEditingController: controller.emailController,
               isReadOnly: true,
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             ElevatedButton(
@@ -121,7 +121,7 @@ class ProfileEditWidget extends BaseWidget<ProfileController> {
                       borderRadius: BorderRadiusDirectional.circular(10)),
                   textStyle: const TextStyle(fontSize: 20)),
               onPressed: () => controller.launchReadOnly(),
-              child: Text(
+              child: Text (
                 AppLocalizations.of(context).translate('save_information'),
                 style: const TextStyle(color: Colors.white, fontSize: 20),
               ),
