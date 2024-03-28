@@ -8,14 +8,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfileAppBar extends BaseWidget<ProfileController> implements PreferredSizeWidget {
-  
-  const ProfileAppBar( {
-    super.key,
-    this.height,
-    this.widthGap,
-    this.title
-  } );
+class ProfileAppBar extends BaseWidget<ProfileController>
+    implements PreferredSizeWidget {
+  const ProfileAppBar({super.key, this.height, this.widthGap, this.title});
 
   final double? height, widthGap;
   final String? title;
@@ -25,71 +20,87 @@ class ProfileAppBar extends BaseWidget<ProfileController> implements PreferredSi
 
   @override
   Widget build(BuildContext context) {
-    return AppBarWidget (
+    return AppBarWidget(
       backgroundColor: Colors.white,
       height: height ?? kToolbarHeight,
-      child: Stack (
+      child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
-          Positioned (
+          Positioned(
             left: widthGap,
-            child: IconButton (
+            child: IconButton(
               onPressed: () => Get.back(),
               icon: const Icon(
                 CupertinoIcons.arrow_left,
                 color: Colors.white,
               ),
-              style: IconButton.styleFrom (
+              style: IconButton.styleFrom(
                   backgroundColor: Colors.green,
-                  padding: const EdgeInsets.symmetric (
+                  padding: const EdgeInsets.symmetric(
                       vertical: 1.0, horizontal: 25.0),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadiusDirectional.circular(20))),
             ),
           ),
-          Text (
-            title?? Constants.BLANK,
+          Text(
+            title ?? Constants.BLANK,
             style: const TextStyle(color: Colors.green, fontSize: 20),
           ),
-          Positioned (
+          Positioned(
+            height: 150,
+            width: 150,
             right: widthGap,
-            child: OutlinedButton (
-              onPressed: () { controller.onPickFiles(); },
-              child: Column (
+            child: OutlinedButton(
+              onPressed: () {
+                controller.onPickFiles();
+              },
+              child: Column(
                 children: [
                   Obx(() {
-                    if(controller.hasFile.isTrue && controller.photo.isBlank == true) {
-                      return Image.memory (
+                    if (controller.hasFile.isTrue &&
+                        controller.photo.isBlank == true) {
+                      return Image.memory(
                         controller.liveFileBytes.value,
                         fit: BoxFit.scaleDown,
                         height: 50,
                         width: 50,
                       );
                     } else if (controller.photo.isBlank == true) {
-                      return const Icon (
+                      return const Icon(
                         CupertinoIcons.profile_circled,
                         color: Colors.green,
                       );
-                     } else {
-                      return CachedNetworkImage (
-                        imageUrl: controller.photo.value,
-                        fit: BoxFit.cover,
-                        height: 50,
-                        width: 50,
-                        alignment: Alignment.center,
-                        placeholder: (context, url) => const CircularProgressIndicator(),
-                        errorWidget: (context, error, stackTrace) => const Icon (CupertinoIcons.profile_circled, color: Colors.red,)
-                      );
+                    } else {
+                      return CachedNetworkImage(
+                          imageUrl: controller.photo.value,
+                          fit: BoxFit.cover,
+                          height: 50,
+                          width: 50,
+                          alignment: Alignment.center,
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(),
+                          errorWidget: (context, error, stackTrace) =>
+                              const Icon(
+                                CupertinoIcons.profile_circled,
+                                color: Colors.red,
+                              ));
                     }
                   }),
-                  Row (
+                  Column(
                     children: [
-                      const Icon (
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      const Icon(
                         CupertinoIcons.plus_circle_fill,
                         color: Colors.green,
                       ),
-                      Text (
-                        AppLocalizations.of(context).translate('add_or_change_photo'),
+                      Text(
+                        AppLocalizations.of(context)
+                            .translate('add_or_change_photo'),
+                        style: const TextStyle(
+                          fontSize: 10,
+                        ),
                       ),
                     ],
                   )
