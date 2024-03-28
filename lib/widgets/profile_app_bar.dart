@@ -8,8 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfileAppBar extends BaseWidget<ProfileController>
-    implements PreferredSizeWidget {
+class ProfileAppBar extends BaseWidget<ProfileController> implements PreferredSizeWidget {
   const ProfileAppBar({super.key, this.height, this.widthGap, this.title});
 
   final double? height, widthGap;
@@ -57,33 +56,32 @@ class ProfileAppBar extends BaseWidget<ProfileController>
               child: Column(
                 children: [
                   Obx(() {
-                    if (controller.hasFile.isTrue &&
-                        controller.photo.isBlank == true) {
+                    if (controller.hasFile.isTrue) {
                       return Image.memory(
                         controller.liveFileBytes.value,
                         fit: BoxFit.scaleDown,
                         height: 50,
                         width: 50,
                       );
-                    } else if (controller.photo.isBlank == true) {
+                    } else if (controller.hasFile.isFalse && controller.photo.isBlank == true) {
                       return const Icon(
                         CupertinoIcons.profile_circled,
                         color: Colors.green,
                       );
                     } else {
                       return CachedNetworkImage(
-                          imageUrl: controller.photo.value,
-                          fit: BoxFit.cover,
-                          height: 50,
-                          width: 50,
-                          alignment: Alignment.center,
-                          placeholder: (context, url) =>
-                              const CircularProgressIndicator(),
-                          errorWidget: (context, error, stackTrace) =>
-                              const Icon(
-                                CupertinoIcons.profile_circled,
-                                color: Colors.red,
-                              ));
+                        imageUrl: controller.photo.value,
+                        fit: BoxFit.cover,
+                        height: 50,
+                        width: 50,
+                        alignment: Alignment.center,
+                        placeholder: (context, url) =>
+                          const CircularProgressIndicator(), errorWidget: (context, error, stackTrace) =>
+                          const Icon(
+                            CupertinoIcons.profile_circled,
+                            color: Colors.red,
+                          )
+                      );
                     }
                   }),
                   Column(
