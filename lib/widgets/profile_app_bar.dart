@@ -8,7 +8,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfileAppBar extends BaseWidget<ProfileController> implements PreferredSizeWidget {
+class ProfileAppBar extends BaseWidget<ProfileController>
+    implements PreferredSizeWidget {
   const ProfileAppBar({super.key, this.height, this.widthGap, this.title});
 
   final double? height, widthGap;
@@ -43,67 +44,105 @@ class ProfileAppBar extends BaseWidget<ProfileController> implements PreferredSi
           ),
           Text(
             title ?? Constants.BLANK,
-            style: const TextStyle(color: Colors.green, fontSize: 20),
+            style: const TextStyle(
+              color: Colors.green,
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           Positioned(
-            height: 150,
-            width: 150,
+            // height: 100,
+            // width: 100,
             right: widthGap,
-            child: OutlinedButton(
-              onPressed: () {
+            child: InkWell(
+              customBorder: Border.all(color: Colors.black),
+              onTap: () {
                 controller.onPickFiles();
               },
-              child: Column(
-                children: [
-                  Obx(() {
-                    if (controller.hasFile.isTrue) {
-                      return Image.memory(
-                        controller.liveFileBytes.value,
-                        fit: BoxFit.scaleDown,
-                        height: 50,
-                        width: 50,
-                      );
-                    } else if (controller.hasFile.isFalse && controller.photo.isBlank == true) {
-                      return const Icon(
+              child: Obx(() {
+                if (controller.hasFile.isTrue) {
+                  return Container(
+                    height: 150,
+                    width: 150,
+                    // clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: MemoryImage(controller.liveFileBytes.value),
+                        fit: BoxFit.cover,
+                        // scale: BorderSide.strokeAlignCenter,
+                      ),
+                    ),
+                  );
+                } else if (controller.hasFile.isFalse &&
+                    controller.photo.isBlank == true) {
+                  return const Column(
+                    children: [
+                      Icon(
                         CupertinoIcons.profile_circled,
                         color: Colors.green,
-                      );
-                    } else {
-                      return CachedNetworkImage(
-                        imageUrl: controller.photo.value,
-                        fit: BoxFit.cover,
-                        height: 50,
-                        width: 50,
-                        alignment: Alignment.center,
-                        placeholder: (context, url) =>
-                          const CircularProgressIndicator(), errorWidget: (context, error, stackTrace) =>
-                          const Icon(
-                            CupertinoIcons.profile_circled,
-                            color: Colors.red,
-                          )
-                      );
-                    }
-                  }),
-                  Column(
-                    children: [
-                      const SizedBox(
-                        height: 30,
+                        size: 15,
                       ),
-                      const Icon(
-                        CupertinoIcons.plus_circle_fill,
-                        color: Colors.green,
-                      ),
-                      Text(
-                        AppLocalizations.of(context)
-                            .translate('add_or_change_photo'),
-                        style: const TextStyle(
-                          fontSize: 10,
-                        ),
-                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "Add/Update Image",
+                          ),
+                        ],
+                      )
                     ],
-                  )
-                ],
-              ),
+                  );
+                } else {
+                  return Container(
+                    height: 150,
+                    width: 150,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black,
+                      ),
+                      shape: BoxShape.circle,
+                    ),
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: CachedNetworkImage(
+                      imageUrl: controller.photo.value,
+                      fit: BoxFit.cover,
+                      alignment: Alignment.center,
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      errorWidget: (context, error, stackTrace) => const Icon(
+                        CupertinoIcons.profile_circled,
+                        color: Colors.red,
+                        size:
+                            50, // Adjust the size of the icon to match the circle size
+                      ),
+                    ),
+                  );
+                }
+              }),
+              // Column(
+              //   children: [
+
+              //     // Column(
+              //     //   children: [
+              //     //     const SizedBox(
+              //     //       height: 30,
+              //     //     ),
+              //     //     const Icon(
+              //     //       CupertinoIcons.plus_circle_fill,
+              //     //       color: Colors.green,
+              //     //     ),
+              //     //     Text(
+              //     //       AppLocalizations.of(context)
+              //     //           .translate('add_or_change_photo'),
+              //     //       style: const TextStyle(
+              //     //         fontSize: 10,
+              //     //       ),
+              //     //     ),
+              //     //   ],
+              //     // )
+              //   ],
+              // ),
             ),
           ),
         ],
