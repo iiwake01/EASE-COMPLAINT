@@ -42,7 +42,7 @@ class WhiteBackAppbar extends BaseWidget implements PreferredSizeWidget {
             title ?? Constants.BLANK,
             style: TextStyle(
                 color: Constants.standardColor,
-                fontSize: 40,
+                fontSize: 60,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 2),
           ),
