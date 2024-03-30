@@ -1,4 +1,6 @@
 import 'package:app/controllers/staff_complaints_list_controller.dart';
+import 'package:app/models/resident.dart';
+import 'package:app/utils/resident_tile.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
@@ -81,7 +83,7 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
                                 TitleWidget(
                                   title: "Status",
                                 ),
-                                TitleWidget(title: "        ")
+                                TitleWidget(title: "              ")
                               ],
                             ),
                             SizedBox(
@@ -91,42 +93,59 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
                         ),
                       ),
                       Container(
-                        height: MediaQuery.of(context).size.height * .05,
-                        width: MediaQuery.of(context).size.width * .7,
-                        margin: EdgeInsets.symmetric(horizontal: 60),
-                        decoration: BoxDecoration(
-                            color: Colors.green.shade50,
-                            borderRadius: BorderRadius.circular(36)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            DataWidget(
-                              data: "John Richard Alix",
-                            ),
-                            DataWidget(
-                              data: "Zone 6",
-                            ),
-                            DataWidget(
-                              data: "Environmental Problems",
-                            ),
-                            DataWidget(
-                              data: "10/12/24",
-                            ),
-                            DataWidget(
-                              data: "Single",
-                            ),
-                            TextButton(
-                                onPressed: () => controller.launchView(),
-                                child: Text(
-                                  "View",
-                                  style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                    fontSize: 20,
-                                  ),
-                                ))
-                          ],
+                        height: MediaQuery.of(context).size.height * .5,
+                        child: ListView.builder(
+                          itemCount: 20,
+                          scrollDirection: Axis.vertical,
+                          itemBuilder: (context, index) {
+                            Test test = Test(
+                              name: "John Richard Alix",
+                              zone: "Zone 6",
+                              complaintType: "Environmental Problem",
+                              date: "10/12/24",
+                              status: "Unresolved",
+                            );
+                            return ResidentTile(test: test);
+                          },
                         ),
-                      )
+                      ),
+                      // Container(
+                      //   height: MediaQuery.of(context).size.height * .05,
+                      //   width: MediaQuery.of(context).size.width * .7,
+                      //   margin: EdgeInsets.symmetric(horizontal: 60),
+                      //   decoration: BoxDecoration(
+                      //       color: Colors.green.shade50,
+                      //       borderRadius: BorderRadius.circular(36)),
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      //     children: [
+                      //       DataWidget(
+                      //         data: "John Richard Alix",
+                      //       ),
+                      //       DataWidget(
+                      //         data: "Zone 6",
+                      //       ),
+                      //       DataWidget(
+                      //         data: "Environmental Problems",
+                      //       ),
+                      //       DataWidget(
+                      //         data: "10/12/24",
+                      //       ),
+                      //       DataWidget(
+                      //         data: "Single",
+                      //       ),
+                      //       TextButton(
+                      //           onPressed: () => controller.launchView(),
+                      //           child: Text(
+                      //             "View",
+                      //             style: TextStyle(
+                      //               decoration: TextDecoration.underline,
+                      //               fontSize: 20,
+                      //             ),
+                      //           ))
+                      //     ],
+                      //   ),
+                      // )
                     ],
                   ),
                 ],
