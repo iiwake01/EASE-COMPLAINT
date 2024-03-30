@@ -1,11 +1,9 @@
-import 'dart:html';
-
 import 'package:app/controllers/dashboard_controller.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/views/base_view.dart';
-import 'package:app/widgets/back_app_bar.dart';
+import 'package:app/widgets/top_complaints_text.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 class DashboardPage extends BaseView<DashboardController> {
@@ -33,7 +31,7 @@ class DashboardPage extends BaseView<DashboardController> {
               height: 650,
               padding:
                   EdgeInsets.only(top: 20, left: 50, right: 50, bottom: 100),
-              child: const Stack(
+              child: Stack(
                 // alignment: Alignment.center,
                 children: <Widget>[
                   Column(
@@ -58,39 +56,21 @@ class DashboardPage extends BaseView<DashboardController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(
+                            padding: const EdgeInsets.only(
                               top: 30,
                               left: 40,
                             ),
-                            child: Column(
+                            child: Column (
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                TopComplaintsText(
-                                  iteration: '1.',
-                                  data: "data 1",
+                              children: controller.getTopComplaintsList().mapIndexed((index, topComplaint) => 
+                                TopComplaintsText (
+                                  iteration: '${index + 1}.',
+                                  data: topComplaint,
                                 ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                TopComplaintsText(
-                                  iteration: '2.',
-                                  data: 'data 2',
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                TopComplaintsText(
-                                  iteration: '3.',
-                                  data: 'data 3',
-                                ),
-                              ],
+                              ).toList(),
                             ),
                           )
                         ],
-                        // children: controller
-                        //     .getTopComplaintsList()
-                        //     .map((topComplaint) => Text(topComplaint))
-                        //     .toList(),
                       )
                     ],
                   ),
@@ -108,7 +88,7 @@ class DashboardPage extends BaseView<DashboardController> {
                   child: Stack(
                     children: <Widget>[
                       Container(
-                        padding: EdgeInsets.only(top: 20),
+                        padding: const EdgeInsets.only(top: 20),
                         width: 600,
                         height: 150,
                         child: Column(
@@ -116,9 +96,8 @@ class DashboardPage extends BaseView<DashboardController> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              AppLocalizations.of(context)
-                                  .translate('solved_complaints'),
-                              style: TextStyle(
+                              AppLocalizations.of(context).translate('solved_complaints'),
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
@@ -130,8 +109,8 @@ class DashboardPage extends BaseView<DashboardController> {
                                   color: Colors.white, thickness: 1.0),
                             ),
                             Container(
-                              margin: EdgeInsets.only(top: 10),
-                              padding: EdgeInsets.symmetric(
+                              margin: const EdgeInsets.only(top: 10),
+                              padding: const EdgeInsets.symmetric(
                                 horizontal: 10,
                                 vertical: 5,
                               ),
@@ -152,7 +131,7 @@ class DashboardPage extends BaseView<DashboardController> {
                   child: Stack(
                     children: <Widget>[
                       Container(
-                        padding: EdgeInsets.only(top: 20),
+                        padding: const EdgeInsets.only(top: 20),
                         width: 600,
                         height: 150,
                         child: Column(
@@ -160,7 +139,7 @@ class DashboardPage extends BaseView<DashboardController> {
                             Text(
                               AppLocalizations.of(context)
                                   .translate('pending_complaints'),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
@@ -172,8 +151,8 @@ class DashboardPage extends BaseView<DashboardController> {
                                   color: Colors.white, thickness: 1.0),
                             ),
                             Container(
-                                margin: EdgeInsets.only(top: 10),
-                                padding: EdgeInsets.symmetric(
+                                margin: const EdgeInsets.only(top: 10),
+                                padding: const EdgeInsets.symmetric(
                                   horizontal: 10,
                                   vertical: 5,
                                 ),
@@ -200,9 +179,8 @@ class DashboardPage extends BaseView<DashboardController> {
                         child: Column(
                           children: <Widget>[
                             Text(
-                              AppLocalizations.of(context)
-                                  .translate('complaints_submitted_today'),
-                              style: TextStyle(
+                              AppLocalizations.of(context).translate('complaints_submitted_today'),
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
@@ -214,8 +192,8 @@ class DashboardPage extends BaseView<DashboardController> {
                                   color: Colors.white, thickness: 1.0),
                             ),
                             Container(
-                                margin: EdgeInsets.only(top: 10),
-                                padding: EdgeInsets.symmetric(
+                                margin: const EdgeInsets.only(top: 10),
+                                padding: const EdgeInsets.symmetric(
                                   horizontal: 10,
                                   vertical: 5,
                                 ),
@@ -234,61 +212,6 @@ class DashboardPage extends BaseView<DashboardController> {
           ),
         ],
       ),
-    );
-  }
-}
-
-class TopComplaintsText extends StatelessWidget {
-  const TopComplaintsText({
-    super.key,
-    required this.iteration,
-    required this.data,
-  });
-
-  final String iteration;
-  final String data;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          iteration,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        SizedBox(
-          width: 40,
-        ),
-        Container(
-          width: 100,
-          height: 50,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(36),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8),
-            child: Container(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(36),
-                color: Colors.white,
-              ),
-              child: Text(
-                data,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w100,
-                  fontSize: 25,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
