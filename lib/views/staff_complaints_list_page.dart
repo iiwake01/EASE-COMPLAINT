@@ -1,6 +1,8 @@
 import 'package:app/controllers/staff_complaints_list_controller.dart';
+import 'package:app/models/complaint_model.dart';
 import 'package:app/models/resident.dart';
-import 'package:app/utils/resident_tile.dart';
+import 'package:app/models/resident_model.dart';
+import 'package:app/utils/complaint_tile.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
@@ -33,11 +35,11 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
               width: MediaQuery.of(context).size.width * .775,
               decoration: BoxDecoration(
                 color: Constants.appBarColor,
-                borderRadius: BorderRadius.all(Radius.circular(36)),
+                borderRadius: const BorderRadius.all(Radius.circular(36)),
               ),
               child: Column(
                 children: [
-                  Row(
+                  const Row(
                     children: [
                       Padding(
                         padding: EdgeInsets.only(top: 50, left: 50),
@@ -53,7 +55,7 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
                     ],
                   ),
                   SizedBox(
-                    height: 30,
+                    height: MediaQuery.of(context).size.height * .02,
                   ),
                   Column(
                     children: [
@@ -62,28 +64,34 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
                         width: MediaQuery.of(context).size.width * .7,
                         // margin: EdgeInsets.symmetric(horizontal: 90),
                         // color: Colors.red,
-                        child: Column(
+                        child: const Column(
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               // crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Text("        "),
                                 TitleWidget(
                                   title: "Complainant's Name",
+                                  multiplier: .1,
                                 ),
                                 TitleWidget(
                                   title: "Zone",
+                                  multiplier: .1,
                                 ),
                                 TitleWidget(
                                   title: "Complaint Type",
+                                  multiplier: .1,
                                 ),
                                 TitleWidget(
                                   title: "Date Filled",
+                                  multiplier: .07,
                                 ),
                                 TitleWidget(
                                   title: "Status",
+                                  multiplier: .15,
                                 ),
-                                TitleWidget(title: "              ")
+                                // TitleWidget(title: "")
                               ],
                             ),
                             SizedBox(
@@ -92,60 +100,25 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
                           ],
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         height: MediaQuery.of(context).size.height * .5,
                         child: ListView.builder(
-                          itemCount: 20,
+                          itemCount: controller.getList().length,
                           scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) {
-                            Test test = Test(
-                              name: "John Richard Alix",
-                              zone: "Zone 6",
-                              complaintType: "Environmental Problem",
-                              date: "10/12/24",
-                              status: "Unresolved",
+                            ComplaintModel model = controller.getList()[index];
+                            Complaint complaint = Complaint(
+                              photo: model.photo ?? Constants.BLANK,
+                              name: model.name ?? Constants.BLANK,
+                              zone: model.zone ?? Constants.BLANK,
+                              complaintType: model.type ?? Constants.BLANK,
+                              date: model.date ?? Constants.BLANK,
+                              status: model.status ?? Constants.BLANK,
                             );
-                            return ResidentTile(test: test);
+                            return ComplaintTile(resident: complaint);
                           },
                         ),
                       ),
-                      // Container(
-                      //   height: MediaQuery.of(context).size.height * .05,
-                      //   width: MediaQuery.of(context).size.width * .7,
-                      //   margin: EdgeInsets.symmetric(horizontal: 60),
-                      //   decoration: BoxDecoration(
-                      //       color: Colors.green.shade50,
-                      //       borderRadius: BorderRadius.circular(36)),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      //     children: [
-                      //       DataWidget(
-                      //         data: "John Richard Alix",
-                      //       ),
-                      //       DataWidget(
-                      //         data: "Zone 6",
-                      //       ),
-                      //       DataWidget(
-                      //         data: "Environmental Problems",
-                      //       ),
-                      //       DataWidget(
-                      //         data: "10/12/24",
-                      //       ),
-                      //       DataWidget(
-                      //         data: "Single",
-                      //       ),
-                      //       TextButton(
-                      //           onPressed: () => controller.launchView(),
-                      //           child: Text(
-                      //             "View",
-                      //             style: TextStyle(
-                      //               decoration: TextDecoration.underline,
-                      //               fontSize: 20,
-                      //             ),
-                      //           ))
-                      //     ],
-                      //   ),
-                      // )
                     ],
                   ),
                 ],
@@ -183,18 +156,23 @@ class TitleWidget extends StatelessWidget {
   const TitleWidget({
     super.key,
     required this.title,
+    required this.multiplier,
   });
 
   final String title;
+  final double multiplier;
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 15,
-        color: Colors.white,
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * multiplier,
+      child: Text(
+        title,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
+          color: Colors.white,
+        ),
       ),
     );
   }
