@@ -1,14 +1,11 @@
 import 'package:app/controllers/staff_complaints_list_controller.dart';
 import 'package:app/models/complaint_model.dart';
 import 'package:app/models/complaint.dart';
-import 'package:app/models/resident_model.dart';
 import 'package:app/utils/complaint_tile.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
-import 'package:app/widgets/back_app_bar.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
