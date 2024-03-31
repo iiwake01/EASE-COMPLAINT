@@ -1,16 +1,15 @@
-class Complaint {
+class Resident {
   final String photo;
-  final String name;
+  final String lastName;
+  final String firstName;
   final String zone;
-  final String complaintType;
-  final String date;
-  final String status;
+  final String age;
 
-  Complaint(
-      {required this.photo,
-      required this.name,
-      required this.zone,
-      required this.complaintType,
-      required this.date,
-      required this.status});
+  Resident({
+    required this.photo,
+    required this.lastName,
+    required this.firstName,
+    required this.zone,
+    required this.age,
+  });
 }

@@ -1,9 +1,12 @@
 import 'package:app/controllers/residents_list_controller.dart';
+import 'package:app/models/resident.dart';
+import 'package:app/models/resident_model.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
-import 'package:app/widgets/back_app_bar.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:app/views/staff_complaints_list_page.dart';
+import 'package:app/widgets/resident_tile.dart';
+import 'package:app/widgets/white_back_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +17,7 @@ class ResidentsListPage extends BaseView<ResidentsListController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BackAppBar(
+      appBar: WhiteBackAppbar(
         height: MediaQuery.of(context).size.height * 0.20,
         widthGap: MediaQuery.of(context).size.width * 0.05,
         title: AppLocalizations.of(context).translate('list_of_residents'),
@@ -24,128 +27,97 @@ class ResidentsListPage extends BaseView<ResidentsListController> {
         if (controller.observeLoading().isTrue) {
           return const Center(child: CircularProgressIndicator());
         } else {
-          return DataTable(
-              columns: const <DataColumn>[
-                DataColumn(label: SizedBox()),
-                DataColumn(
-                  label: Text(
-                    "Last Name",
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500,
-                    ),
+          return Center(
+            child: Container(
+              height: MediaQuery.of(context).size.height * .7,
+              width: MediaQuery.of(context).size.width * .775,
+              decoration: BoxDecoration(
+                color: Constants.appBarColor,
+                borderRadius: const BorderRadius.all(Radius.circular(36)),
+              ),
+              child: Column(
+                children: [
+                  const Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 50, left: 50),
+                        child: Text(
+                          "Filed Complaints",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                DataColumn(
-                  label: Text(
-                    "First Name",
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500,
-                    ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * .02,
                   ),
-                ),
-                DataColumn(
-                  label: Text(
-                    "Zone",
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500,
-                    ),
+                  Column(
+                    children: [
+                      Container(
+                        height: MediaQuery.of(context).size.height * .05,
+                        width: MediaQuery.of(context).size.width * .7,
+                        // margin: EdgeInsets.symmetric(horizontal: 90),
+                        // color: Colors.red,
+                        child: const Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              // crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(""),
+                                TitleWidget(
+                                  title: "Last Name",
+                                  multiplier: .1,
+                                ),
+                                TitleWidget(
+                                  title: "First Name",
+                                  multiplier: .1,
+                                ),
+                                TitleWidget(
+                                  title: "Zone",
+                                  multiplier: .07,
+                                ),
+                                TitleWidget(
+                                  title: "Age",
+                                  multiplier: .13,
+                                ),
+                                // TitleWidget(title: "")
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * .5,
+                        child: ListView.builder(
+                          itemCount: controller.getList().length,
+                          scrollDirection: Axis.vertical,
+                          itemBuilder: (context, index) {
+                            ResidentModel model = controller.getList()[index];
+                            Resident resident = Resident(
+                              photo: model.photo ?? Constants.BLANK,
+                              lastName: model.last ?? Constants.BLANK,
+                              firstName: model.first ?? Constants.BLANK,
+                              zone: model.zone ?? Constants.BLANK,
+                              age: model.age ?? Constants.BLANK,
+                            );
+                            return ResidentTile(resident: resident);
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                DataColumn(
-                  label: Text(
-                    "Age",
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                DataColumn(label: SizedBox()),
-              ],
-              rows: controller
-                  .getList()
-                  .map((model) => DataRow(cells: <DataCell>[
-                        DataCell(
-                          CachedNetworkImage(
-                            imageUrl: model.photo ?? Constants.BLANK,
-                            fit: BoxFit.cover,
-                            height: 50,
-                            width: 50,
-                            alignment: Alignment.center,
-                            placeholder: (context, url) {
-                              return const CircularProgressIndicator();
-                            },
-                            errorWidget: ((context, error, stackTrace) {
-                              return const Icon(
-                                CupertinoIcons.person_circle,
-                                color: Colors.grey,
-                              );
-                            }),
-                          ),
-                        ),
-                        DataCell(
-                          Text(
-                            model.last ?? Constants.BLANK,
-                            style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 13,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                        DataCell(
-                          Text(
-                            model.first ?? Constants.BLANK,
-                            style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 13,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                        DataCell(
-                          Text(
-                            model.zone ?? Constants.BLANK,
-                            style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 13,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                        DataCell(
-                          Text(
-                            model.age ?? Constants.BLANK,
-                            style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 13,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                        DataCell(TextButton(
-                          onPressed: () => controller.launchView(),
-                          child: Text(
-                            AppLocalizations.of(context).translate('view'),
-                            style: const TextStyle(
-                                color: Color.fromARGB(255, 106, 129, 107),
-                                decoration: TextDecoration.underline,
-                                decorationColor:
-                                    Color.fromARGB(255, 156, 204, 156),
-                                decorationStyle: TextDecorationStyle.solid,
-                                decorationThickness: 2,
-                                fontSize: 20),
-                          ),
-                        ))
-                      ]))
-                  .toList());
+                ],
+              ),
+            ),
+          );
         }
       }),
     );

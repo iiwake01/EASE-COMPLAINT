@@ -1,6 +1,6 @@
 import 'package:app/controllers/staff_complaints_list_controller.dart';
 import 'package:app/models/complaint_model.dart';
-import 'package:app/models/resident.dart';
+import 'package:app/models/complaint.dart';
 import 'package:app/models/resident_model.dart';
 import 'package:app/utils/complaint_tile.dart';
 import 'package:app/utils/app_localizations.dart';

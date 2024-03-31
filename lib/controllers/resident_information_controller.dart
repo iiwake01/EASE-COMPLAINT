@@ -6,8 +6,8 @@ import 'package:app/routes/app_pages.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
-class ResidentsListController extends BaseController {
-  ResidentsListController(
+class ResidentsInformationController extends BaseController {
+  ResidentsInformationController(
     this._auth,
     this._service,
   ) {
@@ -17,7 +17,8 @@ class ResidentsListController extends BaseController {
   final FirebaseAuthService _auth;
   final FirestoreService _service;
   final RxBool _isLoading = false.obs;
-  final RxList<ResidentModel> _residentList = List<ResidentModel>.empty().obs;
+  final RxList<ResidentModel> _residentInformation =
+      List<ResidentModel>.empty().obs;
 
   @override
   Future<void> onInit() async {
@@ -32,9 +33,9 @@ class ResidentsListController extends BaseController {
       _isLoading(true);
       if (checkSession(_auth)) {
         final List<ResidentModel> snapshot = await _service.getResidents();
-        _residentList.assignAll(snapshot);
+        _residentInformation.assignAll(snapshot);
       } else {
-        _residentList.clear();
+        _residentInformation.clear();
       }
     } catch (exception) {
       onShowAlert("Error", "Fetch Failed");
@@ -49,20 +50,6 @@ class ResidentsListController extends BaseController {
   }
 
   List<ResidentModel> getList() {
-    return _residentList;
-  }
-
-  // void launchView() {
-  //   if(checkSession(_auth)) onShowAlert("Under Construction", "On Going . . .");
-  // }
-
-  void launchView() {
-    if (checkSession(_auth)) Get.toNamed(Routes.RESIDENTINFORMATION);
-  }
-
-  @override
-  void onClose() {
-    debugPrint("ResidentsListController onClose");
-    super.onClose();
+    return _residentInformation;
   }
 }

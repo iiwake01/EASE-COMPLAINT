@@ -45,14 +45,14 @@ class LoginWidget extends BaseWidget<LoginController> {
             ],
           ),
           Container(
-            margin: EdgeInsets.only(top: 70),
+            margin: EdgeInsets.only(top: 20),
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    height: 200,
-                    width: 300,
+                    height: MediaQuery.of(context).size.height * .2,
+                    width: MediaQuery.of(context).size.width * .15,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Color.fromARGB(131, 61, 94, 49),
@@ -92,8 +92,8 @@ class LoginWidget extends BaseWidget<LoginController> {
                     width: widthGap,
                   ),
                   Container(
-                    height: 200,
-                    width: 300,
+                    height: MediaQuery.of(context).size.height * .2,
+                    width: MediaQuery.of(context).size.width * .15,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Color.fromARGB(131, 61, 94, 49),

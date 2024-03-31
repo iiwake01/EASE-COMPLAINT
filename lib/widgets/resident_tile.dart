@@ -1,14 +1,14 @@
-import 'package:app/controllers/staff_complaints_list_controller.dart';
-import 'package:app/models/complaint.dart';
-import 'package:app/utils/constants.dart';
+import 'package:app/controllers/residents_list_controller.dart';
+import 'package:app/models/resident.dart';
 import 'package:app/views/base_view.dart';
+import 'package:app/views/staff_complaints_list_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ComplaintTile extends BaseView<StaffComplaintsListController> {
-  const ComplaintTile({Key? key, required this.resident}) : super(key: key);
-  final Complaint resident;
+class ResidentTile extends BaseView<ResidentsListController> {
+  const ResidentTile({super.key, required this.resident});
+  final Resident resident;
 
   @override
   Widget build(BuildContext context) {
@@ -45,23 +45,19 @@ class ComplaintTile extends BaseView<StaffComplaintsListController> {
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width * .1,
-            child: DataWidget(data: resident.name),
+            child: DataWidget(data: resident.lastName),
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width * .1,
+            child: DataWidget(data: resident.firstName),
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * .075,
             child: DataWidget(data: resident.zone),
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width * .1,
-            child: DataWidget(data: resident.complaintType),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * .0675,
-            child: DataWidget(data: resident.date),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * .1,
-            child: DataWidget(data: resident.status),
+            width: MediaQuery.of(context).size.width * .06,
+            child: DataWidget(data: resident.age),
           ),
           TextButton(
             onPressed: () => controller.launchView(),
@@ -75,27 +71,6 @@ class ComplaintTile extends BaseView<StaffComplaintsListController> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class DataWidget extends StatelessWidget {
-  const DataWidget({
-    super.key,
-    required this.data,
-  });
-
-  final String data;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      data,
-      style: TextStyle(
-        color: Constants.standardColor,
-        fontWeight: FontWeight.bold,
-        fontSize: 15,
       ),
     );
   }
