@@ -111,6 +111,7 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
                               complaintType: model.type ?? Constants.BLANK,
                               date: model.date ?? Constants.BLANK,
                               status: model.status ?? Constants.BLANK,
+                              uid: model.uid ?? Constants.BLANK,
                             );
                             return ComplaintTile(resident: complaint);
                           },

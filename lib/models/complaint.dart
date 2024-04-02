@@ -5,6 +5,7 @@ class Complaint {
   final String complaintType;
   final String date;
   final String status;
+  final String uid;
 
   Complaint(
       {required this.photo,
@@ -12,5 +13,6 @@ class Complaint {
       required this.zone,
       required this.complaintType,
       required this.date,
-      required this.status});
+      required this.status,
+      required this.uid});
 }

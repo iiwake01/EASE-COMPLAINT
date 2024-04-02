@@ -102,6 +102,7 @@ class ResidentsListPage extends BaseView<ResidentsListController> {
                           itemBuilder: (context, index) {
                             ResidentModel model = controller.getList()[index];
                             Resident resident = Resident(
+                              uid: model.uid ?? Constants.BLANK,
                               photo: model.photo ?? Constants.BLANK,
                               lastName: model.last ?? Constants.BLANK,
                               firstName: model.first ?? Constants.BLANK,

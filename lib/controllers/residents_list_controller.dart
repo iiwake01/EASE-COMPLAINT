@@ -56,8 +56,10 @@ class ResidentsListController extends BaseController {
   //   if(checkSession(_auth)) onShowAlert("Under Construction", "On Going . . .");
   // }
 
-  void launchView() {
-    if (checkSession(_auth)) Get.toNamed(Routes.RESIDENTINFORMATION);
+  void launchView(final String? uid) {
+    if (checkSession(_auth)) {
+      Get.toNamed(Routes.RESIDENTINFORMATION, arguments: uid);
+    }
   }
 
   @override

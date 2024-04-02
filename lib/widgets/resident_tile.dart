@@ -60,7 +60,7 @@ class ResidentTile extends BaseView<ResidentsListController> {
             child: DataWidget(data: resident.age),
           ),
           TextButton(
-            onPressed: () => controller.launchView(),
+            onPressed: () => controller.launchView(resident.uid),
             child: const Text(
               "View",
               style: TextStyle(

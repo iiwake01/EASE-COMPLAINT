@@ -6,6 +6,7 @@ import 'package:app/bindings/login_binding.dart';
 import 'package:app/bindings/notification_binding.dart';
 import 'package:app/bindings/profile_binding.dart';
 import 'package:app/bindings/resident_complaints_list_binding.dart';
+import 'package:app/bindings/resident_information_binder.dart';
 // import 'package:app/bindings/resident_information_binding.dart';
 import 'package:app/bindings/residents_list_binding.dart';
 import 'package:app/bindings/sign_up_binding.dart';
@@ -115,7 +116,7 @@ abstract class AppPages {
     GetPage(
       name: Routes.RESIDENTINFORMATION,
       page: () => const ResidentsInformationPage(),
-      binding: ResidentsListBinding(),
+      binding: ResidentsInformationBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),

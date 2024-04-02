@@ -6,7 +6,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class FirestoreService extends GetxService {
-
   final dbFirestore = FirebaseFirestore.instance;
 
   Future<void> _create(String collectionPath, Map<String, dynamic> data) async {
@@ -31,7 +30,10 @@ class FirestoreService extends GetxService {
 
   Future<void> updateResident(ResidentModel? model) async {
     if (model != null) {
-      await dbFirestore.collection("residents").doc(model.id).update(model.toMap());
+      await dbFirestore
+          .collection("residents")
+          .doc(model.id)
+          .update(model.toMap());
     } else {
       throw Exception("ResidentModel is Null");
     }
@@ -39,7 +41,10 @@ class FirestoreService extends GetxService {
 
   Future<void> updateStaff(StaffModel? model) async {
     if (model != null) {
-      await dbFirestore.collection("staffs").doc(model.id).update(model.toMap());
+      await dbFirestore
+          .collection("staffs")
+          .doc(model.id)
+          .update(model.toMap());
     } else {
       throw Exception("StaffModel is Null");
     }
@@ -47,14 +52,26 @@ class FirestoreService extends GetxService {
 
   Future<ResidentModel?> getResident(String? uid) async {
     if (uid == null) return null;
-    final response = await dbFirestore.collection("residents").where(Constants.UID, isEqualTo: uid).get();
-    return response.docs.map((doc) => ResidentModel.fromSnapshot(doc)).toList().firstOrNull;
+    final response = await dbFirestore
+        .collection("residents")
+        .where(Constants.UID, isEqualTo: uid)
+        .get();
+    return response.docs
+        .map((doc) => ResidentModel.fromSnapshot(doc))
+        .toList()
+        .firstOrNull;
   }
 
   Future<StaffModel?> getStaff(String? uid) async {
     if (uid == null) return null;
-    final response = await dbFirestore.collection("staffs").where(Constants.UID, isEqualTo: uid).get();
-    return response.docs.map((doc) => StaffModel.fromSnapshot(doc)).toList().firstOrNull;
+    final response = await dbFirestore
+        .collection("staffs")
+        .where(Constants.UID, isEqualTo: uid)
+        .get();
+    return response.docs
+        .map((doc) => StaffModel.fromSnapshot(doc))
+        .toList()
+        .firstOrNull;
   }
 
   Future<List<ResidentModel>> getResidents() async {
@@ -64,12 +81,19 @@ class FirestoreService extends GetxService {
 
   Future<List<ComplaintModel>> getResidentComplaints(String? uid) async {
     if (uid == null) return List.empty();
-    final response = await dbFirestore.collection("complaints").where(Constants.UID, isEqualTo: uid).get();
-    return response.docs.map((doc) => ComplaintModel.fromSnapshot(doc)).toList();
+    final response = await dbFirestore
+        .collection("complaints")
+        .where(Constants.UID, isEqualTo: uid)
+        .get();
+    return response.docs
+        .map((doc) => ComplaintModel.fromSnapshot(doc))
+        .toList();
   }
 
   Future<List<ComplaintModel>> getComplaints() async {
     final response = await dbFirestore.collection("complaints").get();
-    return response.docs.map((doc) => ComplaintModel.fromSnapshot(doc)).toList();
+    return response.docs
+        .map((doc) => ComplaintModel.fromSnapshot(doc))
+        .toList();
   }
 }

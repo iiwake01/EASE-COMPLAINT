@@ -6,7 +6,7 @@ import 'package:app/models/resident.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-class ResidentInformationBinding extends BaseBinding {
+class ResidentsInformationBinding extends BaseBinding {
   @override
   void dependencies() {
     Get.lazyPut<ResidentsInformationController>(

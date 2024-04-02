@@ -1,3 +1,4 @@
+import 'package:app/controllers/resident_information_controller.dart';
 import 'package:app/controllers/residents_list_controller.dart';
 import 'package:app/models/resident_information_model.dart';
 import 'package:app/models/resident_model.dart';
@@ -8,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
-class ResidentsInformationPage extends BaseView<ResidentsListController> {
+class ResidentsInformationPage
+    extends BaseView<ResidentsInformationController> {
   const ResidentsInformationPage({super.key});
 
   @override
@@ -38,6 +40,8 @@ class ResidentsInformationPage extends BaseView<ResidentsListController> {
               width: MediaQuery.of(context).size.width * .8,
 
               // TODO : Pa help fix neto para ma display yung mga data po :3
+              child: ResidentInformationDataBox(
+                  model: controller.observeResidentInformation().value),
             ),
           );
         }
@@ -52,7 +56,7 @@ class ResidentInformationDataBox extends StatelessWidget {
     required this.model,
   });
 
-  final ResidentModel model;
+  final ResidentModel? model;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +83,7 @@ class ResidentInformationDataBox extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * .175,
                   color: Colors.white,
                   child: Text(
-                    model.last ?? Constants.BLANK,
+                    model?.last ?? Constants.BLANK,
                     style: TextStyle(
                         color: Constants.standardColor,
                         fontWeight: FontWeight.bold,
@@ -110,7 +114,7 @@ class ResidentInformationDataBox extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * .175,
                   color: Colors.white,
                   child: Text(
-                    model.first ?? Constants.BLANK,
+                    model?.first ?? Constants.BLANK,
                     style: TextStyle(
                         color: Constants.standardColor,
                         fontWeight: FontWeight.bold,
@@ -141,7 +145,7 @@ class ResidentInformationDataBox extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * .175,
                   color: Colors.white,
                   child: Text(
-                    model.middle ?? Constants.BLANK,
+                    model?.middle ?? Constants.BLANK,
                     style: TextStyle(
                         color: Constants.standardColor,
                         fontWeight: FontWeight.bold,
@@ -172,7 +176,7 @@ class ResidentInformationDataBox extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * .065,
                   color: Colors.white,
                   child: Text(
-                    model.sex ?? Constants.BLANK,
+                    model?.sex ?? Constants.BLANK,
                     style: TextStyle(
                         color: Constants.standardColor,
                         fontWeight: FontWeight.bold,
@@ -203,7 +207,7 @@ class ResidentInformationDataBox extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * .065,
                   color: Colors.white,
                   child: Text(
-                    model.age ?? Constants.BLANK,
+                    model?.age ?? Constants.BLANK,
                     style: TextStyle(
                         color: Constants.standardColor,
                         fontWeight: FontWeight.bold,
@@ -239,7 +243,7 @@ class ResidentInformationDataBox extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * .12,
                   color: Colors.white,
                   child: Text(
-                    model.birth ?? Constants.BLANK,
+                    model?.birth ?? Constants.BLANK,
                     style: TextStyle(
                         color: Constants.standardColor,
                         fontWeight: FontWeight.bold,
@@ -270,7 +274,7 @@ class ResidentInformationDataBox extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * .155,
                   color: Colors.white,
                   child: Text(
-                    model.contact ?? Constants.BLANK,
+                    model?.contact ?? Constants.BLANK,
                     style: TextStyle(
                         color: Constants.standardColor,
                         fontWeight: FontWeight.bold,
@@ -301,7 +305,7 @@ class ResidentInformationDataBox extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * .1,
                   color: Colors.white,
                   child: Text(
-                    model.status ?? Constants.BLANK,
+                    model?.status ?? Constants.BLANK,
                     style: TextStyle(
                         color: Constants.standardColor,
                         fontWeight: FontWeight.bold,
@@ -332,7 +336,7 @@ class ResidentInformationDataBox extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * .25,
                   color: Colors.white,
                   child: Text(
-                    model.zone ?? Constants.BLANK,
+                    model?.zone ?? Constants.BLANK,
                     style: TextStyle(
                         color: Constants.standardColor,
                         fontWeight: FontWeight.bold,
@@ -368,7 +372,7 @@ class ResidentInformationDataBox extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * .35,
                   color: Colors.white,
                   child: Text(
-                    model.houseStreet ?? Constants.BLANK,
+                    model?.houseStreet ?? Constants.BLANK,
                     style: TextStyle(
                         color: Constants.standardColor,
                         fontWeight: FontWeight.bold,
@@ -399,7 +403,7 @@ class ResidentInformationDataBox extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * .35,
                   color: Colors.white,
                   child: Text(
-                    model.email ?? Constants.BLANK,
+                    model?.email ?? Constants.BLANK,
                     style: TextStyle(
                         color: Constants.standardColor,
                         fontWeight: FontWeight.bold,
