@@ -15,5 +15,5 @@ abstract class Routes {
   static const STAFFCOMPLAINTSLIST = '/staff_complaints_list';
   static const RESIDENTSLIST = '/residents_list';
   static const RESIDENTINFORMATION = '/view_resident';
-  static const RESIDENTCOMPLAINTFORM = '/view_complaint';
+  static const RESIDENTCOMPLAINTINFORMATION = '/view_complaint';
 }

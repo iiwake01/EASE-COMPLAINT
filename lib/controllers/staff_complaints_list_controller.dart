@@ -58,9 +58,11 @@ class StaffComplaintsListController extends BaseController {
   //   if(checkSession(_auth)) onShowAlert("Under Construction", "On Going . . .");
   // }
 
-  void launchView() {
+  void launchView(final String? uid) {
     debugPrint("StaffComplaintsListController launchView");
-    if (checkSession(_auth)) Get.toNamed(Routes.RESIDENTCOMPLAINTFORM);
+    if (checkSession(_auth)) {
+      Get.toNamed(Routes.RESIDENTCOMPLAINTINFORMATION, arguments: uid);
+    }
   }
 
   @override

@@ -64,7 +64,7 @@ class ComplaintTile extends BaseView<StaffComplaintsListController> {
             child: DataWidget(data: resident.status),
           ),
           TextButton(
-            onPressed: () => controller.launchView(),
+            onPressed: () => controller.launchView(resident.uid),
             child: const Text(
               "View",
               style: TextStyle(

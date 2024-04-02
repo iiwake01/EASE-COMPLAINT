@@ -5,6 +5,7 @@ import 'package:app/bindings/home_binding.dart';
 import 'package:app/bindings/login_binding.dart';
 import 'package:app/bindings/notification_binding.dart';
 import 'package:app/bindings/profile_binding.dart';
+import 'package:app/bindings/resident_complaint_form_binding.dart';
 import 'package:app/bindings/resident_complaints_list_binding.dart';
 import 'package:app/bindings/resident_information_binder.dart';
 // import 'package:app/bindings/resident_information_binding.dart';
@@ -17,6 +18,7 @@ import 'package:app/views/file_complaint_page.dart';
 import 'package:app/views/login_page.dart';
 import 'package:app/views/notification_page.dart';
 import 'package:app/views/profile_page.dart';
+import 'package:app/views/resident_complaint_information_page.dart';
 import 'package:app/views/resident_complaints_list_page.dart';
 import 'package:app/views/resident_home_page.dart';
 import 'package:app/views/resident_information_page.dart';
@@ -117,6 +119,13 @@ abstract class AppPages {
       name: Routes.RESIDENTINFORMATION,
       page: () => const ResidentsInformationPage(),
       binding: ResidentsInformationBinding(),
+      transition: Transition.noTransition,
+      transitionDuration: const Duration(milliseconds: 250),
+    ),
+    GetPage(
+      name: Routes.RESIDENTCOMPLAINTINFORMATION,
+      page: () => const ResidentsComplaintInformationPage(),
+      binding: ResidentsComplaintsFormBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
