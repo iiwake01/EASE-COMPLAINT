@@ -1,11 +1,10 @@
-import 'package:app/controllers/resident_complaint_information.dart';
+import 'package:app/controllers/resident_complaint_information_controller.dart';
 import 'package:app/views/base_view.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ResidentsComplaintInformationPage
-    extends BaseView<ResidentsComplaintInformationController> {
+class ResidentsComplaintInformationPage extends BaseView<ResidentsComplaintInformationController> {
   const ResidentsComplaintInformationPage({super.key});
 
   @override
@@ -23,6 +22,8 @@ class ResidentsComplaintInformationPage
               child: CircularProgressIndicator(),
             );
           } else {
+            //controller.observeResidentInformation
+            //controller.observeComplaintInformation()
             return Center(
               child: Column(
                 children: [Text("Basta center")],

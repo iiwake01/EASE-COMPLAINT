@@ -2,13 +2,13 @@ import 'package:app/controllers/base_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/resident_model.dart';
-import 'package:app/routes/app_pages.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class ResidentsInformationController extends BaseController {
+
   ResidentsInformationController(this._auth, this._service) {
-    debugPrint("ResidentsListController Constructor");
+    debugPrint("ResidentsInformationController Constructor");
   }
 
   final FirebaseAuthService _auth;
@@ -16,11 +16,11 @@ class ResidentsInformationController extends BaseController {
   final arguments = Get.arguments;
   final RxBool _isLoading = false.obs;
   final Rx<ResidentModel?> _residentInformation = ResidentModel().obs;
-
+  
   @override
   Future<void> onInit() async {
     super.onInit();
-    debugPrint("ResidentsListController onInit");
+    debugPrint("ResidentsInformationController onInit");
     //checkSession();
     fetch();
   }
@@ -36,7 +36,7 @@ class ResidentsInformationController extends BaseController {
       }
     } catch (exception) {
       onShowAlert("Error", "Fetch Failed");
-      debugPrint("ResidentsListController fetch $exception");
+      debugPrint("ResidentsInformationController fetch $exception");
     } finally {
       _isLoading(false);
     }

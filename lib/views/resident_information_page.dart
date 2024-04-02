@@ -38,10 +38,8 @@ class ResidentsInformationPage
               ),
               height: MediaQuery.of(context).size.height * .7,
               width: MediaQuery.of(context).size.width * .8,
-
               // TODO : Pa help fix neto para ma display yung mga data po :3
-              child: ResidentInformationDataBox(
-                  model: controller.observeResidentInformation().value),
+              child: ResidentInformationDataBox(model: controller.observeResidentInformation().value),
             ),
           );
         }

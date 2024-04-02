@@ -17,8 +17,7 @@ class StaffComplaintsListController extends BaseController {
   final FirebaseAuthService _auth;
   final FirestoreService _service;
   final RxBool _isLoading = false.obs;
-  final RxList<ComplaintModel> _complaintList =
-      List<ComplaintModel>.empty().obs;
+  final RxList<ComplaintModel> _complaintList = List<ComplaintModel>.empty().obs;
 
   @override
   Future<void> onInit() async {
