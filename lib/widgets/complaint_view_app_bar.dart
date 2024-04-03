@@ -1,3 +1,4 @@
+import 'package:app/routes/app_pages.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/views/staff_home_page.dart';
 import 'package:app/widgets/app_bar_widget.dart';
@@ -6,8 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class WhiteBackAppbar extends BaseWidget implements PreferredSizeWidget {
-  const WhiteBackAppbar({super.key, this.height, this.widthGap, this.title});
+class ComplaintAppbar extends BaseWidget implements PreferredSizeWidget {
+  const ComplaintAppbar({super.key, this.height, this.widthGap, this.title});
 
   final double? height, widthGap;
   final String? title;
@@ -18,7 +19,7 @@ class WhiteBackAppbar extends BaseWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBarWidget(
-      backgroundColor: Colors.white,
+      backgroundColor: Constants.standardColor,
       height: height ?? kToolbarHeight,
       child: Stack(
         alignment: Alignment.center,
@@ -32,20 +33,51 @@ class WhiteBackAppbar extends BaseWidget implements PreferredSizeWidget {
                 color: Colors.white,
               ),
               style: IconButton.styleFrom(
-                  backgroundColor: Constants.standardColor,
+                  backgroundColor: Colors.green.shade200,
                   padding: const EdgeInsets.symmetric(
                       vertical: 1.0, horizontal: 25.0),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadiusDirectional.circular(20))),
             ),
           ),
-          Text(
-            title ?? Constants.BLANK,
-            style: TextStyle(
-                color: Constants.standardColor,
-                fontSize: 60,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 2),
+          const Spacer(),
+          HomeButton(widthGap: widthGap),
+        ],
+      ),
+    );
+  }
+}
+
+class HomeButton extends StatelessWidget {
+  const HomeButton({
+    super.key,
+    required this.widthGap,
+  });
+
+  final double? widthGap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      right: widthGap,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IconButton(
+            onPressed: () => Get.offAndToNamed(Routes.STAFFHOME),
+            icon: const Icon(
+              Icons.house_rounded,
+              size: 35,
+              color: Colors.white,
+            ),
+            style: IconButton.styleFrom(backgroundColor: Colors.green.shade200),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          const Text(
+            "Return Home",
+            style: TextStyle(color: Colors.white),
           ),
         ],
       ),

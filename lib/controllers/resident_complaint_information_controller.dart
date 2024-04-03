@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ResidentsComplaintInformationController extends BaseController {
-  
   ResidentsComplaintInformationController(this._auth, this._service) {
     debugPrint("ResidentsListController Constructor");
   }
@@ -31,14 +30,19 @@ class ResidentsComplaintInformationController extends BaseController {
   Future<void> fetch() async {
     try {
       _isLoading(true);
-      if (checkSession(_auth)) {
-        final User? user = _auth.getUser();
-        final ResidentModel? snapshot = await _service.getResident(user?.uid);
-        _residentInformation(snapshot);
-      }
-      if (checkSession(_auth) && arguments != null && arguments is String) {
-        final ComplaintModel? snapshot = await _service.getComplaint(arguments);
+      if (checkSession(_auth) && arguments != null && arguments is List) {
+        final ComplaintModel? snapshot =
+            await _service.getComplaint(arguments[1]);
         _complaintInformation(snapshot);
+        debugPrint(snapshot.toString());
+
+        final User? user = _auth.getUser();
+        final ResidentModel? snapshots =
+            await _service.getResident(arguments[0]);
+        _residentInformation(snapshots);
+        debugPrint(snapshot.toString());
+
+        debugPrint(arguments[1]);
       }
     } catch (exception) {
       onShowAlert("Error", "Fetch Failed");

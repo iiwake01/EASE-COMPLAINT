@@ -17,7 +17,8 @@ class StaffComplaintsListController extends BaseController {
   final FirebaseAuthService _auth;
   final FirestoreService _service;
   final RxBool _isLoading = false.obs;
-  final RxList<ComplaintModel> _complaintList = List<ComplaintModel>.empty().obs;
+  final RxList<ComplaintModel> _complaintList =
+      List<ComplaintModel>.empty().obs;
 
   @override
   Future<void> onInit() async {
@@ -57,10 +58,13 @@ class StaffComplaintsListController extends BaseController {
   //   if(checkSession(_auth)) onShowAlert("Under Construction", "On Going . . .");
   // }
 
-  void launchView(final String? uid) {
+  void launchView(final String? uid, final String? complaintId) {
     debugPrint("StaffComplaintsListController launchView");
     if (checkSession(_auth)) {
-      Get.toNamed(Routes.RESIDENTCOMPLAINTINFORMATION, arguments: uid);
+      Get.toNamed(
+        Routes.RESIDENTCOMPLAINTINFORMATION,
+        arguments: [uid, complaintId],
+      );
     }
   }
 

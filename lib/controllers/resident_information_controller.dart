@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class ResidentsInformationController extends BaseController {
-
   ResidentsInformationController(this._auth, this._service) {
     debugPrint("ResidentsInformationController Constructor");
   }
@@ -16,7 +15,7 @@ class ResidentsInformationController extends BaseController {
   final arguments = Get.arguments;
   final RxBool _isLoading = false.obs;
   final Rx<ResidentModel?> _residentInformation = ResidentModel().obs;
-  
+
   @override
   Future<void> onInit() async {
     super.onInit();

@@ -4,6 +4,7 @@ import 'package:app/models/resident_information_model.dart';
 import 'package:app/models/resident_model.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
+import 'package:app/widgets/complaint_view_app_bar.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,7 @@ class ResidentsInformationPage
       appBar: WhiteBackAppbar(
         height: MediaQuery.of(context).size.height * 0.20,
         widthGap: MediaQuery.of(context).size.width * 0.05,
-        title: "User Information",
+        // title: "User Information",
       ),
       backgroundColor: Colors.white,
       body: Obx(() {
@@ -38,8 +39,8 @@ class ResidentsInformationPage
               ),
               height: MediaQuery.of(context).size.height * .7,
               width: MediaQuery.of(context).size.width * .8,
-              // TODO : Pa help fix neto para ma display yung mga data po :3
-              child: ResidentInformationDataBox(model: controller.observeResidentInformation().value),
+              child: ResidentInformationDataBox(
+                  model: controller.observeResidentInformation().value),
             ),
           );
         }

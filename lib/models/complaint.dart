@@ -6,6 +6,7 @@ class Complaint {
   final String date;
   final String status;
   final String uid;
+  final String complaintId;
 
   Complaint(
       {required this.photo,
@@ -14,5 +15,6 @@ class Complaint {
       required this.complaintType,
       required this.date,
       required this.status,
-      required this.uid});
+      required this.uid,
+      required this.complaintId});
 }
