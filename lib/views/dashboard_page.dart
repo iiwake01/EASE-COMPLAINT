@@ -5,6 +5,7 @@ import 'package:app/widgets/top_complaints_text.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DashboardPage extends BaseView<DashboardController> {
   const DashboardPage({Key? key}) : super(key: key);
@@ -117,9 +118,7 @@ class DashboardPage extends BaseView<DashboardController> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(36),
                                   color: Colors.white),
-                              child: Text(
-                                controller.getSolvedComplaints(),
-                              ),
+                              child: Obx(() => Text(controller.observeSolvedComplaints().value)),
                             )
                           ],
                         ),
@@ -160,9 +159,7 @@ class DashboardPage extends BaseView<DashboardController> {
                                   borderRadius: BorderRadius.circular(36),
                                   color: Colors.white,
                                 ),
-                                child: Text(
-                                  controller.getPendingComplaints(),
-                                )),
+                                child: Obx(() => Text(controller.observePendingComplaints().value)),),
                           ],
                         ),
                       ),

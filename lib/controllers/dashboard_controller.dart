@@ -14,13 +14,18 @@ class DashboardController extends BaseController {
   final FirebaseAuthService _auth;
   final FirestoreService _service;
   List<String> _topComplaintsList = [];
+  final RxString _solvedComplaints = "".obs, _pendingComplaints = "".obs;
 
   @override
   Future<void> onInit() async {
     super.onInit();
     debugPrint("DashboardController onInit");
     //checkSession();
-    _topComplaintsList = ["Sample First", "Sample Second", "Sample Third"]; //TODO: Get Data from Firestore Database
+    if (checkSession(_auth)) {
+      _topComplaintsList = ["Sample First", "Sample Second", "Sample Third"]; //TODO: Get Data from Firestore Database
+      _solvedComplaints("${await _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('resolved'))}");
+      _pendingComplaints("${await _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('pending'))}");
+    }
   }
 
   int getTopComplaintsCount() {
@@ -35,12 +40,12 @@ class DashboardController extends BaseController {
     return _topComplaintsList;
   }
 
-  String getSolvedComplaints() {
-    return _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('resolved')).toString(); //TODO: Test this query Firestore Database
+  RxString observeSolvedComplaints() {
+    return _solvedComplaints;
   }
 
-  String getPendingComplaints() {
-    return _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('pending')).toString(); //TODO: Test this query Firestore Database
+  RxString observePendingComplaints() {
+    return _pendingComplaints;
   }
 
   String getComplaintsSubmittedToday() {

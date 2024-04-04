@@ -103,7 +103,6 @@ class FirestoreService extends GetxService {
 
   Future<ComplaintModel?> getComplaint(String? id) async {
     final response = await dbFirestore.collection("complaints").doc(id).get();
-    ;
     return ComplaintModel.fromSnapshot(response);
   }
 
