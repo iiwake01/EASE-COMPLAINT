@@ -274,14 +274,17 @@ class ResidentsComplaintInformationPage
                                       ?.narrative ??
                                   Constants.BLANK,
                             ),
-                            ContainerField(
-                              fieldTitle: "Previous Action Taken:",
-                              // widthMultiplier: .2,
-                              value: controller
-                                      .observeComplaintInformation()
-                                      .value
-                                      ?.previousActionTaken ??
-                                  Constants.BLANK,
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * .1,
+                              child: ContainerField(
+                                fieldTitle: "Previous Action Taken:",
+                                // widthMultiplier: .2,
+                                value: controller
+                                        .observeComplaintInformation()
+                                        .value
+                                        ?.previousActionTaken ??
+                                    Constants.BLANK,
+                              ),
                             ),
                             Center(
                               heightFactor: 2,
@@ -309,8 +312,7 @@ class ResidentsComplaintInformationPage
                                 Expanded(
                                   flex: 2,
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       ContainerField(
                                         fieldTitle: "Name:",
@@ -418,7 +420,7 @@ class ContainerField extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.center,
             child: Text(
               value,
               style: TextStyle(
