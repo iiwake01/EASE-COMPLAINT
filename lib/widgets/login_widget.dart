@@ -32,7 +32,7 @@ class LoginWidget extends BaseWidget<LoginController> {
                     letterSpacing: 2.5),
               ),
               SizedBox(
-                height: 70,
+                height: 5,
               ),
               Text(
                 AppLocalizations.of(context).translate('log_in_as_'),
@@ -45,7 +45,7 @@ class LoginWidget extends BaseWidget<LoginController> {
             ],
           ),
           Container(
-            margin: EdgeInsets.only(top: 20),
+            margin: EdgeInsets.only(top: 50),
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
