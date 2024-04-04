@@ -6,6 +6,7 @@ import 'package:app/widgets/back_app_bar.dart';
 import 'package:app/widgets/complaint_view_app_bar.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -351,26 +352,29 @@ class ResidentsComplaintInformationPage
                               alignment: Alignment.bottomRight,
                               child: Container(
                                 decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(.5),
-                                    borderRadius: BorderRadius.circular(36)),
-                                height:
-                                    MediaQuery.of(context).size.height * .05,
-                                width: MediaQuery.of(context).size.width * .1,
-                                child: Center(
-                                  // TODO : Update complaint status from staff to user
-                                  child: Obx(
-                                    () => DropdownButton(
-                                      value: controller.selectStatus.value,
-                                      items: controller.statusLists
-                                          .map<DropdownMenuItem<String>>(
-                                              (status) => DropdownMenuItem(
-                                                    value: status,
-                                                    child: Text(status),
-                                                  ))
-                                          .toList(),
-                                      onChanged: (status) =>
-                                          controller.updateStatus(status),
-                                    ),
+                                  color: Colors.yellow.shade200.withOpacity(.5),
+                                  borderRadius: BorderRadius.circular(36),
+                                ),
+                                width: 200,
+                                height: 50,
+                                child: IconButton(
+                                  onPressed: () => controller.launchView(),
+                                  icon: const Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        CupertinoIcons.paperclip,
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        "Update Status",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
                               ),

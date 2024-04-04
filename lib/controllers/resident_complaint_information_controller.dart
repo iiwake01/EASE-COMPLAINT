@@ -3,6 +3,7 @@ import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/complaint_model.dart';
 import 'package:app/models/resident_model.dart';
+import 'package:app/routes/app_pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,12 +21,6 @@ class ResidentsComplaintInformationController extends BaseController {
   final Rx<ComplaintModel?> _complaintInformation = ComplaintModel().obs;
 
   RxString selectStatus = "Pending".obs;
-
-  final List<String> statusLists = [
-    "Pending",
-    "Unresolved",
-    "Resolved",
-  ];
 
   @override
   Future<void> onInit() async {
@@ -74,5 +69,18 @@ class ResidentsComplaintInformationController extends BaseController {
 
   Rx<ComplaintModel?> observeComplaintInformation() {
     return _complaintInformation;
+  }
+
+  void launchView() {
+    debugPrint("View clicked!");
+    if (checkSession(_auth)) {
+      Get.toNamed(Routes.STATUSCHANGE, arguments: arguments[1]);
+    }
+  }
+
+  @override
+  void onClose() {
+    debugPrint("StaffComplaintsListController onClose");
+    super.onClose();
   }
 }
