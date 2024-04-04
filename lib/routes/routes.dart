@@ -17,4 +17,5 @@ abstract class Routes {
   static const RESIDENTINFORMATION = '/view_resident';
   static const RESIDENTCOMPLAINTINFORMATION = '/view_complaint';
   static const STATUSCHANGE = '/change_status';
+  static const RESIDENTCOMPLAINTVIEW = '/review_complaint';
 }

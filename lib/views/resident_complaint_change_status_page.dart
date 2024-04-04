@@ -42,7 +42,7 @@ class ResidentsComplaintChangeStatusPage
                       statusTitle: "Unresolved",
                       colorBg: Colors.red.shade200,
                       onclick: () {
-                        controller.updateResolved();
+                        controller.updateUnresolved();
                         Get.back();
                       },
                     ),

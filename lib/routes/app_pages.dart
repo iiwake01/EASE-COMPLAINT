@@ -5,6 +5,7 @@ import 'package:app/bindings/home_binding.dart';
 import 'package:app/bindings/login_binding.dart';
 import 'package:app/bindings/notification_binding.dart';
 import 'package:app/bindings/profile_binding.dart';
+import 'package:app/bindings/resident_complain_review_binding.dart';
 import 'package:app/bindings/resident_complaint_form_binding.dart';
 import 'package:app/bindings/resident_complaint_status_change_binding.dart';
 import 'package:app/bindings/resident_complaints_list_binding.dart';
@@ -21,6 +22,7 @@ import 'package:app/views/notification_page.dart';
 import 'package:app/views/profile_page.dart';
 import 'package:app/views/resident_complaint_change_status_page.dart';
 import 'package:app/views/resident_complaint_information_page.dart';
+import 'package:app/views/resident_complaint_review_page.dart';
 import 'package:app/views/resident_complaints_list_page.dart';
 import 'package:app/views/resident_home_page.dart';
 import 'package:app/views/resident_information_page.dart';
@@ -135,6 +137,13 @@ abstract class AppPages {
       name: Routes.STATUSCHANGE,
       page: () => const ResidentsComplaintChangeStatusPage(),
       binding: ResidentComplaintChangeStatusBinding(),
+      transition: Transition.noTransition,
+      transitionDuration: const Duration(milliseconds: 250),
+    ),
+    GetPage(
+      name: Routes.RESIDENTCOMPLAINTVIEW,
+      page: () => const ResidentsComplaintReviewPage(),
+      binding: ResidentComplaintReviewBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
