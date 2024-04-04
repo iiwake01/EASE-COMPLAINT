@@ -19,6 +19,14 @@ class ResidentsComplaintInformationController extends BaseController {
   final Rx<ResidentModel?> _residentInformation = ResidentModel().obs;
   final Rx<ComplaintModel?> _complaintInformation = ComplaintModel().obs;
 
+  RxString selectStatus = "Pending".obs;
+
+  final List<String> statusLists = [
+    "Pending",
+    "Unresolved",
+    "Resolved",
+  ];
+
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -50,6 +58,10 @@ class ResidentsComplaintInformationController extends BaseController {
     } finally {
       _isLoading(false);
     }
+  }
+
+  Future<void> updateStatus(String? status) async {
+    selectStatus(status);
   }
 
   RxBool observeLoading() {

@@ -2,6 +2,7 @@ import 'package:app/controllers/resident_complaint_information_controller.dart';
 import 'package:app/models/complaint.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
+import 'package:app/widgets/back_app_bar.dart';
 import 'package:app/widgets/complaint_view_app_bar.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -15,10 +16,10 @@ class ResidentsComplaintInformationPage
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: ComplaintAppbar(
+        appBar: BackAppBar(
           height: MediaQuery.of(context).size.height * 0.20,
           widthGap: MediaQuery.of(context).size.width * 0.05,
-          // title: "Complaint Information",
+          title: "Complaint Information",
         ),
         backgroundColor: Constants.standardColor,
         body: Obx(() {
@@ -78,19 +79,28 @@ class ResidentsComplaintInformationPage
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                ContainerField(
-                                    fieldTitle: "Complaints Full Name:",
-                                    widthMultiplier: .4,
-                                    value:
-                                        "${controller.observeResidentInformation().value?.first} ${controller.observeResidentInformation().value?.last}"),
-                                ContainerField(
-                                  fieldTitle: "Zone:",
-                                  widthMultiplier: .3,
-                                  value: controller
-                                          .observeResidentInformation()
-                                          .value
-                                          ?.zone ??
-                                      Constants.BLANK,
+                                Flexible(
+                                  flex: 2,
+                                  child: ContainerField(
+                                      fieldTitle: "Complaints Full Name:",
+                                      // widthMultiplier: .4,
+                                      value:
+                                          "${controller.observeResidentInformation().value?.first} ${controller.observeResidentInformation().value?.last}"),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Flexible(
+                                  flex: 1,
+                                  child: ContainerField(
+                                    fieldTitle: "Zone:",
+                                    // widthMultiplier: .3,
+                                    value: controller
+                                            .observeResidentInformation()
+                                            .value
+                                            ?.zone ??
+                                        Constants.BLANK,
+                                  ),
                                 ),
                               ],
                             ),
@@ -100,38 +110,47 @@ class ResidentsComplaintInformationPage
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                ContainerField(
-                                  fieldTitle: "Contact Number:",
-                                  widthMultiplier: .22,
-                                  value: controller
-                                          .observeResidentInformation()
-                                          .value
-                                          ?.contact ??
-                                      Constants.BLANK,
+                                Flexible(
+                                  flex: 1,
+                                  child: ContainerField(
+                                    fieldTitle: "Contact Number:",
+                                    // widthMultiplier: .22,
+                                    value: controller
+                                            .observeResidentInformation()
+                                            .value
+                                            ?.contact ??
+                                        Constants.BLANK,
+                                  ),
                                 ),
                                 SizedBox(
                                   width: 10,
                                 ),
-                                ContainerField(
-                                  fieldTitle: "Email Address:",
-                                  widthMultiplier: .22,
-                                  value: controller
-                                          .observeResidentInformation()
-                                          .value
-                                          ?.email ??
-                                      Constants.BLANK,
+                                Flexible(
+                                  flex: 1,
+                                  child: ContainerField(
+                                    fieldTitle: "Email Address:",
+                                    // widthMultiplier: .22,
+                                    value: controller
+                                            .observeResidentInformation()
+                                            .value
+                                            ?.email ??
+                                        Constants.BLANK,
+                                  ),
                                 ),
                                 SizedBox(
                                   width: 10,
                                 ),
-                                ContainerField(
-                                  fieldTitle: "Age:",
-                                  widthMultiplier: .22,
-                                  value: controller
-                                          .observeResidentInformation()
-                                          .value
-                                          ?.age ??
-                                      Constants.BLANK,
+                                Flexible(
+                                  flex: 1,
+                                  child: ContainerField(
+                                    fieldTitle: "Age:",
+                                    // widthMultiplier: .22,
+                                    value: controller
+                                            .observeResidentInformation()
+                                            .value
+                                            ?.age ??
+                                        Constants.BLANK,
+                                  ),
                                 ),
                               ],
                             ),
@@ -140,14 +159,17 @@ class ResidentsComplaintInformationPage
                             ),
                             Row(
                               children: [
-                                ContainerField(
-                                  fieldTitle: "Date Complaint Filed:",
-                                  widthMultiplier: .2,
-                                  value: controller
-                                          .observeComplaintInformation()
-                                          .value
-                                          ?.date ??
-                                      Constants.BLANK,
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width * .1,
+                                  child: ContainerField(
+                                    fieldTitle: "Date Complaint Filed:",
+                                    // widthMultiplier: .2,
+                                    value: controller
+                                            .observeComplaintInformation()
+                                            .value
+                                            ?.date ??
+                                        Constants.BLANK,
+                                  ),
                                 ),
                               ],
                             ),
@@ -179,39 +201,54 @@ class ResidentsComplaintInformationPage
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                ContainerField(
-                                  fieldTitle: "Urgency of Problem:",
-                                  widthMultiplier: .23,
-                                  value: controller
-                                          .observeComplaintInformation()
-                                          .value
-                                          ?.urgency ??
-                                      Constants.BLANK,
+                                Flexible(
+                                  flex: 1,
+                                  child: ContainerField(
+                                    fieldTitle: "Urgency of Problem:",
+                                    // widthMultiplier: .23,
+                                    value: controller
+                                            .observeComplaintInformation()
+                                            .value
+                                            ?.urgency ??
+                                        Constants.BLANK,
+                                  ),
                                 ),
-                                ContainerField(
-                                  fieldTitle: "Specific Type of Problem:",
-                                  widthMultiplier: .23,
-                                  value: controller
-                                          .observeComplaintInformation()
-                                          .value
-                                          ?.type ??
-                                      Constants.BLANK,
+                                SizedBox(
+                                  width: 10,
                                 ),
-                                ContainerField(
-                                  fieldTitle: "Date of Incident:",
-                                  widthMultiplier: .23,
-                                  value: controller
-                                          .observeComplaintInformation()
-                                          .value
-                                          ?.date ??
-                                      Constants.BLANK,
+                                Flexible(
+                                  flex: 1,
+                                  child: ContainerField(
+                                    fieldTitle: "Specific Type of Problem:",
+                                    // widthMultiplier: .23,
+                                    value: controller
+                                            .observeComplaintInformation()
+                                            .value
+                                            ?.type ??
+                                        Constants.BLANK,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Flexible(
+                                  flex: 1,
+                                  child: ContainerField(
+                                    fieldTitle: "Date of Incident:",
+                                    // widthMultiplier: .23,
+                                    value: controller
+                                            .observeComplaintInformation()
+                                            .value
+                                            ?.date ??
+                                        Constants.BLANK,
+                                  ),
                                 ),
                               ],
                             ),
                             Center(
                               child: ContainerField(
                                 fieldTitle: "Full Location of Incident:",
-                                widthMultiplier: .5,
+                                // widthMultiplier: .5,
                                 value: controller
                                         .observeComplaintInformation()
                                         .value
@@ -231,7 +268,6 @@ class ResidentsComplaintInformationPage
                             ),
                             NarrativeField(
                               fieldTitle: "Narrative Report",
-                              widthMultiplier: .72,
                               value: controller
                                       .observeComplaintInformation()
                                       .value
@@ -240,7 +276,7 @@ class ResidentsComplaintInformationPage
                             ),
                             ContainerField(
                               fieldTitle: "Previous Action Taken:",
-                              widthMultiplier: .2,
+                              // widthMultiplier: .2,
                               value: controller
                                       .observeComplaintInformation()
                                       .value
@@ -269,42 +305,43 @@ class ResidentsComplaintInformationPage
                               ),
                             ),
                             Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    ContainerField(
-                                      fieldTitle: "Name:",
-                                      widthMultiplier: .25,
-                                      value: controller
-                                              .observeComplaintInformation()
-                                              .value
-                                              ?.witnessName ??
-                                          Constants.BLANK,
-                                    ),
-                                    ContainerField(
-                                      fieldTitle: "Contact:",
-                                      widthMultiplier: .25,
-                                      value: controller
-                                              .observeComplaintInformation()
-                                              .value
-                                              ?.witnessContact ??
-                                          Constants.BLANK,
-                                    ),
-                                  ],
+                                Expanded(
+                                  flex: 2,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      ContainerField(
+                                        fieldTitle: "Name:",
+                                        value: controller
+                                                .observeComplaintInformation()
+                                                .value
+                                                ?.witnessName ??
+                                            Constants.BLANK,
+                                      ),
+                                      ContainerField(
+                                        fieldTitle: "Contact:",
+                                        value: controller
+                                                .observeComplaintInformation()
+                                                .value
+                                                ?.witnessContact ??
+                                            Constants.BLANK,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                NarrativeField(
-                                  fieldTitle: "Resolution Request:",
-                                  widthMultiplier: .45,
-                                  value: controller
-                                          .observeComplaintInformation()
-                                          .value
-                                          ?.resolutionRequest ??
-                                      Constants.BLANK,
+                                SizedBox(width: 20),
+                                Expanded(
+                                  flex: 4,
+                                  child: NarrativeField(
+                                    fieldTitle: "Resolution Request:",
+                                    value: controller
+                                            .observeComplaintInformation()
+                                            .value
+                                            ?.resolutionRequest ??
+                                        Constants.BLANK,
+                                  ),
                                 )
                               ],
                             ),
@@ -319,31 +356,19 @@ class ResidentsComplaintInformationPage
                                 width: MediaQuery.of(context).size.width * .1,
                                 child: Center(
                                   // TODO : Update complaint status from staff to user
-                                  child: DropdownButton<String>(
-                                    value: 'Pending',
-                                    underline: null,
-                                    onChanged: (String? newValue) {
-                                      // Handle dropdown value change
-                                      // This function will be called when the user selects a new value
-                                      // You can implement any logic here based on the selected value
-                                      print(newValue);
-                                    },
-                                    items: <String>[
-                                      'Pending',
-                                      'Unresolved',
-                                      'Resolved'
-                                    ].map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(
-                                          value,
-                                          style: TextStyle(
-                                            color: Constants.standardColor,
-                                          ),
-                                        ),
-                                      );
-                                    }).toList(),
+                                  child: Obx(
+                                    () => DropdownButton(
+                                      value: controller.selectStatus.value,
+                                      items: controller.statusLists
+                                          .map<DropdownMenuItem<String>>(
+                                              (status) => DropdownMenuItem(
+                                                    value: status,
+                                                    child: Text(status),
+                                                  ))
+                                          .toList(),
+                                      onChanged: (status) =>
+                                          controller.updateStatus(status),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -363,46 +388,45 @@ class ResidentsComplaintInformationPage
 
 class ContainerField extends StatelessWidget {
   const ContainerField({
-    super.key,
+    Key? key,
     required this.fieldTitle,
-    required this.widthMultiplier,
     required this.value,
-  });
+  }) : super(key: key);
 
   final String fieldTitle;
-  final double widthMultiplier;
   final String value;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(right: 10, bottom: 15),
+      margin: const EdgeInsets.only(bottom: 15),
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             fieldTitle,
             style: TextStyle(
-                color: Constants.standardColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 15),
+              color: Constants.standardColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
           ),
           Container(
-            width: MediaQuery.of(context).size.width * widthMultiplier,
-            height: MediaQuery.of(context).size.height * .06,
+            height: 40,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Center(
-              child: Text(
-                value,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              value,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
               ),
             ),
           ),
-          // Chip(label: "label")
         ],
       ),
     );
@@ -447,47 +471,44 @@ class ContainerAttachment extends StatelessWidget {
 
 class NarrativeField extends StatelessWidget {
   const NarrativeField({
-    super.key,
+    Key? key,
     required this.fieldTitle,
-    required this.widthMultiplier,
     required this.value,
-  });
+  }) : super(key: key);
 
   final String fieldTitle;
-  final double widthMultiplier;
   final String value;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(right: 10, bottom: 15, top: 10),
+      margin: const EdgeInsets.only(bottom: 15),
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             fieldTitle,
             style: TextStyle(
-                color: Constants.standardColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 15),
+              color: Constants.standardColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            width: MediaQuery.of(context).size.width * widthMultiplier,
-            height: MediaQuery.of(context).size.height * .3,
+            height: MediaQuery.of(context).size.height * .5,
+            width: MediaQuery.of(context).size.width * .7,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(10),
             ),
+            padding: const EdgeInsets.all(10),
             child: Text(
               value,
               style: TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 15,
+                fontSize: 16,
               ),
             ),
-          )
+          ),
         ],
       ),
     );
