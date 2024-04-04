@@ -39,6 +39,17 @@ class FirestoreService extends GetxService {
     }
   }
 
+  Future<void> updateComplaint(ComplaintModel? model) async {
+    if (model != null) {
+      await dbFirestore
+          .collection("complaints")
+          .doc(model.id)
+          .update(model.toMap());
+    } else {
+      throw Exception("ComplaintModel is Null");
+    }
+  }
+
   Future<void> updateStaff(StaffModel? model) async {
     if (model != null) {
       await dbFirestore
