@@ -1,7 +1,9 @@
 import 'package:app/controllers/base_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
+import 'package:app/utils/app_localizations.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 
 class DashboardController extends BaseController {
 
@@ -34,11 +36,11 @@ class DashboardController extends BaseController {
   }
 
   String getSolvedComplaints() {
-    return "Sample for Solved Complaints"; //TODO: Get Data from Firestore Database
+    return _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('resolved')).toString(); //TODO: Test this query Firestore Database
   }
 
   String getPendingComplaints() {
-    return "Sample for Pending Complaints"; //TODO: Get Data from Firestore Database
+    return _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('pending')).toString(); //TODO: Test this query Firestore Database
   }
 
   String getComplaintsSubmittedToday() {
