@@ -30,12 +30,12 @@ class TopComplaintsText extends BaseWidget {
           ),
           Container(
             width: MediaQuery.of(context).size.width * .3,
-            height: MediaQuery.of(context).size.height * .06,
+            height: MediaQuery.of(context).size.height * .07,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(36),
             ),
             child: Padding(
-              padding: const EdgeInsets.only(top: 8),
+              padding: const EdgeInsets.only(top: 0),
               child: Container(
                 padding: const EdgeInsets.only(
                     left: 20, right: 20, top: 5, bottom: 10),
@@ -45,10 +45,11 @@ class TopComplaintsText extends BaseWidget {
                 ),
                 child: Text(
                   data,
+                  textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w400,
-                    fontSize: 25,
+                    fontSize: 20,
                   ),
                 ),
               ),

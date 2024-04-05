@@ -1,5 +1,6 @@
 import 'package:app/controllers/resident_complaints_list_controller.dart';
 import 'package:app/utils/app_localizations.dart';
+import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
 import 'package:app/widgets/back_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,19 @@ import 'package:get/get.dart';
 class ResidentComplaintsListPage
     extends BaseView<ResidentComplaintsListController> {
   const ResidentComplaintsListPage({Key? key}) : super(key: key);
+
+  Color _getStatusColor(String status) {
+    switch (status.toLowerCase()) {
+      case "pending":
+        return Colors.orange;
+      case "resolved":
+        return Colors.green;
+      case "unresolved":
+        return Colors.red;
+      default:
+        return Colors.black;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,16 +68,15 @@ class ResidentComplaintsListPage
                         Text(
                           controller.getStatus(index),
                           style: TextStyle(
-                              color: controller.getStatus(index) == 'Pending'
-                                  ? Colors.orange
-                                  : Colors.greenAccent.shade100,
+                              color:
+                                  _getStatusColor(controller.getStatus(index)),
                               fontSize: 15),
                         ),
                         SizedBox(
                           width: 20,
                         ),
                         TextButton(
-                          onPressed: () => controller.launchView(),
+                          onPressed: () => controller.launchView(index),
                           child: Text(
                             AppLocalizations.of(context).translate('view'),
                             style: TextStyle(

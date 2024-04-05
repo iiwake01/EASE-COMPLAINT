@@ -69,10 +69,11 @@ class ResidentComplaintsListController extends BaseController {
     return _complaintList;
   }
 
-  void launchView() {
+  void launchView(final int index) {
     debugPrint("ResidentComplaintsListController launchView");
     if (checkSession(_auth)) {
-      Get.toNamed(Routes.RESIDENTCOMPLAINTVIEW);
+      Get.toNamed(Routes.RESIDENTCOMPLAINTVIEW,
+          arguments: [_complaintList[index].uid, _complaintList[index].id]);
     }
   }
 

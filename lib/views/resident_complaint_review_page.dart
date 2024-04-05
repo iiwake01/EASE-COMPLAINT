@@ -1,4 +1,5 @@
 import 'package:app/controllers/resident_complaint_information_controller.dart';
+import 'package:app/controllers/resident_complaint_review_controller.dart';
 import 'package:app/models/complaint.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
@@ -11,17 +12,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ResidentsComplaintReviewPage
-    extends BaseView<ResidentsComplaintInformationController> {
+    extends BaseView<ResidentsComplaintReviewController> {
   const ResidentsComplaintReviewPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    controller.fetch();
     return Scaffold(
         appBar: BackAppBar(
           height: MediaQuery.of(context).size.height * 0.20,
           widthGap: MediaQuery.of(context).size.width * 0.05,
-          title: "Complaint Information",
+          title: "Your Complaint",
         ),
         backgroundColor: Constants.standardColor,
         body: Obx(() {

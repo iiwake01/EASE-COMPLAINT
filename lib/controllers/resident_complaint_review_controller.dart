@@ -25,38 +25,35 @@ class ResidentsComplaintReviewController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    debugPrint("ResidentsListController onInit");
+    debugPrint("ResidentsComplaintReviewController onInit");
     //checkSession();
     fetch();
   }
 
   Future<void> fetch() async {
     try {
+      print("Fetching data...");
+      debugPrint("ResidentsComplaintReviewController fetch");
       _isLoading(true);
       if (checkSession(_auth) && arguments != null && arguments is List) {
-        final ComplaintModel? snapshot =
-            await _service.getComplaint(arguments[1]);
-        _complaintInformation(snapshot);
-        debugPrint(snapshot.toString());
-
-        final User? user = _auth.getUser();
-        final ResidentModel? snapshots =
+        final ResidentModel? resident =
             await _service.getResident(arguments[0]);
-        _residentInformation(snapshots);
-        debugPrint(snapshot.toString());
-
-        debugPrint(arguments[1]);
+        final ComplaintModel? complaint =
+            await _service.getComplaint(arguments[1]);
+        _residentInformation(resident);
+        _complaintInformation(complaint);
+        debugPrint(
+            "ResidentsComplaintReviewController resident ${resident?.toString()}");
+        debugPrint(
+            "ResidentsComplaintReviewController complaint ${complaint?.toString()}");
       }
     } catch (exception) {
       onShowAlert("Error", "Fetch Failed");
-      debugPrint("ResidentsInformationController fetch $exception");
+      debugPrint("ResidentsComplaintReviewController catch $exception");
     } finally {
       _isLoading(false);
+      debugPrint("ResidentsComplaintReviewController finally");
     }
-  }
-
-  Future<void> updateStatus(String? status) async {
-    selectStatus(status);
   }
 
   RxBool observeLoading() {
@@ -71,16 +68,9 @@ class ResidentsComplaintReviewController extends BaseController {
     return _complaintInformation;
   }
 
-  void launchView() {
-    debugPrint("View clicked!");
-    if (checkSession(_auth)) {
-      Get.toNamed(Routes.STATUSCHANGE, arguments: arguments[1]);
-    }
-  }
-
   @override
   void onClose() {
-    debugPrint("StaffComplaintsListController onClose");
+    debugPrint("ResidentsComplaintReviewController onClose");
     super.onClose();
   }
 }
