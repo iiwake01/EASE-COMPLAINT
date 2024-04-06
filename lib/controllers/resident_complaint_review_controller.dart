@@ -33,10 +33,9 @@ class ResidentsComplaintReviewController extends BaseController {
       debugPrint("ResidentsComplaintReviewController fetch");
       _isLoading(true);
       if (checkSession(_auth) && arguments != null && arguments is List) {
-        final ResidentModel? resident =
-            await _service.getResident(arguments[0]);
-        final ComplaintModel? complaint =
-            await _service.getComplaint(arguments[1]);
+        debugPrint("ResidentsComplaintReviewController fetch ${arguments[0]} ${arguments[1]}");
+        final ResidentModel? resident = await _service.getResident(arguments[0]);
+        final ComplaintModel? complaint = await _service.getComplaint(arguments[1]);
         _residentInformation(resident);
         _complaintInformation(complaint);
         debugPrint(

@@ -70,7 +70,7 @@ class NotificationPage extends BaseView<NotificationController> {
                               controller
                                   .observeNotifications()
                                   .value[index]
-                                  .uid,
+                                  .complaintId,
                             ),
                             child: Text(
                               AppLocalizations.of(context).translate('view'),
