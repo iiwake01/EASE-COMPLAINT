@@ -7,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ComplaintTile extends BaseView<StaffComplaintsListController> {
-
   const ComplaintTile({Key? key, required this.model}) : super(key: key);
   final ComplaintModel model;
 
@@ -27,7 +26,7 @@ class ComplaintTile extends BaseView<StaffComplaintsListController> {
         children: [
           ClipOval(
             child: CachedNetworkImage(
-              imageUrl: model.photo ?? "",
+              imageUrl: model.photo ?? Constants.BLANK,
               fit: BoxFit.cover,
               height: 50,
               width: 50,
@@ -64,8 +63,7 @@ class ComplaintTile extends BaseView<StaffComplaintsListController> {
             child: DataWidget(data: model.status),
           ),
           TextButton(
-            onPressed: () =>
-                controller.launchView(model.uid, model.id),
+            onPressed: () => controller.launchView(model.uid, model.id),
             child: const Text(
               "View",
               style: TextStyle(

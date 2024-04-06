@@ -5,6 +5,7 @@ import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/complaint_model.dart';
 import 'package:app/models/notification_model.dart';
 import 'package:app/routes/app_pages.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -63,10 +64,8 @@ class NotificationController extends BaseController {
   void launchView(final String? complaintId) {
     debugPrint("NotificationController launchView");
     if (checkSession(_auth)) {
-      Get.toNamed(Routes.RESIDENTCOMPLAINTVIEW, arguments: [
-        _auth.getUser()?.uid,
-        complaintId,
-      ]);
+      Get.toNamed(Routes.RESIDENTCOMPLAINTVIEW,
+          arguments: [_auth.getUser()?.uid, complaintId]);
     }
   }
 

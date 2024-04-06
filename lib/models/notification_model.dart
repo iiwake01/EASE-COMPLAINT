@@ -29,11 +29,8 @@ class NotificationModel {
       uid: data[Constants.UID],
       complaintId: data[Constants.COMPLIANTID],
       message: data[Constants.MESSAGE],
-      // dateFilled: DateTime.parse(data[Constants.DATEFILLED]),
-      // lastUpdate: DateTime.parse(data[Constants.DATELASTUPDATED]),
       dateFilled: data[Constants.DATEFILLED] as Timestamp?,
       lastUpdate: data[Constants.DATELASTUPDATED] as Timestamp?,
-
       hasRead: data[Constants.HASREAD],
     );
   }
