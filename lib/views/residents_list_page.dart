@@ -1,13 +1,10 @@
 import 'package:app/controllers/residents_list_controller.dart';
-import 'package:app/models/resident.dart';
-import 'package:app/models/resident_model.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
 import 'package:app/views/staff_complaints_list_page.dart';
 import 'package:app/widgets/resident_tile.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -100,16 +97,7 @@ class ResidentsListPage extends BaseView<ResidentsListController> {
                           itemCount: controller.getList().length,
                           scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) {
-                            ResidentModel model = controller.getList()[index];
-                            Resident resident = Resident(
-                              uid: model.uid ?? Constants.BLANK,
-                              photo: model.photo ?? Constants.BLANK,
-                              lastName: model.last ?? Constants.BLANK,
-                              firstName: model.first ?? Constants.BLANK,
-                              zone: model.zone ?? Constants.BLANK,
-                              age: model.age ?? Constants.BLANK,
-                            );
-                            return ResidentTile(resident: resident);
+                            return ResidentTile(resident: controller.getList()[index]);
                           },
                         ),
                       ),

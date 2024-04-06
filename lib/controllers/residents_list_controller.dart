@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class ResidentsListController extends BaseController {
+  
   ResidentsListController(
     this._auth,
     this._service,
@@ -51,10 +52,6 @@ class ResidentsListController extends BaseController {
   List<ResidentModel> getList() {
     return _residentList;
   }
-
-  // void launchView() {
-  //   if(checkSession(_auth)) onShowAlert("Under Construction", "On Going . . .");
-  // }
 
   void launchView(final String? uid) {
     if (checkSession(_auth)) {

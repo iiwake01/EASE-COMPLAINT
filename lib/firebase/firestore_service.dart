@@ -28,6 +28,10 @@ class FirestoreService extends GetxService {
     await _create("notifications", data);
   }
 
+  Future<void> createLogs(Map<String, dynamic> data) async {
+    await _create("logs", data);
+  }
+
   Future<void> updateResident(ResidentModel? model) async {
     if (model != null) {
       await dbFirestore
