@@ -19,54 +19,59 @@ class ResidentsComplaintChangeStatusPage
         title: "Update Status",
       ),
       backgroundColor: Colors.white,
-      body: Obx( () {
-        if (controller.observeLoading().isTrue) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
-          return Center(
-            child: Container(
-              height: MediaQuery.of(context).size.height * .7,
-              width: MediaQuery.of(context).size.width * .5,
-              decoration: BoxDecoration(
-                color: Colors.green.shade200.withOpacity(.5),
-                border: Border.all(color: Colors.green.shade200),
-                borderRadius: BorderRadius.circular(36),
+      body: Obx(
+        () {
+          if (controller.observeLoading().isTrue) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return Center(
+              child: Container(
+                height: MediaQuery.of(context).size.height * .7,
+                width: MediaQuery.of(context).size.width * .5,
+                decoration: BoxDecoration(
+                  color: Colors.green.shade200.withOpacity(.5),
+                  border: Border.all(color: Colors.green.shade200),
+                  borderRadius: BorderRadius.circular(36),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    StatusContainer(
+                      statusTitle: "Unresolved",
+                      colorBg: Colors.red.shade200,
+                      onclick: () {
+                        controller.updateStatus(AppLocalizations.of(context)
+                            .translate('unresolved'));
+                        Get.back();
+                      },
+                    ),
+                    StatusContainer(
+                      statusTitle: "Pending",
+                      colorBg: Colors.yellow.shade200,
+                      onclick: () {
+                        controller.updateStatus(
+                            AppLocalizations.of(context).translate('pending'));
+                        Get.back();
+                      },
+                    ),
+                    StatusContainer(
+                      statusTitle: "Resolved",
+                      colorBg: Colors.green.shade200,
+                      onclick: () {
+                        controller.updateStatus(
+                            AppLocalizations.of(context).translate('resolved'));
+                        Get.back();
+                      },
+                    ),
+                  ],
+                ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  StatusContainer(
-                    statusTitle: "Unresolved",
-                    colorBg: Colors.red.shade200,
-                    onclick: () {
-                      controller.updateStatus(AppLocalizations.of(context).translate('unresolved'));
-                      Get.back();
-                    },
-                  ),
-                  StatusContainer(
-                    statusTitle: "Pending",
-                    colorBg: Colors.yellow.shade200,
-                    onclick: () {
-                      controller.updateStatus(AppLocalizations.of(context).translate('pending'));
-                      Get.back();
-                    },
-                  ),
-                  StatusContainer(
-                    statusTitle: "Resolved",
-                    colorBg: Colors.green.shade200,
-                    onclick: () {
-                      controller.updateStatus(AppLocalizations.of(context).translate('resolved'));
-                      Get.back();
-                    },
-                  ),
-                ],
-              ),
-            ),
-          );
-        }
-      }, ),
+            );
+          }
+        },
+      ),
     );
   }
 }
