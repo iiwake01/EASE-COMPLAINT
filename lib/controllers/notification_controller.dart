@@ -63,7 +63,10 @@ class NotificationController extends BaseController {
   void launchView(final String? complaintId) {
     debugPrint("NotificationController launchView");
     if (checkSession(_auth)) {
-      Get.toNamed(Routes.RESIDENTCOMPLAINTVIEW, arguments: complaintId);
+      Get.toNamed(Routes.RESIDENTCOMPLAINTVIEW, arguments: [
+        _auth.getUser()?.uid,
+        complaintId,
+      ]);
     }
   }
 
