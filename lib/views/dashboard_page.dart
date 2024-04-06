@@ -43,8 +43,8 @@ class DashboardPage extends BaseView<DashboardController> {
                       Divider(),
                       Center(
                         child: Text(
-                          "Top Complaints in\nBarangay Bonbon",
-                          style: TextStyle(
+                          AppLocalizations.of(context).translate('top_complaints_in_barangay_bonbon'),
+                          style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 30,
@@ -63,7 +63,7 @@ class DashboardPage extends BaseView<DashboardController> {
                             ),
                             child: Column (
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: controller.getTopComplaintsList().mapIndexed((index, topComplaint) => 
+                              children: controller.observeTopComplaintsList().mapIndexed((index, topComplaint) => 
                                 TopComplaintsText (
                                   iteration: '${index + 1}.',
                                   data: topComplaint,

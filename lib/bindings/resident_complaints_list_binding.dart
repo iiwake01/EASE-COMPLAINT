@@ -8,9 +8,10 @@ class ResidentComplaintsListBinding extends BaseBinding {
   @override
   void dependencies() {
     Get.lazyPut<ResidentComplaintsListController>(
-        () => ResidentComplaintsListController(
-              Get.find<FirebaseAuthService>(),
-              Get.find<FirestoreService>(),
-            ));
+      () => ResidentComplaintsListController(
+        Get.find<FirebaseAuthService>(),
+        Get.find<FirestoreService>(),
+      )
+    );
   }
 }

@@ -117,8 +117,18 @@ class FirestoreService extends GetxService {
         .toList();
   }
 
-  Future<int> getComplaintsStatus(String status) async {
-    final response = await dbFirestore.collection("complaints").where(Constants.STATUS, isEqualTo: status).get();
+  Future<int> getComplaintsStatus(String status, String? uid) async {
+    final QuerySnapshot<Map<String, dynamic>> response;
+    if (uid != null) {
+      response = await dbFirestore.collection("complaints")
+      .where(Constants.STATUS, isEqualTo: status)
+      .where(Constants.UID, isEqualTo: uid)
+      .get();
+    } else {
+      response = await dbFirestore.collection("complaints")
+      .where(Constants.STATUS, isEqualTo: status)
+      .get();
+    }
     return response.docs.length;
   }
 }
