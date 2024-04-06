@@ -18,7 +18,8 @@ class NotificationModel {
   final String? complaintId;
   //final String? title;
   final String? message;
-  final DateTime? dateFilled, lastUpdate;
+  // final DateTime? dateFilled, lastUpdate;
+  final Timestamp? dateFilled, lastUpdate;
   final bool? hasRead;
 
   factory NotificationModel.fromSnapshot(DocumentSnapshot snapshot) {
@@ -28,8 +29,11 @@ class NotificationModel {
       uid: data[Constants.UID],
       complaintId: data[Constants.COMPLIANTID],
       message: data[Constants.MESSAGE],
-      dateFilled: DateTime.parse(data[Constants.DATEFILLED]),
-      lastUpdate: DateTime.parse(data[Constants.DATELASTUPDATED]),
+      // dateFilled: DateTime.parse(data[Constants.DATEFILLED]),
+      // lastUpdate: DateTime.parse(data[Constants.DATELASTUPDATED]),
+      dateFilled: data[Constants.DATEFILLED] as Timestamp?,
+      lastUpdate: data[Constants.DATELASTUPDATED] as Timestamp?,
+
       hasRead: data[Constants.HASREAD],
     );
   }
@@ -38,7 +42,7 @@ class NotificationModel {
         Constants.UID: uid,
         Constants.COMPLIANTID: complaintId,
         //Constants.LOCATION: title,
-        Constants.NARRATIVE: message,
+        Constants.MESSAGE: message,
         Constants.DATEFILLED: dateFilled,
         Constants.DATELASTUPDATED: lastUpdate,
         Constants.HASREAD: hasRead,

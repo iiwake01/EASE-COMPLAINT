@@ -3,6 +3,7 @@ import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/complaint_model.dart';
 import 'package:app/models/notification_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -54,7 +55,7 @@ class ResidentComplaintStatusChangeController extends BaseController {
         complaintId: notification?.id,
         message: "Your filed complaint has been updated.",
         dateFilled: notification?.dateFilled,
-        lastUpdate: DateTime.now(),
+        lastUpdate: Timestamp.now(),
         hasRead: false,
       ));
     }

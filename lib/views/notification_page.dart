@@ -47,10 +47,12 @@ class NotificationPage extends BaseView<NotificationController> {
                       itemBuilder: (context, index) => Card(
                         clipBehavior: Clip.antiAlias,
                         child: ListTile(
-                          contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 15),
                           leading: Icon(
                             CupertinoIcons.bell_fill,
                             color: Constants.standardColor,
+                            size: 30,
                           ),
                           title: Text(
                             controller
@@ -58,6 +60,10 @@ class NotificationPage extends BaseView<NotificationController> {
                                     .value?[index]
                                     .message ??
                                 Constants.BLANK,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                           trailing: TextButton(
                             onPressed: () => controller.launchView(),

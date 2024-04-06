@@ -147,8 +147,8 @@ class ComplaintFormController extends BaseController {
         uid: user?.uid,
         complaintId: complaintDocument.id,
         message: "Complaint has successfully submitted.",
-        dateFilled: DateTime.now(),
-        lastUpdate: DateTime.now(),
+        dateFilled: Timestamp.now(),
+        lastUpdate: Timestamp.now(),
         hasRead: false,
       );
       await _service.createNotification(notification.toMap());
