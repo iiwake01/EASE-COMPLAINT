@@ -27,7 +27,7 @@ class ComplaintTile extends BaseView<StaffComplaintsListController> {
         children: [
           ClipOval(
             child: CachedNetworkImage(
-              imageUrl: model.photo!,
+              imageUrl: model.photo ?? "",
               fit: BoxFit.cover,
               height: 50,
               width: 50,
@@ -36,7 +36,6 @@ class ComplaintTile extends BaseView<StaffComplaintsListController> {
                 return const CircularProgressIndicator();
               },
               errorWidget: (context, error, stackTrace) {
-                // Display a placeholder or alternative image
                 return const Icon(
                   CupertinoIcons.person_circle,
                   color: Colors.grey,
