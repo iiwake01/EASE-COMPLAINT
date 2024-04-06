@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ResidentComplaintStatusChangeController extends BaseController {
-
   ResidentComplaintStatusChangeController(this._auth, this._service) {
     debugPrint("ResidentsListController Constructor");
   }
@@ -47,16 +46,17 @@ class ResidentComplaintStatusChangeController extends BaseController {
           status: status,
         ),
       );
-      final NotificationModel? notification = await _service.getNotification(complaint?.id,);
-      _service.updateNotification(
-        NotificationModel(
-          uid: notification?.uid,
-          complaintId: notification?.id,
-          dateFilled: notification?.dateFilled,
-          lastUpdate: DateTime.now(),
-          hasRead: false,
-        )
+      final NotificationModel? notification = await _service.getNotification(
+        complaint?.id,
       );
+      _service.updateNotification(NotificationModel(
+        uid: notification?.uid,
+        complaintId: notification?.id,
+        message: "Your filed complaint has been updated.",
+        dateFilled: notification?.dateFilled,
+        lastUpdate: DateTime.now(),
+        hasRead: false,
+      ));
     }
   }
 

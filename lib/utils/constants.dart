@@ -38,13 +38,15 @@ class Constants {
   static const DATELASTUPDATED = "date_last_updated";
   static const LOCATION = "location_of_incident";
   static const NARRATIVE = "narrative_report";
+  static const MESSAGE = "message";
   static const ATTACHMENT = "attachment";
   static const PAT = "previous_action_taken";
   static const WITNESSNAME = "witness_name";
   static const WITNESSCONTACT = "witness_contract";
   static const RESOLUTIONREQUEST = "resolution_request";
   static const HASREAD = "has_read";
-  static Color transparentColor = HexColor('00ffffff').withOpacity(0.00) ?? Colors.transparent;
+  static Color transparentColor =
+      HexColor('00ffffff').withOpacity(0.00) ?? Colors.transparent;
   static Color standardColor = const Color.fromARGB(255, 74, 107, 76);
   static Color primaryColor = const Color.fromARGB(255, 169, 202, 174);
   static Color appBarColor = const Color.fromARGB(131, 64, 90, 54);

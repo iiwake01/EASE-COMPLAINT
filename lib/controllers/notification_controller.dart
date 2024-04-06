@@ -6,14 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NotificationController extends BaseController {
-
   NotificationController(this._auth, this._service) {
     debugPrint("NotificationController Constructor");
   }
 
   final FirebaseAuthService _auth;
   final FirestoreService _service;
-  final RxList<NotificationModel> _notificationList = List<NotificationModel>.empty().obs;
+  final RxBool _isLoading = false.obs;
+
+  final RxList<NotificationModel> _notificationList =
+      List<NotificationModel>.empty().obs;
 
   @override
   Future<void> onInit() async {
@@ -21,12 +23,13 @@ class NotificationController extends BaseController {
     debugPrint("NotificationController onInit");
     _fetch();
   }
-  
+
   Future<void> _fetch() async {
-     try {
-      //_isLoading(true);
+    try {
+      _isLoading(true);
       if (checkSession(_auth)) {
-        final List<NotificationModel> snapshot = await _service.getNotifications(_auth.getUser()?.uid);
+        final List<NotificationModel> snapshot =
+            await _service.getNotifications(_auth.getUser()?.uid);
         _notificationList.assignAll(snapshot);
       } else {
         _notificationList.clear();
@@ -35,7 +38,7 @@ class NotificationController extends BaseController {
       onShowAlert("Error", "Fetch Failed");
       debugPrint("NotificationController fetch $exception");
     } finally {
-      //_isLoading(false);
+      _isLoading(false);
     }
   }
 
@@ -43,10 +46,18 @@ class NotificationController extends BaseController {
     return _notificationList;
   }
 
+  int getListCount() {
+    return _notificationList.length;
+  }
+
+  RxBool observeLoading() {
+    return _isLoading;
+  }
+
   void launchView() {
     //TODO: after lauching the Notification update the parameter Constants.HASREAD to true
   }
-  
+
   @override
   void onClose() {
     debugPrint("NotificationController onClose");
