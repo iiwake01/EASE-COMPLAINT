@@ -139,7 +139,8 @@ class ComplaintFormController extends BaseController {
       notification = NotificationModel(
         uid: user?.uid,
         complaintId: complaintDocument.id,
-        dateTime: DateTime.now(),
+        dateFilled: DateTime.now(),
+        lastUpdate: DateTime.now(),
         hasRead: false,
       );
       await _service.createNotification(notification.toMap());

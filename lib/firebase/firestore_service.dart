@@ -115,6 +115,7 @@ class FirestoreService extends GetxService {
   }
 
   Future<ComplaintModel?> getComplaint(String? id) async {
+    if (id == null) return null;
     final response = await dbFirestore.collection("complaints").doc(id).get();
     return ComplaintModel.fromSnapshot(response);
   }
@@ -141,9 +142,21 @@ class FirestoreService extends GetxService {
     return response.docs.length;
   }
 
+  Future<NotificationModel?> getNotification(String? complaintId) async {
+    if (complaintId == null) return null;
+    final response = await dbFirestore.collection("notifications").where(Constants.COMPLIANTID, isEqualTo: complaintId).get();
+    return response.docs
+        .map((doc) => NotificationModel.fromSnapshot(doc))
+        .toList()
+        .firstOrNull;
+  }
+
   Future<List<NotificationModel>> getNotifications(String? uid) async {
     if (uid == null) return List.empty();
-    final response = await dbFirestore.collection("notifications").where(Constants.UID, isEqualTo: uid).get();
+    final response = await dbFirestore.collection("notifications")
+      .where(Constants.UID, isEqualTo: uid)
+      .orderBy(Constants.DATELASTUPDATED, descending: false)
+      .get();
     return response.docs.map((doc) => NotificationModel.fromSnapshot(doc)).toList();
   }
 

@@ -2,7 +2,7 @@ import 'package:app/controllers/base_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/complaint_model.dart';
-import 'package:app/utils/app_localizations.dart';
+import 'package:app/models/notification_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,80 +24,38 @@ class ResidentComplaintStatusChangeController extends BaseController {
     debugPrint("ResidentsListController onInit");
   }
 
-  Future<void> updatePending() async {
+  Future<void> updateStatus(String status) async {
     if (checkSession(_auth)) {
-      final ComplaintModel? snapshot = await _service.getComplaint(arguments);
+      final ComplaintModel? complaint = await _service.getComplaint(arguments);
       _service.updateComplaint(
         ComplaintModel(
-          id: snapshot!.id,
-          uid: snapshot.uid,
-          urgency: snapshot.urgency,
-          location: snapshot.location,
-          narrative: snapshot.narrative,
-          attacthment: snapshot.attacthment,
-          previousActionTaken: snapshot.previousActionTaken,
-          witnessName: snapshot.witnessName,
-          witnessContact: snapshot.witnessContact,
-          resolutionRequest: snapshot.resolutionRequest,
-          photo: snapshot.photo,
-          name: snapshot.name,
-          zone: snapshot.zone,
-          type: snapshot.type,
-          date: snapshot.date,
-          status: AppLocalizations.of(Get.context!).translate('pending'),
+          id: complaint?.id,
+          uid: complaint?.uid,
+          urgency: complaint?.urgency,
+          location: complaint?.location,
+          narrative: complaint?.narrative,
+          attacthment: complaint?.attacthment,
+          previousActionTaken: complaint?.previousActionTaken,
+          witnessName: complaint?.witnessName,
+          witnessContact: complaint?.witnessContact,
+          resolutionRequest: complaint?.resolutionRequest,
+          photo: complaint?.photo,
+          name: complaint?.name,
+          zone: complaint?.zone,
+          type: complaint?.type,
+          date: complaint?.date,
+          status: status,
         ),
       );
-    }
-  }
-
-  Future<void> updateUnresolved() async {
-    if(checkSession(_auth)) {
-      final ComplaintModel? snapshot = await _service.getComplaint(arguments);
-      _service.updateComplaint(
-        ComplaintModel(
-          id: snapshot!.id,
-          uid: snapshot.uid,
-          urgency: snapshot.urgency,
-          location: snapshot.location,
-          narrative: snapshot.narrative,
-          attacthment: snapshot.attacthment,
-          previousActionTaken: snapshot.previousActionTaken,
-          witnessName: snapshot.witnessName,
-          witnessContact: snapshot.witnessContact,
-          resolutionRequest: snapshot.resolutionRequest,
-          photo: snapshot.photo,
-          name: snapshot.name,
-          zone: snapshot.zone,
-          type: snapshot.type,
-          date: snapshot.date,
-          status: AppLocalizations.of(Get.context!).translate('unresolved'),
-        ),
-      );
-    }
-  }
-
-  Future<void> updateResolved() async {
-    if(checkSession(_auth)) {
-      final ComplaintModel? snapshot = await _service.getComplaint(arguments);
-      _service.updateComplaint(
-        ComplaintModel(
-          id: snapshot!.id,
-          uid: snapshot.uid,
-          urgency: snapshot.urgency,
-          location: snapshot.location,
-          narrative: snapshot.narrative,
-          attacthment: snapshot.attacthment,
-          previousActionTaken: snapshot.previousActionTaken,
-          witnessName: snapshot.witnessName,
-          witnessContact: snapshot.witnessContact,
-          resolutionRequest: snapshot.resolutionRequest,
-          photo: snapshot.photo,
-          name: snapshot.name,
-          zone: snapshot.zone,
-          type: snapshot.type,
-          date: snapshot.date,
-          status: AppLocalizations.of(Get.context!).translate('resolved'),
-        ),
+      final NotificationModel? notification = await _service.getNotification(complaint?.id,);
+      _service.updateNotification(
+        NotificationModel(
+          uid: notification?.uid,
+          complaintId: notification?.id,
+          dateFilled: notification?.dateFilled,
+          lastUpdate: DateTime.now(),
+          hasRead: false,
+        )
       );
     }
   }

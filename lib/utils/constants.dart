@@ -35,6 +35,7 @@ class Constants {
   static const URGENCY = "urgency_of_problem";
   static const DATEFILLED = "date_filled";
   static const DATEINCIDENT = "date_of_incident";
+  static const DATELASTUPDATED = "date_last_updated";
   static const LOCATION = "location_of_incident";
   static const NARRATIVE = "narrative_report";
   static const ATTACHMENT = "attachment";
