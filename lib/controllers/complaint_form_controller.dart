@@ -4,10 +4,12 @@ import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firebase_storage_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/complaint_model.dart';
+import 'package:app/models/notification_model.dart';
 import 'package:app/models/resident_model.dart';
 import 'package:app/routes/app_pages.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/widgets/dialog_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -34,7 +36,6 @@ class ComplaintFormController extends BaseController {
   void onInit() {
     super.onInit();
     debugPrint("ComplaintFormController onInit arguments $arguments");
-    //checkSession();
     urgencyController = TextEditingController();
     locationController = TextEditingController();
     narrativeController = TextEditingController();
@@ -95,14 +96,15 @@ class ComplaintFormController extends BaseController {
     try {
       TaskSnapshot? taskSnapshot = await _storage.uploadPlatformFiles(attatchmentFile);
       final ComplaintModel complaint;
+      final NotificationModel notification;
       final User? user = _auth.getUser();
-      final ResidentModel? resident = await _service.getResident(user?.uid ?? "000");
+      final ResidentModel? resident = await _service.getResident(user?.uid);
       if (taskSnapshot != null && taskSnapshot.state == TaskState.success) {
         complaint = ComplaintModel (
-          uid: user?.uid ?? "000",
+          uid: user?.uid,
           name: "${resident?.first} ${resident?.middle} ${resident?.last}",
           photo: resident?.photo,
-          zone: resident?.zone ?? "Zone 007",
+          zone: resident?.zone,
           urgency: urgencyController?.text,
           type: typeController.value?.text,
           date: incidentDateController.value?.text,
@@ -117,10 +119,10 @@ class ComplaintFormController extends BaseController {
         );
       } else {
         complaint = ComplaintModel (
-          uid: user?.uid ?? "007",
+          uid: user?.uid,
           name: "${resident?.first} ${resident?.middle} ${resident?.last}",
           photo: resident?.photo,
-          zone: resident?.zone ?? "Zone 007",
+          zone: resident?.zone,
           urgency: urgencyController?.text,
           type: typeController.value?.text,
           date: incidentDateController.value?.text,
@@ -133,7 +135,14 @@ class ComplaintFormController extends BaseController {
           status: AppLocalizations.of(Get.context!).translate('pending')
         );
       }
-      await _service.createComplaint(complaint.toMap());
+      final DocumentReference complaintDocument = await _service.createComplaint(complaint.toMap());
+      notification = NotificationModel(
+        uid: user?.uid,
+        complaintId: complaintDocument.id,
+        dateTime: DateTime.now(),
+        hasRead: false,
+      );
+      await _service.createNotification(notification.toMap());
     } catch(exception) {
       debugPrint("ComplaintFormController Invalid $exception");
       onShowAlert("Error", "Please Try again $exception");

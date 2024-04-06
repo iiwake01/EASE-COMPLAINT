@@ -16,6 +16,7 @@ class Constants {
   ];
   static const ID = "id";
   static const UID = "user_id";
+  static const COMPLIANTID = "complaint_id";
   static const PHOTO = "photo";
   static const NAME = "name";
   static const FIRST = "first";
@@ -32,6 +33,7 @@ class Constants {
   static const EMAIL = "email";
   static const RESIDENCY = "proof_of_residency";
   static const URGENCY = "urgency_of_problem";
+  static const DATEFILLED = "date_filled";
   static const DATEINCIDENT = "date_of_incident";
   static const LOCATION = "location_of_incident";
   static const NARRATIVE = "narrative_report";
@@ -40,8 +42,8 @@ class Constants {
   static const WITNESSNAME = "witness_name";
   static const WITNESSCONTACT = "witness_contract";
   static const RESOLUTIONREQUEST = "resolution_request";
-  static Color transparentColor =
-      HexColor('00ffffff').withOpacity(0.00) ?? Colors.transparent;
+  static const HASREAD = "has_read";
+  static Color transparentColor = HexColor('00ffffff').withOpacity(0.00) ?? Colors.transparent;
   static Color standardColor = const Color.fromARGB(255, 74, 107, 76);
   static Color primaryColor = const Color.fromARGB(255, 169, 202, 174);
   static Color appBarColor = const Color.fromARGB(131, 64, 90, 54);

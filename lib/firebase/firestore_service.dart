@@ -1,4 +1,5 @@
 import 'package:app/models/complaint_model.dart';
+import 'package:app/models/notification_model.dart';
 import 'package:app/models/resident_model.dart';
 import 'package:app/models/staff_model.dart';
 import 'package:app/utils/constants.dart';
@@ -8,16 +9,16 @@ import 'package:get/get.dart';
 class FirestoreService extends GetxService {
   final dbFirestore = FirebaseFirestore.instance;
 
-  Future<void> _create(String collectionPath, Map<String, dynamic> data) async {
-    await dbFirestore.collection(collectionPath).add(data);
+  Future<DocumentReference> _create(String collectionPath, Map<String, dynamic> data) async {
+    return await dbFirestore.collection(collectionPath).add(data);
   }
 
   Future<void> createResident(Map<String, dynamic> data) async {
     await _create("residents", data);
   }
 
-  Future<void> createComplaint(Map<String, dynamic> data) async {
-    await _create("complaints", data);
+  Future<DocumentReference> createComplaint(Map<String, dynamic> data) async {
+    return await _create("complaints", data);
   }
 
   Future<void> createStaff(Map<String, dynamic> data) async {
@@ -26,10 +27,6 @@ class FirestoreService extends GetxService {
 
   Future<void> createNotification(Map<String, dynamic> data) async {
     await _create("notifications", data);
-  }
-
-  Future<void> createLogs(Map<String, dynamic> data) async {
-    await _create("logs", data);
   }
 
   Future<void> updateResident(ResidentModel? model) async {
@@ -62,6 +59,17 @@ class FirestoreService extends GetxService {
           .update(model.toMap());
     } else {
       throw Exception("StaffModel is Null");
+    }
+  }
+
+  Future<void> updateNotification(NotificationModel? model) async {
+    if (model != null) {
+      await dbFirestore
+          .collection("notifications")
+          .doc(model.id)
+          .update(model.toMap());
+    } else {
+      throw Exception("NotificationModel is Null");
     }
   }
 
@@ -130,5 +138,10 @@ class FirestoreService extends GetxService {
       .get();
     }
     return response.docs.length;
+  }
+
+  Future<List<NotificationModel>> getNotifications() async {
+    final response = await dbFirestore.collection("notifications").get();
+    return response.docs.map((doc) => NotificationModel.fromSnapshot(doc)).toList();
   }
 }
