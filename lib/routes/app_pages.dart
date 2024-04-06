@@ -147,5 +147,12 @@ abstract class AppPages {
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
+    GetPage(
+      name: Routes.RESIDENTCOMPLAINTVIEW,
+      page: () => const ResidentsComplaintReviewPage(),
+      binding: ResidentComplaintReviewBinding(),
+      transition: Transition.noTransition,
+      transitionDuration: const Duration(milliseconds: 250),
+    ),
   ];
 }

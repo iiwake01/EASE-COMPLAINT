@@ -1,7 +1,9 @@
+import 'package:app/bindings/complaint_form_finding.dart';
 import 'package:app/controllers/base_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/notification_model.dart';
+import 'package:app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -54,8 +56,14 @@ class NotificationController extends BaseController {
     return _isLoading;
   }
 
-  void launchView() {
+  void launchView(final String? complaintId) {
     //TODO: after lauching the Notification update the parameter Constants.HASREAD to true
+    if (checkSession(_auth)) {
+      Get.toNamed(
+        Routes.RESIDENTCOMPLAINTVIEW,
+        arguments: complaintId,
+      );
+    }
   }
 
   @override

@@ -66,7 +66,12 @@ class NotificationPage extends BaseView<NotificationController> {
                             ),
                           ),
                           trailing: TextButton(
-                            onPressed: () => controller.launchView(),
+                            onPressed: () => controller.launchView(
+                              controller
+                                  .observeNotifications()
+                                  .value[index]
+                                  .complaintId,
+                            ),
                             child: Text(
                               AppLocalizations.of(context).translate('view'),
                               style: TextStyle(
