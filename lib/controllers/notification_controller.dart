@@ -2,6 +2,7 @@ import 'package:app/bindings/complaint_form_finding.dart';
 import 'package:app/controllers/base_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
+import 'package:app/models/complaint_model.dart';
 import 'package:app/models/notification_model.dart';
 import 'package:app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,9 @@ class NotificationController extends BaseController {
 
   final FirebaseAuthService _auth;
   final FirestoreService _service;
+  final RxList<ComplaintModel> _complaintList =
+      List<ComplaintModel>.empty().obs;
+
   final RxBool _isLoading = false.obs;
 
   final RxList<NotificationModel> _notificationList =
@@ -57,12 +61,9 @@ class NotificationController extends BaseController {
   }
 
   void launchView(final String? complaintId) {
-    //TODO: after lauching the Notification update the parameter Constants.HASREAD to true
+    debugPrint("NotificationController launchView");
     if (checkSession(_auth)) {
-      Get.toNamed(
-        Routes.RESIDENTCOMPLAINTVIEW,
-        arguments: complaintId,
-      );
+      Get.toNamed(Routes.RESIDENTCOMPLAINTVIEW, arguments: complaintId);
     }
   }
 

@@ -9,36 +9,53 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends BaseController {
-
-  DashboardController(this._auth, this._service,) {
+  DashboardController(
+    this._auth,
+    this._service,
+  ) {
     debugPrint("DashboardController Constructor");
   }
 
   final FirebaseAuthService _auth;
   final FirestoreService _service;
-  final RxList<TopComplaintModel?> _topComplaintsList = List<TopComplaintModel?>.empty().obs;
-  final RxString _solvedComplaints = "".obs, _pendingComplaints = "".obs, _todayComplaints = "".obs;
+  final RxBool _isLoading = false.obs;
+
+  final RxList<TopComplaintModel?> _topComplaintsList =
+      List<TopComplaintModel?>.empty().obs;
+  final RxString _solvedComplaints = "".obs,
+      _pendingComplaints = "".obs,
+      _todayComplaints = "".obs;
 
   @override
   Future<void> onInit() async {
     super.onInit();
     debugPrint("DashboardController onInit");
     if (checkSession(_auth)) {
+      _isLoading(false);
+
       final User? user = _auth.getUser();
       final ResidentModel? resident = await _service.getResident(user?.uid);
-      if(resident != null) {
+      if (resident != null) {
         _topComplaintsList(await _service.getComplaintsTop(user?.uid));
-        _solvedComplaints("${await _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('resolved'), resident.uid)}");
-        _pendingComplaints("${await _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('pending'), resident.uid)}");
+        _solvedComplaints(
+            "${await _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('resolved'), resident.uid)}");
+        _pendingComplaints(
+            "${await _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('pending'), resident.uid)}");
         _todayComplaints("${await _service.getNotificationsToday(user?.uid)}");
       } else {
         _topComplaintsList(await _service.getComplaintsTop(null));
-        _solvedComplaints("${await _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('resolved'), null)}");
-        _pendingComplaints("${await _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('pending'), null)}");
+        _solvedComplaints(
+            "${await _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('resolved'), null)}");
+        _pendingComplaints(
+            "${await _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('pending'), null)}");
         _todayComplaints("${await _service.getNotificationsToday(null)}");
       }
     }
     debugPrint("DashboardController onInit done");
+  }
+
+  RxBool observeLoading() {
+    return _isLoading;
   }
 
   int getTopComplaintsCount() {
@@ -60,7 +77,7 @@ class DashboardController extends BaseController {
   RxString observeComplaintsSubmittedToday() {
     return _todayComplaints;
   }
-  
+
   @override
   void onClose() {
     debugPrint("DashboardController onClose");

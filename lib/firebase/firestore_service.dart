@@ -12,7 +12,8 @@ import 'package:get/get.dart';
 class FirestoreService extends GetxService {
   final dbFirestore = FirebaseFirestore.instance;
 
-  Future<DocumentReference> _create(String collectionPath, Map<String, dynamic> data) async {
+  Future<DocumentReference> _create(
+      String collectionPath, Map<String, dynamic> data) async {
     return await dbFirestore.collection(collectionPath).add(data);
   }
 
@@ -132,14 +133,16 @@ class FirestoreService extends GetxService {
   Future<int> getComplaintsStatus(String status, String? uid) async {
     final QuerySnapshot<Map<String, dynamic>> response;
     if (uid != null) {
-      response = await dbFirestore.collection("complaints")
-      .where(Constants.STATUS, isEqualTo: status)
-      .where(Constants.UID, isEqualTo: uid)
-      .get();
+      response = await dbFirestore
+          .collection("complaints")
+          .where(Constants.STATUS, isEqualTo: status)
+          .where(Constants.UID, isEqualTo: uid)
+          .get();
     } else {
-      response = await dbFirestore.collection("complaints")
-      .where(Constants.STATUS, isEqualTo: status)
-      .get();
+      response = await dbFirestore
+          .collection("complaints")
+          .where(Constants.STATUS, isEqualTo: status)
+          .get();
     }
     return response.docs.length;
   }
@@ -147,50 +150,71 @@ class FirestoreService extends GetxService {
   Future<List<TopComplaintModel?>> getComplaintsTop(String? uid) async {
     final QuerySnapshot<Map<String, dynamic>> response;
     final int environment, community, disturbance, crime, other;
-    final List<TopComplaintModel> topComplaint = List.empty();
+    final List<TopComplaintModel> topComplaint = [];
     if (uid != null) {
-      response = await dbFirestore.collection("complaints")
-      .where(Constants.UID, isEqualTo: uid)
-      .get();
+      response = await dbFirestore
+          .collection("complaints")
+          .where(Constants.UID, isEqualTo: uid)
+          .get();
     } else {
-      response = await dbFirestore.collection("complaints")
-      .get();
+      response = await dbFirestore.collection("complaints").get();
     }
-    final List<ComplaintModel?> list = response.docs
-      .map((doc) => ComplaintModel.fromSnapshot(doc))
-      .toList();
-    environment = list.where((complaint) => complaint?.type == AppLocalizations.of(Get.context!).translate('environmental_problem')).toList().length;
-    community = list.where((complaint) => complaint?.type == AppLocalizations.of(Get.context!).translate('community_conflict')).toList().length;
-    disturbance = list.where((complaint) => complaint?.type == AppLocalizations.of(Get.context!).translate('public_disturbance')).toList().length;
-    crime = list.where((complaint) => complaint?.type == AppLocalizations.of(Get.context!).translate('crime_related')).toList().length;
+    final List<ComplaintModel?> list =
+        response.docs.map((doc) => ComplaintModel.fromSnapshot(doc)).toList();
+    environment = list
+        .where((complaint) =>
+            complaint?.type ==
+            AppLocalizations.of(Get.context!)
+                .translate('environmental_problem'))
+        .toList()
+        .length;
+    community = list
+        .where((complaint) =>
+            complaint?.type ==
+            AppLocalizations.of(Get.context!).translate('community_conflict'))
+        .toList()
+        .length;
+    disturbance = list
+        .where((complaint) =>
+            complaint?.type ==
+            AppLocalizations.of(Get.context!).translate('public_disturbance'))
+        .toList()
+        .length;
+    crime = list
+        .where((complaint) =>
+            complaint?.type ==
+            AppLocalizations.of(Get.context!).translate('crime_related'))
+        .toList()
+        .length;
     other = list.length - (environment + community + disturbance + crime);
-    topComplaint.add( TopComplaintModel(
-      type: AppLocalizations.of(Get.context!).translate('environmental_problem'),
-      quanity: environment
-    ) );
-    topComplaint.add( TopComplaintModel(
-      type: AppLocalizations.of(Get.context!).translate('community_conflict'),
-      quanity: community
-    ) );
-    topComplaint.add( TopComplaintModel(
-      type: AppLocalizations.of(Get.context!).translate('public_disturbance'),
-      quanity: disturbance
-    ) );
-    topComplaint.add( TopComplaintModel(
-      type: AppLocalizations.of(Get.context!).translate('crime_related'),
-      quanity: crime
-    ) );
-    topComplaint.add( TopComplaintModel(
-      type: AppLocalizations.of(Get.context!).translate('other_type_of_problem'),
-      quanity: other
-    ) );
-    topComplaint.sort((modelA, modelB) => modelB.quanity!.compareTo(modelA.quanity));
+    topComplaint.add(TopComplaintModel(
+        type: AppLocalizations.of(Get.context!)
+            .translate('environmental_problem'),
+        quanity: environment));
+    topComplaint.add(TopComplaintModel(
+        type: AppLocalizations.of(Get.context!).translate('community_conflict'),
+        quanity: community));
+    topComplaint.add(TopComplaintModel(
+        type: AppLocalizations.of(Get.context!).translate('public_disturbance'),
+        quanity: disturbance));
+    topComplaint.add(TopComplaintModel(
+        type: AppLocalizations.of(Get.context!).translate('crime_related'),
+        quanity: crime));
+    topComplaint.add(TopComplaintModel(
+        type: AppLocalizations.of(Get.context!)
+            .translate('other_type_of_problem'),
+        quanity: other));
+    topComplaint
+        .sort((modelA, modelB) => modelB.quanity!.compareTo(modelA.quanity));
     return topComplaint;
   }
 
   Future<NotificationModel?> getNotification(String? complaintId) async {
     if (complaintId == null) return null;
-    final response = await dbFirestore.collection("notifications").where(Constants.COMPLIANTID, isEqualTo: complaintId).get();
+    final response = await dbFirestore
+        .collection("notifications")
+        .where(Constants.COMPLIANTID, isEqualTo: complaintId)
+        .get();
     return response.docs
         .map((doc) => NotificationModel.fromSnapshot(doc))
         .toList()
@@ -199,33 +223,39 @@ class FirestoreService extends GetxService {
 
   Future<List<NotificationModel>> getNotifications(String? uid) async {
     if (uid == null) return List.empty();
-    final response = await dbFirestore.collection("notifications")
-      .where(Constants.UID, isEqualTo: uid)
-      .where(Constants.HASREAD, isEqualTo: false)
-      .orderBy(Constants.DATELASTUPDATED, descending: false)
-      .get();
-    return response.docs.map((doc) => NotificationModel.fromSnapshot(doc)).toList();
+    final response = await dbFirestore
+        .collection("notifications")
+        .where(Constants.UID, isEqualTo: uid)
+        .where(Constants.HASREAD, isEqualTo: false)
+        .orderBy(Constants.DATELASTUPDATED, descending: false)
+        .get();
+    return response.docs
+        .map((doc) => NotificationModel.fromSnapshot(doc))
+        .toList();
   }
 
   Future<int> getNotificationsToday(String? uid) async {
     final DateTime now = DateTime.now();
     final DateTime dateTimeToday = DateTime(now.year, now.month, now.day);
-    final DateTime dateTimeTomorrow = dateTimeToday.add(const Duration(days: 1));
+    final DateTime dateTimeTomorrow =
+        dateTimeToday.add(const Duration(days: 1));
     final Timestamp today = Timestamp.fromDate(dateTimeToday);
     final Timestamp tomorrow = Timestamp.fromDate(dateTimeTomorrow);
     try {
       final QuerySnapshot<Map<String, dynamic>> response;
       if (uid != null) {
-        response = await dbFirestore.collection("notifications")
-          .where(Constants.DATEFILLED, isGreaterThanOrEqualTo: today)
-          .where(Constants.DATEFILLED, isLessThan: tomorrow)
-          .where(Constants.UID, isEqualTo: uid)
-          .get();
+        response = await dbFirestore
+            .collection("notifications")
+            .where(Constants.DATEFILLED, isGreaterThanOrEqualTo: today)
+            .where(Constants.DATEFILLED, isLessThan: tomorrow)
+            .where(Constants.UID, isEqualTo: uid)
+            .get();
       } else {
-        response = await dbFirestore.collection("notifications")
-          .where(Constants.DATEFILLED, isGreaterThanOrEqualTo: today)
-          .where(Constants.DATEFILLED, isLessThan: tomorrow)
-          .get();
+        response = await dbFirestore
+            .collection("notifications")
+            .where(Constants.DATEFILLED, isGreaterThanOrEqualTo: today)
+            .where(Constants.DATEFILLED, isLessThan: tomorrow)
+            .get();
       }
       return response.docs.length;
     } catch (error) {

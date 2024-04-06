@@ -1,5 +1,6 @@
 import 'package:app/controllers/dashboard_controller.dart';
 import 'package:app/utils/app_localizations.dart';
+import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
 import 'package:app/widgets/top_complaints_text.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
@@ -43,7 +44,8 @@ class DashboardPage extends BaseView<DashboardController> {
                       Divider(),
                       Center(
                         child: Text(
-                          AppLocalizations.of(context).translate('top_complaints_in_barangay_bonbon'),
+                          AppLocalizations.of(context)
+                              .translate('top_complaints_in_barangay_bonbon'),
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -57,20 +59,33 @@ class DashboardPage extends BaseView<DashboardController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(
-                              top: 30,
-                              left: 40,
-                            ),
-                            child: Column (
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: controller.observeTopComplaintsList().mapIndexed((index, topComplaint) => 
-                                TopComplaintsText (
-                                  iteration: '${index + 1}.',
-                                  data: topComplaint,
-                                ),
-                              ).toList(),
-                            ),
-                          )
+                              padding: const EdgeInsets.only(
+                                top: 30,
+                                left: 40,
+                              ),
+                              child: Obx(() {
+                                if (controller.observeLoading().isTrue) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                } else {
+                                  return Container(
+                                    height:
+                                        MediaQuery.of(context).size.width * .13,
+                                    width:
+                                        MediaQuery.of(context).size.width * .4,
+                                    child: ListView.builder(
+                                      itemCount:
+                                          controller.getTopComplaintsCount(),
+                                      itemBuilder: (context, index) =>
+                                          TopComplaintsText(
+                                              iteration: "${index + 1}",
+                                              data:
+                                                  "${controller.observeTopComplaintsList().value[index]?.type}"),
+                                    ),
+                                  );
+                                }
+                              }))
                         ],
                       )
                     ],
@@ -97,7 +112,8 @@ class DashboardPage extends BaseView<DashboardController> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              AppLocalizations.of(context).translate('solved_complaints'),
+                              AppLocalizations.of(context)
+                                  .translate('solved_complaints'),
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -118,7 +134,8 @@ class DashboardPage extends BaseView<DashboardController> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(36),
                                   color: Colors.white),
-                              child: Obx(() => Text(controller.observeSolvedComplaints().value)),
+                              child: Obx(() => Text(
+                                  controller.observeSolvedComplaints().value)),
                             )
                           ],
                         ),
@@ -150,16 +167,18 @@ class DashboardPage extends BaseView<DashboardController> {
                                   color: Colors.white, thickness: 1.0),
                             ),
                             Container(
-                                margin: const EdgeInsets.only(top: 10),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 5,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(36),
-                                  color: Colors.white,
-                                ),
-                                child: Obx(() => Text(controller.observePendingComplaints().value)),),
+                              margin: const EdgeInsets.only(top: 10),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(36),
+                                color: Colors.white,
+                              ),
+                              child: Obx(() => Text(
+                                  controller.observePendingComplaints().value)),
+                            ),
                           ],
                         ),
                       ),
@@ -176,7 +195,8 @@ class DashboardPage extends BaseView<DashboardController> {
                         child: Column(
                           children: <Widget>[
                             Text(
-                              AppLocalizations.of(context).translate('complaints_submitted_today'),
+                              AppLocalizations.of(context)
+                                  .translate('complaints_submitted_today'),
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -189,15 +209,18 @@ class DashboardPage extends BaseView<DashboardController> {
                                   color: Colors.white, thickness: 1.0),
                             ),
                             Container(
-                                margin: const EdgeInsets.only(top: 10),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 5,
-                                ),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(36),
-                                    color: Colors.white),
-                                child: Obx(() => Text(controller.observeComplaintsSubmittedToday().value)),),
+                              margin: const EdgeInsets.only(top: 10),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
+                              ),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(36),
+                                  color: Colors.white),
+                              child: Obx(() => Text(controller
+                                  .observeComplaintsSubmittedToday()
+                                  .value)),
+                            ),
                           ],
                         ),
                       ),
