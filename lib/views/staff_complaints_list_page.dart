@@ -1,12 +1,10 @@
 import 'package:app/controllers/staff_complaints_list_controller.dart';
 import 'package:app/models/complaint_model.dart';
-import 'package:app/models/complaint.dart';
 import 'package:app/utils/complaint_tile.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -104,17 +102,7 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
                           scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) {
                             ComplaintModel model = controller.getList()[index];
-                            Complaint complaint = Complaint(
-                              photo: model.photo ?? Constants.BLANK,
-                              name: model.name ?? Constants.BLANK,
-                              zone: model.zone ?? Constants.BLANK,
-                              complaintType: model.type ?? Constants.BLANK,
-                              date: model.date ?? Constants.BLANK,
-                              status: model.status ?? Constants.BLANK,
-                              uid: model.uid ?? Constants.BLANK,
-                              complaintId: model.id ?? Constants.BLANK,
-                            );
-                            return ComplaintTile(resident: complaint);
+                            return ComplaintTile(model: model);
                           },
                         ),
                       ),

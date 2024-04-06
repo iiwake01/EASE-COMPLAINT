@@ -1,13 +1,8 @@
-import 'package:app/controllers/resident_complaint_information_controller.dart';
 import 'package:app/controllers/resident_complaint_review_controller.dart';
-import 'package:app/models/complaint.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
 import 'package:app/widgets/back_app_bar.dart';
-import 'package:app/widgets/complaint_view_app_bar.dart';
-import 'package:app/widgets/white_back_app_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

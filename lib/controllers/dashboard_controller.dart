@@ -2,6 +2,7 @@ import 'package:app/controllers/base_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/resident_model.dart';
+import 'package:app/models/top_complaint_model.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -15,7 +16,7 @@ class DashboardController extends BaseController {
 
   final FirebaseAuthService _auth;
   final FirestoreService _service;
-  final RxList<String> _topComplaintsList = List<String>.empty().obs;
+  final RxList<TopComplaintModel?> _topComplaintsList = List<TopComplaintModel?>.empty().obs;
   final RxString _solvedComplaints = "".obs, _pendingComplaints = "".obs, _todayComplaints = "".obs;
 
   @override
@@ -25,12 +26,13 @@ class DashboardController extends BaseController {
     if (checkSession(_auth)) {
       final User? user = _auth.getUser();
       final ResidentModel? resident = await _service.getResident(user?.uid);
-      _topComplaintsList(["Sample First", "Sample Second", "Sample Third"]);//TODO: Get Data from Firestore Database
       if(resident != null) {
+        _topComplaintsList(await _service.getComplaintsTop(user?.uid));
         _solvedComplaints("${await _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('resolved'), resident.uid)}");
         _pendingComplaints("${await _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('pending'), resident.uid)}");
         _todayComplaints("${await _service.getNotificationsToday(user?.uid)}");
       } else {
+        _topComplaintsList(await _service.getComplaintsTop(null));
         _solvedComplaints("${await _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('resolved'), null)}");
         _pendingComplaints("${await _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('pending'), null)}");
         _todayComplaints("${await _service.getNotificationsToday(null)}");
@@ -43,11 +45,7 @@ class DashboardController extends BaseController {
     return _topComplaintsList.length;
   }
 
-  String getTopComplaints(int index) {
-    return _topComplaintsList[index];
-  }
-
-  RxList<String> observeTopComplaintsList() {
+  RxList<TopComplaintModel?> observeTopComplaintsList() {
     return _topComplaintsList;
   }
 

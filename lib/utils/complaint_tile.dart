@@ -1,5 +1,5 @@
 import 'package:app/controllers/staff_complaints_list_controller.dart';
-import 'package:app/models/complaint.dart';
+import 'package:app/models/complaint_model.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -7,8 +7,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ComplaintTile extends BaseView<StaffComplaintsListController> {
-  const ComplaintTile({Key? key, required this.resident}) : super(key: key);
-  final Complaint resident;
+
+  const ComplaintTile({Key? key, required this.model}) : super(key: key);
+  final ComplaintModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class ComplaintTile extends BaseView<StaffComplaintsListController> {
         children: [
           ClipOval(
             child: CachedNetworkImage(
-              imageUrl: resident.photo,
+              imageUrl: model.photo!,
               fit: BoxFit.cover,
               height: 50,
               width: 50,
@@ -45,27 +46,27 @@ class ComplaintTile extends BaseView<StaffComplaintsListController> {
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width * .1,
-            child: DataWidget(data: resident.name),
+            child: DataWidget(data: model.name),
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width * .1,
-            child: DataWidget(data: resident.zone),
+            child: DataWidget(data: model.zone),
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width * .1,
-            child: DataWidget(data: resident.complaintType),
+            child: DataWidget(data: model.type),
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width * .0675,
-            child: DataWidget(data: resident.date),
+            child: DataWidget(data: model.date),
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width * .1,
-            child: DataWidget(data: resident.status),
+            child: DataWidget(data: model.status),
           ),
           TextButton(
             onPressed: () =>
-                controller.launchView(resident.uid, resident.complaintId),
+                controller.launchView(model.uid, model.id),
             child: const Text(
               "View",
               style: TextStyle(
@@ -87,12 +88,12 @@ class DataWidget extends StatelessWidget {
     required this.data,
   });
 
-  final String data;
+  final String? data;
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      data,
+      data ?? Constants.BLANK,
       style: TextStyle(
         color: Constants.standardColor,
         fontWeight: FontWeight.bold,
