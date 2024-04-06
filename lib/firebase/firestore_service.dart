@@ -155,6 +155,7 @@ class FirestoreService extends GetxService {
     if (uid == null) return List.empty();
     final response = await dbFirestore.collection("notifications")
       .where(Constants.UID, isEqualTo: uid)
+      .where(Constants.HASREAD, isEqualTo: false)
       .orderBy(Constants.DATELASTUPDATED, descending: false)
       .get();
     return response.docs.map((doc) => NotificationModel.fromSnapshot(doc)).toList();
