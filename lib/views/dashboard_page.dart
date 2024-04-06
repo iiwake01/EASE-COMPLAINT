@@ -197,9 +197,7 @@ class DashboardPage extends BaseView<DashboardController> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(36),
                                     color: Colors.white),
-                                child: Text(
-                                  controller.getComplaintsSubmittedToday(),
-                                )),
+                                child: Obx(() => Text(controller.observeComplaintsSubmittedToday().value)),),
                           ],
                         ),
                       ),

@@ -4,6 +4,7 @@ import 'package:app/models/resident_model.dart';
 import 'package:app/models/staff_model.dart';
 import 'package:app/utils/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class FirestoreService extends GetxService {
@@ -140,8 +141,36 @@ class FirestoreService extends GetxService {
     return response.docs.length;
   }
 
-  Future<List<NotificationModel>> getNotifications() async {
-    final response = await dbFirestore.collection("notifications").get();
+  Future<List<NotificationModel>> getNotifications(String? uid) async {
+    if (uid == null) return List.empty();
+    final response = await dbFirestore.collection("notifications").where(Constants.UID, isEqualTo: uid).get();
     return response.docs.map((doc) => NotificationModel.fromSnapshot(doc)).toList();
+  }
+
+  Future<int> getNotificationsToday(String? uid) async {
+    final DateTime now = DateTime.now();
+    final DateTime dateTimeToday = DateTime(now.year, now.month, now.day);
+    final DateTime dateTimeTomorrow = dateTimeToday.add(const Duration(days: 1));
+    final Timestamp today = Timestamp.fromDate(dateTimeToday);
+    final Timestamp tomorrow = Timestamp.fromDate(dateTimeTomorrow);
+    try {
+      final QuerySnapshot<Map<String, dynamic>> response;
+      if (uid != null) {
+        response = await dbFirestore.collection("notifications")
+          .where(Constants.DATEFILLED, isGreaterThanOrEqualTo: today)
+          .where(Constants.DATEFILLED, isLessThan: tomorrow)
+          .where(Constants.UID, isEqualTo: uid)
+          .get();
+      } else {
+        response = await dbFirestore.collection("notifications")
+          .where(Constants.DATEFILLED, isGreaterThanOrEqualTo: today)
+          .where(Constants.DATEFILLED, isLessThan: tomorrow)
+          .get();
+      }
+      return response.docs.length;
+    } catch (error) {
+      debugPrint("FirestoreService getNotificationsToday error: $error");
+      return 0;
+    }
   }
 }

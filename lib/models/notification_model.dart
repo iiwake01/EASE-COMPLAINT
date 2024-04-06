@@ -27,8 +27,8 @@ class NotificationModel {
       id : snapshot.id.toString(),
       uid : data [Constants.UID],
       complaintId : data [Constants.COMPLIANTID],
-      dateTime : DateTime.parse(data["date"]),
-      hasRead : data[Constants.MIDDLE],
+      dateTime : DateTime.parse(data[Constants.DATEFILLED]),
+      hasRead : data[Constants.HASREAD],
     );
   }
 
