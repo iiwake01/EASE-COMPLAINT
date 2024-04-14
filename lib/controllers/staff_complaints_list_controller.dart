@@ -3,6 +3,7 @@ import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/complaint_model.dart';
 import 'package:app/routes/app_pages.dart';
+import 'package:app/utils/app_localizations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
@@ -19,6 +20,21 @@ class StaffComplaintsListController extends BaseController {
   final RxBool _isLoading = false.obs;
   final RxList<ComplaintModel> _complaintList =
       List<ComplaintModel>.empty().obs;
+
+  final List<String> sortList = [
+    "Sort by ->",
+    AppLocalizations.of(Get.context!).translate("pending"),
+    AppLocalizations.of(Get.context!).translate("resolved"),
+    AppLocalizations.of(Get.context!).translate("unresolved"),
+    AppLocalizations.of(Get.context!).translate("environmental_problem"),
+    AppLocalizations.of(Get.context!).translate("community_conflict"),
+    AppLocalizations.of(Get.context!).translate("crime_related"),
+    AppLocalizations.of(Get.context!).translate("public_disturbance"),
+  ];
+
+  final List<String> sortTest = ["x", "y", "Z"];
+
+  RxString selectedRepute = "".obs;
 
   @override
   Future<void> onInit() async {
@@ -51,6 +67,10 @@ class StaffComplaintsListController extends BaseController {
 
   List<ComplaintModel> getList() {
     return _complaintList;
+  }
+
+  Future<void> updateRepute(String? repute) async {
+    updateRepute(repute);
   }
 
   // void launchView() {

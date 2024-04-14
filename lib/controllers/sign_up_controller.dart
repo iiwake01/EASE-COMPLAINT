@@ -41,6 +41,7 @@ class SignUpController extends BaseController {
     AppLocalizations.of(Get.context!).translate('single'),
     AppLocalizations.of(Get.context!).translate('married')
   ];
+
   final List<String> zoneList = [
     AppLocalizations.of(Get.context!)
         .translate('select_the_zone_your_reside_in_'),
@@ -55,6 +56,7 @@ class SignUpController extends BaseController {
       selectedStatus = "".obs,
       selectedZone = "".obs,
       liveFile = "".obs;
+
   final Rx<TextEditingController?> birthdateController =
       TextEditingController().obs;
   PlatformFile? residencyFile;

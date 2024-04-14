@@ -4,6 +4,7 @@ import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
 import 'package:app/views/staff_complaints_list_page.dart';
 import 'package:app/widgets/resident_tile.dart';
+import 'package:app/widgets/search_view_widget.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,7 +41,7 @@ class ResidentsListPage extends BaseView<ResidentsListController> {
                       Padding(
                         padding: EdgeInsets.only(top: 50, left: 50),
                         child: Text(
-                          "Filed Complaints",
+                          "Resident List",
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -48,6 +49,7 @@ class ResidentsListPage extends BaseView<ResidentsListController> {
                           ),
                         ),
                       ),
+                      SearchViewWidget()
                     ],
                   ),
                   SizedBox(

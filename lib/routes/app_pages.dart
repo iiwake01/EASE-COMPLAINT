@@ -147,5 +147,14 @@ abstract class AppPages {
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
+
+    // TODO : Make admin page here later and finish ui please self :3 HAHHA
+    // GetPage(
+    //   name: Routes.ADMINLOGIN,
+    //   page: () => const AdminLoginPage(),
+    //   binding: AdminLoginBinding(),
+    //   transition: Transition.noTransition,
+    //   transitionDuration: const Duration(milliseconds: 250),
+    // ),
   ];
 }
