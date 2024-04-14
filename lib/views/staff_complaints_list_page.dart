@@ -50,17 +50,37 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
                           ),
                         ),
                       ),
-                      Obx(
-                        () => DropdownButton(
-                          value: controller.selectedRepute.value,
-                          items: controller.sortList
-                              .map<DropdownMenuItem<String>>(
-                                  (repute) => DropdownMenuItem(
-                                        value: repute,
-                                        child: Text(repute),
-                                      ))
-                              .toList(),
-                          onChanged: (repute) => controller.updateRepute(repute),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30.0, right: 30.0),
+                        child: Obx(
+                          () => Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                            ),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: DropdownButton(
+                                value: controller.selectedRepute.value,
+                                items: controller.sortList
+                                    .map<DropdownMenuItem<String>>(
+                                        (repute) => DropdownMenuItem(
+                                              value: repute,
+                                              child: Text(
+                                                repute,
+                                                style: const TextStyle(
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ))
+                                    .toList(),
+                                onChanged: (repute) =>
+                                    controller.updateRepute(repute),
+                                underline: Container(),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ],
