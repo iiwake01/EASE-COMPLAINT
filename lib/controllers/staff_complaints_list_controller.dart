@@ -22,7 +22,7 @@ class StaffComplaintsListController extends BaseController {
       List<ComplaintModel>.empty().obs;
 
   final List<String> sortList = [
-    "Sort by ->",
+    //"Sort by ->",
     AppLocalizations.of(Get.context!).translate("pending"),
     AppLocalizations.of(Get.context!).translate("resolved"),
     AppLocalizations.of(Get.context!).translate("unresolved"),
@@ -32,8 +32,6 @@ class StaffComplaintsListController extends BaseController {
     AppLocalizations.of(Get.context!).translate("public_disturbance"),
   ];
 
-  final List<String> sortTest = ["x", "y", "Z"];
-
   RxString selectedRepute = "".obs;
 
   @override
@@ -42,6 +40,7 @@ class StaffComplaintsListController extends BaseController {
     debugPrint("StaffComplaintsListController onInit");
     //checkSession();
     fetch();
+    selectedRepute(sortList.first);
   }
 
   Future<void> fetch() async {

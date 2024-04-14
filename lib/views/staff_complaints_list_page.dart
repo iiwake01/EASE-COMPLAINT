@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:app/controllers/staff_complaints_list_controller.dart';
 import 'package:app/models/complaint_model.dart';
 import 'package:app/utils/complaint_tile.dart';
@@ -9,7 +7,6 @@ import 'package:app/views/base_view.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:app/controllers/sign_up_controller.dart';
 
 class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
   const StaffComplaintsListPage({Key? key}) : super(key: key);
@@ -53,21 +50,19 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
                           ),
                         ),
                       ),
-
-                      // TODO : DROPDOWNBUTTON FIX
-                      // Obx(
-                      //   () => DropdownButton(
-                      //     value: controller.selectedRepute.value,
-                      //     items: controller.sortList
-                      //         .map<DropdownMenuItem<String>>(
-                      //             (repute) => DropdownMenuItem(
-                      //                   value: repute,
-                      //                   child: Text(repute),
-                      //                 ))
-                      //         .toList(),
-                      //     onChanged: (repute) => controller.updateRepute(repute),
-                      //   ),
-                      // ),
+                      Obx(
+                        () => DropdownButton(
+                          value: controller.selectedRepute.value,
+                          items: controller.sortList
+                              .map<DropdownMenuItem<String>>(
+                                  (repute) => DropdownMenuItem(
+                                        value: repute,
+                                        child: Text(repute),
+                                      ))
+                              .toList(),
+                          onChanged: (repute) => controller.updateRepute(repute),
+                        ),
+                      ),
                     ],
                   ),
                   SizedBox(
