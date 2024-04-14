@@ -38,16 +38,16 @@ class DashboardController extends BaseController {
       if (resident != null) {
         _topComplaintsList(await _service.getComplaintsTop(user?.uid));
         _solvedComplaints(
-            "${await _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('resolved'), resident.uid)}");
+            "${await _service.getComplaintsStatusCount(AppLocalizations.of(Get.context!).translate('resolved'), resident.uid)}");
         _pendingComplaints(
-            "${await _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('pending'), resident.uid)}");
+            "${await _service.getComplaintsStatusCount(AppLocalizations.of(Get.context!).translate('pending'), resident.uid)}");
         _todayComplaints("${await _service.getNotificationsToday(user?.uid)}");
       } else {
         _topComplaintsList(await _service.getComplaintsTop(null));
         _solvedComplaints(
-            "${await _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('resolved'), null)}");
+            "${await _service.getComplaintsStatusCount(AppLocalizations.of(Get.context!).translate('resolved'), null)}");
         _pendingComplaints(
-            "${await _service.getComplaintsStatus(AppLocalizations.of(Get.context!).translate('pending'), null)}");
+            "${await _service.getComplaintsStatusCount(AppLocalizations.of(Get.context!).translate('pending'), null)}");
         _todayComplaints("${await _service.getNotificationsToday(null)}");
       }
     }

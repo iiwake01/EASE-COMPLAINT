@@ -62,7 +62,7 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10),
                               child: DropdownButton(
-                                value: controller.selectedRepute.value,
+                                value: controller.selectedSort.value,
                                 items: controller.sortList
                                     .map<DropdownMenuItem<String>>(
                                         (repute) => DropdownMenuItem(
@@ -75,8 +75,7 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
                                               ),
                                             ))
                                     .toList(),
-                                onChanged: (repute) =>
-                                    controller.updateRepute(repute),
+                                onChanged: (sort) => controller.updateSort(sort),
                                 underline: Container(),
                               ),
                             ),

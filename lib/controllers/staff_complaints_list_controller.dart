@@ -18,8 +18,7 @@ class StaffComplaintsListController extends BaseController {
   final FirebaseAuthService _auth;
   final FirestoreService _service;
   final RxBool _isLoading = false.obs;
-  final RxList<ComplaintModel> _complaintList =
-      List<ComplaintModel>.empty().obs;
+  final RxList<ComplaintModel> _complaintList = List<ComplaintModel>.empty().obs;
 
   final List<String> sortList = [
     "Sort by",
@@ -33,7 +32,7 @@ class StaffComplaintsListController extends BaseController {
     "Other",
   ];
 
-  RxString selectedRepute = "".obs;
+  RxString selectedSort = "".obs;
 
   @override
   Future<void> onInit() async {
@@ -41,7 +40,7 @@ class StaffComplaintsListController extends BaseController {
     debugPrint("StaffComplaintsListController onInit");
     //checkSession();
     fetch();
-    selectedRepute(sortList.first);
+    selectedSort(sortList.first);
   }
 
   Future<void> fetch() async {
@@ -69,8 +68,56 @@ class StaffComplaintsListController extends BaseController {
     return _complaintList;
   }
 
-  Future<void> updateRepute(String? repute) async {
-    updateRepute(repute);
+  Future<void> updateSort(String? sort) async {
+    selectedSort(sort);
+    if (sort == AppLocalizations.of(Get.context!).translate("environmental_problem")
+    || sort == AppLocalizations.of(Get.context!).translate("resolved")
+    || sort == AppLocalizations.of(Get.context!).translate("unresolved")
+    ) {         
+      fetchStatus(sort);
+    } else if (sort == AppLocalizations.of(Get.context!).translate("pending")
+    || sort == AppLocalizations.of(Get.context!).translate("community_conflict")
+    || sort == AppLocalizations.of(Get.context!).translate("crime_related")
+    || sort == AppLocalizations.of(Get.context!).translate("public_disturbance")
+    ) {
+      fetchType(sort);
+    } else {
+      fetch();
+    }
+  }
+
+  Future<void> fetchStatus(String? status) async {
+    try {
+      _isLoading(true);
+      if (checkSession(_auth)) {
+        final List<ComplaintModel> snapshot = await _service.getComplaintsStatus(status, null);
+        _complaintList.assignAll(snapshot);
+      } else {
+        _complaintList.clear();
+      }
+    } catch (exception) {
+      onShowAlert("Error", "Fetch Failed");
+      debugPrint("StaffComplaintsListController fetch $exception");
+    } finally {
+      _isLoading(false);
+    }
+  }
+
+  Future<void> fetchType(String? type) async {
+    try {
+      _isLoading(true);
+      if (checkSession(_auth)) {
+        final List<ComplaintModel> snapshot = await _service.getComplaintsType(type, null);
+        _complaintList.assignAll(snapshot);
+      } else {
+        _complaintList.clear();
+      }
+    } catch (exception) {
+      onShowAlert("Error", "Fetch Failed");
+      debugPrint("StaffComplaintsListController fetch $exception");
+    } finally {
+      _isLoading(false);
+    }
   }
 
   // void launchView() {

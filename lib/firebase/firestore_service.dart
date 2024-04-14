@@ -130,7 +130,25 @@ class FirestoreService extends GetxService {
         .toList();
   }
 
-  Future<int> getComplaintsStatus(String status, String? uid) async {
+  
+  Future<List<ComplaintModel>> getComplaintsStatus(String? status, String? uid) async {
+    final QuerySnapshot<Map<String, dynamic>> response;
+    if (uid != null) {
+      response = await dbFirestore
+          .collection("complaints")
+          .where(Constants.STATUS, isEqualTo: status)
+          .where(Constants.UID, isEqualTo: uid)
+          .get();
+    } else {
+      response = await dbFirestore
+          .collection("complaints")
+          .where(Constants.STATUS, isEqualTo: status)
+          .get();
+    }
+    return response.docs.map((doc) => ComplaintModel.fromSnapshot(doc)).toList();
+  }
+
+  Future<int> getComplaintsStatusCount(String status, String? uid) async {
     final QuerySnapshot<Map<String, dynamic>> response;
     if (uid != null) {
       response = await dbFirestore
@@ -147,65 +165,53 @@ class FirestoreService extends GetxService {
     return response.docs.length;
   }
 
+  Future<List<ComplaintModel>> getComplaintsType(String? type, String? uid) async {
+    final QuerySnapshot<Map<String, dynamic>> response;
+    if (uid != null) {
+      response = await dbFirestore
+          .collection("complaints")
+          .where(Constants.STATUS, isEqualTo: type)
+          .where(Constants.UID, isEqualTo: uid)
+          .get();
+    } else {
+      response = await dbFirestore
+          .collection("complaints")
+          .where(Constants.TYPE, isEqualTo: type)
+          .get();
+    }
+    return response.docs.map((doc) => ComplaintModel.fromSnapshot(doc)).toList();
+  }
+
   Future<List<TopComplaintModel?>> getComplaintsTop(String? uid) async {
     final QuerySnapshot<Map<String, dynamic>> response;
     final int environment, community, disturbance, crime, other;
     final List<TopComplaintModel> topComplaint = [];
     if (uid != null) {
       response = await dbFirestore
-          .collection("complaints")
-          .where(Constants.UID, isEqualTo: uid)
-          .get();
+          .collection("complaints").where(Constants.UID, isEqualTo: uid).get();
     } else {
       response = await dbFirestore.collection("complaints").get();
     }
-    final List<ComplaintModel?> list =
-        response.docs.map((doc) => ComplaintModel.fromSnapshot(doc)).toList();
+    final List<ComplaintModel?> list = response.docs.map((doc) => ComplaintModel.fromSnapshot(doc)).toList();
     environment = list
-        .where((complaint) =>
-            complaint?.type ==
-            AppLocalizations.of(Get.context!)
-                .translate('environmental_problem'))
-        .toList()
-        .length;
+        .where((complaint) => complaint?.type == AppLocalizations.of(Get.context!).translate('environmental_problem'))
+        .toList().length;
     community = list
-        .where((complaint) =>
-            complaint?.type ==
-            AppLocalizations.of(Get.context!).translate('community_conflict'))
-        .toList()
-        .length;
+        .where((complaint) => complaint?.type == AppLocalizations.of(Get.context!).translate('community_conflict'))
+        .toList().length;
     disturbance = list
-        .where((complaint) =>
-            complaint?.type ==
-            AppLocalizations.of(Get.context!).translate('public_disturbance'))
-        .toList()
-        .length;
+        .where((complaint) => complaint?.type == AppLocalizations.of(Get.context!).translate('public_disturbance'))
+        .toList().length;
     crime = list
-        .where((complaint) =>
-            complaint?.type ==
-            AppLocalizations.of(Get.context!).translate('crime_related'))
-        .toList()
-        .length;
+        .where((complaint) => complaint?.type == AppLocalizations.of(Get.context!).translate('crime_related'))
+        .toList().length;
     other = list.length - (environment + community + disturbance + crime);
-    topComplaint.add(TopComplaintModel(
-        type: AppLocalizations.of(Get.context!)
-            .translate('environmental_problem'),
-        quanity: environment));
-    topComplaint.add(TopComplaintModel(
-        type: AppLocalizations.of(Get.context!).translate('community_conflict'),
-        quanity: community));
-    topComplaint.add(TopComplaintModel(
-        type: AppLocalizations.of(Get.context!).translate('public_disturbance'),
-        quanity: disturbance));
-    topComplaint.add(TopComplaintModel(
-        type: AppLocalizations.of(Get.context!).translate('crime_related'),
-        quanity: crime));
-    topComplaint.add(TopComplaintModel(
-        type: AppLocalizations.of(Get.context!)
-            .translate('other_type_of_problem'),
-        quanity: other));
-    topComplaint
-        .sort((modelA, modelB) => modelB.quanity!.compareTo(modelA.quanity));
+    topComplaint.add(TopComplaintModel(type: AppLocalizations.of(Get.context!).translate('environmental_problem'), quanity: environment));
+    topComplaint.add(TopComplaintModel(type: AppLocalizations.of(Get.context!).translate('community_conflict'), quanity: community));
+    topComplaint.add(TopComplaintModel(type: AppLocalizations.of(Get.context!).translate('public_disturbance'),quanity: disturbance));
+    topComplaint.add(TopComplaintModel(type: AppLocalizations.of(Get.context!).translate('crime_related'), quanity: crime));
+    topComplaint.add(TopComplaintModel(type: AppLocalizations.of(Get.context!).translate('other_type_of_problem'),quanity: other));
+    topComplaint.sort((modelA, modelB) => modelB.quanity!.compareTo(modelA.quanity));
     return topComplaint;
   }
 
@@ -237,8 +243,7 @@ class FirestoreService extends GetxService {
   Future<int> getNotificationsToday(String? uid) async {
     final DateTime now = DateTime.now();
     final DateTime dateTimeToday = DateTime(now.year, now.month, now.day);
-    final DateTime dateTimeTomorrow =
-        dateTimeToday.add(const Duration(days: 1));
+    final DateTime dateTimeTomorrow = dateTimeToday.add(const Duration(days: 1));
     final Timestamp today = Timestamp.fromDate(dateTimeToday);
     final Timestamp tomorrow = Timestamp.fromDate(dateTimeTomorrow);
     try {
