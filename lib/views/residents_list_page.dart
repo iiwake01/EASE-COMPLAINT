@@ -35,6 +35,7 @@ class ResidentsListPage extends BaseView<ResidentsListController> {
               child: Column(
                 children: [
                   const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
                         padding: EdgeInsets.only(top: 50, left: 50),
@@ -97,7 +98,8 @@ class ResidentsListPage extends BaseView<ResidentsListController> {
                           itemCount: controller.getList().length,
                           scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) {
-                            return ResidentTile(resident: controller.getList()[index]);
+                            return ResidentTile(
+                                resident: controller.getList()[index]);
                           },
                         ),
                       ),

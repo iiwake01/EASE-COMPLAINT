@@ -4,6 +4,7 @@ import 'package:app/utils/complaint_tile.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
+import 'package:app/widgets/search_view_widget.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,6 +36,7 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
               child: Column(
                 children: [
                   const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
                         padding: EdgeInsets.only(top: 50, left: 50),
@@ -47,6 +49,7 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
                           ),
                         ),
                       ),
+                      SearchViewWidget()
                     ],
                   ),
                   SizedBox(
