@@ -18,7 +18,8 @@ class StaffComplaintsListController extends BaseController {
   final FirebaseAuthService _auth;
   final FirestoreService _service;
   final RxBool _isLoading = false.obs;
-  final RxList<ComplaintModel> _complaintList = List<ComplaintModel>.empty().obs;
+  final RxList<ComplaintModel> _complaintList =
+      List<ComplaintModel>.empty().obs;
 
   final List<String> sortList = [
     "Sort by",
@@ -70,16 +71,18 @@ class StaffComplaintsListController extends BaseController {
 
   Future<void> updateSort(String? sort) async {
     selectedSort(sort);
-    if (sort == AppLocalizations.of(Get.context!).translate("environmental_problem")
-    || sort == AppLocalizations.of(Get.context!).translate("resolved")
-    || sort == AppLocalizations.of(Get.context!).translate("unresolved")
-    ) {         
+    if (sort == AppLocalizations.of(Get.context!).translate("pending") ||
+        sort == AppLocalizations.of(Get.context!).translate("resolved") ||
+        sort == AppLocalizations.of(Get.context!).translate("unresolved")) {
       fetchStatus(sort);
-    } else if (sort == AppLocalizations.of(Get.context!).translate("pending")
-    || sort == AppLocalizations.of(Get.context!).translate("community_conflict")
-    || sort == AppLocalizations.of(Get.context!).translate("crime_related")
-    || sort == AppLocalizations.of(Get.context!).translate("public_disturbance")
-    ) {
+    } else if (sort ==
+            AppLocalizations.of(Get.context!)
+                .translate("environmental_problem") ||
+        sort ==
+            AppLocalizations.of(Get.context!).translate("community_conflict") ||
+        sort == AppLocalizations.of(Get.context!).translate("crime_related") ||
+        sort ==
+            AppLocalizations.of(Get.context!).translate("public_disturbance")) {
       fetchType(sort);
     } else {
       fetch();
@@ -90,7 +93,8 @@ class StaffComplaintsListController extends BaseController {
     try {
       _isLoading(true);
       if (checkSession(_auth)) {
-        final List<ComplaintModel> snapshot = await _service.getComplaintsStatus(status, null);
+        final List<ComplaintModel> snapshot =
+            await _service.getComplaintsStatus(status, null);
         _complaintList.assignAll(snapshot);
       } else {
         _complaintList.clear();
@@ -107,7 +111,8 @@ class StaffComplaintsListController extends BaseController {
     try {
       _isLoading(true);
       if (checkSession(_auth)) {
-        final List<ComplaintModel> snapshot = await _service.getComplaintsType(type, null);
+        final List<ComplaintModel> snapshot =
+            await _service.getComplaintsType(type, null);
         _complaintList.assignAll(snapshot);
       } else {
         _complaintList.clear();
@@ -115,6 +120,21 @@ class StaffComplaintsListController extends BaseController {
     } catch (exception) {
       onShowAlert("Error", "Fetch Failed");
       debugPrint("StaffComplaintsListController fetch $exception");
+    } finally {
+      _isLoading(false);
+    }
+  }
+
+  Future<void> filter() async {
+    try {
+      _isLoading(true);
+      final snapshot = await _service.getResidents();
+
+      if (snapshot.isNotEmpty) {
+        // TODO : Search Filter fix
+      }
+    } catch (exception) {
+      onShowAlert("Error", "Filter failed");
     } finally {
       _isLoading(false);
     }
