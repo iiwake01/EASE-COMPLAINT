@@ -3,6 +3,7 @@ import 'package:app/controllers/base_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firebase_storage_service.dart';
 import 'package:app/firebase/firestore_service.dart';
+import 'package:app/models/admin_model.dart';
 import 'package:app/models/resident_model.dart';
 import 'package:app/models/staff_model.dart';
 import 'package:app/routes/app_pages.dart';
@@ -290,47 +291,36 @@ class SignUpController extends BaseController {
   }
 
   // TODO : FIX THIS LATER FOR ADDING ADMIN INITIALLY
-  // Future<void> _addAdmin(String? uid) async {
-  //   debugPrint("SignUpController _addStaff");
-  //   try {
-  //     _auth.sendEmailVerification(
-  //         () {}, (firebaseException) {}, (exception) {});
-  //     TaskSnapshot? taskSnapshot =
-  //         await _storage.uploadPlatformFiles(residencyFile);
-  //     final StaffModel staff;
-  //     if (taskSnapshot != null && taskSnapshot.state == TaskState.success) {
-  //       staff = StaffModel(
-  //         uid: uid,
-  //         email: emailController?.text,
-
-  //       );
-  //     } else {
-  //       staff = StaffModel(
-  //         uid: uid,
-  //         email: emailController?.text,
-  //         first: firstNameController?.text,
-  //         last: lastNameController?.text,
-  //         middle: middleNameController?.text,
-  //         sex: selectedGender.value,
-  //         age: ageController?.text,
-  //         birth: birthdateController.value?.text,
-  //         contact: contactNumberController?.text,
-  //         status: selectedStatus.value,
-  //         zone: selectedZone.value,
-  //         houseStreet: houseStreetController?.text,
-  //       );
-  //     }
-  //     await _service.createStaff(staff.toMap());
-  //   } catch (exception) {
-  //     debugPrint("SignUpController Invalid $exception");
-  //     onShowAlert("Error", "Please Try again $exception");
-  //   } finally {
-  //     if (Get.isDialogOpen == true) {
-  //       Get.back();
-  //     }
-  //     _launchLogin();
-  //   }
-  // }
+  Future<void> _addAdmin(String? uid) async {
+    debugPrint("SignUpController _addStaff");
+    try {
+      _auth.sendEmailVerification(
+          () {}, (firebaseException) {}, (exception) {});
+      TaskSnapshot? taskSnapshot =
+          await _storage.uploadPlatformFiles(residencyFile);
+      final AdminModel admin;
+      if (taskSnapshot != null && taskSnapshot.state == TaskState.success) {
+        admin = AdminModel(
+          uid: uid,
+          email: emailController?.text,
+        );
+      } else {
+        admin = AdminModel(
+          uid: uid,
+          email: emailController?.text,
+        );
+      }
+      await _service.createAdmin(admin.toMap());
+    } catch (exception) {
+      debugPrint("SignUpController Invalid $exception");
+      onShowAlert("Error", "Please Try again $exception");
+    } finally {
+      if (Get.isDialogOpen == true) {
+        Get.back();
+      }
+      _launchLogin();
+    }
+  }
 
   //#region For Picking and displaying Image Files Methods
   Future<void> onPickFiles() async {
@@ -397,4 +387,9 @@ class SignUpController extends BaseController {
     debugPrint("SignUpController onClose");
     super.onClose();
   }
+
+  // void _launchAdmin() {
+  //   debugPrint("Signup _adminLogin");
+  //   Get.offAndToNamed(Routes.ADMINHOMEPAGE)
+  // }
 }

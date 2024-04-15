@@ -46,7 +46,7 @@ class AdminLoginPage extends BaseWidget<LoginController> {
                     foregroundColor: Colors.white,
                     textStyle: const TextStyle(fontSize: 20)),
                 onPressed: () {
-                  controller.validateStaffCredential();
+                  controller.validateAdminCredential();
                 },
                 child: Text(AppLocalizations.of(context).translate('log_in')),
               ),

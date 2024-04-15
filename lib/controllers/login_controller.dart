@@ -125,6 +125,7 @@ class LoginController extends BaseController {
       },
       () async {
         if (await _service.getAdmin(_auth.getUser()?.uid) != null) {
+          onShowAlert("Success", "WELCOME");
           _launchStaffHomePage();
         } else {
           _auth.signOut();
@@ -138,7 +139,8 @@ class LoginController extends BaseController {
       (exception) {
         debugPrint(
             'LoginController validateStaffCredential exception ${exception.toString()}}');
-        onShowAlert("Error!", "Invalid Credential Please Try Again");
+        onShowAlert(
+            "Error!", "Invalid Credential Please Try Again; Adminlogin");
         isLoading(false);
       },
       () {},

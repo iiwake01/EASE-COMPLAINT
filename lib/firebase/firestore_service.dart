@@ -1,3 +1,4 @@
+import 'package:app/models/admin_model.dart';
 import 'package:app/models/complaint_model.dart';
 import 'package:app/models/notification_model.dart';
 import 'package:app/models/resident_model.dart';
@@ -27,6 +28,10 @@ class FirestoreService extends GetxService {
 
   Future<void> createStaff(Map<String, dynamic> data) async {
     await _create("staffs", data);
+  }
+
+  Future<void> createAdmin(Map<String, dynamic> data) async {
+    await _create("admins", data);
   }
 
   Future<void> createNotification(Map<String, dynamic> data) async {
@@ -101,14 +106,14 @@ class FirestoreService extends GetxService {
         .firstOrNull;
   }
 
-  Future<StaffModel?> getAdmin(String? uid) async {
+  Future<AdminModel?> getAdmin(String? uid) async {
     if (uid == null) return null;
     final response = await dbFirestore
         .collection("admins")
         .where(Constants.UID, isEqualTo: uid)
         .get();
     return response.docs
-        .map((doc) => StaffModel.fromSnapshot(doc))
+        .map((doc) => AdminModel.fromSnapshot(doc))
         .toList()
         .firstOrNull;
   }
