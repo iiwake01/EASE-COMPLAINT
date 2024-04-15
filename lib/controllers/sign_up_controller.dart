@@ -386,9 +386,4 @@ class SignUpController extends BaseController {
     debugPrint("SignUpController onClose");
     super.onClose();
   }
-
-  void _launchAdmin() {
-    debugPrint("Signup _adminLogin");
-    Get.offAndToNamed(Routes.ADMINHOMEPAGE);
-  }
 }

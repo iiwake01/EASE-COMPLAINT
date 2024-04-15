@@ -19,5 +19,8 @@ abstract class Routes {
   static const STATUSCHANGE = '/change_status';
   static const RESIDENTCOMPLAINTVIEW = '/review_complaint';
   static const ADMINLOGIN = '/admin';
-  static const ADMINHOMEPAGE = '/admin_homepage';
+  static const ADMINHOME = '/admin_homepage';
+  static const RESIDENTACCOUNTS = '/resident_accounts';
+  static const NEWSTAFFACCOUNTCREATION = '/new_staff_account_creation';
+  static const STAFFACCOUNTS = '/staff_accounts';
 }

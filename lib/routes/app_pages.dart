@@ -20,8 +20,10 @@ import 'package:app/views/complaint_form_page.dart';
 import 'package:app/views/dashboard_page.dart';
 import 'package:app/views/file_complaint_page.dart';
 import 'package:app/views/login_page.dart';
+import 'package:app/views/new_staff_account_creation_page.dart';
 import 'package:app/views/notification_page.dart';
 import 'package:app/views/profile_page.dart';
+import 'package:app/views/resident_accounts_page.dart';
 import 'package:app/views/resident_complaint_change_status_page.dart';
 import 'package:app/views/resident_complaint_information_page.dart';
 import 'package:app/views/resident_complaint_review_page.dart';
@@ -30,6 +32,7 @@ import 'package:app/views/resident_home_page.dart';
 import 'package:app/views/resident_information_page.dart';
 import 'package:app/views/residents_list_page.dart';
 import 'package:app/views/sign_up_page.dart';
+import 'package:app/views/staff_accounts_page.dart';
 import 'package:app/views/staff_complaints_list_page.dart';
 import 'package:app/views/staff_home_page.dart';
 import 'package:get/get.dart';
@@ -157,9 +160,30 @@ abstract class AppPages {
       transitionDuration: const Duration(milliseconds: 250),
     ),
     GetPage(
-      name: Routes.ADMINHOMEPAGE,
+      name: Routes.ADMINHOME,
       page: () => const AdminHomePage(),
       binding: HomeBinding(),
+      transition: Transition.noTransition,
+      transitionDuration: const Duration(milliseconds: 250),
+    ),
+     GetPage(
+      name: Routes.RESIDENTACCOUNTS,
+      page: () => const ResidentAccountsPage(),
+      binding: null,
+      transition: Transition.noTransition,
+      transitionDuration: const Duration(milliseconds: 250),
+    ),
+     GetPage(
+      name: Routes.NEWSTAFFACCOUNTCREATION,
+      page: () => const NewStaffAccountCreationPage(),
+      binding: null,
+      transition: Transition.noTransition,
+      transitionDuration: const Duration(milliseconds: 250),
+    ),
+     GetPage(
+      name: Routes.STAFFACCOUNTS,
+      page: () => const StaffAccountsPage(),
+      binding: null,
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),

@@ -159,7 +159,7 @@ class LoginController extends BaseController {
 
   void _launchAdminHomePage() {
     debugPrint("LoginController AdminHomePage");
-    Get.offAndToNamed(Routes.ADMINHOMEPAGE);
+    Get.offAndToNamed(Routes.ADMINHOME);
   }
 
   void launchSignUp() {
