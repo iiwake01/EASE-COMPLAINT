@@ -7,7 +7,6 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class ResidentsListController extends BaseController {
-  
   ResidentsListController(
     this._auth,
     this._service,
@@ -40,6 +39,21 @@ class ResidentsListController extends BaseController {
     } catch (exception) {
       onShowAlert("Error", "Fetch Failed");
       debugPrint("ResidentsListController fetch $exception");
+    } finally {
+      _isLoading(false);
+    }
+  }
+
+  Future<void> filter() async {
+    try {
+      _isLoading(true);
+      final snapshot = await _service.getResidents();
+
+      if (snapshot.isNotEmpty) {
+        // TODO : Search Filter fix
+      }
+    } catch (exception) {
+      onShowAlert("Error", "Filter failed");
     } finally {
       _isLoading(false);
     }

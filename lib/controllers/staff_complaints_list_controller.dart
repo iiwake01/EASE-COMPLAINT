@@ -125,21 +125,6 @@ class StaffComplaintsListController extends BaseController {
     }
   }
 
-  Future<void> filter() async {
-    try {
-      _isLoading(true);
-      final snapshot = await _service.getResidents();
-
-      if (snapshot.isNotEmpty) {
-        // TODO : Search Filter fix
-      }
-    } catch (exception) {
-      onShowAlert("Error", "Filter failed");
-    } finally {
-      _isLoading(false);
-    }
-  }
-
   // void launchView() {
   //   debugPrint("StaffComplaintsListController launchView");
   //   if(checkSession(_auth)) onShowAlert("Under Construction", "On Going . . .");
