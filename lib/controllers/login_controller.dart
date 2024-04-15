@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginController extends BaseController {
-
-  LoginController(this._auth, this._service,) {
+  LoginController(
+    this._auth,
+    this._service,
+  ) {
     debugPrint("LoginController Constructor");
   }
 
@@ -42,31 +44,34 @@ class LoginController extends BaseController {
     debugPrint("LoginController validateResidentCredential");
     //_launchResidentHomePage();
     isLoading(true);
-    _auth.checkCredential (
+    _auth.checkCredential(
       emailController?.text ?? "",
       passwordController?.text ?? "",
       (userCredential) {
-        debugPrint("LoginController validateResidentCredential credential ${userCredential.toString()}");
-        debugPrint("LoginController validateResidentCredential user ${userCredential.user}");
-      }, 
+        debugPrint(
+            "LoginController validateResidentCredential credential ${userCredential.toString()}");
+        debugPrint(
+            "LoginController validateResidentCredential user ${userCredential.user}");
+      },
       () async {
-        if (await _service.getResident(_auth.getUser()?.uid) !=  null) {
+        if (await _service.getResident(_auth.getUser()?.uid) != null) {
           _launchResidentHomePage();
         } else {
           _auth.signOut();
-          debugPrint('LoginController validateResidentCredential user uid is not a Resident');
-          onShowAlert("Error!", "Invalid Residential User, Please Login as a Resident User");
+          debugPrint(
+              'LoginController validateResidentCredential user uid is not a Resident');
+          onShowAlert("Error!",
+              "Invalid Residential User, Please Login as a Resident User");
           isLoading(false);
         }
-      }, 
+      },
       (exception) {
-        debugPrint('LoginController validateResidentCredential exception ${exception.toString()}}');
+        debugPrint(
+            'LoginController validateResidentCredential exception ${exception.toString()}}');
         onShowAlert("Error!", "Invalid Credential Please Try Again");
         isLoading(false);
       },
-      () {
-
-      },
+      () {},
     );
   }
 
@@ -74,31 +79,69 @@ class LoginController extends BaseController {
     debugPrint("LoginController validateStaffCredential");
     //_launchStaffHomePage();
     isLoading(true);
-    _auth.checkCredential (
+    _auth.checkCredential(
       emailController?.text ?? "",
       passwordController?.text ?? "",
       (userCredential) {
-        debugPrint("LoginController validateStaffCredential credential ${userCredential.toString()}");
-        debugPrint("LoginController validateStaffCredential user ${userCredential.user}");
-      }, 
+        debugPrint(
+            "LoginController validateStaffCredential credential ${userCredential.toString()}");
+        debugPrint(
+            "LoginController validateStaffCredential user ${userCredential.user}");
+      },
       () async {
-        if (await _service.getStaff(_auth.getUser()?.uid) !=  null) {
+        if (await _service.getStaff(_auth.getUser()?.uid) != null) {
           _launchStaffHomePage();
         } else {
           _auth.signOut();
-          debugPrint('LoginController validateStaffCredential user uid is not a Resident}');
-          onShowAlert("Error!", "Invalid Staff User, Please Login as a Staff User");
+          debugPrint(
+              'LoginController validateStaffCredential user uid is not a Resident}');
+          onShowAlert(
+              "Error!", "Invalid Staff User, Please Login as a Staff User");
           isLoading(false);
         }
-      }, 
+      },
       (exception) {
-        debugPrint('LoginController validateStaffCredential exception ${exception.toString()}}');
+        debugPrint(
+            'LoginController validateStaffCredential exception ${exception.toString()}}');
         onShowAlert("Error!", "Invalid Credential Please Try Again");
         isLoading(false);
       },
-      () {
+      () {},
+    );
+  }
 
+  Future<void> validateAdminCredential() async {
+    debugPrint("LoginController validateStaffCredential");
+    //_launchStaffHomePage();
+    isLoading(true);
+    _auth.checkCredential(
+      emailController?.text ?? "",
+      passwordController?.text ?? "",
+      (userCredential) {
+        debugPrint(
+            "LoginController validateStaffCredential credential ${userCredential.toString()}");
+        debugPrint(
+            "LoginController validateStaffCredential user ${userCredential.user}");
       },
+      () async {
+        if (await _service.getAdmin(_auth.getUser()?.uid) != null) {
+          _launchStaffHomePage();
+        } else {
+          _auth.signOut();
+          debugPrint(
+              'LoginController validateStaffCredential user uid is not a Resident}');
+          onShowAlert(
+              "Error!", "Invalid Staff User, Please Login as a Staff User");
+          isLoading(false);
+        }
+      },
+      (exception) {
+        debugPrint(
+            'LoginController validateStaffCredential exception ${exception.toString()}}');
+        onShowAlert("Error!", "Invalid Credential Please Try Again");
+        isLoading(false);
+      },
+      () {},
     );
   }
 
@@ -112,10 +155,15 @@ class LoginController extends BaseController {
     Get.offAndToNamed(Routes.STAFFHOME);
   }
 
+  void _launchAdminHomePage() {
+    debugPrint("LoginController AdminHomePage");
+    Get.offAndToNamed(Routes.ADMINLOGIN);
+  }
+
   void launchSignUp() {
     Get.toNamed(Routes.SIGNUP);
   }
-  
+
   @override
   void onClose() {
     debugPrint("LoginController onClose");

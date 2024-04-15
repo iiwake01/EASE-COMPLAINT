@@ -14,6 +14,7 @@ import 'package:app/bindings/resident_information_binder.dart';
 import 'package:app/bindings/residents_list_binding.dart';
 import 'package:app/bindings/sign_up_binding.dart';
 import 'package:app/bindings/staff_complaints_list_binding.dart';
+import 'package:app/views/admin_login_page.dart';
 import 'package:app/views/complaint_form_page.dart';
 import 'package:app/views/dashboard_page.dart';
 import 'package:app/views/file_complaint_page.dart';
@@ -149,12 +150,12 @@ abstract class AppPages {
     ),
 
     // TODO : Make admin page here later and finish ui please self :3 HAHHA
-    // GetPage(
-    //   name: Routes.ADMINLOGIN,
-    //   page: () => const AdminLoginPage(),
-    //   binding: AdminLoginBinding(),
-    //   transition: Transition.noTransition,
-    //   transitionDuration: const Duration(milliseconds: 250),
-    // ),
+    GetPage(
+      name: Routes.ADMINLOGIN,
+      page: () => const AdminLoginPage(),
+      binding: LoginBinding(),
+      transition: Transition.noTransition,
+      transitionDuration: const Duration(milliseconds: 250),
+    ),
   ];
 }
