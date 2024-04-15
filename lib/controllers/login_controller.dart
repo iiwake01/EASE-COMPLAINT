@@ -126,7 +126,7 @@ class LoginController extends BaseController {
       () async {
         if (await _service.getAdmin(_auth.getUser()?.uid) != null) {
           onShowAlert("Success", "WELCOME");
-          _launchStaffHomePage();
+          _launchAdminHomePage();
         } else {
           _auth.signOut();
           debugPrint(
@@ -159,7 +159,7 @@ class LoginController extends BaseController {
 
   void _launchAdminHomePage() {
     debugPrint("LoginController AdminHomePage");
-    Get.offAndToNamed(Routes.ADMINLOGIN);
+    Get.offAndToNamed(Routes.ADMINHOMEPAGE);
   }
 
   void launchSignUp() {

@@ -4,6 +4,7 @@ import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/resident_model.dart';
 import 'package:app/routes/app_pages.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ResidentsListController extends BaseController {
@@ -18,6 +19,7 @@ class ResidentsListController extends BaseController {
   final FirestoreService _service;
   final RxBool _isLoading = false.obs;
   final RxList<ResidentModel> _residentList = List<ResidentModel>.empty().obs;
+  final TextEditingController searchController = TextEditingController();
 
   @override
   Future<void> onInit() async {
@@ -25,6 +27,25 @@ class ResidentsListController extends BaseController {
     debugPrint("ResidentsListController onInit");
     //checkSession();
     fetch();
+    onTextChangeListener();
+  }
+
+  void onTextChangeListener() {
+    String previousText = '';
+    searchController.addListener(() {
+      debugPrint("SearchController text: ${searchController.text}");
+      debugPrint("Previous text: $previousText");
+      debugPrint(
+          "SearchController isNotBlank ${searchController.text.trim().isNotEmpty}");
+      if (searchController.text.trim() != previousText) {
+        previousText = searchController.text.trim();
+        if (searchController.text.trim().isNotEmpty) {
+          filter();
+        } else {
+          fetch();
+        }
+      }
+    });
   }
 
   Future<void> fetch() async {
@@ -48,12 +69,30 @@ class ResidentsListController extends BaseController {
     try {
       _isLoading(true);
       final snapshot = await _service.getResidents();
-
       if (snapshot.isNotEmpty) {
-        // TODO : Search Filter fix
+        _residentList.assignAll(snapshot);
+      } else if (snapshot.isEmpty) {
+        _residentList.clear();
       }
+      final List<ResidentModel> filtered = _residentList
+          .where((model) =>
+              (model.first
+                      ?.toLowerCase()
+                      ?.contains(searchController.text.toLowerCase()) ??
+                  false) ||
+              (model.last
+                      ?.toLowerCase()
+                      ?.contains(searchController.text.toLowerCase()) ??
+                  false) ||
+              (model.age?.contains(searchController.text) ?? false) ||
+              (model.zone
+                      ?.toLowerCase()
+                      ?.contains(searchController.text.toLowerCase()) ??
+                  false))
+          .toList();
+      _residentList.assignAll(filtered);
     } catch (exception) {
-      onShowAlert("Error", "Filter failed");
+      onShowAlert("Error", "Filter Failed");
     } finally {
       _isLoading(false);
     }
@@ -77,5 +116,6 @@ class ResidentsListController extends BaseController {
   void onClose() {
     debugPrint("ResidentsListController onClose");
     super.onClose();
+    searchController.dispose();
   }
 }

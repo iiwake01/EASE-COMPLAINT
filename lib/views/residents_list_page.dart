@@ -21,98 +21,96 @@ class ResidentsListPage extends BaseView<ResidentsListController> {
         title: AppLocalizations.of(context).translate('list_of_residents'),
       ),
       backgroundColor: Colors.white,
-      body: Obx(() {
-        if (controller.observeLoading().isTrue) {
-          return const Center(child: CircularProgressIndicator());
-        } else {
-          return Center(
-            child: Container(
-              height: MediaQuery.of(context).size.height * .7,
-              width: MediaQuery.of(context).size.width * .775,
-              decoration: BoxDecoration(
-                color: Constants.appBarColor,
-                borderRadius: const BorderRadius.all(Radius.circular(36)),
-              ),
-              child: Column(
+      body: Center(
+        child: Container(
+          height: MediaQuery.of(context).size.height * .7,
+          width: MediaQuery.of(context).size.width * .775,
+          decoration: BoxDecoration(
+            color: Constants.appBarColor,
+            borderRadius: const BorderRadius.all(Radius.circular(36)),
+          ),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: 50, left: 50),
-                        child: Text(
-                          "Resident List",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                          ),
-                        ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 50, left: 50),
+                    child: Text(
+                      "Resident List",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
                       ),
-                      SearchViewWidget()
-                    ],
+                    ),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * .02,
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height * .05,
-                        width: MediaQuery.of(context).size.width * .7,
-                        // margin: EdgeInsets.symmetric(horizontal: 90),
-                        // color: Colors.red,
-                        child: const Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              // crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(""),
-                                TitleWidget(
-                                  title: "Last Name",
-                                  multiplier: .1,
-                                ),
-                                TitleWidget(
-                                  title: "First Name",
-                                  multiplier: .1,
-                                ),
-                                TitleWidget(
-                                  title: "Zone",
-                                  multiplier: .07,
-                                ),
-                                TitleWidget(
-                                  title: "Age",
-                                  multiplier: .13,
-                                ),
-                                // TitleWidget(title: "")
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * .5,
-                        child: ListView.builder(
-                          itemCount: controller.getList().length,
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) {
-                            return ResidentTile(
-                                resident: controller.getList()[index]);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
+                  SearchViewWidget(
+                    textEditingController: controller.searchController,
+                  )
                 ],
               ),
-            ),
-          );
-        }
-      }),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .02,
+              ),
+              Column(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height * .05,
+                    width: MediaQuery.of(context).size.width * .7,
+                    // margin: EdgeInsets.symmetric(horizontal: 90),
+                    // color: Colors.red,
+                    child: const Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          // crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(""),
+                            TitleWidget(
+                              title: "Last Name",
+                              multiplier: .1,
+                            ),
+                            TitleWidget(
+                              title: "First Name",
+                              multiplier: .1,
+                            ),
+                            TitleWidget(
+                              title: "Zone",
+                              multiplier: .07,
+                            ),
+                            TitleWidget(
+                              title: "Age",
+                              multiplier: .13,
+                            ),
+                            // TitleWidget(title: "")
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Obx(() {
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height * .5,
+                      child: ListView.builder(
+                        itemCount: controller.getList().length,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          return ResidentTile(
+                              resident: controller.getList()[index]);
+                        },
+                      ),
+                    );
+                  }),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

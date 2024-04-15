@@ -167,7 +167,7 @@ class SignUpController extends BaseController {
       (user) => debugPrint(
           'SignUpController User Id ${user!.uid} registered: $user '),
       (uid) {
-        _addResident(uid);
+        _addAdmin(uid);
       },
       (firebaseAuthException) {
         debugPrint(
@@ -290,7 +290,6 @@ class SignUpController extends BaseController {
     }
   }
 
-  // TODO : FIX THIS LATER FOR ADDING ADMIN INITIALLY
   Future<void> _addAdmin(String? uid) async {
     debugPrint("SignUpController _addStaff");
     try {
@@ -388,8 +387,8 @@ class SignUpController extends BaseController {
     super.onClose();
   }
 
-  // void _launchAdmin() {
-  //   debugPrint("Signup _adminLogin");
-  //   Get.offAndToNamed(Routes.ADMINHOMEPAGE)
-  // }
+  void _launchAdmin() {
+    debugPrint("Signup _adminLogin");
+    Get.offAndToNamed(Routes.ADMINHOMEPAGE);
+  }
 }

@@ -7,8 +7,9 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class HomedController extends BaseController {
-  
-  HomedController(this._auth,) {
+  HomedController(
+    this._auth,
+  ) {
     debugPrint("HomedController Constructor");
   }
 
@@ -20,25 +21,30 @@ class HomedController extends BaseController {
     debugPrint("HomedController onInit");
     //checkSession();
   }
+
   //#region Home App Bar Methods
   void launchNotification() {
     debugPrint("HomedController launchNotification");
-    if(checkSession(_auth)) Get.toNamed(Routes.NOTIFICATION);
+    if (checkSession(_auth)) Get.toNamed(Routes.NOTIFICATION);
   }
 
   void launchProfile() {
     debugPrint("HomedController launchProfile");
-    if(checkSession(_auth)) Get.toNamed(Routes.PROFILE);
+    if (checkSession(_auth)) Get.toNamed(Routes.PROFILE);
   }
 
   void promptLogout() {
     debugPrint("HomedController promptLogout");
-    DialogWidget.logoutDialog (
-      AppLocalizations.of(Get.context!).translate('are_you_sure_you_want_to_log_out_'),
-      AppLocalizations.of(Get.context!).translate('yes'),
-      AppLocalizations.of(Get.context!).translate('no'),
-      () => _launchLogout(), () { if (Get.isDialogOpen == true) { Get.back(); } }
-    );
+    DialogWidget.logoutDialog(
+        AppLocalizations.of(Get.context!)
+            .translate('are_you_sure_you_want_to_log_out_'),
+        AppLocalizations.of(Get.context!).translate('yes'),
+        AppLocalizations.of(Get.context!).translate('no'),
+        () => _launchLogout(), () {
+      if (Get.isDialogOpen == true) {
+        Get.back();
+      }
+    });
   }
 
   void _launchLogout() {
@@ -53,11 +59,13 @@ class HomedController extends BaseController {
     Get.offAndToNamed(Routes.LOGIN);
     _auth.signOut();
   }
+
   //#endregion
   void launchDashboard() {
     debugPrint("HomedController launchDashboard");
     Get.toNamed(Routes.DASHBOARD);
   }
+
   //#region Resident Methods
   void launchFileComplaint() {
     debugPrint("HomedController launchFileComplaint");
@@ -68,17 +76,23 @@ class HomedController extends BaseController {
     debugPrint("HomedController launchResidentComplaintList");
     Get.toNamed(Routes.RESIDENTCOMPLAINTSLIST);
   }
+
   //#endregion
   //#region Staff Methods
   void launchStaffComplaintList() {
     debugPrint("HomedController launchStaffComplaintsList");
-    if(checkSession(_auth)) Get.toNamed(Routes.STAFFCOMPLAINTSLIST);
+    if (checkSession(_auth)) Get.toNamed(Routes.STAFFCOMPLAINTSLIST);
   }
 
   void launchResidentsList() {
     debugPrint("HomedController launchResidentsList");
-    if(checkSession(_auth)) Get.toNamed(Routes.RESIDENTSLIST);
+    if (checkSession(_auth)) Get.toNamed(Routes.RESIDENTSLIST);
   }
+
+  void launchManageResident() {
+    debugPrint("HomeController launuchMangeResident");
+  }
+
   //#endregion
   @override
   void onClose() {
