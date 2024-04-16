@@ -90,7 +90,10 @@ class HomedController extends BaseController {
   }
 
   void launchManageResident() {
-    debugPrint("HomeController launuchMangeResident");
+    debugPrint("HomeController launchManageResident");
+    //if (checkSession(_auth)) Get.toNamed(Routes.RESIDENTACCOUNTS);
+    //if (checkSession(_auth)) Get.toNamed(Routes.NEWSTAFFACCOUNTCREATION);
+    //if (checkSession(_auth)) Get.toNamed(Routes.STAFFACCOUNTS);
   }
 
   //#endregion

@@ -1,8 +1,6 @@
 import 'package:app/controllers/home_controller.dart';
-import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
 import 'package:app/widgets/admin_home_appbar.dart';
-import 'package:app/widgets/card_home_widget.dart';
 import 'package:flutter/material.dart';
 
 class AdminHomePage extends BaseView<HomedController> {
@@ -17,7 +15,7 @@ class AdminHomePage extends BaseView<HomedController> {
       ),
       backgroundColor: Colors.white,
       body: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

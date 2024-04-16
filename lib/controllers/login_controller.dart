@@ -111,7 +111,7 @@ class LoginController extends BaseController {
   }
 
   Future<void> validateAdminCredential() async {
-    debugPrint("LoginController validateStaffCredential");
+    debugPrint("LoginController validateAdminCredential");
     //_launchStaffHomePage();
     isLoading(true);
     _auth.checkCredential(
@@ -119,9 +119,8 @@ class LoginController extends BaseController {
       passwordController?.text ?? "",
       (userCredential) {
         debugPrint(
-            "LoginController validateStaffCredential credential ${userCredential.toString()}");
-        debugPrint(
-            "LoginController validateStaffCredential user ${userCredential.user}");
+            "LoginController validateAdminCredential credential ${userCredential.toString()}");
+        debugPrint("LoginController validateAdminCredential user ${userCredential.user}");
       },
       () async {
         if (await _service.getAdmin(_auth.getUser()?.uid) != null) {
@@ -129,18 +128,14 @@ class LoginController extends BaseController {
           _launchAdminHomePage();
         } else {
           _auth.signOut();
-          debugPrint(
-              'LoginController validateStaffCredential user uid is not a Resident}');
-          onShowAlert(
-              "Error!", "Invalid Staff User, Please Login as a Staff User");
+          debugPrint('LoginController validateAdminCredential user uid is not a Resident}');
+          onShowAlert("Error!", "Invalid Staff User, Please Login as a Staff User");
           isLoading(false);
         }
       },
       (exception) {
-        debugPrint(
-            'LoginController validateStaffCredential exception ${exception.toString()}}');
-        onShowAlert(
-            "Error!", "Invalid Credential Please Try Again; Adminlogin");
+        debugPrint('LoginController validateAdminCredential exception ${exception.toString()}}');
+        onShowAlert("Error!", "Invalid Credential Please Try Again; Adminlogin");
         isLoading(false);
       },
       () {},
