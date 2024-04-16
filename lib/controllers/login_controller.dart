@@ -112,14 +112,12 @@ class LoginController extends BaseController {
 
   Future<void> validateAdminCredential() async {
     debugPrint("LoginController validateAdminCredential");
-    //_launchStaffHomePage();
     isLoading(true);
     _auth.checkCredential(
       emailController?.text ?? "",
       passwordController?.text ?? "",
       (userCredential) {
-        debugPrint(
-            "LoginController validateAdminCredential credential ${userCredential.toString()}");
+        debugPrint("LoginController validateAdminCredential credential ${userCredential.toString()}");
         debugPrint("LoginController validateAdminCredential user ${userCredential.user}");
       },
       () async {
@@ -129,13 +127,13 @@ class LoginController extends BaseController {
         } else {
           _auth.signOut();
           debugPrint('LoginController validateAdminCredential user uid is not a Resident}');
-          onShowAlert("Error!", "Invalid Staff User, Please Login as a Staff User");
+          onShowAlert("Error!", "Invalid Admin User, Please Login as a Admin User");
           isLoading(false);
         }
       },
       (exception) {
         debugPrint('LoginController validateAdminCredential exception ${exception.toString()}}');
-        onShowAlert("Error!", "Invalid Credential Please Try Again; Adminlogin");
+        onShowAlert("Error!", "Invalid Credential Please Try Again");
         isLoading(false);
       },
       () {},
