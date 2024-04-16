@@ -32,7 +32,7 @@ class AdminHomePage extends BaseView<HomedController> {
                 ),
                 AdminHomeWidget(
                   onpressed: () {
-                    controller.launchManageResident();
+                    controller.launchManageStaff();
                   },
                   title: 'MANGE STAFF\nACCOUNTS',
                 ),
@@ -41,7 +41,7 @@ class AdminHomePage extends BaseView<HomedController> {
                 ),
                 AdminHomeWidget(
                   onpressed: () {
-                    controller.launchManageResident();
+                    controller.launchCreateNewStaff();
                   },
                   title: 'CREATE NEW STAFF\nACCOUNTS',
                 )

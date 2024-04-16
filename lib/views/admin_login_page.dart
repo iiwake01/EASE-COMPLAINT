@@ -9,14 +9,14 @@ class AdminLoginPage extends BaseWidget<LoginController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.onInitTextEditingControllers();
     return Card(
       color: const Color.fromARGB(255, 169, 202, 174),
       margin: const EdgeInsets.symmetric(horizontal: 200, vertical: 50),
       elevation: 1.0,
       shadowColor: const Color.fromARGB(255, 196, 233, 202),
       child: Padding(
-        padding:
-            const EdgeInsets.only(top: 13, left: 15.0, right: 15.0, bottom: 13),
+        padding: const EdgeInsets.only(top: 13, left: 15.0, right: 15.0, bottom: 13),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 150),
           child: Column(
@@ -45,9 +45,7 @@ class AdminLoginPage extends BaseWidget<LoginController> {
                     backgroundColor: Colors.green,
                     foregroundColor: Colors.white,
                     textStyle: const TextStyle(fontSize: 20)),
-                onPressed: () {
-                  controller.validateAdminCredential();
-                },
+                onPressed: () => controller.validateAdminCredential(),
                 child: Text(AppLocalizations.of(context).translate('log_in')),
               ),
             ],

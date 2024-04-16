@@ -103,35 +103,18 @@ class SignUpController extends BaseController {
 
   Future<void> validate() async {
     final age = num.tryParse(ageController?.text ?? "");
-    final isAgeInvalid = age == null ||
-        age.isBlank == true ||
-        age.isNegative == true ||
-        age == 0;
+    final isAgeInvalid = age == null || age.isBlank == true || age.isNegative == true || age == 0;
     final isPhoneValid = contactNumberController?.text.isPhoneNumber;
-    final isfirstNameValid = firstNameController?.text
-        .split(' ')
-        .where((first) => first.isBlank == true || first.isAlphabetOnly != true)
-        .isEmpty;
-    final islastNameValid = lastNameController?.text
-        .split(' ')
-        .where((last) => last.isBlank == true || last.isAlphabetOnly != true)
-        .isEmpty;
-    final isMiddleNameValid = middleNameController?.text
-        .split(' ')
-        .where(
-            (middle) => middle.isBlank == true || middle.isAlphabetOnly != true)
-        .isEmpty;
-    debugPrint(
-        "SignUpController validate age $age isAgeInvalid $isAgeInvalid isPhoneValid $isPhoneValid isfirstNameValid $isfirstNameValid islastNameValid $islastNameValid isMiddleNameValid $isMiddleNameValid");
-    if (isfirstNameValid == false ||
-        islastNameValid == false ||
-        isMiddleNameValid == false) {
+    final isfirstNameValid = firstNameController?.text.split(' ').where((first) => first.isBlank == true || first.isAlphabetOnly != true).isEmpty;
+    final islastNameValid = lastNameController?.text.split(' ').where((last) => last.isBlank == true || last.isAlphabetOnly != true).isEmpty;
+    final isMiddleNameValid = middleNameController?.text.split(' ').where((middle) => middle.isBlank == true || middle.isAlphabetOnly != true).isEmpty;
+    debugPrint("SignUpController validate age $age isAgeInvalid $isAgeInvalid isPhoneValid $isPhoneValid isfirstNameValid $isfirstNameValid islastNameValid $islastNameValid isMiddleNameValid $isMiddleNameValid");
+    if (isfirstNameValid == false || islastNameValid == false || isMiddleNameValid == false) {
       onShowAlert("Error", "Name is Invalid");
       debugPrint("SignUpController Name is Invalid");
     } else if (passwordController?.text != confirmPasswordController?.text) {
       onShowAlert("Error", "Password and Confrim Password is not equal");
-      debugPrint(
-          "SignUpController Password and Confrim Password is not equal ${passwordController?.text} ${confirmPasswordController?.text}");
+      debugPrint("SignUpController Password and Confrim Password is not equal ${passwordController?.text} ${confirmPasswordController?.text}");
     } else if (isAgeInvalid) {
       onShowAlert("Error", "Age is invalid");
       onShowAlert("Error", "Age is invalid");
@@ -162,16 +145,11 @@ class SignUpController extends BaseController {
     _auth.registerCredential(
       emailController?.text ?? "",
       passwordController?.text ?? "",
-      (userCredential) =>
-          debugPrint('SignUpController UserCredential $userCredential'),
-      (user) => debugPrint(
-          'SignUpController User Id ${user!.uid} registered: $user '),
-      (uid) {
-        _addAdmin(uid);
-      },
+      (userCredential) => debugPrint('SignUpController UserCredential $userCredential'),
+      (user) => debugPrint('SignUpController User Id ${user!.uid} registered: $user '),
+      (uid) { _addResident(uid); },
       (firebaseAuthException) {
-        debugPrint(
-            'SignUpController createAccount FirebaseAuthException ${firebaseAuthException.toString()}}');
+        debugPrint('SignUpController createAccount FirebaseAuthException ${firebaseAuthException.toString()}}');
         if (firebaseAuthException.code == 'weak-password') {
           onShowAlert("Error!", 'The password provided is too weak.');
         } else if (firebaseAuthException.code == 'email-already-in-use') {
@@ -179,8 +157,7 @@ class SignUpController extends BaseController {
         }
       },
       (exception) {
-        debugPrint(
-            'SignUpController registerCredential exception ${exception.toString()}}');
+        debugPrint('SignUpController registerCredential exception ${exception.toString()}}');
         onShowAlert("Error!", "Register failed Please Try Again");
       },
     );

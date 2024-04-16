@@ -24,8 +24,7 @@ class LoginStaffWidget extends BaseWidget<LoginController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                AppLocalizations.of(context)
-                    .translate('log_in_to_your_account'),
+                AppLocalizations.of(context).translate('log_in_to_your_account'),
                 style: const TextStyle(
                   color: Color.fromARGB(255, 29, 87, 30),
                   fontSize: 40,

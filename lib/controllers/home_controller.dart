@@ -88,14 +88,22 @@ class HomedController extends BaseController {
     debugPrint("HomedController launchResidentsList");
     if (checkSession(_auth)) Get.toNamed(Routes.RESIDENTSLIST);
   }
-
+  //#endregion
+  //#region Admin Methods
   void launchManageResident() {
     debugPrint("HomeController launchManageResident");
-    //if (checkSession(_auth)) Get.toNamed(Routes.RESIDENTACCOUNTS);
-    //if (checkSession(_auth)) Get.toNamed(Routes.NEWSTAFFACCOUNTCREATION);
-    //if (checkSession(_auth)) Get.toNamed(Routes.STAFFACCOUNTS);
+    if (checkSession(_auth)) Get.toNamed(Routes.RESIDENTACCOUNTS);
   }
 
+  void launchManageStaff() {
+    debugPrint("HomeController launchManageStaff");
+    if (checkSession(_auth)) Get.toNamed(Routes.STAFFACCOUNTS);
+  }
+
+  void launchCreateNewStaff() {
+    debugPrint("HomeController launchCreateNewStaff");
+    if (checkSession(_auth)) Get.toNamed(Routes.NEWSTAFFACCOUNTCREATION);
+  }
   //#endregion
   @override
   void onClose() {
