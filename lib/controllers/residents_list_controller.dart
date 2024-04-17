@@ -3,15 +3,12 @@ import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/resident_model.dart';
 import 'package:app/routes/app_pages.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ResidentsListController extends BaseController {
-  ResidentsListController(
-    this._auth,
-    this._service,
-  ) {
+
+  ResidentsListController(this._auth, this._service,) {
     debugPrint("ResidentsListController Constructor");
   }
 
@@ -25,8 +22,7 @@ class ResidentsListController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     debugPrint("ResidentsListController onInit");
-    //checkSession();
-    fetch();
+    _fetch();
     onTextChangeListener();
   }
 
@@ -35,20 +31,19 @@ class ResidentsListController extends BaseController {
     searchController.addListener(() {
       debugPrint("SearchController text: ${searchController.text}");
       debugPrint("Previous text: $previousText");
-      debugPrint(
-          "SearchController isNotBlank ${searchController.text.trim().isNotEmpty}");
+      debugPrint("SearchController isNotBlank ${searchController.text.trim().isNotEmpty}");
       if (searchController.text.trim() != previousText) {
         previousText = searchController.text.trim();
         if (searchController.text.trim().isNotEmpty) {
-          filter();
+          _filter();
         } else {
-          fetch();
+          _fetch();
         }
       }
     });
   }
 
-  Future<void> fetch() async {
+  Future<void> _fetch() async {
     try {
       _isLoading(true);
       if (checkSession(_auth)) {
@@ -65,7 +60,7 @@ class ResidentsListController extends BaseController {
     }
   }
 
-  Future<void> filter() async {
+  Future<void> _filter() async {
     try {
       _isLoading(true);
       final snapshot = await _service.getResidents();
@@ -74,28 +69,22 @@ class ResidentsListController extends BaseController {
       } else if (snapshot.isEmpty) {
         _residentList.clear();
       }
-      final List<ResidentModel> filtered = _residentList
-          .where((model) =>
-              (model.first
-                      ?.toLowerCase()
-                      ?.contains(searchController.text.toLowerCase()) ??
-                  false) ||
-              (model.last
-                      ?.toLowerCase()
-                      ?.contains(searchController.text.toLowerCase()) ??
-                  false) ||
-              (model.age?.contains(searchController.text) ?? false) ||
-              (model.zone
-                      ?.toLowerCase()
-                      ?.contains(searchController.text.toLowerCase()) ??
-                  false))
-          .toList();
+      final List<ResidentModel> filtered = _residentList.where((model) => 
+        (model.first?.toLowerCase()?.contains(searchController.text.toLowerCase()) ?? false) ||
+        (model.last?.toLowerCase()?.contains(searchController.text.toLowerCase()) ?? false) ||
+        (model.age?.contains(searchController.text) ?? false) ||
+        (model.zone?.toLowerCase()?.contains(searchController.text.toLowerCase()) ?? false))
+      .toList();
       _residentList.assignAll(filtered);
     } catch (exception) {
       onShowAlert("Error", "Filter Failed");
     } finally {
       _isLoading(false);
     }
+  }
+
+  Future<void> remove(ResidentModel? model) async {
+    _service.deleteResident(model);
   }
 
   RxBool observeLoading() {

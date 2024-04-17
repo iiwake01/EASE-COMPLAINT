@@ -13,6 +13,7 @@ import 'package:app/bindings/resident_information_binder.dart';
 // import 'package:app/bindings/resident_information_binding.dart';
 import 'package:app/bindings/residents_list_binding.dart';
 import 'package:app/bindings/sign_up_binding.dart';
+import 'package:app/bindings/staff_binding.dart';
 import 'package:app/bindings/staff_complaints_list_binding.dart';
 import 'package:app/views/admin_home_page.dart';
 import 'package:app/views/admin_login_page.dart';
@@ -169,21 +170,21 @@ abstract class AppPages {
      GetPage(
       name: Routes.RESIDENTACCOUNTS,
       page: () => const ResidentAccountsPage(),
-      binding: null,
+      binding: ResidentsListBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
      GetPage(
       name: Routes.NEWSTAFFACCOUNTCREATION,
       page: () => const NewStaffAccountCreationPage(),
-      binding: null,
+      binding: StaffBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
      GetPage(
       name: Routes.STAFFACCOUNTS,
       page: () => const StaffAccountsPage(),
-      binding: null,
+      binding: StaffBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),

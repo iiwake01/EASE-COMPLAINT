@@ -22,8 +22,7 @@ class SearchViewWidget extends BaseWidget {
         child: SearchFieldWidget(
           textEditingController: textEditingController,
           hintText: 'Search',
-          suffixIcon: IconButton(
-              onPressed: onPressed, icon: const Icon(CupertinoIcons.search)),
+          suffixIcon: IconButton(onPressed: onPressed, icon: const Icon(CupertinoIcons.search)),
         ),
       ),
     );
