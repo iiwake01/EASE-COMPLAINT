@@ -31,6 +31,8 @@ class StaffController extends BaseController {
   final TextEditingController searchController = TextEditingController();
   final Rx<TextEditingController?> birthdateController =
       TextEditingController().obs;
+  final Rx<StaffModel?> _staffInformation = StaffModel().obs;
+  final arguments = Get.arguments;
 
   @override
   Future<void> onInit() async {
@@ -178,7 +180,6 @@ class StaffController extends BaseController {
 
   //#region StaffAccountsPage Methods
   Future<void> onInitList() async {
-    //TODO: Use this for StaffAccountsPage
     debugPrint("StaffController onInitList");
     _fetch();
     onTextChangeListener();
@@ -202,9 +203,28 @@ class StaffController extends BaseController {
     });
   }
 
+  Future<void> fetchArguments() async {
+    try {
+      _isLoading(true);
+
+      if (checkSession(_auth) && arguments != null && arguments is String) {
+        final StaffModel? snapshot = await _service.getStaff(arguments);
+        _staffInformation(snapshot);
+      } else {
+        _staffInformation();
+      }
+    } catch (exception) {
+      onShowAlert("Error:", "Error fetching staffInformation");
+      debugPrint("StaffInformation fetch $exception");
+    } finally {
+      _isLoading(false);
+    }
+  }
+
   Future<void> _fetch() async {
     try {
       _isLoading(true);
+
       if (checkSession(_auth)) {
         final List<StaffModel> snapshot = await _service.getStaffs();
         _staffList.assignAll(snapshot);
@@ -274,14 +294,19 @@ class StaffController extends BaseController {
     return _isLoading;
   }
 
-  List<StaffModel> getList() {
+  List<StaffModel> observeList() {
     return _staffList;
   }
 
   void launchView(final String? uid) {
     if (checkSession(_auth)) {
-      //Get.toNamed(Routes.xxx, arguments: uid);
+      Get.toNamed(Routes.STAFFINFORMATION, arguments: uid);
+      debugPrint("uid: $uid");
     }
+  }
+
+  Rx<StaffModel?> observeStaffInformation() {
+    return _staffInformation;
   }
 
   //#endregion

@@ -15,6 +15,7 @@ class StaffAccountsPage extends BaseView<StaffController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.onInitList();
     return Scaffold(
       appBar: WhiteBackAppbar(
         height: MediaQuery.of(context).size.height * 0.20,
@@ -69,15 +70,15 @@ class StaffAccountsPage extends BaseView<StaffController> {
                             Text(""),
                             TitleWidget(
                               title: "Last Name",
-                              multiplier: .09,
+                              multiplier: .1,
                             ),
                             TitleWidget(
                               title: "First Name",
-                              multiplier: .09,
+                              multiplier: .1,
                             ),
                             TitleWidget(
                               title: "Position",
-                              multiplier: .0675,
+                              multiplier: .235,
                             ),
                             // TitleWidget(title: "")
                           ],
@@ -92,11 +93,11 @@ class StaffAccountsPage extends BaseView<StaffController> {
                     return SizedBox(
                       height: MediaQuery.of(context).size.height * .5,
                       child: ListView.builder(
-                        itemCount: controller.getList().length,
+                        itemCount: controller.observeList().length,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) {
                           return StaffAccountTile(
-                            staff: controller.getList()[index],
+                            staff: controller.observeList()[index],
                           );
                         },
                       ),

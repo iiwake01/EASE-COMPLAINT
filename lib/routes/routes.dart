@@ -23,4 +23,5 @@ abstract class Routes {
   static const RESIDENTACCOUNTS = '/resident_accounts';
   static const NEWSTAFFACCOUNTCREATION = '/new_staff_account_creation';
   static const STAFFACCOUNTS = '/staff_accounts';
+  static const STAFFINFORMATION = '/staff_information';
 }

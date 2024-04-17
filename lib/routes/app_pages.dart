@@ -36,6 +36,7 @@ import 'package:app/views/sign_up_page.dart';
 import 'package:app/views/staff_accounts_page.dart';
 import 'package:app/views/staff_complaints_list_page.dart';
 import 'package:app/views/staff_home_page.dart';
+import 'package:app/views/staff_information_page.dart';
 import 'package:get/get.dart';
 part 'routes.dart';
 
@@ -167,23 +168,30 @@ abstract class AppPages {
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
-     GetPage(
+    GetPage(
       name: Routes.RESIDENTACCOUNTS,
       page: () => const ResidentAccountsPage(),
       binding: ResidentsListBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
-     GetPage(
+    GetPage(
       name: Routes.NEWSTAFFACCOUNTCREATION,
       page: () => const NewStaffAccountCreationPage(),
       binding: StaffBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),
-     GetPage(
+    GetPage(
       name: Routes.STAFFACCOUNTS,
       page: () => const StaffAccountsPage(),
+      binding: StaffBinding(),
+      transition: Transition.noTransition,
+      transitionDuration: const Duration(milliseconds: 250),
+    ),
+    GetPage(
+      name: Routes.STAFFINFORMATION,
+      page: () => const StaffInformationPage(),
       binding: StaffBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
