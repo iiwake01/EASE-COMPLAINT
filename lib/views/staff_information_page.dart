@@ -1,23 +1,17 @@
-import 'package:app/controllers/resident_information_controller.dart';
-import 'package:app/controllers/residents_list_controller.dart';
 import 'package:app/controllers/staff_controller.dart';
-import 'package:app/models/resident_information_model.dart';
-import 'package:app/models/resident_model.dart';
+import 'package:app/controllers/staff_information_controller.dart';
 import 'package:app/models/staff_model.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
-import 'package:app/widgets/complaint_view_app_bar.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
-class StaffInformationPage extends BaseView<StaffController> {
+class StaffInformationPage extends BaseView<StaffInformationController> {
   const StaffInformationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    controller.fetchArguments();
     return Scaffold(
       appBar: WhiteBackAppbar(
         height: MediaQuery.of(context).size.height * 0.20,
@@ -62,6 +56,7 @@ class ResidentInformationDataBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Column(
       children: [
         Row(

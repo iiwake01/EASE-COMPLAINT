@@ -15,6 +15,7 @@ import 'package:app/bindings/residents_list_binding.dart';
 import 'package:app/bindings/sign_up_binding.dart';
 import 'package:app/bindings/staff_binding.dart';
 import 'package:app/bindings/staff_complaints_list_binding.dart';
+import 'package:app/bindings/staff_information_binding.dart';
 import 'package:app/views/admin_home_page.dart';
 import 'package:app/views/admin_login_page.dart';
 import 'package:app/views/complaint_form_page.dart';
@@ -192,7 +193,7 @@ abstract class AppPages {
     GetPage(
       name: Routes.STAFFINFORMATION,
       page: () => const StaffInformationPage(),
-      binding: StaffBinding(),
+      binding: StaffInformationBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),

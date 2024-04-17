@@ -9,6 +9,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class StaffController extends BaseController {
+
   StaffController(
     this._auth,
     this._service,
@@ -31,8 +32,6 @@ class StaffController extends BaseController {
   final TextEditingController searchController = TextEditingController();
   final Rx<TextEditingController?> birthdateController =
       TextEditingController().obs;
-  final Rx<StaffModel?> _staffInformation = StaffModel().obs;
-  final arguments = Get.arguments;
 
   @override
   Future<void> onInit() async {
@@ -41,7 +40,6 @@ class StaffController extends BaseController {
   }
 
   Future<void> onInitTextEditingControllers() async {
-    //TODO: Use this for NewStaffAccountCreationPage
     debugPrint("StaffController onInitTextEditingControllers");
     firstNameController = TextEditingController();
     emailController = TextEditingController();
@@ -190,8 +188,7 @@ class StaffController extends BaseController {
     searchController.addListener(() {
       debugPrint("SearchController text: ${searchController.text}");
       debugPrint("Previous text: $previousText");
-      debugPrint(
-          "SearchController isNotBlank ${searchController.text.trim().isNotEmpty}");
+      debugPrint("SearchController isNotBlank ${searchController.text.trim().isNotEmpty}");
       if (searchController.text.trim() != previousText) {
         previousText = searchController.text.trim();
         if (searchController.text.trim().isNotEmpty) {
@@ -201,24 +198,6 @@ class StaffController extends BaseController {
         }
       }
     });
-  }
-
-  Future<void> fetchArguments() async {
-    try {
-      _isLoading(true);
-
-      if (checkSession(_auth) && arguments != null && arguments is String) {
-        final StaffModel? snapshot = await _service.getStaff(arguments);
-        _staffInformation(snapshot);
-      } else {
-        _staffInformation();
-      }
-    } catch (exception) {
-      onShowAlert("Error:", "Error fetching staffInformation");
-      debugPrint("StaffInformation fetch $exception");
-    } finally {
-      _isLoading(false);
-    }
   }
 
   Future<void> _fetch() async {
@@ -298,17 +277,12 @@ class StaffController extends BaseController {
     return _staffList;
   }
 
-  void launchView(final String? uid) {
+  Future<void> launchView(final String? uid) async {
+    debugPrint("StaffController launchView $uid");
     if (checkSession(_auth)) {
       Get.toNamed(Routes.STAFFINFORMATION, arguments: uid);
-      debugPrint("uid: $uid");
     }
   }
-
-  Rx<StaffModel?> observeStaffInformation() {
-    return _staffInformation;
-  }
-
   //#endregion
   @override
   void onClose() {

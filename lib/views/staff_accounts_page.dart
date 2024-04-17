@@ -3,7 +3,6 @@ import 'package:app/utils/app_localizations.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
 import 'package:app/views/staff_complaints_list_page.dart';
-import 'package:app/widgets/resident_account_tile.dart';
 import 'package:app/widgets/search_view_widget.dart';
 import 'package:app/widgets/staff_account_tile.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
