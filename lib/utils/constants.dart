@@ -41,6 +41,7 @@ class Constants {
   static const MESSAGE = "message";
   static const ATTACHMENT = "attachment";
   static const PAT = "previous_action_taken";
+  static const POSITION = "position";
   static const WITNESSNAME = "witness_name";
   static const WITNESSCONTACT = "witness_contract";
   static const RESOLUTIONREQUEST = "resolution_request";

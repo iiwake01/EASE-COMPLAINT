@@ -2,28 +2,28 @@ import 'package:app/utils/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class StaffModel {
+  StaffModel(
+      {this.id,
+      this.uid,
+      this.photo,
+      this.first,
+      this.middle,
+      this.last,
+      this.sex,
+      this.age,
+      this.birth,
+      this.contact,
+      this.status,
+      this.zone,
+      this.houseStreet,
+      this.email,
+      this.residency,
+      this.position
+      //this.phone,
+      //this.email,
+      //this.age,
+      });
 
-  StaffModel ( {
-    this.id,
-    this.uid,
-    this.photo,
-    this.first, 
-    this.middle,
-    this.last,
-    this.sex,
-    this.age,
-    this.birth,
-    this.contact,
-    this.status,
-    this.zone,
-    this.houseStreet,
-    this.email,
-    this.residency,
-    //this.phone,
-    //this.email,
-    //this.age,
-  } );
-  
   final String? id;
   final String? uid;
   final String? photo;
@@ -39,70 +39,73 @@ class StaffModel {
   final String? houseStreet;
   final String? email;
   final String? residency;
+  final String? position;
 
   factory StaffModel.fromJson(Map<String, dynamic> json) {
-    return StaffModel (
-      id : json[Constants.ID],
-      uid : json[Constants.UID],
-      photo : json[Constants.PHOTO].toString(),
-      first : json[Constants.FIRST].toString(),
-      middle : json[Constants.MIDDLE].toString(),
-      last : json[Constants.LAST].toString(),
-      sex : json[Constants.SEX].toString(),
-      age : json[Constants.AGE].toString(),
-      birth : json[Constants.BIRTH].toString(),
-      contact : json[Constants.CONTACT].toString(),
-      status : json[Constants.STATUS].toString(),
-      zone : json[Constants.ZONE].toString(),
-      houseStreet : json[Constants.HOUSESTREET].toString(),
-      email : json[Constants.EMAIL].toString(),
-      residency : json[Constants.RESIDENCY].toString(),
+    return StaffModel(
+      id: json[Constants.ID],
+      uid: json[Constants.UID],
+      photo: json[Constants.PHOTO].toString(),
+      first: json[Constants.FIRST].toString(),
+      middle: json[Constants.MIDDLE].toString(),
+      last: json[Constants.LAST].toString(),
+      sex: json[Constants.SEX].toString(),
+      age: json[Constants.AGE].toString(),
+      birth: json[Constants.BIRTH].toString(),
+      contact: json[Constants.CONTACT].toString(),
+      status: json[Constants.STATUS].toString(),
+      zone: json[Constants.ZONE].toString(),
+      houseStreet: json[Constants.HOUSESTREET].toString(),
+      email: json[Constants.EMAIL].toString(),
+      residency: json[Constants.RESIDENCY].toString(),
+      position: json[Constants.POSITION].toString(),
     );
   }
 
   factory StaffModel.fromSnapshot(DocumentSnapshot snapshot) {
-    final data = snapshot.data() as Map<String,dynamic>;
-    return StaffModel (
-      id : snapshot.id.toString(),
-      uid : data [Constants.UID],
-      photo : data [Constants.PHOTO],
-      first : data[Constants.FIRST],
-      middle : data[Constants.MIDDLE],
-      last : data[Constants.LAST],
-      sex : data[Constants.SEX],
-      age : data[Constants.AGE],
-      birth : data[Constants.BIRTH],
-      contact : data[Constants.CONTACT],
-      status : data[Constants.STATUS],
-      zone : data[Constants.ZONE],
-      houseStreet : data[Constants.HOUSESTREET],
-      email : data[Constants.EMAIL],
-      residency : data[Constants.RESIDENCY],
-    );
+    final data = snapshot.data() as Map<String, dynamic>;
+    return StaffModel(
+        id: snapshot.id.toString(),
+        uid: data[Constants.UID],
+        photo: data[Constants.PHOTO],
+        first: data[Constants.FIRST],
+        middle: data[Constants.MIDDLE],
+        last: data[Constants.LAST],
+        sex: data[Constants.SEX],
+        age: data[Constants.AGE],
+        birth: data[Constants.BIRTH],
+        contact: data[Constants.CONTACT],
+        status: data[Constants.STATUS],
+        zone: data[Constants.ZONE],
+        houseStreet: data[Constants.HOUSESTREET],
+        email: data[Constants.EMAIL],
+        residency: data[Constants.RESIDENCY],
+        position: data[Constants.POSITION]);
   }
 
   Map<String, dynamic> toMap() => {
-    Constants.UID: uid,
-    Constants.PHOTO: photo,
-    Constants.FIRST: first,
-    Constants.MIDDLE: middle,
-    Constants.LAST: last,
-    Constants.SEX: sex,
-    Constants.AGE: age,
-    Constants.BIRTH: birth,
-    Constants.CONTACT: contact,
-    Constants.STATUS: status,
-    Constants.ZONE: zone,
-    Constants.HOUSESTREET: houseStreet,
-    Constants.EMAIL: email,
-    Constants.RESIDENCY: residency,
-  };
+        Constants.UID: uid,
+        Constants.PHOTO: photo,
+        Constants.FIRST: first,
+        Constants.MIDDLE: middle,
+        Constants.LAST: last,
+        Constants.SEX: sex,
+        Constants.AGE: age,
+        Constants.BIRTH: birth,
+        Constants.CONTACT: contact,
+        Constants.STATUS: status,
+        Constants.ZONE: zone,
+        Constants.HOUSESTREET: houseStreet,
+        Constants.EMAIL: email,
+        Constants.RESIDENCY: residency,
+        Constants.POSITION: position,
+      };
 
   Map<String, dynamic> toJson() {
     return {
-      Constants.ID : id,
-      Constants.UID : uid,
-      Constants.PHOTO : photo,
+      Constants.ID: id,
+      Constants.UID: uid,
+      Constants.PHOTO: photo,
       Constants.FIRST: first,
       Constants.MIDDLE: middle,
       Constants.LAST: last,
@@ -115,6 +118,7 @@ class StaffModel {
       Constants.HOUSESTREET: houseStreet,
       Constants.EMAIL: email,
       Constants.RESIDENCY: residency,
+      Constants.POSITION: position,
     };
   }
 
@@ -222,22 +226,31 @@ class StaffModel {
     return id == newModel.id && residency != newModel.residency;
   }
 
+  bool isSamePosition(StaffModel newModel) {
+    return id == newModel.position && position == newModel.position;
+  }
+
+  bool isNotSamePosition(StaffModel newModel) {
+    return id == newModel.position && position != newModel.position;
+  }
+
   bool isSameContent(StaffModel newModel) {
     return isSamePhoto(newModel) &&
-    isSamePhoto(newModel) &&
-    isSameFirst(newModel) &&
-    isSameMiddle(newModel) &&
-    isSameMiddle(newModel) &&
-    isSameLast(newModel) &&
-    isSameSex(newModel) &&
-    isSameAge(newModel) &&
-    isSameBirth(newModel) &&
-    isSameContact(newModel) &&
-    isSameStatus(newModel) &&
-    isSameZone(newModel) &&
-    isSameHouseStreet(newModel) &&
-    isSameEmail(newModel) &&
-    isSameResidency(newModel);
+        isSamePhoto(newModel) &&
+        isSameFirst(newModel) &&
+        isSameMiddle(newModel) &&
+        isSameMiddle(newModel) &&
+        isSameLast(newModel) &&
+        isSameSex(newModel) &&
+        isSameAge(newModel) &&
+        isSameBirth(newModel) &&
+        isSameContact(newModel) &&
+        isSameStatus(newModel) &&
+        isSameZone(newModel) &&
+        isSameHouseStreet(newModel) &&
+        isSameEmail(newModel) &&
+        isSameResidency(newModel) &&
+        isSamePosition(newModel);
   }
 
   bool isNotSameContent(StaffModel newModel) {
@@ -246,6 +259,7 @@ class StaffModel {
 
   @override
   String toString() {
-    return "StaffModel id $id, photo $photo, first $first, middle $middle, last $last, sex $sex, age $age, birth $birth, contact $contact, status $status, zone $zone, houseStreet $houseStreet, email $email" ?? super.toString();
+    return "StaffModel id $id, photo $photo, first $first, middle $middle, last $last, sex $sex, age $age, birth $birth, contact $contact, status $status, zone $zone, houseStreet $houseStreet, email $email, position $position" ??
+        super.toString();
   }
 }

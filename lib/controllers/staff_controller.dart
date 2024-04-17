@@ -9,18 +9,28 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class StaffController extends BaseController {
-
-  StaffController(this._auth, this._service,) {
+  StaffController(
+    this._auth,
+    this._service,
+  ) {
     debugPrint("StaffController Constructor");
   }
 
   final FirebaseAuthService _auth;
   final FirestoreService _service;
   final RxBool _isLoading = false.obs;
-  TextEditingController? emailController, passwordController, confirmPasswordController, firstNameController, lastNameController, middleNameController, positionController, contactNumberController;
-  final RxList<StaffModel> _residentList = List<StaffModel>.empty().obs;
+  TextEditingController? emailController,
+      passwordController,
+      confirmPasswordController,
+      firstNameController,
+      lastNameController,
+      middleNameController,
+      positionController,
+      contactNumberController;
+  final RxList<StaffModel> _staffList = List<StaffModel>.empty().obs;
   final TextEditingController searchController = TextEditingController();
-  final Rx<TextEditingController?> birthdateController = TextEditingController().obs;
+  final Rx<TextEditingController?> birthdateController =
+      TextEditingController().obs;
 
   @override
   Future<void> onInit() async {
@@ -28,8 +38,9 @@ class StaffController extends BaseController {
     debugPrint("StaffController onInit");
   }
 
-  Future<void> onInitTextEditingControllers() async { //TODO: Use this for NewStaffAccountCreationPage
-  debugPrint("StaffController onInitTextEditingControllers");
+  Future<void> onInitTextEditingControllers() async {
+    //TODO: Use this for NewStaffAccountCreationPage
+    debugPrint("StaffController onInitTextEditingControllers");
     firstNameController = TextEditingController();
     emailController = TextEditingController();
     lastNameController = TextEditingController();
@@ -40,19 +51,34 @@ class StaffController extends BaseController {
     confirmPasswordController = TextEditingController();
   }
 
-  Future<void> validate() async { //TODO: add some validations for the inputs needed!
+  Future<void> validate() async {
+    //TODO: add some validations for the inputs needed!
     //final isAgeInvalid = age == null || age.isBlank == true || age.isNegative == true || age == 0;
     final isPhoneValid = contactNumberController?.text.isPhoneNumber;
-    final isfirstNameValid = firstNameController?.text.split(' ').where((first) => first.isBlank == true || first.isAlphabetOnly != true).isEmpty;
-    final islastNameValid = lastNameController?.text.split(' ').where((last) => last.isBlank == true || last.isAlphabetOnly != true).isEmpty;
-    final isMiddleNameValid = middleNameController?.text.split(' ').where((middle) => middle.isBlank == true || middle.isAlphabetOnly != true).isEmpty;
-    debugPrint("StaffController validate isPhoneValid $isPhoneValid isfirstNameValid $isfirstNameValid islastNameValid $islastNameValid isMiddleNameValid $isMiddleNameValid");
-    if (isfirstNameValid == false || islastNameValid == false || isMiddleNameValid == false) {
+    final isfirstNameValid = firstNameController?.text
+        .split(' ')
+        .where((first) => first.isBlank == true || first.isAlphabetOnly != true)
+        .isEmpty;
+    final islastNameValid = lastNameController?.text
+        .split(' ')
+        .where((last) => last.isBlank == true || last.isAlphabetOnly != true)
+        .isEmpty;
+    final isMiddleNameValid = middleNameController?.text
+        .split(' ')
+        .where(
+            (middle) => middle.isBlank == true || middle.isAlphabetOnly != true)
+        .isEmpty;
+    debugPrint(
+        "StaffController validate isPhoneValid $isPhoneValid isfirstNameValid $isfirstNameValid islastNameValid $islastNameValid isMiddleNameValid $isMiddleNameValid");
+    if (isfirstNameValid == false ||
+        islastNameValid == false ||
+        isMiddleNameValid == false) {
       onShowAlert("Error", "Name is Invalid");
       debugPrint("StaffController Name is Invalid");
     } else if (passwordController?.text != confirmPasswordController?.text) {
       onShowAlert("Error", "Password and Confrim Password is not equal");
-      debugPrint("StaffController Password and Confrim Password is not equal ${passwordController?.text} ${confirmPasswordController?.text}");
+      debugPrint(
+          "StaffController Password and Confrim Password is not equal ${passwordController?.text} ${confirmPasswordController?.text}");
     } else if (isPhoneValid == false) {
       onShowAlert("Error", "Contact is invalid");
       debugPrint("StaffController Contact is invalid");
@@ -65,14 +91,19 @@ class StaffController extends BaseController {
 
   Future<void> _createAccount() async {
     debugPrint("StaffController createAccount");
-    _auth.registerCredential (
+    _auth.registerCredential(
       emailController?.text ?? "",
       passwordController?.text ?? "",
-      (userCredential) => debugPrint('StaffController UserCredential $userCredential'),
-      (user) => debugPrint('StaffController User Id ${user!.uid} registered: $user '),
-      (uid) { _addStaff(uid); },
+      (userCredential) =>
+          debugPrint('StaffController UserCredential $userCredential'),
+      (user) =>
+          debugPrint('StaffController User Id ${user!.uid} registered: $user '),
+      (uid) {
+        _addStaff(uid);
+      },
       (firebaseAuthException) {
-        debugPrint('StaffController createAccount FirebaseAuthException ${firebaseAuthException.toString()}}');
+        debugPrint(
+            'StaffController createAccount FirebaseAuthException ${firebaseAuthException.toString()}}');
         if (firebaseAuthException.code == 'weak-password') {
           onShowAlert("Error!", 'The password provided is too weak.');
         } else if (firebaseAuthException.code == 'email-already-in-use') {
@@ -80,7 +111,8 @@ class StaffController extends BaseController {
         }
       },
       (exception) {
-        debugPrint('StaffController registerCredential exception ${exception.toString()}}');
+        debugPrint(
+            'StaffController registerCredential exception ${exception.toString()}}');
         onShowAlert("Error!", "Register failed Please Try Again");
       },
     );
@@ -89,7 +121,8 @@ class StaffController extends BaseController {
   Future<void> _addStaff(String? uid) async {
     debugPrint("StaffController _addStaff");
     try {
-      _auth.sendEmailVerification(() {}, (firebaseException) {}, (exception) {});
+      _auth.sendEmailVerification(
+          () {}, (firebaseException) {}, (exception) {});
       //TaskSnapshot? taskSnapshot = await _storage.uploadPlatformFiles(residencyFile);
       final StaffModel staff;
       /*
@@ -111,15 +144,16 @@ class StaffController extends BaseController {
         );
       } else {
       */
-        staff = StaffModel(
-          uid: uid,
-          email: emailController?.text,
-          first: firstNameController?.text,
-          last: lastNameController?.text,
-          middle: middleNameController?.text,
-          birth: birthdateController.value?.text,
-          contact: contactNumberController?.text,
-        );
+      staff = StaffModel(
+        uid: uid,
+        email: emailController?.text,
+        first: firstNameController?.text,
+        last: lastNameController?.text,
+        middle: middleNameController?.text,
+        birth: birthdateController.value?.text,
+        contact: contactNumberController?.text,
+        position: positionController?.text,
+      );
       //}
       await _service.createStaff(staff.toMap());
     } catch (exception) {
@@ -129,7 +163,7 @@ class StaffController extends BaseController {
       if (Get.isDialogOpen == true) {
         Get.back();
       }
-      DialogWidget.staffCreatedDialog (
+      DialogWidget.staffCreatedDialog(
         emailController?.text,
         passwordController?.text,
         () {
@@ -138,12 +172,14 @@ class StaffController extends BaseController {
           }
           Get.offAndToNamed(Routes.ADMINHOME);
         },
-      );      
+      );
     }
   }
+
   //#region StaffAccountsPage Methods
-  Future<void> onInitList() async { //TODO: Use this for StaffAccountsPage
-  debugPrint("StaffController onInitList");
+  Future<void> onInitList() async {
+    //TODO: Use this for StaffAccountsPage
+    debugPrint("StaffController onInitList");
     _fetch();
     onTextChangeListener();
   }
@@ -153,7 +189,8 @@ class StaffController extends BaseController {
     searchController.addListener(() {
       debugPrint("SearchController text: ${searchController.text}");
       debugPrint("Previous text: $previousText");
-      debugPrint("SearchController isNotBlank ${searchController.text.trim().isNotEmpty}");
+      debugPrint(
+          "SearchController isNotBlank ${searchController.text.trim().isNotEmpty}");
       if (searchController.text.trim() != previousText) {
         previousText = searchController.text.trim();
         if (searchController.text.trim().isNotEmpty) {
@@ -170,9 +207,9 @@ class StaffController extends BaseController {
       _isLoading(true);
       if (checkSession(_auth)) {
         final List<StaffModel> snapshot = await _service.getStaffs();
-        _residentList.assignAll(snapshot);
+        _staffList.assignAll(snapshot);
       } else {
-        _residentList.clear();
+        _staffList.clear();
       }
     } catch (exception) {
       onShowAlert("Error", "Fetch Failed");
@@ -187,17 +224,27 @@ class StaffController extends BaseController {
       _isLoading(true);
       final snapshot = await _service.getStaffs();
       if (snapshot.isNotEmpty) {
-        _residentList.assignAll(snapshot);
+        _staffList.assignAll(snapshot);
       } else if (snapshot.isEmpty) {
-        _residentList.clear();
+        _staffList.clear();
       }
-      final List<StaffModel> filtered = _residentList.where((model) => 
-        (model.first?.toLowerCase()?.contains(searchController.text.toLowerCase()) ?? false) ||
-        (model.last?.toLowerCase()?.contains(searchController.text.toLowerCase()) ?? false) ||
-        (model.age?.contains(searchController.text) ?? false) ||
-        (model.zone?.toLowerCase()?.contains(searchController.text.toLowerCase()) ?? false))
-      .toList();
-      _residentList.assignAll(filtered);
+      final List<StaffModel> filtered = _staffList
+          .where((model) =>
+              (model.first
+                      ?.toLowerCase()
+                      ?.contains(searchController.text.toLowerCase()) ??
+                  false) ||
+              (model.last
+                      ?.toLowerCase()
+                      ?.contains(searchController.text.toLowerCase()) ??
+                  false) ||
+              (model.age?.contains(searchController.text) ?? false) ||
+              (model.zone
+                      ?.toLowerCase()
+                      ?.contains(searchController.text.toLowerCase()) ??
+                  false))
+          .toList();
+      _staffList.assignAll(filtered);
     } catch (exception) {
       onShowAlert("Error", "Filter Failed");
     } finally {
@@ -207,16 +254,15 @@ class StaffController extends BaseController {
 
   Future<void> onRemove(StaffModel? model) async {
     DialogWidget.removeDialog(
-      AppLocalizations.of(Get.context!).translate('are_you_sure_you_want_to_delete_this_account_'), 
-      AppLocalizations.of(Get.context!).translate('yes'),
-      AppLocalizations.of(Get.context!).translate('no'),
-      () => _remove(model), 
-      () {
-        if (Get.isDialogOpen == true) {
-          Get.back();
-        }
+        AppLocalizations.of(Get.context!)
+            .translate('are_you_sure_you_want_to_delete_this_account_'),
+        AppLocalizations.of(Get.context!).translate('yes'),
+        AppLocalizations.of(Get.context!).translate('no'),
+        () => _remove(model), () {
+      if (Get.isDialogOpen == true) {
+        Get.back();
       }
-    );
+    });
   }
 
   Future<void> _remove(StaffModel? model) async {
@@ -229,7 +275,7 @@ class StaffController extends BaseController {
   }
 
   List<StaffModel> getList() {
-    return _residentList;
+    return _staffList;
   }
 
   void launchView(final String? uid) {
@@ -237,6 +283,7 @@ class StaffController extends BaseController {
       //Get.toNamed(Routes.xxx, arguments: uid);
     }
   }
+
   //#endregion
   @override
   void onClose() {
