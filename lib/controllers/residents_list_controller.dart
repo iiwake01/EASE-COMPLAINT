@@ -7,8 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ResidentsListController extends BaseController {
-
-  ResidentsListController(this._auth, this._service,) {
+  ResidentsListController(
+    this._auth,
+    this._service,
+  ) {
     debugPrint("ResidentsListController Constructor");
   }
 
@@ -31,7 +33,8 @@ class ResidentsListController extends BaseController {
     searchController.addListener(() {
       debugPrint("SearchController text: ${searchController.text}");
       debugPrint("Previous text: $previousText");
-      debugPrint("SearchController isNotBlank ${searchController.text.trim().isNotEmpty}");
+      debugPrint(
+          "SearchController isNotBlank ${searchController.text.trim().isNotEmpty}");
       if (searchController.text.trim() != previousText) {
         previousText = searchController.text.trim();
         if (searchController.text.trim().isNotEmpty) {
@@ -69,12 +72,22 @@ class ResidentsListController extends BaseController {
       } else if (snapshot.isEmpty) {
         _residentList.clear();
       }
-      final List<ResidentModel> filtered = _residentList.where((model) => 
-        (model.first?.toLowerCase()?.contains(searchController.text.toLowerCase()) ?? false) ||
-        (model.last?.toLowerCase()?.contains(searchController.text.toLowerCase()) ?? false) ||
-        (model.age?.contains(searchController.text) ?? false) ||
-        (model.zone?.toLowerCase()?.contains(searchController.text.toLowerCase()) ?? false))
-      .toList();
+      final List<ResidentModel> filtered = _residentList
+          .where((model) =>
+              (model.first
+                      ?.toLowerCase()
+                      ?.contains(searchController.text.toLowerCase()) ??
+                  false) ||
+              (model.last
+                      ?.toLowerCase()
+                      ?.contains(searchController.text.toLowerCase()) ??
+                  false) ||
+              (model.age?.contains(searchController.text) ?? false) ||
+              (model.zone
+                      ?.toLowerCase()
+                      ?.contains(searchController.text.toLowerCase()) ??
+                  false))
+          .toList();
       _residentList.assignAll(filtered);
     } catch (exception) {
       onShowAlert("Error", "Filter Failed");
@@ -85,6 +98,7 @@ class ResidentsListController extends BaseController {
 
   Future<void> remove(ResidentModel? model) async {
     _service.deleteResident(model);
+    _fetch();
   }
 
   RxBool observeLoading() {
