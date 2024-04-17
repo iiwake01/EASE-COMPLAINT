@@ -52,13 +52,17 @@ class SignUpController extends BaseController {
     AppLocalizations.of(Get.context!).translate('zone_4'),
     AppLocalizations.of(Get.context!).translate('zone_5'),
     AppLocalizations.of(Get.context!).translate('zone_6'),
+    AppLocalizations.of(Get.context!).translate('zone_7'),
+    AppLocalizations.of(Get.context!).translate('zone_8'),
+    AppLocalizations.of(Get.context!).translate('zone_9'),
   ];
   RxString selectedGender = "".obs,
       selectedStatus = "".obs,
       selectedZone = "".obs,
       liveFile = "".obs;
 
-  final Rx<TextEditingController?> birthdateController = TextEditingController().obs;
+  final Rx<TextEditingController?> birthdateController =
+      TextEditingController().obs;
   PlatformFile? residencyFile;
   RxBool isReadTerms = false.obs;
 
@@ -102,18 +106,35 @@ class SignUpController extends BaseController {
 
   Future<void> validate() async {
     final age = num.tryParse(ageController?.text ?? "");
-    final isAgeInvalid = age == null || age.isBlank == true || age.isNegative == true || age == 0;
+    final isAgeInvalid = age == null ||
+        age.isBlank == true ||
+        age.isNegative == true ||
+        age == 0;
     final isPhoneValid = contactNumberController?.text.isPhoneNumber;
-    final isfirstNameValid = firstNameController?.text.split(' ').where((first) => first.isBlank == true || first.isAlphabetOnly != true).isEmpty;
-    final islastNameValid = lastNameController?.text.split(' ').where((last) => last.isBlank == true || last.isAlphabetOnly != true).isEmpty;
-    final isMiddleNameValid = middleNameController?.text.split(' ').where((middle) => middle.isBlank == true || middle.isAlphabetOnly != true).isEmpty;
-    debugPrint("SignUpController validate age $age isAgeInvalid $isAgeInvalid isPhoneValid $isPhoneValid isfirstNameValid $isfirstNameValid islastNameValid $islastNameValid isMiddleNameValid $isMiddleNameValid");
-    if (isfirstNameValid == false || islastNameValid == false || isMiddleNameValid == false) {
+    final isfirstNameValid = firstNameController?.text
+        .split(' ')
+        .where((first) => first.isBlank == true || first.isAlphabetOnly != true)
+        .isEmpty;
+    final islastNameValid = lastNameController?.text
+        .split(' ')
+        .where((last) => last.isBlank == true || last.isAlphabetOnly != true)
+        .isEmpty;
+    final isMiddleNameValid = middleNameController?.text
+        .split(' ')
+        .where(
+            (middle) => middle.isBlank == true || middle.isAlphabetOnly != true)
+        .isEmpty;
+    debugPrint(
+        "SignUpController validate age $age isAgeInvalid $isAgeInvalid isPhoneValid $isPhoneValid isfirstNameValid $isfirstNameValid islastNameValid $islastNameValid isMiddleNameValid $isMiddleNameValid");
+    if (isfirstNameValid == false ||
+        islastNameValid == false ||
+        isMiddleNameValid == false) {
       onShowAlert("Error", "Name is Invalid");
       debugPrint("SignUpController Name is Invalid");
     } else if (passwordController?.text != confirmPasswordController?.text) {
       onShowAlert("Error", "Password and Confrim Password is not equal");
-      debugPrint("SignUpController Password and Confrim Password is not equal ${passwordController?.text} ${confirmPasswordController?.text}");
+      debugPrint(
+          "SignUpController Password and Confrim Password is not equal ${passwordController?.text} ${confirmPasswordController?.text}");
     } else if (isAgeInvalid) {
       onShowAlert("Error", "Age is invalid");
       onShowAlert("Error", "Age is invalid");
@@ -144,11 +165,16 @@ class SignUpController extends BaseController {
     _auth.registerCredential(
       emailController?.text ?? "",
       passwordController?.text ?? "",
-      (userCredential) => debugPrint('SignUpController UserCredential $userCredential'),
-      (user) => debugPrint('SignUpController User Id ${user!.uid} registered: $user '),
-      (uid) { _addResident(uid); },
+      (userCredential) =>
+          debugPrint('SignUpController UserCredential $userCredential'),
+      (user) => debugPrint(
+          'SignUpController User Id ${user!.uid} registered: $user '),
+      (uid) {
+        _addResident(uid);
+      },
       (firebaseAuthException) {
-        debugPrint('SignUpController createAccount FirebaseAuthException ${firebaseAuthException.toString()}}');
+        debugPrint(
+            'SignUpController createAccount FirebaseAuthException ${firebaseAuthException.toString()}}');
         if (firebaseAuthException.code == 'weak-password') {
           onShowAlert("Error!", 'The password provided is too weak.');
         } else if (firebaseAuthException.code == 'email-already-in-use') {
@@ -156,7 +182,8 @@ class SignUpController extends BaseController {
         }
       },
       (exception) {
-        debugPrint('SignUpController registerCredential exception ${exception.toString()}}');
+        debugPrint(
+            'SignUpController registerCredential exception ${exception.toString()}}');
         onShowAlert("Error!", "Register failed Please Try Again");
       },
     );
@@ -244,6 +271,7 @@ class SignUpController extends BaseController {
       _launchLogin();
     }
   }
+
   //#region For Picking and displaying Image Files Methods
   Future<void> onPickFiles() async {
     const type = FileType.custom;

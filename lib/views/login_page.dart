@@ -8,23 +8,33 @@ import 'package:app/widgets/page_view_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends BaseView<LoginController> {
-
-  const LoginPage( { Key? key } ) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold (
-      appBar: HeaderAppBar(height: MediaQuery.of(context).size.height * 0.20, widthGap: MediaQuery.of(context).size.width * 0.10,),
-      backgroundColor: Colors.white,
-      body: PageViewWidget (
-        pageController: controller.pageController, 
-        isLoading: controller.isLoading,
-        canScroll: false,
-        widgets: const <Widget> [
-          LoginWidget(),
-          LoginResidentWidget(),
-          LoginStaffWidget(),
-        ],
+    return Scaffold(
+      appBar: HeaderAppBar(
+        height: MediaQuery.of(context).size.height * 0.20,
+        widthGap: MediaQuery.of(context).size.width * 0.10,
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+                "assets/easebg.jpg"), // Replace "assets/background_image.jpg" with your image path
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: PageViewWidget(
+          pageController: controller.pageController,
+          isLoading: controller.isLoading,
+          canScroll: false,
+          widgets: const <Widget>[
+            LoginWidget(),
+            LoginResidentWidget(),
+            LoginStaffWidget(),
+          ],
+        ),
       ),
     );
   }

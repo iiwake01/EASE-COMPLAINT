@@ -9,7 +9,6 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class StaffController extends BaseController {
-
   StaffController(
     this._auth,
     this._service,
@@ -68,6 +67,12 @@ class StaffController extends BaseController {
         .where(
             (middle) => middle.isBlank == true || middle.isAlphabetOnly != true)
         .isEmpty;
+    final isPositionValid = middleNameController?.text
+        .split(' ')
+        .where((position) =>
+            position.isBlank == true || position.isAlphabetOnly != true)
+        .isEmpty;
+
     debugPrint(
         "StaffController validate isPhoneValid $isPhoneValid isfirstNameValid $isfirstNameValid islastNameValid $islastNameValid isMiddleNameValid $isMiddleNameValid");
     if (isfirstNameValid == false ||
@@ -82,6 +87,8 @@ class StaffController extends BaseController {
     } else if (isPhoneValid == false) {
       onShowAlert("Error", "Contact is invalid");
       debugPrint("StaffController Contact is invalid");
+    } else if (isPositionValid == false) {
+      onShowAlert("Error:", "Enter position");
     } else {
       onShowAlert("Creating", "Now Creating Account");
       DialogWidget.loadingDialog();
@@ -100,6 +107,7 @@ class StaffController extends BaseController {
           debugPrint('StaffController User Id ${user!.uid} registered: $user '),
       (uid) {
         _addStaff(uid);
+        debugPrint("email ${emailController?.text}");
       },
       (firebaseAuthException) {
         debugPrint(
@@ -120,6 +128,7 @@ class StaffController extends BaseController {
 
   Future<void> _addStaff(String? uid) async {
     debugPrint("StaffController _addStaff");
+
     try {
       _auth.sendEmailVerification(
           () {}, (firebaseException) {}, (exception) {});
@@ -155,6 +164,7 @@ class StaffController extends BaseController {
         position: positionController?.text,
       );
       //}
+
       await _service.createStaff(staff.toMap());
     } catch (exception) {
       debugPrint("StaffController Invalid $exception");
@@ -188,7 +198,8 @@ class StaffController extends BaseController {
     searchController.addListener(() {
       debugPrint("SearchController text: ${searchController.text}");
       debugPrint("Previous text: $previousText");
-      debugPrint("SearchController isNotBlank ${searchController.text.trim().isNotEmpty}");
+      debugPrint(
+          "SearchController isNotBlank ${searchController.text.trim().isNotEmpty}");
       if (searchController.text.trim() != previousText) {
         previousText = searchController.text.trim();
         if (searchController.text.trim().isNotEmpty) {
@@ -283,6 +294,7 @@ class StaffController extends BaseController {
       Get.toNamed(Routes.STAFFINFORMATION, arguments: uid);
     }
   }
+
   //#endregion
   @override
   void onClose() {

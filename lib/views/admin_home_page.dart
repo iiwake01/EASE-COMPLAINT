@@ -25,7 +25,7 @@ class AdminHomePage extends BaseView<HomedController> {
                   onpressed: () {
                     controller.launchManageResident();
                   },
-                  title: 'MANGE RESIDENT\nACCOUNTS',
+                  title: 'MANAGE RESIDENT\nACCOUNTS',
                 ),
                 const SizedBox(
                   height: 40,
@@ -34,7 +34,7 @@ class AdminHomePage extends BaseView<HomedController> {
                   onpressed: () {
                     controller.launchManageStaff();
                   },
-                  title: 'MANGE STAFF\nACCOUNTS',
+                  title: 'MANAGE STAFF\nACCOUNTS',
                 ),
                 const SizedBox(
                   height: 40,

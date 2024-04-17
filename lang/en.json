@@ -4,7 +4,7 @@
     "age": "Age",
     "are_you_sure_you_want_to_delete_this_account_": "Are you sure you want to Delete this account?",
     "are_you_sure_you_want_to_log_out_": "Confirm Log-out?",
-    "attacthments": "Attatchments",
+    "attacthments": "Attachments",
     "barangay_bonbon": "Barangay Bonbon",
     "birthdate": "Birthdate",
     "community_conflict": "Community Conflict",
@@ -59,7 +59,7 @@
     "password": "Password",
     "pending": "Pending",
     "pending_complaints": "Pending Complaints",
-    "please_attach_any_valid_proof_of_residency": "Please Attacth any valid Proof of Residency",
+    "please_attach_any_valid_proof_of_residency": "Please Attach any valid Proof of Residency",
     "please_fill_up_the_form_": "Please fill up the form...",
     "previous_action_taken": "Previous Action Taken",
     "public_disturbance": "Public Disturbance",
@@ -104,5 +104,8 @@
     "zone_3": "Zone 3",
     "zone_4": "Zone 4",
     "zone_5": "Zone 5",
-    "zone_6": "Zone 6"
+    "zone_6": "Zone 6",
+    "zone_7": "Zone 7",
+    "zone_8": "Zone 8",
+    "zone_9": "Zone 9"
 }

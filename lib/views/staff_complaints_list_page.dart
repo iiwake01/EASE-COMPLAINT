@@ -75,7 +75,8 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
                                               ),
                                             ))
                                     .toList(),
-                                onChanged: (sort) => controller.updateSort(sort),
+                                onChanged: (sort) =>
+                                    controller.updateSort(sort),
                                 underline: Container(),
                               ),
                             ),
@@ -114,7 +115,7 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
                                   multiplier: .1,
                                 ),
                                 TitleWidget(
-                                  title: "Date Filled",
+                                  title: "Date Filed",
                                   multiplier: .07,
                                 ),
                                 TitleWidget(
