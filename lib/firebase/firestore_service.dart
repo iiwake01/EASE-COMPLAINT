@@ -220,11 +220,11 @@ class FirestoreService extends GetxService {
   
   Future<void> deleteResident(ResidentModel? model) async {
     if(model != null) await _delete("residents", model.id!);
-    else throw Exception("Error deleting ResidentModel");
+    else throw Exception("Error deleting Resident");
   }
 
   Future<void> deleteStaff(StaffModel? model) async {
     if(model != null) await _delete("staffs", model.id!); 
-    else throw Exception("Error deleting model");
+    else throw Exception("Error deleting Staff");
   }
 }
