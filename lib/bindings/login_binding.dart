@@ -8,7 +8,7 @@ class LoginBinding extends BaseBinding {
 
   @override
   void dependencies() {
-    Get.lazyPut<LoginController> ( 
+    Get.lazyPut<LoginController> (
       () => LoginController (
         Get.find<FirebaseAuthService>(),
         Get.find<FirestoreService>(),
