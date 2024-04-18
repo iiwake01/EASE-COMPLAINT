@@ -1,11 +1,9 @@
-import 'package:app/controllers/sign_up_controller.dart';
 import 'package:app/controllers/staff_controller.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/widgets/base_widgets.dart';
 import 'package:app/widgets/date_picker_widget.dart';
 import 'package:app/widgets/text_field_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class StaffSignUpWidget extends BaseWidget<StaffController> {
@@ -13,15 +11,14 @@ class StaffSignUpWidget extends BaseWidget<StaffController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.onInitTextEditingControllers();
     final double cardMargin = MediaQuery.of(context).size.width * 0.20;
     return Card(
-      margin: EdgeInsets.only(
-          left: cardMargin, top: 0, right: cardMargin, bottom: 0),
+      margin: EdgeInsets.only(left: cardMargin, top: 0, right: cardMargin, bottom: 0),
       elevation: 1.0,
       shadowColor: Colors.grey,
       child: Padding(
-        padding:
-            const EdgeInsets.only(top: 13, left: 20.0, right: 20.0, bottom: 13),
+        padding: const EdgeInsets.only(top: 13, left: 20.0, right: 20.0, bottom: 13),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.min,

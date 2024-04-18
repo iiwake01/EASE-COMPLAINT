@@ -15,8 +15,7 @@ class SignUpWidget extends BaseWidget<SignUpController> {
   Widget build(BuildContext context) {
     final double cardMargin = MediaQuery.of(context).size.width * 0.20;
     return Card(
-      margin: EdgeInsets.only(
-          left: cardMargin, top: 0, right: cardMargin, bottom: 0),
+      margin: EdgeInsets.only(left: cardMargin, top: 0, right: cardMargin, bottom: 0),
       elevation: 1.0,
       shadowColor: Colors.grey,
       child: Padding(

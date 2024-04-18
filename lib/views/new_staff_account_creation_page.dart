@@ -1,11 +1,10 @@
-import 'package:app/controllers/staff_controller.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/views/base_view.dart';
 import 'package:app/widgets/staff_sign_up_widget.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
 import 'package:flutter/material.dart';
 
-class NewStaffAccountCreationPage extends BaseView<StaffController> {
+class NewStaffAccountCreationPage extends BaseView {
   const NewStaffAccountCreationPage({super.key});
 
   @override

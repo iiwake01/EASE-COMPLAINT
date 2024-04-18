@@ -13,8 +13,7 @@ class AdminLoginPage extends BaseWidget<LoginController> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(
-              "assets/easebg.jpg"), // Replace "assets/background_image.jpg" with your image path
+          image: AssetImage("assets/easebg.jpg"),
           fit: BoxFit.cover,
         ),
       ),
