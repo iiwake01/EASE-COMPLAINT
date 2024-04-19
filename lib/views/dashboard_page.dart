@@ -27,12 +27,12 @@ class DashboardPage extends BaseView<DashboardController> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Card(
-            color: Colors.deepPurple.shade200,
+            color: Colors.green.shade200,
             child: Container(
               width: 800,
               height: 650,
               padding:
-                  EdgeInsets.only(top: 20, left: 50, right: 50, bottom: 100),
+                  EdgeInsets.only(top: 20, left: 50, right: 50, bottom: 50),
               child: Stack(
                 // alignment: Alignment.center,
                 children: <Widget>[
@@ -71,7 +71,7 @@ class DashboardPage extends BaseView<DashboardController> {
                                 } else {
                                   return Container(
                                     height:
-                                        MediaQuery.of(context).size.width * .13,
+                                        MediaQuery.of(context).size.width * .23,
                                     width:
                                         MediaQuery.of(context).size.width * .4,
                                     child: ListView.builder(
@@ -143,7 +143,7 @@ class DashboardPage extends BaseView<DashboardController> {
                     ],
                   )),
               Card(
-                  color: Colors.orange.shade100,
+                  color: Colors.red,
                   child: Stack(
                     children: <Widget>[
                       Container(

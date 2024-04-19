@@ -1,5 +1,6 @@
 import 'package:app/controllers/home_controller.dart';
 import 'package:app/utils/app_localizations.dart';
+import 'package:app/utils/constants.dart';
 import 'package:app/widgets/app_bar_widget.dart';
 import 'package:app/widgets/base_widgets.dart';
 import 'package:app/widgets/resident_home_app_bar.dart';
@@ -22,6 +23,7 @@ class StaffHomeAppBar extends BaseWidget<HomedController>
   @override
   Widget build(BuildContext context) {
     return AppBarWidget(
+      backgroundColor: Constants.standardColor,
       height: height ?? kToolbarHeight,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -32,7 +34,7 @@ class StaffHomeAppBar extends BaseWidget<HomedController>
             controller: controller,
             iconName: "Profiles",
             setIcon: CupertinoIcons.person_circle,
-            setController: () => controller.launchProfile(),
+            setController: () => controller.launchStaffProfile(),
           ),
           const Spacer(),
           Column(

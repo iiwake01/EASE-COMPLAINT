@@ -38,6 +38,8 @@ import 'package:app/views/staff_accounts_page.dart';
 import 'package:app/views/staff_complaints_list_page.dart';
 import 'package:app/views/staff_home_page.dart';
 import 'package:app/views/staff_information_page.dart';
+import 'package:app/views/staff_profile_page.dart';
+import 'package:app/widgets/staff_profile_edit_widget.dart';
 import 'package:get/get.dart';
 part 'routes.dart';
 
@@ -79,8 +81,15 @@ abstract class AppPages {
       transitionDuration: const Duration(milliseconds: 250),
     ),
     GetPage(
-      name: Routes.PROFILE,
-      page: () => const ProfilePage(),
+      name: Routes.RESIDENTPROFILE,
+      page: () => const ResidentProfilePage(),
+      binding: ProfileBinding(),
+      transition: Transition.noTransition,
+      transitionDuration: const Duration(milliseconds: 250),
+    ),
+    GetPage(
+      name: Routes.STAFFPROFILE,
+      page: () => const StaffProfilePage(),
       binding: ProfileBinding(),
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),

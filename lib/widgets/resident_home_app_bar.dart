@@ -1,5 +1,6 @@
 import 'package:app/controllers/home_controller.dart';
 import 'package:app/utils/app_localizations.dart';
+import 'package:app/utils/constants.dart';
 import 'package:app/widgets/app_bar_widget.dart';
 import 'package:app/widgets/base_widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,6 +22,7 @@ class ResidentHomeAppBar extends BaseWidget<HomedController>
   @override
   Widget build(BuildContext context) {
     return AppBarWidget(
+      backgroundColor: Constants.standardColor,
       height: height ?? kToolbarHeight,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

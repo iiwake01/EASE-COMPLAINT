@@ -95,8 +95,8 @@ class ProfileAppBar extends BaseWidget<ProfileController>
                   );
                 } else {
                   return Container(
-                    height: 150,
-                    width: 150,
+                    height: MediaQuery.of(context).size.height * .15,
+                    width: MediaQuery.of(context).size.width * .08,
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: Colors.black,
@@ -104,17 +104,19 @@ class ProfileAppBar extends BaseWidget<ProfileController>
                       shape: BoxShape.circle,
                     ),
                     padding: const EdgeInsets.only(top: 10.0),
-                    child: CachedNetworkImage(
-                      imageUrl: controller.photo.value,
-                      fit: BoxFit.cover,
-                      alignment: Alignment.center,
-                      placeholder: (context, url) =>
-                          const CircularProgressIndicator(),
-                      errorWidget: (context, error, stackTrace) => const Icon(
-                        CupertinoIcons.profile_circled,
-                        color: Colors.red,
-                        size:
-                            50, // Adjust the size of the icon to match the circle size
+                    child: ClipOval(
+                      child: CachedNetworkImage(
+                        imageUrl: controller.photo.value,
+                        fit: BoxFit.cover,
+                        alignment: Alignment.center,
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(),
+                        errorWidget: (context, error, stackTrace) => const Icon(
+                          CupertinoIcons.profile_circled,
+                          color: Colors.red,
+                          size:
+                              50, // Adjust the size of the icon to match the circle size
+                        ),
                       ),
                     ),
                   );

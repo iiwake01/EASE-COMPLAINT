@@ -17,7 +17,7 @@ class BackAppBar extends BaseWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBarWidget(
-      backgroundColor: Constants.appBarColor,
+      backgroundColor: Constants.standardColor,
       height: height ?? kToolbarHeight,
       child: Stack(
         alignment: Alignment.center,

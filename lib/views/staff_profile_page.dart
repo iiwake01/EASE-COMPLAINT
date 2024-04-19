@@ -6,10 +6,12 @@ import 'package:app/widgets/profile_edit_widget.dart';
 import 'package:app/widgets/profile_read_only_widget.dart';
 import 'package:app/widgets/page_view_widget.dart';
 import 'package:app/widgets/profile_app_bar.dart';
+import 'package:app/widgets/staff_profile_edit_widget.dart';
+import 'package:app/widgets/staff_read_only_widget.dart';
 import 'package:flutter/material.dart';
 
-class ResidentProfilePage extends BaseView<ProfileController> {
-  const ResidentProfilePage({Key? key}) : super(key: key);
+class StaffProfilePage extends BaseView<ProfileController> {
+  const StaffProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +28,8 @@ class ResidentProfilePage extends BaseView<ProfileController> {
           pageController: controller.pageController,
           isLoading: controller.isLoading,
           widgets: const <Widget>[
-            ProfileReadOnlyWidget(),
-            ProfileEditWidget(),
+            StaffProfileReadOnlyWidget(),
+            StaffProfileEditWidget(),
           ]),
     );
   }

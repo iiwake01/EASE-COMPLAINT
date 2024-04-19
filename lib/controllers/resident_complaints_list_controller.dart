@@ -79,7 +79,7 @@ class ResidentComplaintsListController extends BaseController {
 
   @override
   void onClose() {
-    debugPrint("ResidentComplaintsListController onClose");
+    debugPrint("ResidenwtComplaintsListController onClose");
     super.onClose();
   }
 }

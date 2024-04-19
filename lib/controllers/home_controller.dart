@@ -30,7 +30,12 @@ class HomedController extends BaseController {
 
   void launchProfile() {
     debugPrint("HomedController launchProfile");
-    if (checkSession(_auth)) Get.toNamed(Routes.PROFILE);
+    if (checkSession(_auth)) Get.toNamed(Routes.RESIDENTPROFILE);
+  }
+
+  void launchStaffProfile() {
+    debugPrint("HomedController launchProfile");
+    if (checkSession(_auth)) Get.toNamed(Routes.STAFFPROFILE);
   }
 
   void promptLogout() {
@@ -88,6 +93,7 @@ class HomedController extends BaseController {
     debugPrint("HomedController launchResidentsList");
     if (checkSession(_auth)) Get.toNamed(Routes.RESIDENTSLIST);
   }
+
   //#endregion
   //#region Admin Methods
   void launchManageResident() {
@@ -104,6 +110,7 @@ class HomedController extends BaseController {
     debugPrint("HomeController launchCreateNewStaff");
     if (checkSession(_auth)) Get.toNamed(Routes.NEWSTAFFACCOUNTCREATION);
   }
+
   //#endregion
   @override
   void onClose() {

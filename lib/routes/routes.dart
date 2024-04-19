@@ -7,7 +7,8 @@ abstract class Routes {
   static const STAFFHOME = '/staff_home';
   static const RESIDENTHOME = '/resident_home';
   static const NOTIFICATION = '/notification';
-  static const PROFILE = '/profile';
+  static const RESIDENTPROFILE = '/resident_profile';
+  static const STAFFPROFILE = '/staff_profile';
   static const DASHBOARD = '/dashboard';
   static const FILECOMPLAINT = '/file_complaint';
   static const COMPLAINTFORM = '/complaint_form';
