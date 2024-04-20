@@ -47,7 +47,7 @@ class NotificationPage extends BaseView<NotificationController> {
                       itemBuilder: (context, index) => Card(
                         clipBehavior: Clip.antiAlias,
                         child: ListTile(
-                          contentPadding: EdgeInsets.symmetric(
+                          contentPadding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 15),
                           leading: Icon(
                             CupertinoIcons.bell_fill,
@@ -60,18 +60,13 @@ class NotificationPage extends BaseView<NotificationController> {
                                     .value?[index]
                                     .message ??
                                 Constants.BLANK,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
                           trailing: TextButton(
-                            onPressed: () => controller.launchView(
-                              controller
-                                  .observeNotifications()
-                                  .value[index]
-                                  .complaintId,
-                            ),
+                            onPressed: () => controller.launchView(index),
                             child: Text(
                               AppLocalizations.of(context).translate('view'),
                               style: TextStyle(

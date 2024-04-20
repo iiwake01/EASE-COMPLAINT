@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 
 class ResidentComplaintStatusChangeController extends BaseController {
   ResidentComplaintStatusChangeController(this._auth, this._service) {
-    debugPrint("ResidentsListController Constructor");
+    debugPrint("ResidentComplaintStatusChangeController Constructor");
   }
 
   final FirebaseAuthService _auth;
@@ -21,10 +21,11 @@ class ResidentComplaintStatusChangeController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    debugPrint("ResidentsListController onInit");
+    debugPrint("ResidentComplaintStatusChangeController onInit");
   }
 
   Future<void> updateStatus(String status) async {
+    debugPrint("ResidentComplaintStatusChangeController updateStatus $status arguments $arguments");
     if (checkSession(_auth)) {
       final ComplaintModel? complaint = await _service.getComplaint(arguments);
       _service.updateComplaint(
@@ -47,10 +48,11 @@ class ResidentComplaintStatusChangeController extends BaseController {
           status: status,
         ),
       );
-      final NotificationModel? notification = await _service.getNotification(
-        complaint?.id,
-      );
+      debugPrint("ResidentComplaintStatusChangeController arguments $arguments complaint.id ${complaint?.id}");
+      final NotificationModel? notification = await _service.getNotification(complaint?.id,);
+      debugPrint("ResidentComplaintStatusChangeController NotificationModel $notification");
       _service.updateNotification(NotificationModel(
+        id: notification?.id,
         uid: notification?.uid,
         complaintId: notification?.id,
         message: "Your filed complaint has been updated.",

@@ -1,11 +1,9 @@
-import 'package:app/bindings/complaint_form_finding.dart';
 import 'package:app/controllers/base_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/complaint_model.dart';
 import 'package:app/models/notification_model.dart';
 import 'package:app/routes/app_pages.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,8 +33,7 @@ class NotificationController extends BaseController {
     try {
       _isLoading(true);
       if (checkSession(_auth)) {
-        final List<NotificationModel> snapshot =
-            await _service.getNotifications(_auth.getUser()?.uid);
+        final List<NotificationModel> snapshot = await _service.getNotifications(_auth.getUser()?.uid);
         _notificationList.assignAll(snapshot);
       } else {
         _notificationList.clear();
@@ -61,11 +58,22 @@ class NotificationController extends BaseController {
     return _isLoading;
   }
 
-  void launchView(final String? complaintId) {
+  void launchView(final int index) {
     debugPrint("NotificationController launchView");
+    final NotificationModel notification = _notificationList.value[index];
+    /*
+    _service.updateNotification(NotificationModel(
+      id: notification.id,
+      uid: notification?.uid,
+      complaintId: notification?.id,
+      message: notification.message,
+      dateFilled: notification?.dateFilled,
+      lastUpdate: Timestamp.now(),
+      hasRead: true,
+    ));
+    */
     if (checkSession(_auth)) {
-      Get.toNamed(Routes.RESIDENTCOMPLAINTVIEW,
-          arguments: [_auth.getUser()?.uid, complaintId]);
+      Get.toNamed(Routes.RESIDENTCOMPLAINTVIEW,arguments: [_auth.getUser()?.uid, notification.complaintId]);
     }
   }
 
