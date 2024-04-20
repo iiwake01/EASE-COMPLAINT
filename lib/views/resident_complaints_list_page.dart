@@ -80,11 +80,12 @@ class ResidentComplaintsListPage
                           child: Text(
                             AppLocalizations.of(context).translate('view'),
                             style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                decorationColor: Colors.green.shade300,
-                                decorationStyle: TextDecorationStyle.solid,
-                                decorationThickness: 2,
-                                fontSize: 20),
+                              decoration: TextDecoration.none,
+                              decorationColor: Colors.green.shade300,
+                              decorationStyle: TextDecorationStyle.solid,
+                              decorationThickness: 2,
+                              fontSize: 15,
+                            ),
                           ),
                         ),
                       ],

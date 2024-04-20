@@ -36,7 +36,7 @@ class ComplaintFormPage extends BaseView<ComplaintFormController> {
             children: [
               Text(
                 AppLocalizations.of(context).translate('complaint_details'),
-                style: const TextStyle(color: Colors.green, fontSize: 20),
+                style: TextStyle(color: Constants.standardColor, fontSize: 24),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.025,
@@ -104,7 +104,8 @@ class ComplaintFormPage extends BaseView<ComplaintFormController> {
               ),
               TextFieldWidget(
                   textEditingController: controller.nameController,
-                  labelText: AppLocalizations.of(context).translate('name')),
+                  labelText: AppLocalizations.of(context)
+                      .translate('name_of_any_person_involved')),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.025,
               ),

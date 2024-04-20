@@ -21,7 +21,7 @@ class ProfileAppBar extends BaseWidget<ProfileController>
   @override
   Widget build(BuildContext context) {
     return AppBarWidget(
-      backgroundColor: Colors.white,
+      backgroundColor: Constants.standardColor,
       height: height ?? kToolbarHeight,
       child: Stack(
         alignment: Alignment.center,
@@ -45,7 +45,7 @@ class ProfileAppBar extends BaseWidget<ProfileController>
           Text(
             title ?? Constants.BLANK,
             style: const TextStyle(
-              color: Colors.green,
+              color: Colors.white,
               fontSize: 40,
               fontWeight: FontWeight.bold,
             ),
@@ -98,6 +98,7 @@ class ProfileAppBar extends BaseWidget<ProfileController>
                     height: MediaQuery.of(context).size.height * .15,
                     width: MediaQuery.of(context).size.width * .08,
                     decoration: BoxDecoration(
+                      color: Colors.white,
                       border: Border.all(
                         color: Colors.black,
                       ),
@@ -122,29 +123,6 @@ class ProfileAppBar extends BaseWidget<ProfileController>
                   );
                 }
               }),
-              // Column(
-              //   children: [
-
-              //     // Column(
-              //     //   children: [
-              //     //     const SizedBox(
-              //     //       height: 30,
-              //     //     ),
-              //     //     const Icon(
-              //     //       CupertinoIcons.plus_circle_fill,
-              //     //       color: Colors.green,
-              //     //     ),
-              //     //     Text(
-              //     //       AppLocalizations.of(context)
-              //     //           .translate('add_or_change_photo'),
-              //     //       style: const TextStyle(
-              //     //         fontSize: 10,
-              //     //       ),
-              //     //     ),
-              //     //   ],
-              //     // )
-              //   ],
-              // ),
             ),
           ),
         ],

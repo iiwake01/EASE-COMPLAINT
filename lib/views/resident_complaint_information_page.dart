@@ -273,7 +273,7 @@ class ResidentsComplaintInformationPage
                                   Constants.BLANK,
                             ),
                             SizedBox(
-                              width: MediaQuery.of(context).size.width * .1,
+                              width: MediaQuery.of(context).size.width * .5,
                               child: ContainerField(
                                 fieldTitle: "Previous Action Taken:",
                                 // widthMultiplier: .2,

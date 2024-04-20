@@ -12,11 +12,11 @@ class ProfileReadOnlyWidget extends BaseWidget<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromARGB(255, 127, 168, 148),
+      color: Colors.white,
       child: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 150),
-          margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 150, vertical: 20),
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black),
             borderRadius: BorderRadius.circular(36),
