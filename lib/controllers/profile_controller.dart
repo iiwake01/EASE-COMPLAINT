@@ -165,8 +165,7 @@ class ProfileController extends BaseController {
       final User? user = _auth.getUser();
       final ResidentModel? resident = await _service.getResident(user?.uid);
       final StaffModel? staff = await _service.getStaff(user?.uid);
-      TaskSnapshot? taskSnapshot =
-          await _storage.uploadPlatformFiles(_profileFile);
+      TaskSnapshot? taskSnapshot = await _storage.uploadPlatformFiles(_profileFile);
       _service.updateResident(resident);
       _service.updateStaff(staff);
       if (taskSnapshot != null &&

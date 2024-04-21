@@ -32,6 +32,7 @@ class Constants {
   static const HOUSESTREET = "house_street";
   static const EMAIL = "email";
   static const RESIDENCY = "proof_of_residency";
+  static const LASTLOGIN = "last_log_in";
   static const URGENCY = "urgency_of_problem";
   static const DATEFILLED = "date_filled";
   static const DATEINCIDENT = "date_of_incident";
