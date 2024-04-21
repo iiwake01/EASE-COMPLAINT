@@ -141,8 +141,7 @@ class ComplaintFormController extends BaseController {
           status: AppLocalizations.of(Get.context!).translate('pending'),
         );
       }
-      final DocumentReference complaintDocument =
-          await _service.createComplaint(complaint.toMap());
+      final DocumentReference complaintDocument = await _service.createComplaint(complaint.toMap());
       notification = NotificationModel(
         uid: user?.uid,
         complaintId: complaintDocument.id,

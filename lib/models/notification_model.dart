@@ -36,12 +36,17 @@ class NotificationModel {
   }
 
   Map<String, dynamic> toMap() => {
-        Constants.UID: uid,
-        Constants.COMPLIANTID: complaintId,
-        //Constants.LOCATION: title,
-        Constants.MESSAGE: message,
-        Constants.DATEFILLED: dateFilled,
-        Constants.DATELASTUPDATED: lastUpdate,
-        Constants.HASREAD: hasRead,
-      };
+    Constants.UID: uid,
+    Constants.COMPLIANTID: complaintId,
+    //Constants.LOCATION: title,
+    Constants.MESSAGE: message,
+    Constants.DATEFILLED: dateFilled,
+    Constants.DATELASTUPDATED: lastUpdate,
+    Constants.HASREAD: hasRead,
+  };
+
+  @override
+  String toString() {
+    return "NotificationModel uid $uid complaintId $complaintId dateFilled $dateFilled lastUpdate $lastUpdate hasRead $hasRead" ?? super.toString();
+  }
 }
