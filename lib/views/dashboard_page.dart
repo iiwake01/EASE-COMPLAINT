@@ -27,7 +27,7 @@ class DashboardPage extends BaseView<DashboardController> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Card(
-            color: Colors.green.shade200,
+            color: Constants.standardColor,
             child: Container(
               width: 800,
               height: 650,

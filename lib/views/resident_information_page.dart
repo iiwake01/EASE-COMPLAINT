@@ -6,6 +6,9 @@ import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
 import 'package:app/widgets/complaint_view_app_bar.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
@@ -30,17 +33,19 @@ class ResidentsInformationPage
           );
         } else {
           return Center(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 75, vertical: 100),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                border: Border.all(color: Colors.black26, width: 2),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              height: MediaQuery.of(context).size.height * .7,
-              width: MediaQuery.of(context).size.width * .8,
-              child: ResidentInformationDataBox(
-                model: controller.observeResidentInformation().value,
+            child: SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 75, vertical: 100),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade100,
+                  border: Border.all(color: Colors.black26, width: 2),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                height: MediaQuery.of(context).size.height * .9,
+                width: MediaQuery.of(context).size.width * .9,
+                child: ResidentInformationDataBox(
+                  model: controller.observeResidentInformation().value,
+                ),
               ),
             ),
           );
@@ -413,7 +418,40 @@ class ResidentInformationDataBox extends StatelessWidget {
               ],
             ),
           ],
-        )
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Center(
+          child: CachedNetworkImage(
+            imageUrl: model?.residency ?? Constants.BLANK,
+            width: MediaQuery.of(context).size.width * .5,
+            height: 300,
+            alignment: Alignment.center,
+            placeholder: (context, url) {
+              return const CircularProgressIndicator();
+            },
+            errorWidget: (context, error, StackTrace) {
+              return const Icon(
+                Icons.broken_image,
+                color: Colors.red,
+                size: 24,
+              );
+            },
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Center(
+          child: Text(
+            "LAST LOG-IN: ",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+            ),
+          ),
+        ),
       ],
     );
   }
