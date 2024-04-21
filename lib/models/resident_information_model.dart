@@ -10,6 +10,7 @@ class ResidentInformation {
   final String zone;
   final String street;
   final String email;
+  final String attachment;
 
   ResidentInformation(
       {required this.lastName,
@@ -22,5 +23,6 @@ class ResidentInformation {
       required this.status,
       required this.zone,
       required this.street,
-      required this.email});
+      required this.email,
+      required this.attachment});
 }
