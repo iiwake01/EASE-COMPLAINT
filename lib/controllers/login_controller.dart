@@ -138,7 +138,7 @@ class LoginController extends BaseController {
   }
 
   void _launchResidentHomePage() {
-    debugPrint("LoginController _launchResidentHomePage");
+    debugPrint("LoginController _launchResidentHomePage lastSignInTime ${_auth.getUser()?.metadata.lastSignInTime}");
     Get.offAndToNamed(Routes.RESIDENTHOME);
   }
 
