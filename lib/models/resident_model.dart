@@ -59,6 +59,7 @@ class ResidentModel {
       houseStreet : json[Constants.HOUSESTREET].toString(),
       email : json[Constants.EMAIL].toString(),
       residency : json[Constants.RESIDENCY].toString(),
+      lastLogin: json[Constants.LASTLOGIN].toString()
     );
   }
 

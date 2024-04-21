@@ -75,6 +75,7 @@ class LoginController extends BaseController {
           residency: resident.residency,
           lastLogin: "${_auth.getUser()?.metadata.lastSignInTime}",
         );
+        _service.updateResident(updatedModel);
           _launchResidentHomePage();
         } else {
           _auth.signOut();
