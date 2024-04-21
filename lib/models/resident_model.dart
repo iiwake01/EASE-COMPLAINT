@@ -22,6 +22,7 @@ class ResidentModel {
     //this.phone,
     //this.email,
     //this.age,
+    this.lastLogin,
   } );
   
   final String? id;
@@ -39,6 +40,7 @@ class ResidentModel {
   final String? houseStreet;
   final String? email;
   final String? residency;
+  final String? lastLogin;
 
   factory ResidentModel.fromJson(Map<String, dynamic> json) {
     return ResidentModel (
@@ -78,6 +80,7 @@ class ResidentModel {
       houseStreet : data[Constants.HOUSESTREET],
       email : data[Constants.EMAIL],
       residency : data[Constants.RESIDENCY],
+      lastLogin: data[Constants.LASTLOGIN]
     );
   }
 
@@ -96,6 +99,7 @@ class ResidentModel {
     Constants.HOUSESTREET: houseStreet,
     Constants.EMAIL: email,
     Constants.RESIDENCY: residency,
+    Constants.LASTLOGIN: lastLogin,
   };
 
   Map<String, dynamic> toJson() {
@@ -115,6 +119,7 @@ class ResidentModel {
       Constants.HOUSESTREET: houseStreet,
       Constants.EMAIL: email,
       Constants.RESIDENCY: residency,
+      Constants.LASTLOGIN: lastLogin,
     };
   }
 

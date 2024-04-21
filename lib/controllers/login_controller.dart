@@ -1,6 +1,7 @@
 import 'package:app/controllers/base_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
+import 'package:app/models/resident_model.dart';
 import 'package:app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -54,7 +55,26 @@ class LoginController extends BaseController {
         debugPrint("LoginController validateResidentCredential user ${userCredential.user}");
       },
       () async {
-        if (await _service.getResident(_auth.getUser()?.uid) != null) {
+        final ResidentModel? resident = await _service.getResident(_auth.getUser()?.uid);
+        if (resident != null) {
+          final ResidentModel updatedModel = ResidentModel(
+          id: resident.id,
+          uid: resident.uid,
+          photo: resident.photo,
+          first: resident.first,
+          last: resident.last,
+          middle: resident.middle,
+          sex: resident.sex,
+          age: resident.age,
+          birth: resident.birth,
+          contact: resident.contact,
+          status: resident.status,
+          zone: resident.zone,
+          houseStreet: resident.houseStreet,
+          email: resident.email,
+          residency: resident.residency,
+          lastLogin: "${_auth.getUser()?.metadata.lastSignInTime}",
+        );
           _launchResidentHomePage();
         } else {
           _auth.signOut();
@@ -80,26 +100,21 @@ class LoginController extends BaseController {
       emailController?.text ?? "",
       passwordController?.text ?? "",
       (userCredential) {
-        debugPrint(
-            "LoginController validateStaffCredential credential ${userCredential.toString()}");
-        debugPrint(
-            "LoginController validateStaffCredential user ${userCredential.user}");
+        debugPrint("LoginController validateStaffCredential credential ${userCredential.toString()}");
+        debugPrint("LoginController validateStaffCredential user ${userCredential.user}");
       },
       () async {
         if (await _service.getStaff(_auth.getUser()?.uid) != null) {
           _launchStaffHomePage();
         } else {
           _auth.signOut();
-          debugPrint(
-              'LoginController validateStaffCredential user uid is not a Resident}');
-          onShowAlert(
-              "Error!", "Invalid Staff User, Please Login as a Staff User");
+          debugPrint('LoginController validateStaffCredential user uid is not a Resident}');
+          onShowAlert("Error!", "Invalid Staff User, Please Login as a Staff User");
           isLoading(false);
         }
       },
       (exception) {
-        debugPrint(
-            'LoginController validateStaffCredential exception ${exception.toString()}}');
+        debugPrint('LoginController validateStaffCredential exception ${exception.toString()}}');
         onShowAlert("Error!", "Invalid Credential Please Try Again");
         isLoading(false);
       },
@@ -138,7 +153,7 @@ class LoginController extends BaseController {
   }
 
   void _launchResidentHomePage() {
-    debugPrint("LoginController _launchResidentHomePage lastSignInTime ${_auth.getUser()?.metadata.lastSignInTime}");
+    debugPrint("LoginController _launchResidentHomePage");
     Get.offAndToNamed(Routes.RESIDENTHOME);
   }
 
