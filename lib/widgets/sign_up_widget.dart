@@ -1,10 +1,12 @@
 import 'package:app/controllers/sign_up_controller.dart';
+import 'package:app/routes/app_pages.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/widgets/base_widgets.dart';
 import 'package:app/widgets/date_picker_widget.dart';
 import 'package:app/widgets/text_field_widget.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +17,8 @@ class SignUpWidget extends BaseWidget<SignUpController> {
   Widget build(BuildContext context) {
     final double cardMargin = MediaQuery.of(context).size.width * 0.20;
     return Card(
-      margin: EdgeInsets.only(left: cardMargin, top: 0, right: cardMargin, bottom: 0),
+      margin: EdgeInsets.only(
+          left: cardMargin, top: 0, right: cardMargin, bottom: 0),
       elevation: 1.0,
       shadowColor: Colors.grey,
       child: Padding(
@@ -190,9 +193,21 @@ class SignUpWidget extends BaseWidget<SignUpController> {
                       value: controller.observedTerms().isTrue,
                       onChanged: (isChecked) => controller.toggleTerms(),
                     )),
-                Text(
-                  AppLocalizations.of(context).translate(
-                      'i_have_read_and_agreed_to_the_terms_and_conditions'),
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: AppLocalizations.of(context).translate(
+                            'i_have_read_and_agreed_to_the_terms_and_conditions'),
+                        style: TextStyle(color: Colors.black),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            // Add your navigation logic here
+                            Get.toNamed(Routes.TERMSANDCONDITIONS);
+                          },
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),

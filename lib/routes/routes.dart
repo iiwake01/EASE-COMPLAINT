@@ -25,4 +25,5 @@ abstract class Routes {
   static const NEWSTAFFACCOUNTCREATION = '/new_staff_account_creation';
   static const STAFFACCOUNTS = '/staff_accounts';
   static const STAFFINFORMATION = '/staff_information';
+  static const TERMSANDCONDITIONS = '/terms_and_conditions';
 }

@@ -73,6 +73,14 @@ class ComplaintTile extends BaseView<StaffComplaintsListController> {
               ),
             ),
           ),
+          IconButton(
+              onPressed: () {
+                controller.onRemoveComplaint(model);
+              },
+              icon: Icon(
+                Icons.delete_forever,
+                color: Colors.red,
+              ))
         ],
       ),
     );

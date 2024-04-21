@@ -1,14 +1,10 @@
 import 'package:app/controllers/resident_information_controller.dart';
-import 'package:app/controllers/residents_list_controller.dart';
-import 'package:app/models/resident_information_model.dart';
 import 'package:app/models/resident_model.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
-import 'package:app/widgets/complaint_view_app_bar.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
@@ -35,7 +31,7 @@ class ResidentsInformationPage
           return Center(
             child: SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 75, vertical: 100),
+                padding: EdgeInsets.symmetric(horizontal: 75, vertical: 75),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade100,
                   border: Border.all(color: Colors.black26, width: 2),
@@ -420,7 +416,7 @@ class ResidentInformationDataBox extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: 20,
+          height: 10,
         ),
         Center(
           child: CachedNetworkImage(
@@ -445,7 +441,7 @@ class ResidentInformationDataBox extends StatelessWidget {
         ),
         Center(
           child: Text(
-            "LAST LOG-IN: ",
+            "LAST LOG-IN: ${model?.lastLogin ?? Constants.BLANK}",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 24,

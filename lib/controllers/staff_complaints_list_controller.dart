@@ -4,6 +4,7 @@ import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/complaint_model.dart';
 import 'package:app/routes/app_pages.dart';
 import 'package:app/utils/app_localizations.dart';
+import 'package:app/widgets/dialog_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
@@ -123,6 +124,27 @@ class StaffComplaintsListController extends BaseController {
     } finally {
       _isLoading(false);
     }
+  }
+
+  Future<void> _removeComplaint(ComplaintModel? model) async {
+    if (Get.isDialogOpen == true) {
+      Get.back();
+    }
+
+    _service.deleteComplaint(model);
+    fetch();
+  }
+
+  Future<void> onRemoveComplaint(ComplaintModel? model) async {
+    DialogWidget.removeDialog(
+        "Do you want to delete this complaint?",
+        AppLocalizations.of(Get.context!).translate('yes'),
+        AppLocalizations.of(Get.context!).translate('no'),
+        () => _removeComplaint(model), () {
+      if (Get.isDialogOpen == true) {
+        Get.back();
+      }
+    });
   }
 
   // void launchView() {

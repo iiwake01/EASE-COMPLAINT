@@ -72,7 +72,7 @@ class ResidentAccountTile extends BaseView<ResidentsListController> {
           ),
           IconButton(
               onPressed: () {
-                controller.remove(resident);
+                controller.onRemove(resident);
               },
               icon: const Icon(
                 Icons.delete_forever_rounded,

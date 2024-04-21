@@ -39,6 +39,7 @@ import 'package:app/views/staff_complaints_list_page.dart';
 import 'package:app/views/staff_home_page.dart';
 import 'package:app/views/staff_information_page.dart';
 import 'package:app/views/staff_profile_page.dart';
+import 'package:app/views/terms_and_condition_page.dart';
 import 'package:app/widgets/staff_profile_edit_widget.dart';
 import 'package:get/get.dart';
 part 'routes.dart';
@@ -203,6 +204,13 @@ abstract class AppPages {
       name: Routes.STAFFINFORMATION,
       page: () => const StaffInformationPage(),
       binding: StaffInformationBinding(),
+      transition: Transition.noTransition,
+      transitionDuration: const Duration(milliseconds: 250),
+    ),
+    GetPage(
+      name: Routes.TERMSANDCONDITIONS,
+      page: () => TermsAndConditionPage(),
+      binding: null,
       transition: Transition.noTransition,
       transitionDuration: const Duration(milliseconds: 250),
     ),

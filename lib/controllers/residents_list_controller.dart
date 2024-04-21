@@ -1,8 +1,11 @@
 import 'package:app/controllers/base_controller.dart';
 import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
+import 'package:app/models/complaint_model.dart';
 import 'package:app/models/resident_model.dart';
 import 'package:app/routes/app_pages.dart';
+import 'package:app/utils/app_localizations.dart';
+import 'package:app/widgets/dialog_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -96,7 +99,24 @@ class ResidentsListController extends BaseController {
     }
   }
 
-  Future<void> remove(ResidentModel? model) async {
+  Future<void> onRemove(ResidentModel? model) async {
+    DialogWidget.removeDialog(
+        AppLocalizations.of(Get.context!)
+            .translate('are_you_sure_you_want_to_delete_this_account_'),
+        AppLocalizations.of(Get.context!).translate('yes'),
+        AppLocalizations.of(Get.context!).translate('no'),
+        () => _remove(model), () {
+      if (Get.isDialogOpen == true) {
+        Get.back();
+      }
+    });
+  }
+
+  Future<void> _remove(ResidentModel? model) async {
+    if (Get.isDialogOpen == true) {
+      Get.back();
+    }
+
     _service.deleteResident(model);
     _fetch();
   }

@@ -143,7 +143,7 @@ class DashboardPage extends BaseView<DashboardController> {
                     ],
                   )),
               Card(
-                  color: Colors.red,
+                  color: Colors.yellow.shade200,
                   child: Stack(
                     children: <Widget>[
                       Container(
