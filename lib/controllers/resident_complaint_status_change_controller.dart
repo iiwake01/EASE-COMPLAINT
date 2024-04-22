@@ -3,6 +3,7 @@ import 'package:app/firebase/firebase_auth_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/complaint_model.dart';
 import 'package:app/models/notification_model.dart';
+import 'package:app/widgets/dialog_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,8 +25,23 @@ class ResidentComplaintStatusChangeController extends BaseController {
     debugPrint("ResidentComplaintStatusChangeController onInit");
   }
 
-  Future<void> updateStatus(String status) async {
-    debugPrint("ResidentComplaintStatusChangeController updateStatus $status arguments $arguments");
+  Future<void> onUpdate(String status) async {
+    DialogWidget.updateDialog(
+      "Confirm Update?",
+      "Confirm",
+      "Cancel",
+      () => _updateStatus(status),
+      () {
+        if (Get.isDialogOpen == true) {
+          Get.back();
+        }
+      },
+    );
+  }
+
+  Future<void> _updateStatus(String status) async {
+    debugPrint(
+        "ResidentComplaintStatusChangeController updateStatus $status arguments $arguments");
     if (checkSession(_auth)) {
       final ComplaintModel? complaint = await _service.getComplaint(arguments);
       _service.updateComplaint(
@@ -48,19 +64,26 @@ class ResidentComplaintStatusChangeController extends BaseController {
           status: status,
         ),
       );
-      debugPrint("ResidentComplaintStatusChangeController arguments $arguments complaint.id ${complaint?.id}");
-      final NotificationModel? notification = await _service.getNotification(complaint?.id,);
-      debugPrint("ResidentComplaintStatusChangeController NotificationModel $notification");
-      _service.updateNotification(NotificationModel(
-        id: notification?.id,
-        uid: notification?.uid,
-        complaintId: notification?.id,
-        message: "Your filed complaint has been updated.",
-        dateFilled: notification?.dateFilled,
-        lastUpdate: Timestamp.now(),
-        hasRead: false,
-      ));
+      debugPrint(
+          "ResidentComplaintStatusChangeController arguments $arguments complaint.id ${complaint?.id}");
+      final NotificationModel? notification = await _service.getNotification(
+        complaint?.id,
+      );
+      debugPrint(
+          "ResidentComplaintStatusChangeController NotificationModel $notification");
+      _service.updateNotification(
+        NotificationModel(
+          id: notification?.id,
+          uid: notification?.uid,
+          complaintId: notification?.id,
+          message: "Your filed complaint has been updated.",
+          dateFilled: notification?.dateFilled,
+          lastUpdate: Timestamp.now(),
+          hasRead: false,
+        ),
+      );
     }
+    Get.back();
   }
 
   RxBool observeLoading() {

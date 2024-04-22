@@ -42,27 +42,24 @@ class ResidentsComplaintChangeStatusPage
                       statusTitle: "Unresolved",
                       colorBg: Colors.red.shade200,
                       onclick: () {
-                        controller.updateStatus(AppLocalizations.of(context)
+                        controller.onUpdate(AppLocalizations.of(context)
                             .translate('unresolved'));
-                        Get.back();
                       },
                     ),
                     StatusContainer(
                       statusTitle: "Pending",
                       colorBg: Colors.yellow.shade200,
                       onclick: () {
-                        controller.updateStatus(
+                        controller.onUpdate(
                             AppLocalizations.of(context).translate('pending'));
-                        Get.back();
                       },
                     ),
                     StatusContainer(
                       statusTitle: "Resolved",
                       colorBg: Colors.green.shade200,
                       onclick: () {
-                        controller.updateStatus(
+                        controller.onUpdate(
                             AppLocalizations.of(context).translate('resolved'));
-                        Get.back();
                       },
                     ),
                   ],

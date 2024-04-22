@@ -96,6 +96,48 @@ class DialogWidget {
     );
   }
 
+  static updateDialog(
+    String title,
+    String textPositive,
+    String textNegative,
+    GestureTapCallback onPressedPositive,
+    GestureTapCallback onPressedNegative,
+  ) {
+    Get.dialog(
+      AlertDialog(
+        actions: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color.fromARGB(255, 6, 141, 76),
+              foregroundColor: Colors.white,
+              textStyle: const TextStyle(fontSize: 20),
+            ),
+            onPressed: onPressedPositive,
+            child: Text(textPositive),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color.fromARGB(255, 6, 141, 76),
+              foregroundColor: Colors.white,
+              textStyle: const TextStyle(fontSize: 20),
+            ),
+            onPressed: onPressedNegative,
+            child: Text(textNegative),
+          ),
+        ],
+        alignment: Alignment.center,
+        backgroundColor: Colors.green,
+        title: Text(title),
+        titleTextStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      barrierDismissible: true,
+    );
+  }
+
   static logoutDialog(
       String title,
       textPositive,

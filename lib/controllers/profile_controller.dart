@@ -146,8 +146,7 @@ class ProfileController extends BaseController {
           text: resident?.houseStreet ?? staff?.houseStreet);
       emailController =
           TextEditingController(text: resident?.email ?? staff?.email);
-      positionController =
-          TextEditingController(text: staff?.position ?? staff?.position);
+      positionController = TextEditingController(text: staff?.position);
       photo(resident?.photo ?? staff?.photo ?? Constants.BLANK);
       debugPrint(
           "ProfileController photo ${photo.value} isBlank ${photo.value.isBlank}");
@@ -165,7 +164,8 @@ class ProfileController extends BaseController {
       final User? user = _auth.getUser();
       final ResidentModel? resident = await _service.getResident(user?.uid);
       final StaffModel? staff = await _service.getStaff(user?.uid);
-      TaskSnapshot? taskSnapshot = await _storage.uploadPlatformFiles(_profileFile);
+      TaskSnapshot? taskSnapshot =
+          await _storage.uploadPlatformFiles(_profileFile);
       _service.updateResident(resident);
       _service.updateStaff(staff);
       if (taskSnapshot != null &&
