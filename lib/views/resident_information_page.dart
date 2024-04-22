@@ -32,7 +32,7 @@ class ResidentsInformationPage
           return Center(
             child: SingleChildScrollView(
                 child: Card(
-              margin: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+              margin: EdgeInsets.symmetric(horizontal: 100, vertical: 50),
               elevation: 2,
               child: ResidentInformationDataBox(
                 model: controller.observeResidentInformation().value,

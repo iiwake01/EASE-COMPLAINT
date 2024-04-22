@@ -273,7 +273,7 @@ class ResidentsComplaintInformationPage
                                   Constants.BLANK,
                             ),
                             SizedBox(
-                              width: MediaQuery.of(context).size.width * .5,
+                              width: MediaQuery.of(context).size.width * .7,
                               child: ContainerField(
                                 fieldTitle: "Previous Action Taken:",
                                 // widthMultiplier: .2,
@@ -287,8 +287,7 @@ class ResidentsComplaintInformationPage
                             Center(
                               heightFactor: 2,
                               child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height * .05,
+                                height: MediaQuery.of(context).size.height * .1,
                                 width: MediaQuery.of(context).size.height * .5,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(36),
@@ -299,7 +298,7 @@ class ResidentsComplaintInformationPage
                                     "Witness/Involved Parties(if applicable):",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 20,
+                                        fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -403,6 +402,7 @@ class ContainerField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

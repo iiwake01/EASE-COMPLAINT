@@ -125,7 +125,7 @@ class ComplaintFormPage extends BaseView<ComplaintFormController> {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Constants.primaryColor,
+                    backgroundColor: Constants.standardColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadiusDirectional.circular(10)),
                     textStyle: const TextStyle(fontSize: 20)),
