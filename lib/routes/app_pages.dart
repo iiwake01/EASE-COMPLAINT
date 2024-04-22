@@ -16,6 +16,7 @@ import 'package:app/bindings/sign_up_binding.dart';
 import 'package:app/bindings/staff_binding.dart';
 import 'package:app/bindings/staff_complaints_list_binding.dart';
 import 'package:app/bindings/staff_information_binding.dart';
+import 'package:app/models/resident_model.dart';
 import 'package:app/views/admin_home_page.dart';
 import 'package:app/views/admin_login_page.dart';
 import 'package:app/views/complaint_form_page.dart';

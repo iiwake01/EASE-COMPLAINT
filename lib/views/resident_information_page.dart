@@ -19,7 +19,7 @@ class ResidentsInformationPage
       appBar: WhiteBackAppbar(
         height: MediaQuery.of(context).size.height * 0.20,
         widthGap: MediaQuery.of(context).size.width * 0.05,
-        // title: "User Information",
+        title: "Resident Information",
       ),
       backgroundColor: Colors.white,
       body: Obx(() {
@@ -30,17 +30,19 @@ class ResidentsInformationPage
         } else {
           return Center(
             child: SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 75, vertical: 75),
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
-                  border: Border.all(color: Colors.black26, width: 2),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                height: MediaQuery.of(context).size.height * .9,
-                width: MediaQuery.of(context).size.width * .9,
-                child: ResidentInformationDataBox(
-                  model: controller.observeResidentInformation().value,
+              child: Card(
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 75, vertical: 75),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade100,
+                    border: Border.all(color: Colors.black26, width: 2),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  height: MediaQuery.of(context).size.height * .9,
+                  width: MediaQuery.of(context).size.width * .9,
+                  child: ResidentInformationDataBox(
+                    model: controller.observeResidentInformation().value,
+                  ),
                 ),
               ),
             ),
