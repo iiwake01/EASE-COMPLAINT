@@ -20,7 +20,7 @@ class ResidentsInformationPage
       appBar: WhiteBackAppbar(
         height: MediaQuery.of(context).size.height * 0.20,
         widthGap: MediaQuery.of(context).size.width * 0.05,
-        // title: "User Information",
+        title: "Resident Information",
       ),
       backgroundColor: Colors.white,
       body: Obx(() {
@@ -31,10 +31,13 @@ class ResidentsInformationPage
         } else {
           return Center(
             child: SingleChildScrollView(
-              child: Card(
-                child: ResidentInformationDataBox(model: controller.observeResidentInformation().value,),
-              )
-            ),
+                child: Card(
+              margin: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+              elevation: 2,
+              child: ResidentInformationDataBox(
+                model: controller.observeResidentInformation().value,
+              ),
+            )),
           );
         }
       }),
@@ -52,394 +55,397 @@ class ResidentInformationDataBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "First Name",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Constants.standardColor,
-                      fontSize: 20),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  height: MediaQuery.of(context).size.height * .07,
-                  width: MediaQuery.of(context).size.width * .175,
-                  color: Colors.white,
-                  child: Text(
-                    model?.last ?? Constants.BLANK,
+    return Center(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "First Name",
                     style: TextStyle(
-                        color: Constants.standardColor,
                         fontWeight: FontWeight.bold,
-                        fontSize: 25),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "First Name",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Constants.standardColor,
-                      fontSize: 20),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  height: MediaQuery.of(context).size.height * .07,
-                  width: MediaQuery.of(context).size.width * .175,
-                  color: Colors.white,
-                  child: Text(
-                    model?.first ?? Constants.BLANK,
-                    style: TextStyle(
                         color: Constants.standardColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Middle Name",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Constants.standardColor,
-                      fontSize: 20),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  height: MediaQuery.of(context).size.height * .07,
-                  width: MediaQuery.of(context).size.width * .175,
-                  color: Colors.white,
-                  child: Text(
-                    model?.middle ?? Constants.BLANK,
-                    style: TextStyle(
-                        color: Constants.standardColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Sex",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Constants.standardColor,
-                      fontSize: 20),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  height: MediaQuery.of(context).size.height * .07,
-                  width: MediaQuery.of(context).size.width * .065,
-                  color: Colors.white,
-                  child: Text(
-                    model?.sex ?? Constants.BLANK,
-                    style: TextStyle(
-                        color: Constants.standardColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Age",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Constants.standardColor,
-                      fontSize: 20),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  height: MediaQuery.of(context).size.height * .07,
-                  width: MediaQuery.of(context).size.width * .065,
-                  color: Colors.white,
-                  child: Text(
-                    model?.age ?? Constants.BLANK,
-                    style: TextStyle(
-                        color: Constants.standardColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 25,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Birthdate",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Constants.standardColor,
-                      fontSize: 20),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  height: MediaQuery.of(context).size.height * .07,
-                  width: MediaQuery.of(context).size.width * .12,
-                  color: Colors.white,
-                  child: Text(
-                    model?.birth ?? Constants.BLANK,
-                    style: TextStyle(
-                        color: Constants.standardColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Contact Number",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Constants.standardColor,
-                      fontSize: 20),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  height: MediaQuery.of(context).size.height * .07,
-                  width: MediaQuery.of(context).size.width * .155,
-                  color: Colors.white,
-                  child: Text(
-                    model?.contact ?? Constants.BLANK,
-                    style: TextStyle(
-                        color: Constants.standardColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Status",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Constants.standardColor,
-                      fontSize: 20),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  height: MediaQuery.of(context).size.height * .07,
-                  width: MediaQuery.of(context).size.width * .1,
-                  color: Colors.white,
-                  child: Text(
-                    model?.status ?? Constants.BLANK,
-                    style: TextStyle(
-                        color: Constants.standardColor,
-                        fontWeight: FontWeight.bold,
                         fontSize: 20),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Zone",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Constants.standardColor,
-                      fontSize: 20),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  height: MediaQuery.of(context).size.height * .07,
-                  width: MediaQuery.of(context).size.width * .25,
-                  color: Colors.white,
-                  child: Text(
-                    model?.zone ?? Constants.BLANK,
-                    style: TextStyle(
-                        color: Constants.standardColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25),
+                  SizedBox(
+                    height: 5,
                   ),
-                ),
-              ],
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 25,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "House Number, Street Name",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Constants.standardColor,
-                      fontSize: 20),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  height: MediaQuery.of(context).size.height * .07,
-                  width: MediaQuery.of(context).size.width * .35,
-                  color: Colors.white,
-                  child: Text(
-                    model?.houseStreet ?? Constants.BLANK,
-                    style: TextStyle(
-                        color: Constants.standardColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25),
+                  Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height * .07,
+                    width: MediaQuery.of(context).size.width * .175,
+                    color: Colors.white,
+                    child: Text(
+                      model?.last ?? Constants.BLANK,
+                      style: TextStyle(
+                          color: Constants.standardColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25),
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Email Address",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Constants.standardColor,
-                      fontSize: 20),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  height: MediaQuery.of(context).size.height * .07,
-                  width: MediaQuery.of(context).size.width * .35,
-                  color: Colors.white,
-                  child: Text(
-                    model?.email ?? Constants.BLANK,
+                ],
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "First Name",
                     style: TextStyle(
-                        color: Constants.standardColor,
                         fontWeight: FontWeight.bold,
-                        fontSize: 25),
+                        color: Constants.standardColor,
+                        fontSize: 20),
                   ),
-                ),
-              ],
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Center(
-          child: CachedNetworkImage(
-            imageUrl: model?.residency ?? Constants.BLANK,
-            width: MediaQuery.of(context).size.width * .5,
-            height: 300,
-            alignment: Alignment.center,
-            placeholder: (context, url) {
-              return const CircularProgressIndicator();
-            },
-            errorWidget: (context, error, StackTrace) {
-              return const Icon(
-                Icons.broken_image,
-                color: Colors.red,
-                size: 24,
-              );
-            },
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height * .07,
+                    width: MediaQuery.of(context).size.width * .175,
+                    color: Colors.white,
+                    child: Text(
+                      model?.first ?? Constants.BLANK,
+                      style: TextStyle(
+                          color: Constants.standardColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Middle Name",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Constants.standardColor,
+                        fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height * .07,
+                    width: MediaQuery.of(context).size.width * .175,
+                    color: Colors.white,
+                    child: Text(
+                      model?.middle ?? Constants.BLANK,
+                      style: TextStyle(
+                          color: Constants.standardColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Sex",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Constants.standardColor,
+                        fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height * .07,
+                    width: MediaQuery.of(context).size.width * .065,
+                    color: Colors.white,
+                    child: Text(
+                      model?.sex ?? Constants.BLANK,
+                      style: TextStyle(
+                          color: Constants.standardColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Age",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Constants.standardColor,
+                        fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height * .07,
+                    width: MediaQuery.of(context).size.width * .065,
+                    color: Colors.white,
+                    child: Text(
+                      model?.age ?? Constants.BLANK,
+                      style: TextStyle(
+                          color: Constants.standardColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Center(
-          child: Text(
-            "LAST LOG-IN: ",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
+          SizedBox(
+            height: 25,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Birthdate",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Constants.standardColor,
+                        fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height * .07,
+                    width: MediaQuery.of(context).size.width * .12,
+                    color: Colors.white,
+                    child: Text(
+                      model?.birth ?? Constants.BLANK,
+                      style: TextStyle(
+                          color: Constants.standardColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Contact Number",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Constants.standardColor,
+                        fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height * .07,
+                    width: MediaQuery.of(context).size.width * .155,
+                    color: Colors.white,
+                    child: Text(
+                      model?.contact ?? Constants.BLANK,
+                      style: TextStyle(
+                          color: Constants.standardColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Status",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Constants.standardColor,
+                        fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height * .07,
+                    width: MediaQuery.of(context).size.width * .1,
+                    color: Colors.white,
+                    child: Text(
+                      model?.status ?? Constants.BLANK,
+                      style: TextStyle(
+                          color: Constants.standardColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Zone",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Constants.standardColor,
+                        fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height * .07,
+                    width: MediaQuery.of(context).size.width * .25,
+                    color: Colors.white,
+                    child: Text(
+                      model?.zone ?? Constants.BLANK,
+                      style: TextStyle(
+                          color: Constants.standardColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "House Number, Street Name",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Constants.standardColor,
+                        fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height * .07,
+                    width: MediaQuery.of(context).size.width * .35,
+                    color: Colors.white,
+                    child: Text(
+                      model?.houseStreet ?? Constants.BLANK,
+                      style: TextStyle(
+                          color: Constants.standardColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Email Address",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Constants.standardColor,
+                        fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height * .07,
+                    width: MediaQuery.of(context).size.width * .35,
+                    color: Colors.white,
+                    child: Text(
+                      model?.email ?? Constants.BLANK,
+                      style: TextStyle(
+                          color: Constants.standardColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: CachedNetworkImage(
+              imageUrl: model?.residency ?? Constants.BLANK,
+              width: MediaQuery.of(context).size.width * .5,
+              height: 300,
+              alignment: Alignment.center,
+              placeholder: (context, url) {
+                return const CircularProgressIndicator();
+              },
+              errorWidget: (context, error, StackTrace) {
+                return const Icon(
+                  Icons.broken_image,
+                  color: Colors.red,
+                  size: 24,
+                );
+              },
             ),
           ),
-        ),
-      ],
+          SizedBox(
+            height: 10,
+          ),
+          Center(
+            child: Text(
+              "LAST LOG-IN: ${model?.lastLogin ?? Constants.BLANK}",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
