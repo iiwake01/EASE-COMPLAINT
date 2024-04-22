@@ -74,8 +74,7 @@ class ProfileReadOnlyWidget extends BaseWidget<ProfileController> {
                 height: 10,
               ),
               TextFieldWidget(
-                labelText:
-                    AppLocalizations.of(context).translate('contact_number'),
+                labelText: AppLocalizations.of(context).translate('contact_number'),
                 textEditingController: controller.contactNumberController,
                 isReadOnly: true,
               ),

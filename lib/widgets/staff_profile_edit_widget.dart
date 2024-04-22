@@ -5,6 +5,7 @@ import 'package:app/widgets/base_widgets.dart';
 import 'package:app/widgets/date_picker_widget.dart';
 import 'package:app/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class StaffProfileEditWidget extends BaseWidget<ProfileController> {
   const StaffProfileEditWidget({super.key});
@@ -58,10 +59,11 @@ class StaffProfileEditWidget extends BaseWidget<ProfileController> {
                 height: 10,
               ),
               TextFieldWidget(
-                labelText:
-                    AppLocalizations.of(context).translate('contact_number'),
+                labelText: AppLocalizations.of(context).translate('contact_number'),
                 textEditingController: controller.contactNumberController,
                 isReadOnly: false,
+                textInputType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.allow(RegExp(r'^[0-9]*$')),],
               ),
               const SizedBox(
                 height: 10,
