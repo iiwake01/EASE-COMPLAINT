@@ -1,13 +1,14 @@
 import 'package:app/controllers/resident_information_controller.dart';
+import 'package:app/controllers/residents_list_controller.dart';
+import 'package:app/models/resident_information_model.dart';
 import 'package:app/models/resident_model.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/views/base_view.dart';
+import 'package:app/widgets/complaint_view_app_bar.dart';
 import 'package:app/widgets/white_back_app_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 class ResidentsInformationPage
     extends BaseView<ResidentsInformationController> {
@@ -19,7 +20,7 @@ class ResidentsInformationPage
       appBar: WhiteBackAppbar(
         height: MediaQuery.of(context).size.height * 0.20,
         widthGap: MediaQuery.of(context).size.width * 0.05,
-        title: "Resident Information",
+        // title: "User Information",
       ),
       backgroundColor: Colors.white,
       body: Obx(() {
@@ -31,20 +32,8 @@ class ResidentsInformationPage
           return Center(
             child: SingleChildScrollView(
               child: Card(
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 75, vertical: 75),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
-                    border: Border.all(color: Colors.black26, width: 2),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  height: MediaQuery.of(context).size.height * .9,
-                  width: MediaQuery.of(context).size.width * .9,
-                  child: ResidentInformationDataBox(
-                    model: controller.observeResidentInformation().value,
-                  ),
-                ),
-              ),
+                child: ResidentInformationDataBox(model: controller.observeResidentInformation().value,),
+              )
             ),
           );
         }
@@ -418,7 +407,7 @@ class ResidentInformationDataBox extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: 10,
+          height: 20,
         ),
         Center(
           child: CachedNetworkImage(
@@ -443,7 +432,7 @@ class ResidentInformationDataBox extends StatelessWidget {
         ),
         Center(
           child: Text(
-            "LAST LOG-IN: ${model?.lastLogin ?? Constants.BLANK}",
+            "LAST LOG-IN: ",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 24,
