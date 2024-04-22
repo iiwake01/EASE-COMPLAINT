@@ -8,6 +8,7 @@ import 'package:app/widgets/text_field_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class SignUpWidget extends BaseWidget<SignUpController> {
@@ -126,8 +127,9 @@ class SignUpWidget extends BaseWidget<SignUpController> {
             ),
             TextFieldWidget(
               textEditingController: controller.contactNumberController,
-              labelText:
-                  AppLocalizations.of(context).translate('contact_number'),
+              labelText: AppLocalizations.of(context).translate('contact_number'),
+              textInputType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.allow(RegExp(r'^[0-9]*$')),],
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.025,

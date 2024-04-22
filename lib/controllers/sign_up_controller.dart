@@ -5,7 +5,6 @@ import 'package:app/firebase/firebase_storage_service.dart';
 import 'package:app/firebase/firestore_service.dart';
 import 'package:app/models/admin_model.dart';
 import 'package:app/models/resident_model.dart';
-import 'package:app/models/staff_model.dart';
 import 'package:app/routes/app_pages.dart';
 import 'package:app/utils/app_localizations.dart';
 import 'package:app/widgets/dialog_widget.dart';
