@@ -21,7 +21,11 @@ class LoginPage extends BaseView<LoginController> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-                "assets/easebg.jpg"), // Replace "assets/background_image.jpg" with your image path
+                "assets/easebg.jpg"), // Replace "assets/background_image.jpg" with your image path]
+            colorFilter: new ColorFilter.mode(
+              Colors.black.withOpacity(.15),
+              BlendMode.darken,
+            ),
             fit: BoxFit.cover,
           ),
         ),

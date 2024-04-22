@@ -104,7 +104,6 @@ class ProfileAppBar extends BaseWidget<ProfileController>
                       ),
                       shape: BoxShape.circle,
                     ),
-                    padding: const EdgeInsets.only(top: 10.0),
                     child: ClipOval(
                       child: CachedNetworkImage(
                         imageUrl: controller.photo.value,

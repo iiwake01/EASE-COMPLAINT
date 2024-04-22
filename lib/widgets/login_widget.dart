@@ -21,26 +21,37 @@ class LoginWidget extends BaseWidget<LoginController> {
         children: <Widget>[
           Column(
             children: [
-              Text(
-                AppLocalizations.of(context)
-                    .translate('welcome_to_ease_complaint')
-                    .toUpperCase(),
-                style: const TextStyle(
-                    color: Colors.yellow,
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2.5),
+              Stack(
+                children: [
+                  // Stroked text
+                  Text(
+                    "${AppLocalizations.of(context).translate('welcome_to_ease_complaint').toUpperCase()}\n${AppLocalizations.of(context).translate('log_in_as_')}",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      foreground: Paint()
+                        ..style = PaintingStyle.stroke
+                        ..strokeWidth = 1
+                        ..color = Colors.black,
+                      letterSpacing: 2.5,
+                    ),
+                  ),
+                  // Solid text
+                  Text(
+                    "${AppLocalizations.of(context).translate('welcome_to_ease_complaint').toUpperCase()}\n${AppLocalizations.of(context).translate('log_in_as_')}",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      letterSpacing: 2.5,
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 5,
-              ),
-              Text(
-                AppLocalizations.of(context).translate('log_in_as_'),
-                style: const TextStyle(
-                  color: Colors.yellow,
-                  fontSize: 40,
-                  fontWeight: FontWeight.w700,
-                ),
               ),
             ],
           ),
