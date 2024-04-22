@@ -29,8 +29,7 @@ class ResidentComplaintsListPage
       appBar: BackAppBar(
         height: MediaQuery.of(context).size.height * 0.20,
         widthGap: MediaQuery.of(context).size.width * 0.05,
-        title:
-            AppLocalizations.of(context).translate('record_of_your_complaints'),
+        title: "Record of Your Complaints",
       ),
       backgroundColor: Colors.white,
       body: Obx(() {

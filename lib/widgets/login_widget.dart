@@ -26,7 +26,7 @@ class LoginWidget extends BaseWidget<LoginController> {
                     .translate('welcome_to_ease_complaint')
                     .toUpperCase(),
                 style: const TextStyle(
-                    color: Color.fromARGB(255, 39, 78, 40),
+                    color: Colors.yellow,
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2.5),
@@ -37,7 +37,7 @@ class LoginWidget extends BaseWidget<LoginController> {
               Text(
                 AppLocalizations.of(context).translate('log_in_as_'),
                 style: const TextStyle(
-                  color: Color.fromARGB(255, 39, 78, 40),
+                  color: Colors.yellow,
                   fontSize: 40,
                   fontWeight: FontWeight.w700,
                 ),

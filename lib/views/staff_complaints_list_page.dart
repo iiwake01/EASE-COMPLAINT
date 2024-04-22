@@ -116,11 +116,11 @@ class StaffComplaintsListPage extends BaseView<StaffComplaintsListController> {
                                 ),
                                 TitleWidget(
                                   title: "Date Filed",
-                                  multiplier: .07,
+                                  multiplier: .0675,
                                 ),
                                 TitleWidget(
                                   title: "Status",
-                                  multiplier: .15,
+                                  multiplier: .19,
                                 ),
                                 // TitleWidget(title: "")
                               ],
